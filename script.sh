@@ -1,13 +1,13 @@
 #!/bin/bash
 #
 #$ -l hostname=micro4.local 
-#$ -N MF_K
+#$ -N MF
 #$ -q all.q
 #$ -m ea
 #$ -M lucasrdf@fisica.ufrn.br
 #$ -cwd
-#$ -o /home/rodrigues/Mathematica/.o
-#$ -e /home/rodrigues/Mathematica/.e
+#$ -o /home/rodrigues/Mathematica2/.o
+#$ -e /home/rodrigues/Mathematica2/.e
 #
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sge/lib/lx-amd64
 export CLASSPATH=/opt/sge/lib/drmaa.jar:/opt/sge/lib/juti.jar:/opt/sge/lib/jgdi.jar

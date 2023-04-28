@@ -2,6 +2,7 @@
 
 (* ::Code::Bold:: *)
 t0=AbsoluteTime[];
+Print["Before Starting Kernels"];
 
 
 (* ::Code::Bold:: *)
@@ -18,10 +19,10 @@ Print["Starting Kernels"];
 (* ::Code::Bold:: *)
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = Range[20,20,4]; 				tV={0,3};				
-		hV={ {0.2,0,0}(* {0.2612,45,0},{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   };
+		Ls = Range[20,20,4]; 				tV={0};				
+		hV={ {0.2612,0,0}(* {0.2612,45,0},{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   };
 
-		steps=600;				acuracy=3;     eVs=Table[1700 x, {x,0,1,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=600;				acuracy=1;     eVs=Table[1700 x, {x,0,1,4*0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -50,6 +51,9 @@ round[\[Kappa]_]:=N[Round[10000\[Kappa]]/10000];round\[CapitalDelta][\[Kappa]_]:
 (*for pure*)
 
 
+to\[Lambda][h_,\[CapitalDelta]v_:0.262]:= {h[[1]]^2,h[[2]]^2,h[[3]]^2}/\[CapitalDelta]v;
+
+
 (* ::Subsubsection::Bold::Closed:: *)
 (*file*)
 
@@ -71,7 +75,7 @@ Close[f];
 data[[-1]]  ];
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Auxiliary matrices for the Hamiltonian  [2x2 matrices]*)
 
 
@@ -962,7 +966,7 @@ minSteps=10;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"}, 
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
 {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; Print[" "];
-Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "; Gmod=",\[CapitalGamma]mod, "; L=",L, "; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); eV=",Round[1000 eVs[[ev]]/1700]/1000"; "];
+Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "; Gmod=",\[CapitalGamma]mod, "; L=",L, "; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); eV=",N[Round[1000 eVs[[ev]]/1700]/1000]"; "];
 Nc=L^2;
 \[Omega]=Table[\[Omega]GA,2,{r,1,Nc} ];
 T=Tmat[L,L];
@@ -993,7 +997,7 @@ Upure=UmatPure[Tpure\[ConjugateTranspose] . Hpure . Tpure];
 dataToFilePure[\[Kappa],L,K,gauge,{0,L,{\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]},{{},{}},{{{},{},{}},{{},{},{}}},{} } ]; 
 Do[ \[Chi][[1,r]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; \[Chi][[2,r]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; \[Chi][[3,r]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; ,{r,1,Nc}];
   ]; 
-(*\[Chi]=\[Chi]gauge4v[\[Chi],L];*)
+
 For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^(-acuracy) ]!= 0)    ) , j++,   
 (*Print["  loop for self-consistent sol." ]; *)
 
@@ -1003,22 +1007,12 @@ Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];(*
 \[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; 
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];  
     u=Umat[T\[ConjugateTranspose].H.T];
-	(*\[CapitalLambda]=Chop[u\[ConjugateTranspose].T\[ConjugateTranspose].H.T.u];En=1/(4 Nc)Tr@\[CapitalLambda]\[LeftDoubleBracket]4Nc+1;;8Nc,4Nc+1;;8Nc\[RightDoubleBracket];*)(*
-	EMF=EnMF[Jv,Kv,\[CapitalGamma]v,h, {\[Chi][[1,j]],\[Chi][[2,j]],\[Chi][[3,j]]}, {\[Omega][[1,j]],\[Omega][[2,j]]},L,L]; 
-	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h, {\[Chi][[1,j]],\[Chi][[2,j]],\[Chi][[3,j]]}, {\[Omega][[1,j]],\[Omega][[2,j]]},L,L];
-	EnList[[1]]={EnList[[1]],{j,EMF}};
-    EnList[[2]]={EnList[[2]],{j,0}};
-    EnList[[3]]={EnList[[3]],{j,EMF+E\[Lambda]}}; *) (*
-TUh=Chop[(T.u)[[;;,-4Nc;;-1]],10^-12]; 
-u1=Re@Chop[I TUh.TUh\[ConjugateTranspose],10^-12];*)
-u1=Re@icc[u,L,T];
-If[Mod[j,2]==0,(*    \[CapitalLambda]=Chop[u\[ConjugateTranspose].T\[ConjugateTranspose].H.T.u];    En=1/(4 Nc)Tr@\[CapitalLambda][[4Nc+1;;8Nc,4Nc+1;;8Nc]];*)
+u1=Chop@icc[u,L,T];
 	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L]; 
 	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];
 	EnList[[1]]={EnList[[1]],{j,EMF}};
     EnList[[2]]={EnList[[2]],{j,0}};
     EnList[[3]]={EnList[[3]],{j,EMF+E\[Lambda]}};   
-];
 Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor];\[Beta]=\[LeftFloor]1+(R0-16rz)/4\[RightFloor];\[Alpha]=R0-16rz-4(\[Beta]-1)+1;
    n=\[LeftFloor]rz/L\[RightFloor];m=rz-n L;rx=Mod[m+1,L]+n L;ry=m+Mod[n+1,L] L;Io=Mod[\[Alpha]+8rz,8Nc,1]; 
     \[Chi][[1,rz+1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];
@@ -1027,19 +1021,9 @@ Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor]
     \[Omega][[1,rz+1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+8rz,8Nc,1],Io]];
     \[Omega][[2,rz+1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Mod[Io+4,8Nc,1]] ];
     ]; , {R0,0,16Nc-1}  ];     
-];(*
-	{\[Chi][[1]],\[Chi][[2]],\[Chi][[3]],\[Omega][[1]],\[Omega][[2]],\[Xi][[1]],\[Xi][[2]],u1}=MFpParallel[u,L,T];   *) 
-    (*MFp2Parallel[u,L,T,u1,\[Chi],\[Omega]];*)
-	(*  atualising  *)
-	(* AppendTo[gc,gaugeConfig[{\[Chi]\[LeftDoubleBracket]1\[RightDoubleBracket]\[LeftDoubleBracket]j+1\[RightDoubleBracket],\[Chi]\[LeftDoubleBracket]2\[RightDoubleBracket]\[LeftDoubleBracket]j+1\[RightDoubleBracket],\[Chi]\[LeftDoubleBracket]3\[RightDoubleBracket]\[LeftDoubleBracket]j+1\[RightDoubleBracket]},L,L]  ];  *)
-	If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};  \[CapitalDelta]\[Omega]=1/(2 Nc) Sum[Abs[\[Omega][[\[Sigma],r,2,1]]+\[Omega][[\[Sigma],r,3,4]]],{r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]\[Omega]seq={\[CapitalDelta]\[Omega]seq,{j,\[CapitalDelta]\[Omega]}}    ]; u2=u1;      
-(*If[j==\[LeftFloor]-15+minSteps/2\[RightFloor], \[Chi]=\[Chi]gauge4vChangeXtoZ[\[Chi],L]  (*\[Chi]gauge4vCHANGE[\[Chi],L] *)
-(*\[Chi]=\[Chi]gauge4vChangeX[\[Chi],L];{\[Chi],\[Omega]}=reflectX[\[Chi],\[Omega],L];\[Chi]=\[Chi]gauge4vChangeX[\[Chi],L];*)
-]; *)
-(*If[j==\[LeftFloor]10+minSteps/2\[RightFloor],  {\[Chi],\[Omega]}=reflectX[\[Chi],\[Omega],L] (*\[Chi]gauge4vCHANGE[\[Chi],L] *)];    *)
-(*
-If[j==\[LeftFloor]minSteps-1\[RightFloor], {\[Chi],\[Omega]}=TranslationMF2[\[Chi],\[Omega],L]   ];                           *)        
- Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1"; "];                                                                              
+];(*	{\[Chi][[1]],\[Chi][[2]],\[Chi][[3]],\[Omega][[1]],\[Omega][[2]],\[Xi][[1]],\[Xi][[2]],u1}=MFpParallel[u,L,T];   *) 
+	If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};  \[CapitalDelta]\[Omega]=1/(2 Nc) Sum[Abs[\[Omega][[\[Sigma],r,2,1]]+\[Omega][[\[Sigma],r,3,4]]],{r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]\[Omega]seq={\[CapitalDelta]\[Omega]seq,{j,\[CapitalDelta]\[Omega]}}    ]; u2=u1;    
+Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1";  E=", N[Round[10000(EMF)]/10000],"; "  ];                                                                              
 ];  
 Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},
 	Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
@@ -1092,7 +1076,7 @@ minSteps=10;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g4"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
 {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; Print[" "];
-Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "; Gmod=",\[CapitalGamma]mod, "; L=",L, "; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); eV=",Round[1000 eVs[[ev]]/1700]/1000"; "];
+Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "; Gmod=",\[CapitalGamma]mod, "; L=",L, "; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); eV=",N[Round[1000 eVs[[ev]]/1700]/1000]"; "];
 Nc=L^2;
 \[Omega]=Table[\[Omega]GA,2,{r,1,Nc} ];
 T=Tmat[L,L];
@@ -1134,22 +1118,13 @@ Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];(*
 \[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; 
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];  
     u=Umat[T\[ConjugateTranspose].H.T];
-	(*\[CapitalLambda]=Chop[u\[ConjugateTranspose].T\[ConjugateTranspose].H.T.u];En=1/(4 Nc)Tr@\[CapitalLambda]\[LeftDoubleBracket]4Nc+1;;8Nc,4Nc+1;;8Nc\[RightDoubleBracket];*)(*
-	EMF=EnMF[Jv,Kv,\[CapitalGamma]v,h, {\[Chi][[1,j]],\[Chi][[2,j]],\[Chi][[3,j]]}, {\[Omega][[1,j]],\[Omega][[2,j]]},L,L]; 
-	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h, {\[Chi][[1,j]],\[Chi][[2,j]],\[Chi][[3,j]]}, {\[Omega][[1,j]],\[Omega][[2,j]]},L,L];
-	EnList[[1]]={EnList[[1]],{j,EMF}};
-    EnList[[2]]={EnList[[2]],{j,0}};
-    EnList[[3]]={EnList[[3]],{j,EMF+E\[Lambda]}}; *) (*
-TUh=Chop[(T.u)[[;;,-4Nc;;-1]],10^-12]; 
-u1=Re@Chop[I TUh.TUh\[ConjugateTranspose],10^-12];*)
-u1=Re@icc[u,L,T];
-If[Mod[j,2]==0,(*    \[CapitalLambda]=Chop[u\[ConjugateTranspose].T\[ConjugateTranspose].H.T.u];    En=1/(4 Nc)Tr@\[CapitalLambda][[4Nc+1;;8Nc,4Nc+1;;8Nc]];*)
+    u1=Chop@icc[u,L,T];
 	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L]; 
 	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];
 	EnList[[1]]={EnList[[1]],{j,EMF}};
     EnList[[2]]={EnList[[2]],{j,0}};
     EnList[[3]]={EnList[[3]],{j,EMF+E\[Lambda]}};   
-];
+ 
 Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor];\[Beta]=\[LeftFloor]1+(R0-16rz)/4\[RightFloor];\[Alpha]=R0-16rz-4(\[Beta]-1)+1;
    n=\[LeftFloor]rz/L\[RightFloor];m=rz-n L;rx=Mod[m+1,L]+n L;ry=m+Mod[n+1,L] L;Io=Mod[\[Alpha]+8rz,8Nc,1]; 
     \[Chi][[1,rz+1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];
@@ -1158,19 +1133,9 @@ Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor]
     \[Omega][[1,rz+1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+8rz,8Nc,1],Io]];
     \[Omega][[2,rz+1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Mod[Io+4,8Nc,1]] ];
     ]; , {R0,0,16Nc-1}  ];     
-];(*
-	{\[Chi][[1]],\[Chi][[2]],\[Chi][[3]],\[Omega][[1]],\[Omega][[2]],\[Xi][[1]],\[Xi][[2]],u1}=MFpParallel[u,L,T];   *) 
-    (*MFp2Parallel[u,L,T,u1,\[Chi],\[Omega]];*)
-	(*  atualising  *)
-	(* AppendTo[gc,gaugeConfig[{\[Chi]\[LeftDoubleBracket]1\[RightDoubleBracket]\[LeftDoubleBracket]j+1\[RightDoubleBracket],\[Chi]\[LeftDoubleBracket]2\[RightDoubleBracket]\[LeftDoubleBracket]j+1\[RightDoubleBracket],\[Chi]\[LeftDoubleBracket]3\[RightDoubleBracket]\[LeftDoubleBracket]j+1\[RightDoubleBracket]},L,L]  ];  *)
-	If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};  \[CapitalDelta]\[Omega]=1/(2 Nc) Sum[Abs[\[Omega][[\[Sigma],r,2,1]]+\[Omega][[\[Sigma],r,3,4]]],{r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]\[Omega]seq={\[CapitalDelta]\[Omega]seq,{j,\[CapitalDelta]\[Omega]}}    ]; u2=u1;      
-(*If[j==\[LeftFloor]-15+minSteps/2\[RightFloor], \[Chi]=\[Chi]gauge4vChangeXtoZ[\[Chi],L]  (*\[Chi]gauge4vCHANGE[\[Chi],L] *)
-(*\[Chi]=\[Chi]gauge4vChangeX[\[Chi],L];{\[Chi],\[Omega]}=reflectX[\[Chi],\[Omega],L];\[Chi]=\[Chi]gauge4vChangeX[\[Chi],L];*)
-]; *)
-(*If[j==\[LeftFloor]10+minSteps/2\[RightFloor],  {\[Chi],\[Omega]}=reflectX[\[Chi],\[Omega],L] (*\[Chi]gauge4vCHANGE[\[Chi],L] *)];    *)
-(*
-If[j==\[LeftFloor]minSteps-1\[RightFloor], {\[Chi],\[Omega]}=TranslationMF2[\[Chi],\[Omega],L]   ];                           *)        
- Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1"; "];                                                                              
+];(*	{\[Chi][[1]],\[Chi][[2]],\[Chi][[3]],\[Omega][[1]],\[Omega][[2]],\[Xi][[1]],\[Xi][[2]],u1}=MFpParallel[u,L,T];   *) 
+	If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};  \[CapitalDelta]\[Omega]=1/(2 Nc) Sum[Abs[\[Omega][[\[Sigma],r,2,1]]+\[Omega][[\[Sigma],r,3,4]]],{r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]\[Omega]seq={\[CapitalDelta]\[Omega]seq,{j,\[CapitalDelta]\[Omega]}}    ]; u2=u1;    
+Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1";  E=", N[Round[10000(EMF)]/10000],"; "  ];                                                                           
 ];  
 Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},
 	Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
@@ -1261,13 +1226,13 @@ H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];
 TUh=Chop[(T.u)[[;;,-4Nc;;-1]],10^-12]; 
 u1=Re@Chop[I TUh.TUh\[ConjugateTranspose],10^-12];*)
 u1=Re@icc[u,L,T];
-If[Mod[j,2]==0,(*    \[CapitalLambda]=Chop[u\[ConjugateTranspose].T\[ConjugateTranspose].H.T.u];    En=1/(4 Nc)Tr@\[CapitalLambda][[4Nc+1;;8Nc,4Nc+1;;8Nc]];*)
+(*    \[CapitalLambda]=Chop[u\[ConjugateTranspose].T\[ConjugateTranspose].H.T.u];    En=1/(4 Nc)Tr@\[CapitalLambda][[4Nc+1;;8Nc,4Nc+1;;8Nc]];*)
 	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L]; 
 	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];
 	EnList[[1]]={EnList[[1]],{j,EMF}};
     EnList[[2]]={EnList[[2]],{j,0}};
     EnList[[3]]={EnList[[3]],{j,EMF+E\[Lambda]}};   
-];
+
 Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor];\[Beta]=\[LeftFloor]1+(R0-16rz)/4\[RightFloor];\[Alpha]=R0-16rz-4(\[Beta]-1)+1;
    n=\[LeftFloor]rz/L\[RightFloor];m=rz-n L;rx=Mod[m+1,L]+n L;ry=m+Mod[n+1,L] L;Io=Mod[\[Alpha]+8rz,8Nc,1]; 
     \[Chi][[1,rz+1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];
@@ -1288,7 +1253,7 @@ Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor]
 (*If[j==\[LeftFloor]10+minSteps/2\[RightFloor],  {\[Chi],\[Omega]}=reflectX[\[Chi],\[Omega],L] (*\[Chi]gauge4vCHANGE[\[Chi],L] *)];    *)
 (*
 If[j==\[LeftFloor]minSteps-1\[RightFloor], {\[Chi],\[Omega]}=TranslationMF2[\[Chi],\[Omega],L]   ];                           *)        
- Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1"; "];                                                                              
+ Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1";  E=", N[Round[10000EnList[[3]]]/10000],"; "  ];                                                                              
 ];  
 Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},
 	Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
