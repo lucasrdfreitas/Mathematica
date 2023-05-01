@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #$ -l hostname=micro4.local 
-#$ -N MF
+#$ -N MF_finite_size
 #$ -q all.q
 #$ -m ea
 #$ -M lucasrdf@fisica.ufrn.br
