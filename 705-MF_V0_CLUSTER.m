@@ -911,13 +911,13 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 
 
 Print[" "];
-Print["    NbName=",NbName];
-Print["    Ls=",Ls];
-Print["    tV=",tV];
-Print["    hV=",hV];
-Print["    Steps=",steps];
-Print["    acuracy=",acuracy];
-Print["    eVs=",eVs];
+Print["    NbName=",NbName,"; "];
+Print["    Ls=",Ls,"; "];
+Print["    tV=",tV,";    ts=", ts,"; "];
+Print["    hV=",hV,";    hs=", hs,"; "];
+Print["    Steps=",steps,"; "];
+Print["    acuracy=",acuracy,"; "];
+Print["    eVs=",eVs,"; "];
 Print[" "];
 Print["    Parameters="];
 Do[
