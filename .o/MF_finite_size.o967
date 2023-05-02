@@ -1,0 +1,29 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    Parameters=
+{0., -1., 0., {0.028867513459481294, 0.028867513459481294, 0.028867513459481294}, 0., -0.9999999999999999, 0., {0.05, 0, 0}, 0, 0.}
+ 
+Definition timing= 31.5658
+ 
+ 
+    Starting free loop
+ 
+J=0.; K=-1.; G=0.; L=44; h=(0.05,0,0); 
+Max Step = 25; Delta=5.*^-13;  p=1/1
+J=0.; K=-1.; G=0.; L=48; h=(0.05,0,0); 
+Max Step = 25; Delta=5.*^-13;  p=1/1
+ 
+Free loop timing= Quantity[2, Minutes]Quantity[5, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+Free loop + electric field timing= Quantity[0, Minutes]Quantity[0, Seconds]
+ 
+ 
+    Starting four vortex + electric field loop: 
+ 
+ 
+J=0.; K=-1.; G=0.; Jmod=0.; Kmod=-0.9999999999999999; Gmod=0.; L=44; h=(0.05,0,0); eV=0.
+ 
