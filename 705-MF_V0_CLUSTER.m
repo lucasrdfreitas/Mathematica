@@ -19,8 +19,8 @@ Print["Starting Kernels"];
 (* ::Code::Bold:: *)
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = Range[12,40,4]; 				tV={3};				
-		hV={ {0.3,0,0}, {0.3,30,45}(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   };
+		Ls = Range[44,48,4]; 				tV={0};				
+		hV={ {0.05,0,0}(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   };
 
 		steps=300;				acuracy=6;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -910,6 +910,16 @@ eV0=0;U=2600;JH=300;
 parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
 
 
+Print[" "];
+Print["    Parameters="];
+Do[
+Print[ parameters[[i,j]] ],
+{i,1,Length@parameters},
+{j,1,Length@parameters[[i]] }
+];
+Print[" "];
+
+
 (* ::Subsubsection::Bold::Closed:: *)
 (*vortex free*)
 
@@ -1307,7 +1317,6 @@ Print[ "4 vortices loop timing \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t
 (*vortex free + gradually increase  electric field*)
 
 
-
 (* ::Code::Bold:: *)
 Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
@@ -1413,6 +1422,8 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
   ];
 ]  , {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]                                                 
 end comment *) 
+
+
 
 (* ::Subsubsection::Bold:: *)
 (*four vortex + gradually increase  electric field*)
