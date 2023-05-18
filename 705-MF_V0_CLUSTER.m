@@ -1058,12 +1058,15 @@ tvf=AbsoluteTime[];Print["Definition timing= ",round[tvf-t0] ]; t0=tvf;
 
 Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
-Do[ Do[ Module[{ \[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
+Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
 {J,K,\[CapitalGamma],h}=parameters[[1,p]][[1;;4]]; Nc=L^2;
 If[ p==1, \[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}; ];\[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   (*Print[MatrixForm/@\[Chi],MatrixForm/@\[Omega]];*)
 Print["J=",J,"; K=",K, "; G=",\[CapitalGamma], "; L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "];
 kTable=toMomentumTable[L];
 For[j=1,( ( j<steps)\[And](Chop[ \[CapitalDelta]1,10^(-acuracy-6) ]!= 0) ), j++,  
+
+loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
+If[ loaddata!=$Failed,{j,L,\[Chi],\[Omega],\[Xi],EnG0}=loaddata];
 u=Chop@Total@Table[ Module[{H0,Hr,U,TU,TUh,k,uu},
 k=kTable[[l]];
 H0=HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],k];
@@ -1158,7 +1161,7 @@ For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy 
 
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 loaddata=loadDataTry[toPath[parameters[[ev,p]],L,acuracy,gauge,NbName]  ];
-If[ loaddata!=$Failed,{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}=loaddata;j+=minSteps];
+If[ loaddata!=$Failed,{j,L,\[Chi],\[Omega],\[Xi],EnG}=loaddata];
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];(*
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;*)
 \[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; 
@@ -1401,7 +1404,7 @@ For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy 
 
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 loaddata=loadDataTry[toPath[parameters[[ev,p]],L,acuracy,gauge,NbName]  ];
-If[ loaddata!=$Failed,{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}=loaddata;j+=minSteps];
+If[ loaddata!=$Failed,{j,L,\[Chi],\[Omega],\[Xi],EnG}=loaddata];
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
