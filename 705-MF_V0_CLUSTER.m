@@ -415,8 +415,8 @@ If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ];Return[$Failed];
 ];
 
 loadDataTry[pathData_]:=
-Module[ {f,data,l=Length@FileNames[pathData]},
-If[l==0,Return[$Failed]];
+Module[ {f,data,path=FindFile[pathData]},
+If[path==$Failed,Return[$Failed]];
 		        f = OpenRead[pathData];
 (*If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ]; Abort[] ];*)
 		        data=ReadList[f];
