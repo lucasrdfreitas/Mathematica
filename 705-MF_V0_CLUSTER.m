@@ -381,7 +381,7 @@ bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 (*MF definitions*)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Saving and Loading data*)
 
 
@@ -400,13 +400,13 @@ If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ pathData ]; Abort[]
 
 toPath [parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
 If[gauge=="free",parameters[[5;;7]]=parameters0[[1;;3]];parameters[[10]]=0;];
-FileNameJoin[{       NotebookDirectory[]   , "Files" ,NbName,gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
+FileNameJoin[{    Directory[]   , "Files" ,NbName,gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
 StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
    }]];
    
 dataToFile[ parameters0_,L_,acuracy_,data_,gauge_,NbName_] :=
 Module[ {path,f,parameters=parameters0}, If[gauge=="free",parameters[[5;;7]]=parameters0[[1;;3]];parameters[[10]]=0;];
-		createDir@FileNameJoin[{ NotebookDirectory[] ,"Files",  NbName,gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+		createDir@FileNameJoin[{ Directory[] ,"Files",  NbName,gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }]      }] ;
 		path = toPath[ parameters,L,acuracy,gauge,NbName];		
 		f = OpenAppend[path];
