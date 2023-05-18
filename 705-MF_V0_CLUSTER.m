@@ -52,7 +52,7 @@ round[\[Kappa]_]:=N[Round[10000\[Kappa]]/10000];round\[CapitalDelta][\[Kappa]_]:
 \[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*for pure*)
 
 
@@ -61,10 +61,32 @@ toKappa[h_,\[CapitalDelta]v_:0.262]:=8h[[1]]h[[2]]h[[3]]/(  3 \[CapitalDelta]v^2
 KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If[C==0,{0,0,0},  d CubeRoot[3  \[CapitalDelta]v^2 \[Kappa]/(8C)]   ]] ;
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*file*)
 
 
+dataToFilePure[ parameters_,L_,acuracy_,gauge_,data_] :=
+Module[ {path,f},		createDir@FileNameJoin[  {Directory[], "Files","pure", gauge}] ;
+		path = toPathPure[parameters,L,acuracy,gauge];		
+		f = OpenWrite[path];
+		 Write[ f, data];
+		 Close[f];                ];
+		 
+toPathPure[parameters0_,L_,acuracy_,gauge_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
+parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;
+FileNameJoin[{       Directory[]   , "Files" ,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
+StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
+   }]];
+
+loadDataPure[ path_]:= Module[{(*path,*)f,data}, 
+(*path= toPathPure[\[Kappa],L,K,gauge];*)
+f = OpenRead[path];
+data=ReadList[ f];
+Close[f];
+data[[-1]]  ];
+
+
+(*
 dataToFilePure[ \[Kappa]_,L_,K_,gauge_,data_] :=
 Module[ {path,f},		createDir@FileNameJoin[  {Directory[], "Files","pure", gauge}] ;
 		path = toPathPure[ \[Kappa],L,K,gauge];		
@@ -79,6 +101,7 @@ f = OpenRead[path];
 data=ReadList[ f];
 Close[f];
 data[[-1]]  ];
+*)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -377,7 +400,7 @@ asites[m_,n_]:=m nx+n ny;
 bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*MF definitions*)
 
 
@@ -1068,9 +1091,9 @@ E\[Lambda]=EnLagMF[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,
 ];                                        (* <- EnMF0 ?  *)
 Esum=Sum[  Total[Select[Eigenvalues[HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],kTable[[l]] ]  ],#<0&]] ,{l,1,Nc}]/(2Nc); 
 
-	dataToFile[parameters[[1,p]],L,acuracy,{j,L,\[Chi],\[Omega],{0,0},{{EMF},{Esum},{EMF+E\[Lambda]},\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}},"free",NbName]; 
+	dataToFile[parameters[[1,p]],L,acuracy,{j,L,\[Chi],\[Omega],{0,0},{{EMF},{Esum},{EMF+E\[Lambda]},\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}},"g0",NbName]; 
 Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1(*,"; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]*),"; E=",{EMF,Esum,EMF+E\[Lambda]},";  p=",p,"/",Length@parameters[[1]]];
-	(*{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,p]],L,acuracy,"free",NbName ]  ];*)
+{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,p]],L,acuracy,"g0",NbName ]  ];
  ];  , {p,1,Length[parameters[[1]]]}  ],{l,1,Length@Ls}];Print[" "];
 
 
@@ -1336,7 +1359,7 @@ Kv=uniform[K,L,L];
 
 u0=gauge4v[uniformU[-1,L],L]; (* <-  the 2nd difference : gauge4v *)
 
-{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,1]],L,acuracy,"free",NbName ]  ]; 
+{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,1]],L,acuracy,"g0",NbName ]  ]; 
 (*\[Omega]G=sym\[Omega][\[Omega]G];*)
 \[Omega][[1]]=Table[\[Omega]G[[1]],{r,1,Nc} ];
 \[Omega][[2]]=Table[\[Omega]G[[2]],{r,1,Nc} ];
