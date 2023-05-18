@@ -21,7 +21,8 @@ Print["Starting Kernels"];
 NbName="705"; \[Lambda]0=0.5; 
 
 		Ls = Range[40,40,4]; 				tV={3};				
-		hV={ {0.25,0,90},{0.25,15,90},{0.25,30,90},{0.25,45,90},{0.25,60,90},{0.25,75,90},{0.25,90,90} (*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   };
+		hV={ {0.25,0,90},{0.25,15,90},{0.25,30,90},{0.25,45,90},{0.25,60,90},{0.25,75,90},{0.25,90,90} 
+		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   };
 
 		steps=500;				acuracy=6;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -403,12 +404,10 @@ bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 createDir[path_] :=
 Module[ {l=Length@FileNames[path]},		
 	If[ l==0,  (*CreateDirectory@File@FileNameJoin[{path}];*) 
-	CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path,"graph" }]; 
-,Null]  ];
+	CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path,"graph" }]; , Null]  ];
 
 loadData[pathData_]:=
-Module[ {f,data},
-		        f = OpenRead[pathData];
+Module[ {f,data},		        f = OpenRead[pathData];
 If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ];Return[$Failed]; Abort[] ];
 		        data=ReadList[f];
 		        Close[f];			data[[-1]]
@@ -416,7 +415,7 @@ If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ];Return[$Failed];
 
 loadDataTry[pathData_]:=
 Module[ {f,data,path=FindFile[pathData]},
-If[path==$Failed,Return[$Failed]];
+If[path==$Failed,Print["New entry at:",pathData];Return[$Failed]];
 		        f = OpenRead[pathData];
 (*If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ]; Abort[] ];*)
 		        data=ReadList[f];
@@ -1066,7 +1065,7 @@ kTable=toMomentumTable[L];
 For[j=1,( ( j<steps)\[And](Chop[ \[CapitalDelta]1,10^(-acuracy-6) ]!= 0) ), j++,  
 
 loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
-If[ loaddata!=$Failed,{j,L,\[Chi],\[Omega],\[Xi],EnG0}=loaddata];
+If[ !(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],EnG0}=loaddata];
 u=Chop@Total@Table[ Module[{H0,Hr,U,TU,TUh,k,uu},
 k=kTable[[l]];
 H0=HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],k];
@@ -1161,7 +1160,7 @@ For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy 
 
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 loaddata=loadDataTry[toPath[parameters[[ev,p]],L,acuracy,gauge,NbName]  ];
-If[ loaddata!=$Failed,{j,L,\[Chi],\[Omega],\[Xi],EnG}=loaddata];
+If[ !(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],EnG}=loaddata];
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];(*
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;*)
 \[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; 
@@ -1404,7 +1403,7 @@ For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy 
 
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 loaddata=loadDataTry[toPath[parameters[[ev,p]],L,acuracy,gauge,NbName]  ];
-If[ loaddata!=$Failed,{j,L,\[Chi],\[Omega],\[Xi],EnG}=loaddata];
+If[ !(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],EnG}=loaddata];
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
