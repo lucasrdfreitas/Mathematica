@@ -86,24 +86,6 @@ Close[f];
 data[[-1]]  ];
 
 
-(*
-dataToFilePure[ \[Kappa]_,L_,K_,gauge_,data_] :=
-Module[ {path,f},		createDir@FileNameJoin[  {Directory[], "Files","pure", gauge}] ;
-		path = toPathPure[ \[Kappa],L,K,gauge];		
-		f = OpenWrite[path];
-		 Write[ f, data];
-		 Close[f];                ];
-toPathPure[\[Kappa]_,L_,K_,gauge_]:=  
-FileNameJoin[  {Directory[], "Files","pure", gauge,"data", StringReplace["K=Z-L=Y-kappa=M.txt",     {"Y"-> ToString[L], "M"->  ToString@N[Round[10000\[Kappa]]/10000]  , "Z"-> ToString[K]}   ] }];
-loadDataPure[ \[Kappa]_,L_,K_,gauge_]:= Module[{path,f,data}, 
-path= toPathPure[\[Kappa],L,K,gauge];
-f = OpenRead[path];
-data=ReadList[ f];
-Close[f];
-data[[-1]]  ];
-*)
-
-
 (* ::Subsubsection::Bold::Closed:: *)
 (*Auxiliary matrices for the Hamiltonian  [2x2 matrices]*)
 
@@ -404,7 +386,7 @@ bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 (*MF definitions*)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Saving and Loading data*)
 
 
@@ -1215,7 +1197,7 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 (*end comment *) 
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*four vortex + gradually increase  electric field*)
 
 
@@ -1359,7 +1341,7 @@ Kv=uniform[K,L,L];
 
 u0=gauge4v[uniformU[-1,L],L]; (* <-  the 2nd difference : gauge4v *)
 
-{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,1]],L,acuracy,"g0",NbName ]  ]; 
+{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,1]],L,acuracy,"free",NbName ]  ]; 
 (*\[Omega]G=sym\[Omega][\[Omega]G];*)
 \[Omega][[1]]=Table[\[Omega]G[[1]],{r,1,Nc} ];
 \[Omega][[2]]=Table[\[Omega]G[[2]],{r,1,Nc} ];
