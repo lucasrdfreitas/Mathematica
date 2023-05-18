@@ -61,7 +61,7 @@ toKappa[h_,\[CapitalDelta]v_:0.262]:=8h[[1]]h[[2]]h[[3]]/(  3 \[CapitalDelta]v^2
 KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If[C==0,{0,0,0},  d CubeRoot[3  \[CapitalDelta]v^2 \[Kappa]/(8C)]   ]] ;
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*file*)
 
 
@@ -409,7 +409,16 @@ Module[ {l=Length@FileNames[path]},
 loadData[pathData_]:=
 Module[ {f,data},
 		        f = OpenRead[pathData];
-If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ pathData ]; Abort[] ];
+If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ];Return[$Failed]; Abort[] ];
+		        data=ReadList[f];
+		        Close[f];			data[[-1]]
+];
+
+loadDataTry[pathData_]:=
+Module[ {f,data,l=Length@FileNames[pathData]},
+If[l==0,Return[$Failed]];
+		        f = OpenRead[pathData];
+(*If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ]; Abort[] ];*)
 		        data=ReadList[f];
 		        Close[f];			data[[-1]]
 ];
@@ -1144,14 +1153,18 @@ Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "
 Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L];
 Jv=uniform[J,L,L];Jv=add4VorticesMaxSpaced[ Jv,Jmod,L];
 \[CapitalGamma]v=uniform[\[CapitalGamma],L,L];\[CapitalGamma]v=add4VorticesMaxSpaced[ \[CapitalGamma]v,\[CapitalGamma]mod,L];
+
 For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy ]!= 0)    ) , j++,   
 
-Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2},Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];(*
+Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
+loaddata=loadDataTry[toPath[parameters[[ev,p]],L,acuracy,gauge,NbName]  ];
+If[ loaddata!=$Failed,{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}=loaddata;j+=minSteps];
+Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];(*
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;*)
 \[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; 
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
 u=Umat[T\[ConjugateTranspose] . H . T];
-u1=Chop@icc[u,L,T];
+u1=Re@Chop@icc[u,L,T];
 
 	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];                                        (* <- EnMF0 ?  *)
 	Esum=Total[Select[Quiet@Eigenvalues[H],#<0&]]/(2Nc);
@@ -1383,9 +1396,13 @@ Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "
 Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L];
 Jv=uniform[J,L,L];Jv=add4VorticesMaxSpaced[ Jv,Jmod,L];
 \[CapitalGamma]v=uniform[\[CapitalGamma],L,L];\[CapitalGamma]v=add4VorticesMaxSpaced[ \[CapitalGamma]v,\[CapitalGamma]mod,L];
+
 For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy ]!= 0)    ) , j++,   
 
-Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2},Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
+Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
+loaddata=loadDataTry[toPath[parameters[[ev,p]],L,acuracy,gauge,NbName]  ];
+If[ loaddata!=$Failed,{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}=loaddata;j+=minSteps];
+Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
