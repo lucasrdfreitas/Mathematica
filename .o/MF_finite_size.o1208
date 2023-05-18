@@ -1,0 +1,144 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=705; 
+    Ls={12}; 
+    tV={3};    ts={{15, 160, -36, 0, -60}}; 
+    hV={{0.25, 0, 90}, {0.25, 15, 90}, {0.25, 30, 90}, {0.25, 45, 90}, {0.25, 60, 90}, {0.25, 75, 90}, {0.25, 90, 90}};
+    hs={{0.14433756729740646, 0.14433756729740646, 0.14433756729740646}, {0.18517255942935615, 0.0936662084832465, 0.13941938395630132}, {0.21338834764831843, 0.03661165235168157, 0.125}, {0.22706207261596578, -0.022937927384034232, 0.10206207261596577}, {0.22526189257265183, -0.08092432527524539, 0.07216878364870323}, {0.2081104868133904, -0.13339586413271926, 0.03735731134033556}, {0.17677669529663687, -0.17677669529663687, 0.}}; 
+    Steps=500; 
+    acuracy=6; 
+    eVs={0.}; 
+ 
+    Parameters=
+{-0.02180032749767517, -1., 0.21994905591719566, {0.14433756729740646, 0.14433756729740646, 0.14433756729740646}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 0, 90}, 3, 0.}
+{-0.02180032749767517, -1., 0.21994905591719566, {0.18517255942935615, 0.0936662084832465, 0.13941938395630132}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 15, 90}, 3, 0.}
+{-0.02180032749767517, -1., 0.21994905591719566, {0.21338834764831843, 0.03661165235168157, 0.125}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 30, 90}, 3, 0.}
+{-0.02180032749767517, -1., 0.21994905591719566, {0.22706207261596578, -0.022937927384034232, 0.10206207261596577}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 45, 90}, 3, 0.}
+{-0.02180032749767517, -1., 0.21994905591719566, {0.22526189257265183, -0.08092432527524539, 0.07216878364870323}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 60, 90}, 3, 0.}
+{-0.02180032749767517, -1., 0.21994905591719566, {0.2081104868133904, -0.13339586413271926, 0.03735731134033556}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 75, 90}, 3, 0.}
+{-0.02180032749767517, -1., 0.21994905591719566, {0.17677669529663687, -0.17677669529663687, 0.}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 90, 90}, 3, 0.}
+ 
+Definition timing= 46.3819
+ 
+ 
+    Starting free loop
+ 
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,0,90); 
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+
+File::fstr: File specification File[FileNameJoin[{FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}}], data}]] is not a string of one or more characters.
+
+CreateDirectory::ioarg: I/O operation is not valid for File[FileNameJoin[{FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}}], data}]].
+
+File::fstr: File specification File[FileNameJoin[{FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}}], graph}]] is not a string of one or more characters.
+
+CreateDirectory::ioarg: I/O operation is not valid for File[FileNameJoin[{FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}}], graph}]].
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+
+OpenAppend::fstr: File specification FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}, data, h=(0.25,90,0)_L=12_A=6.txt}] is not a string of one or more characters.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Max Step = 19; Delta=3.*^-13; E={-1.4036987686081737, -1.5558481757738525, -1.4063204920665364};  p=1/7
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,15,90); 
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+
+General::stop: Further output of FrontEndObject::notavail will be suppressed during this calculation.
+
+File::fstr: File specification File[FileNameJoin[{FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}}], data}]] is not a string of one or more characters.
+
+General::stop: Further output of File::fstr will be suppressed during this calculation.
+
+CreateDirectory::ioarg: I/O operation is not valid for File[FileNameJoin[{FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}}], data}]].
+
+General::stop: Further output of CreateDirectory::ioarg will be suppressed during this calculation.
+
+OpenAppend::fstr: File specification FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}, data, h=(0.25,90,15)_L=12_A=6.txt}] is not a string of one or more characters.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Max Step = 166; Delta=9.*^-13; E={-1.4076980318184398, -1.5566564873566275, -1.4104088605809044};  p=2/7
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,30,90); 
+
+OpenAppend::fstr: File specification FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}, data, h=(0.25,90,30)_L=12_A=6.txt}] is not a string of one or more characters.
+
+General::stop: Further output of OpenAppend::fstr will be suppressed during this calculation.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+General::stop: Further output of Write::strml will be suppressed during this calculation.
+
+Write::noopen: Cannot open $Failed.
+
+General::stop: Further output of Write::noopen will be suppressed during this calculation.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+General::stop: Further output of Close::stream will be suppressed during this calculation.
+Max Step = 178; Delta=9.*^-13; E={-1.4188030747019071, -1.558666565705149, -1.4217048178644274};  p=3/7
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,45,90); 
+Max Step = 191; Delta=9.*^-13; E={-1.434149931269401, -1.5611980223405517, -1.4374131713279878};  p=4/7
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,60,90); 
+Max Step = 201; Delta=1.*^-12; E={-1.450725248302825, -1.563678761029779, -1.4544707997521666};  p=5/7
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,75,90); 
+Max Step = 203; Delta=9.*^-13; E={-1.463662949834163, -1.5653717081885263, -1.467852326900832};  p=6/7
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,90,90); 
+Max Step = 175; Delta=9.*^-13; E={-1.468632365239967, -1.565951524051927, -1.4730055751281124};  p=7/7
+ 
+Free loop timing= Quantity[3, Minutes]Quantity[4, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+
+OpenRead::fstr: File specification FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}, data, h=(0.25,90,0)_L=12_A=6.txt}] is not a string of one or more characters.
+
+ReadList::stream: OpenRead[FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}, data, h=(0.25,90,0)_L=12_A=6.txt}]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+Set::shape: Lists {jG$662018, LG$662018, χG$662018, ωG$662018, ξG$662019, EnG$662018} and OpenRead[FileNameJoin[{$Failed, Files, 705, free, t=3_eV=0_JKG={-0.0218003, -1., 0.219949}_JKGmod={-0.0218003, -1., 0.219949}, data, h=(0.25,90,0)_L=12_A=6.txt}]] are not the same shape.
+
+Part::partd: Part specification ωG$662018[[1]] is longer than depth of object.
+
+Part::partd: Part specification ωG$662018[[2]] is longer than depth of object.
+
+Part::partd: Part specification χG$662018[[1]] is longer than depth of object.
+
+General::stop: Further output of Part::partd will be suppressed during this calculation.
+
+Part::pkspec1: The expression ev cannot be used as a part specification.
+
+Part::pkspec1: The expression ev cannot be used as a part specification.
+
+OpenWrite::noopen: Cannot open /home/rodrigues/Mathematica2/Files/pure/g0/data/K=6-L=12-kappa=0.0001 Round[10000. {{{-0.0218003, -1., 0.219949, {0.144338, 0.144338, 0.144338}, -0.0218003, -1., 0.219949, {0.25, 0., 90.}, 3., 0.}, {-0.0218003, -1., 0.219949, {0.185173, 0.0936662, 0.139419}, -0.0218003, -1., 0.219949, {0.25, 15., 90.}, 3., 0.}, {-0.0218003, -1., 0.219949, {0.213388, 0.0366117, 0.125}, -0.0218003, -1., 0.219949, {0.25, 30., 90.}, 3., 0.}, {-0.0218003, -1., 0.219949, {0.227062, -0.0229379, 0.102062}, -0.0218003, -1., 0.219949, {0.25, 45., 90.}, 3., 0.}, {-0.0218003, -1., 0.219949, {0.225262, -0.0809243, 0.0721688}, -0.0218003, -1., 0.219949, {0.25, 60., 90.}, 3., 0.}, {-0.0218003, -1., 0.219949, {0.20811, -0.133396, 0.0373573}, -0.0218003, -1., 0.219949, {0.25, 75., 90.}, 3., 0.}, {-0.0218003, -1., 0.219949, {0.176777, -0.176777, 0.}, -0.0218003, -1., 0.219949, {0.25, 90., 90.}, 3., 0.}}}[[ev,1]]].txt.
+Pure data saved: 
+Kappa=0.1168 Lambda=; Epure=*λ-1.6858288460816193; 
+
+
+Set::partd: Part specification χ$662019[[1,r,1,1]] is longer than depth of object.
+
+Set::partd: Part specification χ$662019[[2,r,1,1]] is longer than depth of object.
+
+Set::partd: Part specification χ$662019[[3,r,1,1]] is longer than depth of object.
+
+General::stop: Further output of Set::partd will be suppressed during this calculation.
+ 
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; Jmod=-0.02180032749767517; Kmod=-0.9999999999999999; Gmod=0.2199490559171956; L=12; h=(0.25,0,90); eV=0.
+ 
+
+Part::partw: Part 4 of ωG$662018[[2]] does not exist.
+
+Part::partw: Part 3 of ωG$662018[[2]] does not exist.
+
+Part::partw: Part 3 of ωG$662018[[2]] does not exist.
+
+General::stop: Further output of Part::partw will be suppressed during this calculation.
