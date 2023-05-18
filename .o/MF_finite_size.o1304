@@ -1,0 +1,90 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=705; 
+    Ls={12}; 
+    tV={3};    ts={{15, 160, -36, 0, -60}}; 
+    hV={{0.25, 0, 90}};
+    hs={{0.14433756729740646, 0.14433756729740646, 0.14433756729740646}}; 
+    Steps=500; 
+    acuracy=1; 
+    eVs={0.}; 
+ 
+    Parameters=
+{-0.02180032749767517, -1., 0.21994905591719566, {0.14433756729740646, 0.14433756729740646, 0.14433756729740646}, -0.02180032749767517, -0.9999999999999999, 0.2199490559171956, {0.25, 0, 90}, 3, 0.}
+ 
+Definition timing= 46.3939
+ 
+ 
+    Starting free loop
+ 
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=12; h=(0.25,0,90); 
+Max Step = 11; Delta=2.95914*^-8; E={-1.4036987713080873, -1.5558481799054371, -1.4063204947431158};  p=1/1
+ 
+Free loop timing= Quantity[0, Minutes]Quantity[2, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+Pure path=/home/rodrigues/Mathematica2/Files/pure/g0/t=3_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.25,90,0)_L=12_A=1.txt
+
+
+OpenWrite::noopen: Cannot open /home/rodrigues/Mathematica2/Files/pure/g0/t=3_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.25,90,0)_L=12_A=1.txt.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Pure data saved: 
+Kappa=0.1168; Lambda={0.03975826972010179, 0.03975826972010179, 0.03975826972010179}; Epure=-1.6858288460816193; 
+
+ 
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; Jmod=-0.02180032749767517; Kmod=-0.9999999999999999; Gmod=0.2199490559171956; L=12; h=(0.25,0,90); eV=0.
+ 
+ j =1/500; Delta=1.*;  E={-1.384808, -1.544472, -1.387429}; 
+ j =2/500; Delta=0.0015988961167*;  E={-1.402885, -1.555185, -1.40569}; 
+ j =3/500; Delta=0.0003761602675*;  E={-1.403876, -1.556055, -1.406478}; 
+ j =4/500; Delta=0.0000119090151*;  E={-1.4037, -1.555855, -1.406323}; 
+ j =5/500; Delta=6.3108805*^-6*;  E={-1.403702, -1.555852, -1.406323}; 
+ j =6/500; Delta=6.858235*^-7*;  E={-1.403699, -1.555849, -1.406321}; 
+ j =7/500; Delta=1.703475*^-7*;  E={-1.403699, -1.555848, -1.406321}; 
+ j =8/500; Delta=2.94296*^-8*;  E={-1.403699, -1.555848, -1.406321}; 
+ j =9/500; Delta=6.424*^-9*;  E={-1.403699, -1.555848, -1.40632}; 
+ev=1/; j MAX=10/500; Delta=6.423989826198628*^-9; 
+ 
+p=1/1; l=1/1; Δt = Quantity[0, Hours]Quantity[0, Minutes]
+Free loop + electric field timing= Quantity[0, Minutes]Quantity[30, Seconds]
+ 
+ 
+    Starting four vortex -fixed eV- gradually changing parameters  
+ 
+Pure path=/home/rodrigues/Mathematica2/Files/pure/g4/t=3_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.25,90,0)_L=12_A=1.txt
+
+
+OpenWrite::noopen: Cannot open /home/rodrigues/Mathematica2/Files/pure/g4/t=3_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.25,90,0)_L=12_A=1.txt.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Pure data saved: 
+Kappa=0.1168; Lambda={0.03975826972010179, 0.03975826972010179, 0.03975826972010179}; Epure=-1.6777724864341845; 
+
+ 
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; Jmod=-0.02180032749767517; Kmod=-0.9999999999999999; Gmod=0.2199490559171956; L=12; h=(0.25,0,90); eV=0.
+ 
+ j =1/500; Delta=1.*;  E={-1.38111, -1.546611, -1.383731}; 
+ j =2/500; Delta=0.0347357947885*;  E={-1.398525, -1.55263, -1.40169}; 
+ j =3/500; Delta=0.0112654244026*;  E={-1.398949, -1.5527, -1.401869}; 
+ j =4/500; Delta=0.0028980745252*;  E={-1.399068, -1.552656, -1.401962}; 
+ j =5/500; Delta=0.0009217009118*;  E={-1.399009, -1.552682, -1.401929}; 
+ j =6/500; Delta=0.0003763694955*;  E={-1.399032, -1.552677, -1.401943}; 
+ j =7/500; Delta=0.0001729565556*;  E={-1.399023, -1.55268, -1.401937}; 
+ j =8/500; Delta=0.0001259646238*;  E={-1.399026, -1.552679, -1.40194}; 
+ j =9/500; Delta=0.000105608783*;  E={-1.399025, -1.552679, -1.401939}; 
+ev=1/; j MAX=10/500; Delta=0.0001056087830223749; 
+ 
+p=1/1; l=1/1; Δt = Quantity[0, Hours]Quantity[0, Minutes]
+4 vortices loop timing Δt = Quantity[0, Hours]Quantity[0, Minutes]
