@@ -66,12 +66,17 @@ KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If
 
 
 dataToFilePure[ parameters_,L_,acuracy_,gauge_,data_] :=
-Module[ {path,f},		createDir@FileNameJoin[  {Directory[], "Files","pure", gauge}] ;
+Module[ {path,f},		
+(*createDir@FileNameJoin[{Directory[],"Files","pure", gauge}] ;*)
+createDir@FileNameJoin[{Directory[],"Files","pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }]
+           }] ;
 		path = toPathPure[parameters,L,acuracy,gauge];		
 		Print["Pure path=",path];Print[];
 		f = OpenWrite[path];
 		 Write[ f, data];
 		 Close[f];                ];
+		 
 		 
 toPathPure[parameters0_,L_,acuracy_,gauge_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
 parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;
@@ -79,12 +84,14 @@ FileNameJoin[{Directory[], "Files" ,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X
 StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
    }]];
 
-loadDataPure[ path_]:= Module[{(*path,*)f,data}, 
-(*path= toPathPure[\[Kappa],L,K,gauge];*)
+loadDataPure[ path_]:=Module[ {f,data},
 f = OpenRead[path];
-data=ReadList[ f];
-Close[f];
-data[[-1]]  ];
+If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ path ]; Abort[] ];
+data=ReadList[f];
+Close[f];			
+data[[-1]]
+];
+
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -393,7 +400,7 @@ bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 createDir[path_] :=
 Module[ {l=Length@FileNames[path]},		
-	If[ l==0,  CreateDirectory@File@FileNameJoin[{path}]; CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }]; 
+	If[ l==0,  (*CreateDirectory@File@FileNameJoin[{path}];*) CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }]; 
 ,Null]  ];
 
 loadData[pathData_]:=
