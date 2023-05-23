@@ -2,6 +2,7 @@
 #
 #$ -l hostname=micro4.local 
 #$ -N MF_finite_size
+#$ -l h_rt=120:00:00                   #estimate max run time
 #$ -q all.q
 #$ -m ea
 #$ -M lucasrdf@fisica.ufrn.br
