@@ -20,7 +20,7 @@ Print["Starting Kernels"];
 
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = Range[20,20,4]; 				tV={0};				
+		Ls = Range[20,60,2]; 				tV={0};				
 		hV={ {0.25,0,90},{0.25,15,90},{0.25,30,90},{0.25,45,90},{0.25,60,90},{0.25,75,90},{0.25,90,90} 
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   };
 
@@ -1046,6 +1046,8 @@ Print[ parameters[[i,j]] ],
 {j,1,Length@parameters[[i]] }
 ];
 Print[" "];
+Print["    ---- ---- ---- "];
+Print[" "];
 
 
 (* ::Subsubsection::Bold:: *)
@@ -1058,7 +1060,7 @@ t0=AbsoluteTime[];tpK=t0;
 Print["    Starting four vortex - pure Kitaev model + Kappa + Lambda  "];Print[" "]
 
 
-Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
+Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1],\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec }, 
 
  {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; 
 Nc=L^2;
@@ -1083,15 +1085,18 @@ Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
 \[Chi]0=\[Chi]gauge4v[\[Chi]0,L];
 
 dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} } ]; 
-Print["Pure data saved: "];
-Print["Kappa=",\[Kappa],"; Lambda=",\[Lambda] ,"; Epure=",Epure,"; "];Print[];
+Print["Kappa=",\[Kappa],"; Lambda=",round/@\[Lambda] ,"; Epure=",round@Epure,"; "];
        ]; 
 
-Print["L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); ", " eV0=",parameters[[ev,p]][[10]]/1700 ," x 1700 "];
+Print["    L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); ", " eV0=",parameters[[ev,p]][[10]]/1700 ," x 1700 "];
 
-t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];t0=t1; Print[" "];
-Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],
-IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ]   ];
+t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
+\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+t0=t1; 
+Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec   ];
+Print[" "];
 
 ]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   
 
@@ -1099,5 +1104,13 @@ IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ]   ];
 CloseKernels[];
 
 
-Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-tpK], "Seconds" ], "Hours" ];
-Print[ "pure Kitaev timing \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ]   ] ];
+Module[{\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec},
+t1=AbsoluteTime[];
+\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-tpK], "Seconds" ], "Hours" ];
+
+\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+Print["    ---- ---- ---- "];
+Print[" "];
+Print[ "pure Kitaev timing \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ] ];
