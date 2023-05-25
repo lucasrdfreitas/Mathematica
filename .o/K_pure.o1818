@@ -1,0 +1,616 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=705; 
+    Ls={20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60}; 
+    tV={0};    ts={{0, 160, 0, 0, -60}}; 
+    hV={{0.3, 0, 0}, {0.3, 15, 0}, {0.3, 30, 0}, {0.3, 45, 0}, {0.3, 60, 0}, {0.3, 75, 0}, {0.3, 90, 0}};
+    hs={{0.17320508075688776, 0.17320508075688776, 0.17320508075688776}, {0.19900199055833964, 0.19900199055833964, 0.10390580112600545}, {0.21123724356957946, 0.21123724356957946, 0.027525512860841077}, {0.2090770275176028, 0.2090770275176028, -0.05073059361772883}, {0.19266855755642598, 0.19266855755642598, -0.12552949397752036}, {0.1631300437976246, 0.1631300437976246, -0.1917737667700412}, {0.12247448713915891, 0.12247448713915891, -0.2449489742783178}}; 
+    Steps=500; 
+    acuracy=7; 
+    eVs={0.}; 
+ 
+    Parameters=
+{0., -1., 0., {0.17320508075688776, 0.17320508075688776, 0.17320508075688776}, 0., -0.9999999999999999, 0., {0.3, 0, 0}, 0, 0.}
+{0., -1., 0., {0.19900199055833964, 0.19900199055833964, 0.10390580112600545}, 0., -0.9999999999999999, 0., {0.3, 15, 0}, 0, 0.}
+{0., -1., 0., {0.21123724356957946, 0.21123724356957946, 0.027525512860841077}, 0., -0.9999999999999999, 0., {0.3, 30, 0}, 0, 0.}
+{0., -1., 0., {0.2090770275176028, 0.2090770275176028, -0.05073059361772883}, 0., -0.9999999999999999, 0., {0.3, 45, 0}, 0, 0.}
+{0., -1., 0., {0.19266855755642598, 0.19266855755642598, -0.12552949397752036}, 0., -0.9999999999999999, 0., {0.3, 60, 0}, 0, 0.}
+{0., -1., 0., {0.1631300437976246, 0.1631300437976246, -0.1917737667700412}, 0., -0.9999999999999999, 0., {0.3, 75, 0}, 0, 0.}
+{0., -1., 0., {0.12247448713915891, 0.12247448713915891, -0.2449489742783178}, 0., -0.9999999999999999, 0., {0.3, 90, 0}, 0, 0.}
+ 
+    ---- ---- ---- 
+ 
+    Starting four vortex - pure Kitaev model + Kappa + Lambda  
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6845; 
+    L=20; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=1/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.685; 
+    L=20; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=1/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6857; 
+    L=20; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=1/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6855; 
+    L=20; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=1/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6847; 
+    L=20; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=1/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6845; 
+    L=20; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=1/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6857; 
+    L=20; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=1/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6849; 
+    L=22; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=2/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6854; 
+    L=22; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=2/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6861; 
+    L=22; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=2/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6859; 
+    L=22; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=2/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6852; 
+    L=22; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=2/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.685; 
+    L=22; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=2/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6862; 
+    L=22; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=2/21; Δt = 0 hours : 0 minutes : 1 second
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6852; 
+    L=24; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=3/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6857; 
+    L=24; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=3/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6864; 
+    L=24; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=3/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6863; 
+    L=24; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=3/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6855; 
+    L=24; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=3/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6853; 
+    L=24; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=3/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6865; 
+    L=24; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=3/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6855; 
+    L=26; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=4/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.686; 
+    L=26; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=4/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6867; 
+    L=26; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=4/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6865; 
+    L=26; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=4/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6858; 
+    L=26; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=4/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6855; 
+    L=26; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=4/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6868; 
+    L=26; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=4/21; Δt = 0 hours : 0 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6857; 
+    L=28; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=5/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6862; 
+    L=28; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=5/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6869; 
+    L=28; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=5/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6867; 
+    L=28; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=5/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.686; 
+    L=28; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=5/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6857; 
+    L=28; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=5/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.687; 
+    L=28; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=5/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6858; 
+    L=30; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=6/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6864; 
+    L=30; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=6/21; Δt = 0 hours : 0 minutes : 5 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.687; 
+    L=30; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=6/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6869; 
+    L=30; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=6/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6861; 
+    L=30; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=6/21; Δt = 0 hours : 0 minutes : 4 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6859; 
+    L=30; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=6/21; Δt = 0 hours : 0 minutes : 5 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6871; 
+    L=30; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=6/21; Δt = 0 hours : 0 minutes : 5 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.686; 
+    L=32; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=7/21; Δt = 0 hours : 0 minutes : 9 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6865; 
+    L=32; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=7/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6872; 
+    L=32; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=7/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.687; 
+    L=32; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=7/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6863; 
+    L=32; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=7/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.686; 
+    L=32; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=7/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6873; 
+    L=32; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=7/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6861; 
+    L=34; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=8/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6866; 
+    L=34; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=8/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6873; 
+    L=34; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=8/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6871; 
+    L=34; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=8/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6864; 
+    L=34; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=8/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6862; 
+    L=34; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=8/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6874; 
+    L=34; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=8/21; Δt = 0 hours : 0 minutes : 8 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6862; 
+    L=36; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=9/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6867; 
+    L=36; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=9/21; Δt = 0 hours : 0 minutes : 12 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6874; 
+    L=36; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=9/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6872; 
+    L=36; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=9/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6865; 
+    L=36; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=9/21; Δt = 0 hours : 0 minutes : 12 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6862; 
+    L=36; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=9/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6875; 
+    L=36; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=9/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6863; 
+    L=38; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=10/21; Δt = 0 hours : 0 minutes : 14 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6868; 
+    L=38; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=10/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6875; 
+    L=38; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=10/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6873; 
+    L=38; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=10/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6865; 
+    L=38; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=10/21; Δt = 0 hours : 0 minutes : 14 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6863; 
+    L=38; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=10/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6876; 
+    L=38; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=10/21; Δt = 0 hours : 0 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6863; 
+    L=40; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=11/21; Δt = 0 hours : 0 minutes : 21 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6868; 
+    L=40; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=11/21; Δt = 0 hours : 0 minutes : 21 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6875; 
+    L=40; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=11/21; Δt = 0 hours : 0 minutes : 22 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6874; 
+    L=40; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=11/21; Δt = 0 hours : 0 minutes : 22 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6866; 
+    L=40; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=11/21; Δt = 0 hours : 0 minutes : 21 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6864; 
+    L=40; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=11/21; Δt = 0 hours : 0 minutes : 21 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6876; 
+    L=40; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=11/21; Δt = 0 hours : 0 minutes : 22 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6864; 
+    L=42; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=12/21; Δt = 0 hours : 0 minutes : 23 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6869; 
+    L=42; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=12/21; Δt = 0 hours : 0 minutes : 23 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6876; 
+    L=42; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=12/21; Δt = 0 hours : 0 minutes : 24 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6874; 
+    L=42; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=12/21; Δt = 0 hours : 0 minutes : 23 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6867; 
+    L=42; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=12/21; Δt = 0 hours : 0 minutes : 25 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6865; 
+    L=42; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=12/21; Δt = 0 hours : 0 minutes : 24 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6877; 
+    L=42; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=12/21; Δt = 0 hours : 0 minutes : 24 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6864; 
+    L=44; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=13/21; Δt = 0 hours : 0 minutes : 36 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.687; 
+    L=44; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=13/21; Δt = 0 hours : 0 minutes : 35 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6876; 
+    L=44; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=13/21; Δt = 0 hours : 0 minutes : 33 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6875; 
+    L=44; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=13/21; Δt = 0 hours : 0 minutes : 35 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6867; 
+    L=44; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=13/21; Δt = 0 hours : 0 minutes : 35 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6865; 
+    L=44; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=13/21; Δt = 0 hours : 0 minutes : 33 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6877; 
+    L=44; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=13/21; Δt = 0 hours : 0 minutes : 35 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6865; 
+    L=46; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=14/21; Δt = 0 hours : 0 minutes : 38 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.687; 
+    L=46; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=14/21; Δt = 0 hours : 0 minutes : 41 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6877; 
+    L=46; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=14/21; Δt = 0 hours : 0 minutes : 37 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6875; 
+    L=46; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=14/21; Δt = 0 hours : 0 minutes : 40 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6868; 
+    L=46; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=14/21; Δt = 0 hours : 0 minutes : 41 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6866; 
+    L=46; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=14/21; Δt = 0 hours : 0 minutes : 39 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6878; 
+    L=46; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=14/21; Δt = 0 hours : 0 minutes : 38 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6865; 
+    L=48; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=15/21; Δt = 0 hours : 0 minutes : 56 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.687; 
+    L=48; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=15/21; Δt = 0 hours : 0 minutes : 56 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6877; 
+    L=48; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=15/21; Δt = 0 hours : 0 minutes : 55 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6876; 
+    L=48; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=15/21; Δt = 0 hours : 0 minutes : 57 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6868; 
+    L=48; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=15/21; Δt = 0 hours : 0 minutes : 56 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6866; 
+    L=48; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=15/21; Δt = 0 hours : 0 minutes : 56 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6878; 
+    L=48; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=15/21; Δt = 0 hours : 0 minutes : 55 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6866; 
+    L=50; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=16/21; Δt = 0 hours : 0 minutes : 59 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6871; 
+    L=50; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=16/21; Δt = 0 hours : 0 minutes : 59 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6877; 
+    L=50; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=16/21; Δt = 0 hours : 0 minutes : 59 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6876; 
+    L=50; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=16/21; Δt = 0 hours : 0 minutes : 58 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6868; 
+    L=50; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=16/21; Δt = 0 hours : 0 minutes : 59 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6866; 
+    L=50; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=16/21; Δt = 0 hours : 0 minutes : 59 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6878; 
+    L=50; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=16/21; Δt = 0 hours : 0 minutes : 59 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6866; 
+    L=52; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=17/21; Δt = 0 hours : 1 minute : 25 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6871; 
+    L=52; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=17/21; Δt = 0 hours : 1 minute : 26 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6878; 
+    L=52; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=17/21; Δt = 0 hours : 1 minute : 26 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6876; 
+    L=52; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=17/21; Δt = 0 hours : 1 minute : 25 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6869; 
+    L=52; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=17/21; Δt = 0 hours : 1 minute : 17 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6867; 
+    L=52; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=17/21; Δt = 0 hours : 1 minute : 24 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6879; 
+    L=52; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=17/21; Δt = 0 hours : 1 minute : 33 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6866; 
+    L=54; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=18/21; Δt = 0 hours : 1 minute : 21 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6871; 
+    L=54; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=18/21; Δt = 0 hours : 1 minute : 31 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6878; 
+    L=54; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=18/21; Δt = 0 hours : 1 minute : 23 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6877; 
+    L=54; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=18/21; Δt = 0 hours : 1 minute : 23 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6869; 
+    L=54; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=18/21; Δt = 0 hours : 1 minute : 23 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6867; 
+    L=54; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=18/21; Δt = 0 hours : 1 minute : 28 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6879; 
+    L=54; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=18/21; Δt = 0 hours : 1 minute : 20 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6866; 
+    L=56; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=19/21; Δt = 0 hours : 2 minutes : 7 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6872; 
+    L=56; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=19/21; Δt = 0 hours : 2 minutes : 7 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6878; 
+    L=56; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=19/21; Δt = 0 hours : 2 minutes : 15 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6877; 
+    L=56; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=19/21; Δt = 0 hours : 1 minute : 59 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6869; 
+    L=56; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=19/21; Δt = 0 hours : 2 minutes : 2 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6867; 
+    L=56; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=19/21; Δt = 0 hours : 1 minute : 51 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.6879; 
+    L=56; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=19/21; Δt = 0 hours : 1 minute : 58 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6867; 
+    L=58; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=20/21; Δt = 0 hours : 2 minutes : 3 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6872; 
+    L=58; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=20/21; Δt = 0 hours : 2 minutes : 10 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6879; 
+    L=58; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=20/21; Δt = 0 hours : 2 minutes : 16 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6877; 
+    L=58; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=20/21; Δt = 0 hours : 2 minutes : 7 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.6869; 
+    L=58; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=20/21; Δt = 0 hours : 2 minutes : 26 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6867; 
+    L=58; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=20/21; Δt = 0 hours : 2 minutes : 26 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.688; 
+    L=58; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=20/21; Δt = 0 hours : 2 minutes : 13 seconds
+ 
+Kappa=0.0757; Lambda={0.0573, 0.0573, 0.0573}; Epure=-1.6867; 
+    L=60; h=(0.3,0,0);  eV0=0. x 1700 
+p=1/7; l=21/21; Δt = 0 hours : 3 minutes : 19 seconds
+ 
+Kappa=0.0757; Lambda={0.0756, 0.0756, 0.0206}; Epure=-1.6872; 
+    L=60; h=(0.3,15,0);  eV0=0. x 1700 
+p=2/7; l=21/21; Δt = 0 hours : 2 minutes : 50 seconds
+ 
+Kappa=0.0757; Lambda={0.0852, 0.0852, 0.0014}; Epure=-1.6879; 
+    L=60; h=(0.3,30,0);  eV0=0. x 1700 
+p=3/7; l=21/21; Δt = 0 hours : 2 minutes : 52 seconds
+ 
+Kappa=0.0757; Lambda={0.0834, 0.0834, 0.0049}; Epure=-1.6877; 
+    L=60; h=(0.3,45,0);  eV0=0. x 1700 
+p=4/7; l=21/21; Δt = 0 hours : 2 minutes : 45 seconds
+ 
+Kappa=0.0757; Lambda={0.0708, 0.0708, 0.0301}; Epure=-1.687; 
+    L=60; h=(0.3,60,0);  eV0=0. x 1700 
+p=5/7; l=21/21; Δt = 0 hours : 3 minutes : 12 seconds
+ 
+Kappa=0.0757; Lambda={0.0508, 0.0508, 0.0702}; Epure=-1.6867; 
+    L=60; h=(0.3,75,0);  eV0=0. x 1700 
+p=6/7; l=21/21; Δt = 0 hours : 3 minutes : 19 seconds
+ 
+Kappa=0.0757; Lambda={0.0286, 0.0286, 0.1145}; Epure=-1.688; 
+    L=60; h=(0.3,90,0);  eV0=0. x 1700 
+p=7/7; l=21/21; Δt = 0 hours : 3 minutes : 17 seconds
+ 
+    ---- ---- ---- 
+ 
+pure Kitaev timing Δt = 1 hour : 46 minutes : 23 seconds
