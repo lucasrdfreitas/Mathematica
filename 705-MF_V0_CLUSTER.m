@@ -1108,7 +1108,10 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
 (* ::Code::Bold:: *)
-(*minSteps=3;
+(**)
+
+
+minSteps=3;
 Do[   
 Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2=0,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
@@ -1210,7 +1213,7 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 	t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];t0=t1;Print[" "];
 	Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ]   ]
   ];
-]  , {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ];      *)
+]  , {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ];      
 
 
 (* ::Subsubsection::Bold:: *)
@@ -1227,6 +1230,7 @@ t0=t4v;Print[" "] Print[" "];
 Print["    Starting four vortex + electric field loop: "];Print[" "]
 
 
+(*
 minSteps=5;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g4"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
@@ -1257,7 +1261,7 @@ Tpure=TmatPure[L];
 Upure=UmatPure[Tpure\[ConjugateTranspose] . Hpure . Tpure];
 Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
 {\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];   
-dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} } ]; 
+dataToFilePure[parameters[[1,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} } ]; 
 Print["Pure data saved: "];
 Print["Kappa=",\[Kappa]," Lambda=", \[Lambda] "; Epure=",Epure,"; "];Print[];
 Do[ \[Chi][[1,r]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; \[Chi][[2,r]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; \[Chi][[3,r]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; ,{r,1,Nc}];
@@ -1323,7 +1327,8 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 	Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ]   ]
 
   ];
-]  , {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]                                                 
+]  , {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]                 
+*)                                
 
 
 Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-t4v], "Seconds" ], "Hours" ];
