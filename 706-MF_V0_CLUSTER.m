@@ -1109,9 +1109,10 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
 (* ::Code::Bold:: *)
-minSteps=3;
+minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
-Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp}, 
+Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp,
+j0=-1,EnList0={{},{},{}},\[CapitalDelta]seq0={},\[CapitalDelta]\[Omega]seq0={}}, 
 {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,1]][[1;;7]];  
 Nc=L^2;
 \[Omega]=Table[\[Omega]GA,2,{r,1,Nc} ];
@@ -1156,7 +1157,8 @@ For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy 
 
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 If[j<=1, loaddata=loadDataTry[toPath[parameters[[ev,p]],L,4,gauge,NbName]  ];
-If[!(loaddata===$Failed),Print["Loading data ..."]; {j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata; Continue[]] ];
+If[!(loaddata===$Failed),Print["Loading data ..."]; {j0,L,\[Chi],\[Omega],\[Xi],{EnList0[[1]],EnList0[[2]],EnList0[[3]],\[CapitalDelta]seq0,\[CapitalDelta]\[Omega]seq0}}=loaddata; (*Continue[]*)
+] ];
 
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
@@ -1202,6 +1204,7 @@ H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];
 	EnList[[2]]=Partition[Flatten[EnList[[2]]],2];
 	EnList[[3]]=Partition[Flatten[EnList[[3]]],2]; 
 	\[CapitalDelta]\[Omega]seq=Partition[Flatten[\[CapitalDelta]\[Omega]seq],2]; 
+(*If[j0\[NotEqual]-1, {j,EnList,\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}={j0,EnList0,\[CapitalDelta]seq0,\[CapitalDelta]\[Omega]seq0};   ];*)
 	dataToFile[parameters[[ev,p]],L,acuracy,{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}},gauge,NbName];   
   
 Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ];
@@ -1230,7 +1233,8 @@ Print["    Starting four vortex -fixed eV- gradually changing parameters  "];Pri
 (* ::Code::Bold:: *)
 minSteps=10;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g4"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
-Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp}, 
+Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp
+j0=-1,EnList0={{},{},{}},\[CapitalDelta]seq0={},\[CapitalDelta]\[Omega]seq0={}},  
 {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,1]][[1;;7]];  
 Nc=L^2;
 \[Omega]=Table[\[Omega]GA,2,{r,1,Nc} ];
@@ -1277,8 +1281,8 @@ For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy 
 (*Print["j1=",j];*)
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 If[j<=1, loaddata=loadDataTry[toPath[parameters[[ev,p]],L,4,gauge,NbName]  ];
-If[!(loaddata===$Failed),Print["Loading data ..."]; {j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata; Continue[]] ];
-
+If[!(loaddata===$Failed),Print["Loading data ..."]; {j0,L,\[Chi],\[Omega],\[Xi],{EnList0[[1]],EnList0[[2]],EnList0[[3]],\[CapitalDelta]seq0,\[CapitalDelta]\[Omega]seq0}}=loaddata; (*Continue[]*)
+] ];
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
 \[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
@@ -1325,6 +1329,7 @@ H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];
 	EnList[[2]]=Partition[Flatten[EnList[[2]]],2];
 	EnList[[3]]=Partition[Flatten[EnList[[3]]],2]; 
 	\[CapitalDelta]\[Omega]seq=Partition[Flatten[\[CapitalDelta]\[Omega]seq],2]; 
+(*If[j0\[NotEqual]-1, {j,EnList,\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}={j0,EnList0,\[CapitalDelta]seq0,\[CapitalDelta]\[Omega]seq0};   ];*)
 	dataToFile[parameters[[ev,p]],L,acuracy,{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}},gauge,NbName];   
   
 Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ];
