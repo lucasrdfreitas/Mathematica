@@ -17,13 +17,13 @@ Print["Starting Kernels"];
 NbName="706"; \[Lambda]0=0.5; 
 
 		Ls = Range[44,44,4]; 				tV={0};	
-		Js=Table[J,{J,-0.1,0.1,0.01}];
+		Js=Table[N[Round[1000J]/1000],{J,-0.1,0.1,0.02}];
 		Ks={-1};
-		\[CapitalGamma]s=Table[\[CapitalGamma],{\[CapitalGamma],-0.5,0.5,0.01}];			
-		hV=With[{h=0.05,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
+		\[CapitalGamma]s=Table[N[Round[1000\[CapitalGamma]]/1000],{\[CapitalGamma],-0.4,0.4,0.04}];			
+		hV=With[{h=0.1,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 
-		steps=400;				acuracy=8;     eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=100;				acuracy=8;     eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -1025,8 +1025,11 @@ ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300;
 (*  \[Kappa]=0.1 : h=0.3292;   \[Kappa]=0.2 : 0.41475; \[Kappa]=0.05 : 0.2612 *)
-(*parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];*)
-parameters = {Tuples[{Js,Ks,\[CapitalGamma]s ,hs} ] };
+(*parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,
+N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];*)
+JKGtuples = Tuples[{Js,Ks,\[CapitalGamma]s}] ;
+parameters=Table[Flatten[ Table[ {JKGtuples[[t]][[1]],JKGtuples[[t]][[2]],JKGtuples[[t]][[3]],hs[[h]] ,
+JKGtuples[[t]][[1]],JKGtuples[[t]][[2]],JKGtuples[[t]][[3]],hV[[h]],"manual",eVs[[ev]]} , {t,1,Length@JKGtuples},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
 
 
 Print[" "];
@@ -1041,13 +1044,13 @@ Print["    hV=",hV,";"]
 Print["    Steps=",steps,"; "];
 Print["    acuracy=",acuracy,"; "];
 Print["    eVs=",eVs,"; "];
-Print[" "];
+Print[" "];(*
 Print["    Parameters="];
 Do[
 Print[ parameters[[i,j]] ],
 {i,1,Length@parameters},
 {j,1,Length@parameters[[i]] }
-];
+];*)
 Print[" "];
 
 
@@ -1058,16 +1061,17 @@ Print[" "];
 tvf=AbsoluteTime[];Print["Definition timing= ",round[tvf-t0] ]; t0=tvf;
 
 
+(* ::Code::Bold:: *)
 Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
-Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
+Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],Egap,\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
 {J,K,\[CapitalGamma],h}=parameters[[1,p]][[1;;4]]; Nc=L^2;
-If[ p==1, \[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}; ];\[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   (*Print[MatrixForm/@\[Chi],MatrixForm/@\[Omega]];*)
+If[ Mod[p,Length@\[CapitalGamma]s,1]==1, \[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}; ];\[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   (*Print[MatrixForm/@\[Chi],MatrixForm/@\[Omega]];*)
 Print["J=",J,"; K=",K, "; G=",\[CapitalGamma], "; L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "];
 kTable=toMomentumTable[L];
 For[j=1,( ( j<(steps))\[And](Chop[ \[CapitalDelta]1,10^(-acuracy) ]!= 0) ), j++,  
-    If[j<=1, loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
-    If[!(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata]];
+(*    If[j<=1, loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
+    If[!(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq,Egap}}=loaddata]];*)
 u=Chop@Total@Table[ Module[{H0,Hr,U,TU,TUh,k,uu},
 k=kTable[[l]];
 H0=HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],k];
@@ -1096,9 +1100,11 @@ EMF=EnMF0[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\
 E\[Lambda]=EnLagMF[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\[Omega]v,L,L];
 ];                                        (* <- EnMF0 ?  *)
 Esum=Sum[  Total[Select[Eigenvalues[HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],kTable[[l]] ]  ],#<0&]] ,{l,1,Nc}]/(2Nc); 
+Egap=Min@Table[  Abs@Eigenvalues[HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],kTable[[l]] ]  ]   ,{l,1,Nc}]; 
 
-	dataToFile[parameters[[1,p]],L,acuracy,{j,L,\[Chi],\[Omega],{0,0},{{EMF},{Esum},{EMF+E\[Lambda]},\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}},"free",NbName]; 
-Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]*)"; E=",{EMF,Esum,EMF+E\[Lambda]},";  p=",p,"/",Length@parameters[[1]]];
+
+	dataToFile[parameters[[1,p]],L,acuracy,{j,L,\[Chi],\[Omega],{0,0},{{EMF},{Esum},{EMF+E\[Lambda]},\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq,Egap}},"free",NbName]; 
+Print["Max Step = ", j,"; Delta=",\[CapitalDelta]1,"; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ],"; E=",{EMF,Esum,EMF+E\[Lambda]},"; Gap=",Egap,";  p=",p,"/",Length@parameters[[1]]];
 {jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,p]],L,acuracy,"free",NbName ]  ];
  ];  , {p,1,Length[parameters[[1]]]}  ],{l,1,Length@Ls}];Print[" "];
 
