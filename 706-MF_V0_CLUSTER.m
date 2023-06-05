@@ -16,11 +16,11 @@ Print["Starting Kernels"];
 
 NbName="706"; \[Lambda]0=0.5; 
 
-		Ls = Range[32,32,4]; 				tV={0};				
+		Ls = Range[32,32,4]; 				tV={0.5};				
 		hV=With[{h=0.2,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 
-		steps=100;				acuracy=4;     eVs=Table[1700 x, {x,0,1,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=200;				acuracy=4;     eVs=Table[1700 x, {x,0,1,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -1101,13 +1101,13 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
 (*vortex free + gradually increase  parameters *)
 
 
-(*Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;Print[" "] Print[" "];];
-Print["    Starting vortex free + electric field loop: "];Print[" "]*)
+Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
-(*
+
 minSteps=3;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp}, 
@@ -1213,7 +1213,7 @@ Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalD
 
 
   ];
-]  , {l,1,Length@Ls} , {ev,1,Length[parameters]} ];    *)                                        
+]  , {l,1,Length@Ls} , {ev,1,Length[parameters]} ];     
 
 
 (* ::Subsubsection::Bold:: *)
@@ -1335,6 +1335,7 @@ t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ]
 Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]\[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec   ]
 
  , {p,1,Length[parameters[[1]] ]}   ];
+
 
   ];         ]  , {l,1,Length@Ls} , {ev,1,Length[parameters]} ]                                                   
 
