@@ -16,11 +16,11 @@ Print["Starting Kernels"];
 
 NbName="706"; \[Lambda]0=0.5; 
 
-		Ls = Range[16,16,4]; 				tV={1};				
+		Ls = Range[16,16,4]; 				tV={0};				
 		hV=With[{h=0.1,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 
-		steps=30;				acuracy=1.5;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.95,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=30;				acuracy=1.5;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.65,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -49,7 +49,7 @@ round[\[Kappa]_]:=N[Round[10000\[Kappa]]/10000];round\[CapitalDelta][\[Kappa]_]:
 \[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
 
 
-(* ::Subsection::Bold:: *)
+(* ::Subsection::Bold::Closed:: *)
 (*for pure*)
 
 
@@ -106,6 +106,9 @@ data[[-1]]
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 toR[m0_,n0_,L_,M_]:= Module[{\[CapitalDelta]n=\[LeftFloor]n0/L\[RightFloor],n,m},n=Mod[n0 ,L]; m=Mod[m0+M \[CapitalDelta]n,L]; m + n L+1];
 HNN[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{r=toR[m,n ,L,M]},Table[{{0,(-K[[r,\[Alpha]]]+\[Lambda][[\[Alpha]]]) u[[r,\[Alpha]]] },{0,0}},{\[Alpha],1,3}]]; 
 HNNNA[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{
@@ -146,6 +149,9 @@ EandUPure[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 correlations[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS },
 \[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
 
@@ -394,6 +400,175 @@ add4Vortices[ K0,Kmod, RS,RW, RE,RN,L] ];
 
 asites[m_,n_]:=m nx+n ny;
 bsites[m_,n_]:=m nx+n ny-\[Delta]z;
+
+
+(* ::Subsection::Bold::Closed:: *)
+(*for pure*)
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*Auxiliary matrices for the Hamiltonian  [2x2 matrices]*)
+
+
+toR[m0_,n0_,L_,M_]:= Module[{\[CapitalDelta]n=\[LeftFloor]n0/L\[RightFloor],n,m},n=Mod[n0 ,L]; m=Mod[m0+M \[CapitalDelta]n,L]; m + n L+1];
+HNN[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{r=toR[m,n ,L,M]},Table[{{0,(-K[[r,\[Alpha]]]+\[Lambda][[\[Alpha]]]) u[[r,\[Alpha]]] },{0,0}},{\[Alpha],1,3}]]; 
+HNNNA[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{
+r1={toR[m,n ,L,M],toR[m,n ,L,M],toR[m,n,L,M]},
+r2={toR[m+1,n-1 ,L,M],toR[m,n+1 ,L,M],toR[m-1,n,L,M]}        }      ,
+Table[{{\[Kappa] u[[r1[[\[Alpha]]],\[Alpha]]] u[[r2[[\[Alpha]]],Mod[\[Alpha]+1,3,1] ]],0},{0,0 }},{\[Alpha],1,3}]
+];
+HNNNB[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{
+r1={toR[m-1,n ,L,M],toR[m,n -1,L,M],toR[m,n,L,M]},
+r2={toR[m-1,n ,L,M],toR[m,n-1 ,L,M],toR[m,n,L,M]}        }      ,
+Table[{{0,0},{0,\[Kappa] u[[r1[[\[Alpha]]],\[Alpha]]] u[[r2[[\[Alpha]]],Mod[\[Alpha]+1,3,1] ]]}},{\[Alpha],1,3}]
+];
+					
+Hreal[K_,\[Kappa]_,\[Lambda]_,u_,L_,M_,\[Delta]k_] := Module[{Nc=L^2,H },
+
+ H= I Sum[Module[{Hnn,HnnnA,HnnnB, \[CurlyPhi]=\[Delta]k . (m nx+n ny),
+r={toR[m+1,n ,L,M],toR[m,n+1 ,L,M],toR[m,n ,L,M]},
+RA={toR[m+1,n-1 ,L,M],toR[m,n+1 ,L,M],toR[m-1,n,L,M]},
+RB={toR[m-1,n+1 ,L,M],toR[m,n-1 ,L,M],toR[m+1,n,L,M]}    },
+
+Hnn=HNN[K,\[Kappa],\[Lambda],u,m,n,L,M] ;HnnnA=HNNNA[K,\[Kappa],\[Lambda],u,m,n,L,M] ;HnnnB=HNNNB[K,\[Kappa],\[Lambda],u,m,n,L,M] ;
+
+Sum[       KroneckerProduct[ one[r[[3]],r[[\[Alpha]]],Nc],Hnn[[\[Alpha]]]]   +
+KroneckerProduct[ one[r[[3]],RA[[\[Alpha]]],Nc],HnnnA[[\[Alpha]]]]   +
+KroneckerProduct[ one[r[[3]],RB[[\[Alpha]]],Nc],HnnnB[[\[Alpha]]]]   ,{\[Alpha],1,3}] Exp[I \[CurlyPhi]]      ] 
+,{m,0,L-1},{n,0,L-1}];
+
+ H+H\[ConjugateTranspose]];
+
+TmatPure[L_] :=KroneckerProduct[   IdentityMatrix[L^2],  {{1,1},{I,-I}} ];
+UmatPure[H_]:= Module[ {R=Quiet@Eigensystem@N[H]},ReverseSort[R\[Transpose]]\[Transpose][[2]]\[Transpose] ];
+EandUPure[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H]},{R[[1]],R[[2]]\[Transpose] }];
+\[DoubleStruckCapitalU]occupiedPure[TU_,Nc_]:= Drop[Take[TU\[Transpose],-Nc-1],{2}]\[Transpose];
+
+
+correlations[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS },
+\[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
+
+SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ 
+Module[{ rz,Io,J},rz=m+(n-1)L-1; Io=Mod[\[Alpha]+2rz,2L^2,1];J=Mod[\[Beta] + 4 +2rz,2L^2,1];
+-u[[m,n]] icc[[J,Io]]    ], {m,1,L},{n,1,L},  {\[Alpha],1,4},{\[Beta],1,4} ];
+
+SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L,1]; rz=m+(n-1)L-1;rx=mx+(n-1)L-1;Io=Mod[\[Alpha]+2rz,2L^2,1];J=Mod[\[Beta] + 4+2rx,2L^2,1];
+icc[[J,Io]]      ]   , {m,1,L},{n,1,L},  {\[Alpha],1,4},{\[Beta],1,4} ];
+SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, 
+ny=Mod[n+1,L,1];my=If[ny==1,Mod[m-M,L,1] , m];  ry=my+(ny-1)L-1;rz=m+(n-1)L-1;Io=Mod[\[Alpha]+2rz,2L^2,1];J=Mod[\[Beta] + 4+2ry,2L^2,1];
+icc[[J,Io]]    ]    , {m,1,L},{n,1,L},  {\[Alpha],1,4},{\[Beta],1,4} ];
+SS
+];
+
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*to MF pure*)
+
+
+
+toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
+\[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
+
+SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ 
+Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];
+ {{   1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,u[[rz+1,3]]  }}    ],{n,0,L-1} , {m,0,L-1}];
+
+SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];
+ {{  1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,u[[ rz+1 ,1]] ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];
+SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;
+rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];
+ {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,u[[rz+1,2]] ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];
+SS        ];
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*gauge pure*)
+
+
+nx={1/2,Sqrt[3]/2};ny={-(1/2),Sqrt[3]/2};     \[Delta]x={-Sqrt[3]/2,-1/2}/Sqrt[3];\[Delta]y={Sqrt[3]/2,-1/2}/Sqrt[3];\[Delta]z={0,1}/Sqrt[3];
+ 
+asites[m_,n_]:=m nx+n ny;
+bsites[m_,n_]:=m nx+n ny-\[Delta]z;
+\[Sigma]sites[m_,n_,\[Sigma]_]:=m nx+n ny-\[Sigma] \[Delta]z;
+uniformU[u_,L_]:=Table[ {u,u,u},L^2];
+gauge2vX[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;
+Do[  Module[{r,m,n}, m =mS ; n=nS+i ; r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];               u           ];
+gauge2vY[u0_,L_]:= Module[{d1,d2,u=u0,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mW=r2-1;nW=L-r2-1;
+Do[  Module[{r,m,n}, m =mW+i; n=nW; r = m+n L+1;    u[[r,2]] =-u0[[r,2]];      ]   , {i,1,d1}];                u           ];
+gauge2vZ[u0_,L_]:= Module[{d1,d2,u=u0,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mW=r2-1;nW=L-r2-1;
+Do[  Module[{r,m,n}, m =mW+i; n=nW-i+1; r = m+n L+1;    u[[r,3]] =-u0[[r,3]];      ]   , {i,1,d1}];                u           ];
+gauge4v[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  
+mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
+Do[  Module[{r,m,n}, m =mS ; n=nS+i ;       r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];   
+Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];               u           ];
+
+
+positionVortex[v_,L_]:=Module[{d1,d2,r2,mS,nS,mW,nW,mE,nE,mN,nN},
+		 r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2; 
+
+		 mS=r2-1;           nS=r2-1;
+		 mW=r2-1;           nW=L-r2-1;
+		 mE=L-r2-1;     nE=r2-1;
+		 mN=L-r2-1;     nN=L-r2-1;
+
+		{{mS,nS},{mW,nW},{mE,nE},{mN,nN}}[[v]]
+]
+
+
+
+
+gauge2v[u0_,L_,\[Alpha]_]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];   Do[  Module[{r,m,n},
+							m={r2-1,             r2-1+i,              r2-1+i   }[[\[Alpha]]]; 
+							n={r2-1+i,       L-r2-1,             L-r2-i   }[[\[Alpha]]];
+ r = m+n L+1;    u[[r,\[Alpha]]] =-u0[[r,\[Alpha]]];      ]   , {i,1,d1}];                u           ];
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*correlation*)
+
+
+(*spin-spin correlation*)
+ssC[\[Chi]_,\[Omega]_,r_,L_,M_]:=Module[ {m,n,mx,my,ny,R},n=\[LeftFloor](r-1)/L\[RightFloor];m=r-1-n L;mx=Mod[m+1,L];ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];
+ R={ mx+n L +1,my+ny L +1,m+n L +1};
+Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]]
+,
+{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]
+];
+
+ssC2[\[Chi]_,\[Omega]_,m_,n_,L_]:=Module[ {mx,ny,R,r=Mod[m,L] +Mod[n,L] L +1},mx=Mod[m+1,L];ny=Mod[n+1,L]; R={ mx+n L +1,m+ny L +1,r};
+Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]],
+{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]                                      ];
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*electric field*)
+
+
+uniform[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2];   
+
+addVortex[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
+K[[ m+n L1 +1,3    ]]=K0;  
+K[[ Mod[m+1,L1]+Mod[n-1,L2] L1 +1  ,2    ]]=K0;
+K[[ Mod[m+1,L1]+n L1 +1,1    ]]=K0;
+K[[ Mod[m+1,L1]+Mod[n+1,L2] L1 +1  ,3   ]]=K0;
+K[[ m+Mod[n+1,L2] L1+1   ,2    ]]=K0;
+K[[ Mod[m-1,L1]+Mod[n+1,L2] L1 +1  ,1   ]]=K0;
+K];  
+
+add2Vortices[ Ko_,K1_,K2_, R1_,R2_,L1_,L2_] :=Module[ {K}, K = addVortex[ Ko,K1, R1,L1,L2]; addVortex[ K,K2, R2,L1,L2]];
+add4Vortices[ K0_,Kmod_, R1_,R2_, R3_,R4_,L_] :=Module[ {K}, K = addVortex[ K0,Kmod, R1,L,L]; K = addVortex[ K,Kmod, R2,L,L]; K = addVortex[ K,Kmod, R3,L,L]; addVortex[ K,Kmod, R4,L,L]];
+add2VorticesMaxSpaced[ Ko_,K1_,K2_,L1_,L2_] := Module[{R1,R2,d}, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= {\[LeftFloor]L1/2\[RightFloor] ,\[LeftFloor](L2+1)/2\[RightFloor] };R2= {\[LeftFloor]L1/2\[RightFloor]   +d,\[LeftFloor](L2+1)/2\[RightFloor] -d};
+	add2Vortices[ Ko,K1,K2, R1,R2,L1,L2]];
+add4VorticesMaxSpaced[ K0_,Kmod_,L_] :=Module[ {RS,RE,RW,RN,r2},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];
+		RS={(r2-1),(r2-1)};
+		RW={(r2-1),(L-r2-1)};
+		RE={(L-r2-1),(r2-1)};
+		RN={(L-r2-1),(L-r2-1)};
+add4Vortices[ K0,Kmod, RS,RW, RE,RN,L] ];
+
+\[Chi]Gx = {{0.5249,0,0,0},{0,-1,0,0},{0,0,0,0},{0,0,0,0}};\[Chi]Gy = {{0.5249,0,0,0},{0,0,0,0},{0,0,-1,0},{0,0,0,0}};\[Chi]Gz ={{0.5249,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,-1}};
+
 
 
 (* ::Subsection::Bold::Closed:: *)
@@ -1122,6 +1297,9 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,hp,
@@ -1246,6 +1424,9 @@ Print["    Starting four vortex -fixed eV- gradually changing parameters  "];Pri
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g4"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp,
