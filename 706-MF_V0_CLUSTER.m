@@ -16,11 +16,11 @@ Print["Starting Kernels"];
 
 NbName="706"; \[Lambda]0=0.5; 
 
-		Ls = Range[32,32,4]; 				tV={3,4};				
-		hV=With[{h=0.2,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
+		Ls = Range[16,16,4]; 				tV={0};				
+		hV=With[{h=0.1,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 
-		steps=60;				acuracy=2;     eVs=Table[1700 x, {x,0,.95,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=30;				acuracy=1.5;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.65,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -49,7 +49,7 @@ round[\[Kappa]_]:=N[Round[10000\[Kappa]]/10000];round\[CapitalDelta][\[Kappa]_]:
 \[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*for pure*)
 
 
@@ -105,6 +105,7 @@ data[[-1]]
 (**)
 
 
+(* ::Code::Bold:: *)
 toR[m0_,n0_,L_,M_]:= Module[{\[CapitalDelta]n=\[LeftFloor]n0/L\[RightFloor],n,m},n=Mod[n0 ,L]; m=Mod[m0+M \[CapitalDelta]n,L]; m + n L+1];
 HNN[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{r=toR[m,n ,L,M]},Table[{{0,(-K[[r,\[Alpha]]]+\[Lambda][[\[Alpha]]]) u[[r,\[Alpha]]] },{0,0}},{\[Alpha],1,3}]]; 
 HNNNA[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{
@@ -144,6 +145,7 @@ EandUPure[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H
 (**)
 
 
+(* ::Code::Bold:: *)
 correlations[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS },
 \[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
 
@@ -157,7 +159,7 @@ SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J},
 ny=Mod[n+1,L,1];my=If[ny==1,Mod[m-M,L,1] , m];  ry=my+(ny-1)L-1;rz=m+(n-1)L-1;Io=Mod[\[Alpha]+2rz,2L^2,1];J=Mod[\[Beta] + 4+2ry,2L^2,1];
 icc[[J,Io]]    ]    , {m,1,L},{n,1,L},  {\[Alpha],1,4},{\[Beta],1,4} ];
 SS
-];
+];(*
 
 (* writting the exp values in the form of the MF parameters:   *)
 toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
@@ -188,7 +190,7 @@ rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];
  {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,u[[ Mod[rz+1,L^2,1],2]] ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];
 SS        ];
 
-
+*)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -229,20 +231,25 @@ SS        ];
 
 (* ::Input:: *)
 (*(* writting the exp values in the form of the MF parameters:   *)*)
-(*toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },*)
-(*\[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];*)
 (**)
-(*SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ *)
-(*Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];*)
-(* {{   -u[[rz+1,3]]  1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,-1 }}    ],{n,0,L-1} , {m,0,L-1}];*)
 (**)
-(*SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];*)
-(* {{ -u[[ rz+1 ,1]]  1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,-1 ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];*)
-(*SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;*)
-(*rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];*)
-(* {{   -u[[rz+1,2]]  1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,-1 ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];*)
-(*SS        ];*)
-(**)
+
+
+toMFparametersPure[U_,u_,L_,M_] :=
+Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
+\[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
+
+SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ 
+Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];
+ {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,u[[rz+1,3]] }}    ],{n,0,L-1} , {m,0,L-1}];
+
+SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];
+ {{  1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0, u[[ rz+1 ,1]]  ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];
+SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;
+rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];
+ {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0, u[[rz+1,2]] ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];
+SS        ];
+
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -1030,10 +1037,12 @@ Print["    NbName=",NbName,"; "];
 Print["    Ls=",Ls,"; "];
 Print["    tV=",tV,"; "];
 Print["    ts=",ts,"; "];
-Print["    hV=",hV,";"]
+Print["    hV=",hV,";"];
 (*Print["    hs=", hs,"; "];*)
 Print["    Steps=",steps,"; "];
 Print["    acuracy=",acuracy,"; "];
+Print["    \[CapitalDelta]eV=",\[CapitalDelta]ev,"; "];
+Print["    \[Xi]s=",N[eVs/1700],"; "];
 Print["    eVs=",eVs,"; "];
 Print[" "];
 Print["    Parameters="];
@@ -1098,7 +1107,7 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
 
 
 (* ::Subsubsection::Bold:: *)
-(*vortex free + gradually increase  parameters *)
+(*vortex free *)
 
 
 Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
@@ -1112,9 +1121,10 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 (**)
 
 
+(* ::Code::Bold:: *)
 minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
-Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp,
+Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,hp,
 j0=-1,EnList0={{},{},{}},\[CapitalDelta]seq0={},\[CapitalDelta]\[Omega]seq0={}}, 
 {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,1]][[1;;7]];  
 Nc=L^2;
@@ -1124,7 +1134,7 @@ Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L];
 
 u0=uniformU[-1,L]; (* <-  the 2nd difference : gauge4v *)
 
-{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,1]],L,acuracy,"free",NbName ]  ]; 
+{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath[parameters[[1,p]],L,acuracy,"free",NbName ]  ]; 
 (*\[Omega]G=sym\[Omega][\[Omega]G];*)
 \[Omega][[1]]=Table[\[Omega]G[[1]],{r,1,Nc} ];
 \[Omega][[2]]=Table[\[Omega]G[[2]],{r,1,Nc} ];
@@ -1132,9 +1142,9 @@ u0=uniformU[-1,L]; (* <-  the 2nd difference : gauge4v *)
 \[Chi][[2]]=Table[\[Chi]G[[2]],{r,1,Nc} ];
 \[Chi][[3]]=Table[\[Chi]G[[3]],{r,1,Nc} ];
 
-(* Print[" for Pure Kitaev model: " ];*)
+(* Print[" for Pure Kitaev model: " ];  *)
 Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,Hpure,Tpure,Upure,Epure},   
-\[Kappa]0=(*(h0/Sqrt[3])^3/(0.262)^2*) toKappa[h]; 
+\[Kappa]0=toKappa[h]; 
 \[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
 \[Chi]0={0,0,0};  (*
 \[Omega]0=Table[\[Omega]GA,2,{r,1,Nc} ];*)
@@ -1149,8 +1159,7 @@ Print["Kappa=",\[Kappa],"; Lambda=", \[Lambda] ,"; Epure=",Epure,"; "];Print[];
 Do[ \[Chi][[1,r]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; \[Chi][[2,r]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; \[Chi][[3,r]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; ,{r,1,Nc}];
   ]; 
  (* <-  the 3rd difference :  \[Chi]gauge4v *)
-
- Do[ {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; Print[" "];   hp=Mod[p,Length@hV,1] ;
+{J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; Print[" "];   hp=Mod[p,Length@hV,1] ;
 Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "; Gmod=",\[CapitalGamma]mod, "; L=",L, "; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); eV=",N[Round[1000 eVs[[ev]]/1700]/1000]"; "];Print[" "];
 Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L];
 Jv=uniform[J,L,L];Jv=add4VorticesMaxSpaced[ Jv,Jmod,L];
@@ -1159,13 +1168,13 @@ Jv=uniform[J,L,L];Jv=add4VorticesMaxSpaced[ Jv,Jmod,L];
 For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy ]!= 0)    ) , j++,   
 
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
-If[j<=1, loaddata=loadDataTry[toPath[parameters[[ev,p]],L,4,gauge,NbName]  ];
+(*If[j<=1, loaddata=loadDataTry[toPath[parameters[[ev,p]],L,4,gauge,NbName]  ];
 If[!(loaddata===$Failed),Print["Loading data ..."]; {j0,L,\[Chi],\[Omega],\[Xi],{EnList0[[1]],EnList0[[2]],EnList0[[3]],\[CapitalDelta]seq0,\[CapitalDelta]\[Omega]seq0}}=loaddata; (*Continue[]*)
-] ];
+] ];*)
 
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
-\[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
-(*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
+(*\[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;*)
+\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; 
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
 u=Umat[T\[ConjugateTranspose] . H . T];
 u1=Re@Chop@icc[u,L,T];
@@ -1202,7 +1211,8 @@ H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];
 	EnList[[1]]={EnList[[1]],{j,EMF}};
     EnList[[2]]={EnList[[2]],{j,Esum}};
     EnList[[3]]={EnList[[3]],{j,EMF+E\[Lambda]}};           
-];  	\[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2];
+];  	
+    \[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2];
 	EnList[[1]]=Partition[Flatten[EnList[[1]]],2];
 	EnList[[2]]=Partition[Flatten[EnList[[2]]],2];
 	EnList[[3]]=Partition[Flatten[EnList[[3]]],2]; 
@@ -1215,12 +1225,10 @@ t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ]
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
-Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ]
- , {p,1,Length[parameters[[1]] ]}   ];
-
+Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ] 
 
   ];
-]  , {l,1,Length@Ls} , {ev,1,Length[parameters]} ];     
+]  , {p,1,Length[parameters[[1]] ]} , {l,1,Length@Ls} , {ev,1,Length[parameters]} ];     
 
 
 (* ::Subsubsection::Bold:: *)
@@ -1237,6 +1245,7 @@ Print["    Starting four vortex -fixed eV- gradually changing parameters  "];Pri
 (**)
 
 
+(* ::Code::Bold:: *)
 minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g4"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp,
@@ -1275,7 +1284,6 @@ Do[ \[Chi][[1,r]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; \[Chi][[2,r]][[1,1]]=\[Chi]0[[2,
   ]; 
 \[Chi]=\[Chi]gauge4v[\[Chi],L];   (* <-  the 3rd difference :  \[Chi]gauge4v *)
 
- Do[  (*p+=1;*)
 
 {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; Print[" "];   hp=Mod[p,Length@hV,1] ;
 Print["J=",J, "; K=",K, "; G=",\[CapitalGamma],"; Jmod=",Jmod, "; Kmod=",Kmod, "; Gmod=",\[CapitalGamma]mod, "; L=",L, "; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); eV=",N[Round[1000 eVs[[ev]]/1700]/1000]"; "];Print[" "];
@@ -1286,12 +1294,12 @@ Jv=uniform[J,L,L];Jv=add4VorticesMaxSpaced[ Jv,Jmod,L];
 For[j=1, ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^-acuracy ]!= 0)    ) , j++,   
 (*Print["j1=",j];*)
 Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
-If[j<=1, loaddata=loadDataTry[toPath[parameters[[ev,p]],L,4,gauge,NbName]  ];
+(*If[j<=1, loaddata=loadDataTry[toPath[parameters[[ev,p]],L,4,gauge,NbName]  ];
 If[!(loaddata===$Failed),Print["Loading data ..."]; {j0,L,\[Chi],\[Omega],\[Xi],{EnList0[[1]],EnList0[[2]],EnList0[[3]],\[CapitalDelta]seq0,\[CapitalDelta]\[Omega]seq0}}=loaddata; (*Continue[]*)
-] ];
+] ];*)
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
-\[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
-(*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
+(*\[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;*)
+\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; 
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
 u=Umat[T\[ConjugateTranspose] . H . T];
 u1=Re@Chop@icc[u,L,T];
@@ -1345,10 +1353,10 @@ t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ]
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
 Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]\[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec   ]
 
- , {p,1,Length[parameters[[1]] ]}   ];
+  
 
 
-  ];         ]  , {l,1,Length@Ls} , {ev,1,Length[parameters]} ]                                                   
+  ];         ], {p,1,Length[parameters[[1]] ]}    , {l,1,Length@Ls} , {ev,1,Length[parameters]} ]                                                   
 
 
 CloseKernels[];
