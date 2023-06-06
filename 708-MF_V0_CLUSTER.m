@@ -17,7 +17,7 @@ Print["Starting Kernels"];
 
 
 (* ::Code::Bold:: *)
-NbName="706"; \[Lambda]0=0.5; 
+NbName="708"; \[Lambda]0=0.5; 
 
 		Ls = Range[16,16,4]; 				tV={0};				
 		hV=With[{h=0.1,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
