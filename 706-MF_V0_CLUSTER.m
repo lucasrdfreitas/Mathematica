@@ -466,7 +466,6 @@ SS
 (*to MF pure*)
 
 
-
 toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
 \[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
 
@@ -600,17 +599,17 @@ If[path==$Failed,(*Print["New entry at:",pathData];*)Return[$Failed]];
 		        Close[f];			data[[-1]]
 ];
 
-toPath [parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
+toPath [parameters0_,L_,acuracy_,gauge_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
 If[gauge=="free",parameters[[5;;7]]=parameters0[[1;;3]];parameters[[10]]=0;];
-FileNameJoin[{    Directory[]   , "Files" ,NbName,gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
+FileNameJoin[{    Directory[]   , "Files" ,gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
 StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
    }]];
    
-dataToFile[ parameters0_,L_,acuracy_,data_,gauge_,NbName_] :=
+dataToFile[ parameters0_,L_,acuracy_,data_,gauge_] :=
 Module[ {path,f,parameters=parameters0}, If[gauge=="free",parameters[[5;;7]]=parameters0[[1;;3]];parameters[[10]]=0;];
-		createDir@FileNameJoin[{ Directory[] ,"Files",  NbName,gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+		createDir@FileNameJoin[{ Directory[] ,"Files",  gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }]      }] ;
-		path = toPath[ parameters,L,acuracy,gauge,NbName];		
+		path = toPath[ parameters,L,acuracy,gauge];		
 		f = OpenAppend[path];
 		 Write[ f, data];
 		 Close[f];                ];
