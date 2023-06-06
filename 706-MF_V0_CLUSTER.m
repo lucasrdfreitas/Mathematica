@@ -16,11 +16,11 @@ Print["Starting Kernels"];
 
 NbName="706"; \[Lambda]0=0.5; 
 
-		Ls = Range[16,16,4]; 				tV={0};				
+		Ls = Range[16,16,4]; 				tV={1};				
 		hV=With[{h=0.1,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 
-		steps=30;				acuracy=1.5;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.65,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=30;				acuracy=1.5;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.95,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
