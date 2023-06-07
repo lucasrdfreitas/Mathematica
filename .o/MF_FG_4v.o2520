@@ -21,7 +21,7 @@ Starting Kernels
 {0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -1.8295694477715645, 0., {0.1, 0, 0}, 0, 849.9915000000001}
 {0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -2.462534601777602, 0., {0.1, 0, 0}, 0, 1019.9898000000001}
  
-Definition timing= 31.4535
+Definition timing= 33.5812
  
  
     Starting free loop
@@ -36,7 +36,7 @@ ReadList::stream: OpenRead[toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 
 
 Close::stream: OpenRead[toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 0., -1., 0., {0.1, 0, 0}, 0, 0.}, 16, 1.5, free, 706]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
 
-Set::shape: Lists {j$2099, L$2099, χ$2099, ω$2099, ξ$2099, {EnList$2099[[1]], EnList$2099[[2]], EnList$2099[[3]], Δseq$2099, Δωseq$2099}} and OpenRead[toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 0., -1., 0., {0.1, 0, 0}, 0, 0.}, 16, 1.5, free, 706]] are not the same shape.
+Set::shape: Lists {j$2101, L$2101, χ$2101, ω$2101, ξ$2101, {EnList$2101[[1]], EnList$2101[[2]], EnList$2101[[3]], Δseq$2101, Δωseq$2101}} and OpenRead[toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 0., -1., 0., {0.1, 0, 0}, 0, 0.}, 16, 1.5, free, 706]] are not the same shape.
 Max Step = 16; Delta=1.3608*^-8; E={-1.580238731159696, -1.5747505166980187, -1.5808348297633095};  p=1/1
 
 OpenRead::fstr: File specification toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 0., -1., 0., {0.1, 0, 0}, 0, 0.}, 16, 1.5, free, 706] is not a string of one or more characters.
@@ -65,36 +65,36 @@ Close::stream: OpenRead[toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 0.,
 
 General::stop: Further output of Close::stream will be suppressed during this calculation.
 
-Set::shape: Lists {jG$20485, LG$20485, χG$20485, ωG$20485, ξG$20486, EnG$20485} and OpenRead[toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 0., -1., 0., {0.1, 0, 0}, 0, 0.}, 16, 1.5, free, 706]] are not the same shape.
+Set::shape: Lists {jG$20487, LG$20487, χG$20487, ωG$20487, ξG$20488, EnG$20487} and OpenRead[toPath[{0., -1., 0., {0.057735, 0.057735, 0.057735}, 0., -1., 0., {0.1, 0, 0}, 0, 0.}, 16, 1.5, free, 706]] are not the same shape.
 
 General::stop: Further output of Set::shape will be suppressed during this calculation.
 
-Part::partd: Part specification ωG$20485[[1]] is longer than depth of object.
+Part::partd: Part specification ωG$20487[[1]] is longer than depth of object.
 
-Part::partd: Part specification ωG$20485[[2]] is longer than depth of object.
+Part::partd: Part specification ωG$20487[[2]] is longer than depth of object.
 
-Part::partd: Part specification χG$20485[[1]] is longer than depth of object.
+Part::partd: Part specification χG$20487[[1]] is longer than depth of object.
 
 General::stop: Further output of Part::partd will be suppressed during this calculation.
 Pure data saved: 
 Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5850433758917457; 
 
 
-Set::partd: Part specification χ$20486[[1,r,1,1]] is longer than depth of object.
+Set::partd: Part specification χ$20488[[1,r,1,1]] is longer than depth of object.
 
-Set::partd: Part specification χ$20486[[2,r,1,1]] is longer than depth of object.
+Set::partd: Part specification χ$20488[[2,r,1,1]] is longer than depth of object.
 
-Set::partd: Part specification χ$20486[[3,r,1,1]] is longer than depth of object.
+Set::partd: Part specification χ$20488[[3,r,1,1]] is longer than depth of object.
 
 General::stop: Further output of Set::partd will be suppressed during this calculation.
  
 J=0.; K=-1.; G=0.; Jmod=0.; Kmod=-0.9999999999999999; Gmod=0.; L=16; h=(0.1,0,0); eV=0.
  
 
-Part::partw: Part 4 of ωG$20485[[2]] does not exist.
+Part::partw: Part 4 of ωG$20487[[2]] does not exist.
 
-Part::partw: Part 3 of ωG$20485[[2]] does not exist.
+Part::partw: Part 3 of ωG$20487[[2]] does not exist.
 
-Part::partw: Part 3 of ωG$20485[[2]] does not exist.
+Part::partw: Part 3 of ωG$20487[[2]] does not exist.
 
 General::stop: Further output of Part::partw will be suppressed during this calculation.

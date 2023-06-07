@@ -957,7 +957,7 @@ Upure=UmatPure[Tpure\[ConjugateTranspose] . Hpure . Tpure];
 Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
 {\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];
 (*   \[Chi]0=\[Chi]gauge4v[\[Chi]0,L];*)
-dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} } ]; 
+dataToFilePure[parameters[[ev,p]],L,acuracy,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} }, gauge,NbName ]; 
 Print["Pure data saved: "];
 Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h] ,"; Epure=",Epure,"; "];
        ]; 
@@ -992,7 +992,7 @@ Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
 
 {\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];   
 \[Chi]0=\[Chi]gauge4v[\[Chi]0,L];
-dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} } ]; 
+dataToFilePure[parameters[[ev,p]],L,acuracy,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} }, gauge,NbName ]; 
 Print["Pure data saved: "];
 Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h] ,"; Epure=",Epure,"; "];
        ]; 
@@ -1089,7 +1089,7 @@ u0=uniformU[-1,L]; (* <-  the 2nd difference : gauge4v *)
 \[Chi][[3]]=Table[\[Chi]G[[3]],{r,1,Nc} ];
 
 (* Print[" for Pure Kitaev model: " ];  *)
-Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure,h0,\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,Hpure,Tpure,Upure},   
+Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure,h0,\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],Hpure,Tpure,Upure},   
 (*\[Kappa]0=toKappa[h]; 
 \[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
 \[Chi]0={0,0,0};  (*
@@ -1211,7 +1211,7 @@ u0=gauge4v[uniformU[-1,L],L]; (* <-  the 2nd difference : gauge4v *)
 \[Chi][[3]]=Table[\[Chi]G[[3]],{r,1,Nc} ];
 
 (* Print[" for Pure Kitaev model: " ];*)
-Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure,h0,\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,Hpure,Tpure,Upure},   
+Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure,h0,\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],Hpure,Tpure,Upure},   
 (*\[Kappa]\[Kappa]0=(*(h0/Sqrt[3])^3/(0.262)^2*) toKappa[h]; 
 \[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
 \[Chi]0={0,0,0};  (*
