@@ -1,11 +1,17 @@
 (* ::Package:: *)
 
 (* ::Code::Bold:: *)
+(**)
+
+
 t0=AbsoluteTime[];
 Print["Before Starting Kernels"];
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 Needs["ClusterIntegration`"];
 (*kernels = aunchKernels[SGE["micro4", 10]];*)
 Quiet[kernels = LaunchKernels[]];
@@ -17,6 +23,9 @@ Print["Starting Kernels"];
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 NbName="708"; \[Lambda]0=0.5; 
 
 		Ls = Range[16,16,4]; 				tV={0};				
@@ -35,6 +44,9 @@ NbName="708"; \[Lambda]0=0.5;
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 one[i_,j_,N_]:= SparseArray[ {i,j} -> 1, {N,N}];  block[i_,j_] := one[i,j,8];
 
 hc=1/Sqrt[3] {1,1,1};hb=1/Sqrt[2] {1,-1,0};ha=1/Sqrt[6] {1,1,-2};hx={1,0,0};
@@ -53,11 +65,10 @@ round[\[Kappa]_]:=N[Round[10000\[Kappa]]/10000];round\[CapitalDelta][\[Kappa]_]:
 \[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
 
 
-(* ::Subsection::Bold:: *)
+(* ::Subsection::Bold::Closed:: *)
 (*for pure*)
 
 
-(* ::Code::Bold:: *)
 to\[Lambda][h_,\[CapitalDelta]v_:0.262]:= {h[[1]]^2,h[[2]]^2,h[[3]]^2}/(2\[CapitalDelta]v);
 toKappa[h_,\[CapitalDelta]v_:0.262]:=8h[[1]]h[[2]]h[[3]]/(  3 \[CapitalDelta]v^2 );
 KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If[C==0,{0,0,0},  d CubeRoot[3  \[CapitalDelta]v^2 \[Kappa]/(8C)]   ]] ;
@@ -68,6 +79,9 @@ KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 dataToFilePure[ parameters0_,L_,acuracy_,data_,gauge_,NbName_]:=
 Module[ {path,f,parameters=parameters0},
 parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;		
@@ -102,10 +116,8 @@ data[[-1]]
 (*Auxiliary matrices for the Hamiltonian  [2x2 matrices]*)
 
 
-(* ::Code::Bold:: *)
 toR[m0_,n0_,L_,M_]:= Module[{\[CapitalDelta]n=\[LeftFloor]n0/L\[RightFloor],n,m},n=Mod[n0 ,L]; m=Mod[m0+M \[CapitalDelta]n,L]; m + n L+1];
 HNN[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{r=toR[m,n ,L,M]},Table[{{0,(-K[[r,\[Alpha]]]+\[Lambda][[\[Alpha]]]) u[[r,\[Alpha]]] },{0,0}},{\[Alpha],1,3}]]; 
-
 HNNNA[K_,\[Kappa]_,\[Lambda]_,u_,m_,n_,L_,M_]:=Module[{
 r1={toR[m,n ,L,M],toR[m,n ,L,M],toR[m,n,L,M]},
 r2={toR[m+1,n-1 ,L,M],toR[m,n+1 ,L,M],toR[m-1,n,L,M]}        }      ,
@@ -125,7 +137,6 @@ RA={toR[m+1,n-1 ,L,M],toR[m,n+1 ,L,M],toR[m-1,n,L,M]},
 RB={toR[m-1,n+1 ,L,M],toR[m,n-1 ,L,M],toR[m+1,n,L,M]}    },
 
 Hnn=HNN[K,\[Kappa],\[Lambda],u,m,n,L,M] ;HnnnA=HNNNA[K,\[Kappa],\[Lambda],u,m,n,L,M] ;HnnnB=HNNNB[K,\[Kappa],\[Lambda],u,m,n,L,M] ;
-
 Sum[       KroneckerProduct[ one[r[[3]],r[[\[Alpha]]],Nc],Hnn[[\[Alpha]]]]   +
 KroneckerProduct[ one[r[[3]],RA[[\[Alpha]]],Nc],HnnnA[[\[Alpha]]]]   +
 KroneckerProduct[ one[r[[3]],RB[[\[Alpha]]],Nc],HnnnB[[\[Alpha]]]]   ,{\[Alpha],1,3}] Exp[I \[CurlyPhi]]      ] 
@@ -143,7 +154,6 @@ EandUPure[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H
 (*to MF pure*)
 
 
-(* ::Code::Bold:: *)
 toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
 \[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
 
@@ -163,20 +173,20 @@ SS        ];
 (*gauge pure*)
 
 
-(* ::Code::Bold:: *)
 nx={1/2,Sqrt[3]/2};ny={-(1/2),Sqrt[3]/2};     \[Delta]x={-Sqrt[3]/2,-1/2}/Sqrt[3];\[Delta]y={Sqrt[3]/2,-1/2}/Sqrt[3];\[Delta]z={0,1}/Sqrt[3];
  
 asites[m_,n_]:=m nx+n ny;
 bsites[m_,n_]:=m nx+n ny-\[Delta]z;
+\[Sigma]sites[m_,n_,\[Sigma]_]:=m nx+n ny-\[Sigma] \[Delta]z;
+
+
+
 
 uniformU[u_,L1_,L2_]:=Table[   {u,u,u}     ,L1 L2];
 flipUoneZbond[u0_,L1_,L2_]:= Module[{R1,u=u0,m0=\[LeftCeiling]L1/2\[RightCeiling] -1,n0=\[LeftCeiling](L2+1)/2\[RightCeiling]-1 }, R1= { m0,n0};
   Module[{r,m,n}, m =Mod[R1[[1]],L1] ; n=Mod[R1[[2]],L2] ; r = m+n L1+1;    u[[r, 3 ]] =-u0[[r,3 ]];      ]   ;  u           ];
 flipUZMaxSpaced[u0_,L1_,L2_]:= Module[{R1,d,u=u0,m0=\[LeftCeiling]L1/2\[RightCeiling] -1,n0=\[LeftCeiling](L2+1)/2\[RightCeiling]-1 }, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= { m0,n0};
 Do[  Module[{r,m,n}, m =Mod[R1[[1]]+i,L1] ; n=Mod[R1[[2]]-i,L2] ; r = m+n L1+1;    u[[r, 3 ]] =-u0[[r,3 ]];      ]   , {i,0,d-1}];  u           ];
-
-
-(* ::Code::Bold:: *)
 uniformU[u_,L_]:=Table[ {u,u,u},L^2];
 gauge2vX[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ; r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];               u           ];
@@ -184,14 +194,10 @@ gauge2vY[u0_,L_]:= Module[{d1,d2,u=u0,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCe
 Do[  Module[{r,m,n}, m =mW+i; n=nW; r = m+n L+1;    u[[r,2]] =-u0[[r,2]];      ]   , {i,1,d1}];                u           ];
 gauge2vZ[u0_,L_]:= Module[{d1,d2,u=u0,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mW=r2-1;nW=L-r2-1;
 Do[  Module[{r,m,n}, m =mW+i; n=nW-i+1; r = m+n L+1;    u[[r,3]] =-u0[[r,3]];      ]   , {i,1,d1}];                u           ];
-
-gauge4v[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
+gauge4v[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  
+mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ;       r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];   
 Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];               u           ];
-gauge4v[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ;       r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];   
-Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];               u           ];
-
 positionVortex[v_,L_]:=Module[{d1,d2,r2,mS,nS,mW,nW,mE,nE,mN,nN},
 		 r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2; 
 
@@ -201,10 +207,7 @@ positionVortex[v_,L_]:=Module[{d1,d2,r2,mS,nS,mW,nW,mE,nE,mN,nN},
 		 mN=L-r2-1;     nN=L-r2-1;
 
 		{{mS,nS},{mW,nW},{mE,nE},{mN,nN}}[[v]]
-] ;
-
-
-(* ::Code::Bold:: *)
+]
 gauge2v[u0_,L_,\[Alpha]_]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];   Do[  Module[{r,m,n},
 							m={r2-1,             r2-1+i,              r2-1+i   }[[\[Alpha]]]; 
 							n={r2-1+i,       L-r2-1,             L-r2-i   }[[\[Alpha]]];
@@ -212,14 +215,29 @@ gauge2v[u0_,L_,\[Alpha]_]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1
 
 
 (* ::Subsubsection::Bold::Closed:: *)
+(*correlation*)
+
+
+(*spin-spin correlation*)
+ssC[\[Chi]_,\[Omega]_,r_,L_,M_]:=Module[ {m,n,mx,my,ny,R},n=\[LeftFloor](r-1)/L\[RightFloor];m=r-1-n L;mx=Mod[m+1,L];ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];
+ R={ mx+n L +1,my+ny L +1,m+n L +1};
+Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]]
+,
+{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]
+];
+
+ssC2[\[Chi]_,\[Omega]_,m_,n_,L_]:=Module[ {mx,ny,R,r=Mod[m,L] +Mod[n,L] L +1},mx=Mod[m+1,L];ny=Mod[n+1,L]; R={ mx+n L +1,m+ny L +1,r};
+Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]],
+{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]                                      ];
+
+
+(* ::Subsubsection::Bold::Closed:: *)
 (*electric field*)
 
 
-(* ::Code::Bold:: *)
-uniformK[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2];
-
-addVortex[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko},
-K[[ m+n L1 +1,3    ]]=K0;
+uniform[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2];  
+addVortex[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
+K[[ m+n L1 +1,3    ]]=K0;  
 K[[ Mod[m+1,L1]+Mod[n-1,L2] L1 +1  ,2    ]]=K0;
 K[[ Mod[m+1,L1]+n L1 +1,1    ]]=K0;
 K[[ Mod[m+1,L1]+Mod[n+1,L2] L1 +1  ,3   ]]=K0;
@@ -227,12 +245,11 @@ K[[ m+Mod[n+1,L2] L1+1   ,2    ]]=K0;
 K[[ Mod[m-1,L1]+Mod[n+1,L2] L1 +1  ,1   ]]=K0;
 K];
 
-add2Vortices[ Ko_,K1_,K2_, R1_,R2_,L1_,L2_] :=Module[ {K}, K = addVortex[ Ko,K1, R1,L1,L2]; addVortex[ K,K2, R2,L1,L2]];
-add4Vortices[ Ko_,Kmod_, R1_,R2_, R3_,R4_,L_] :=Module[ {K}, K = addVortex[ Ko,Kmod, R1,L,L]; K = addVortex[ K,Kmod, R2,L,L]; K = addVortex[ K,Kmod, R3,L,L]; addVortex[ K,Kmod, R4,L,L]];
 
+add2Vortices[ Ko_,K1_,K2_, R1_,R2_,L1_,L2_] :=Module[ {K}, K = addVortex[ Ko,K1, R1,L1,L2]; addVortex[ K,K2, R2,L1,L2]];
+add4Vortices[ K0_,Kmod_, R1_,R2_, R3_,R4_,L_] :=Module[ {K}, K = addVortex[ K0,Kmod, R1,L,L]; K = addVortex[ K,Kmod, R2,L,L]; K = addVortex[ K,Kmod, R3,L,L]; addVortex[ K,Kmod, R4,L,L]];
 add2VorticesMaxSpaced[ Ko_,K1_,K2_,L1_,L2_] := Module[{R1,R2,d}, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= {\[LeftFloor]L1/2\[RightFloor] ,\[LeftFloor](L2+1)/2\[RightFloor] };R2= {\[LeftFloor]L1/2\[RightFloor]   +d,\[LeftFloor](L2+1)/2\[RightFloor] -d};
 	add2Vortices[ Ko,K1,K2, R1,R2,L1,L2]];
-
 add4VorticesMaxSpaced[ K0_,Kmod_,L_] :=Module[ {RS,RE,RW,RN,r2},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];
 		RS={(r2-1),(r2-1)};
 		RW={(r2-1),(L-r2-1)};
@@ -241,14 +258,7 @@ add4VorticesMaxSpaced[ K0_,Kmod_,L_] :=Module[ {RS,RE,RW,RN,r2},   r2= \[LeftFlo
 add4Vortices[ K0,Kmod, RS,RW, RE,RN,L] ];
 
 \[Chi]Gx = {{0.5249,0,0,0},{0,-1,0,0},{0,0,0,0},{0,0,0,0}};\[Chi]Gy = {{0.5249,0,0,0},{0,0,0,0},{0,0,-1,0},{0,0,0,0}};\[Chi]Gz ={{0.5249,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,-1}};
-
-\[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
-
-
-
-(* ::Code::Bold:: *)
-asites[m_,n_]:=m nx+n ny;
-bsites[m_,n_]:=m nx+n ny-\[Delta]z;
+(*\[Omega]GA =  \[ImaginaryI] IdentityMatrix[4];\[Omega]GB =  \[ImaginaryI] IdentityMatrix[4];*)
 
 
 (* ::Subsection::Bold::Closed:: *)
@@ -260,6 +270,9 @@ bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 createDir[path_] :=
 Module[ {l=Length@FileNames[path]},		
 	If[ l==0,  (*CreateDirectory@File@FileNameJoin[{path}];*) 
@@ -306,6 +319,9 @@ Module[ {path,f,parameters=parameters0}, If[gauge=="free",parameters[[5;;7]]=par
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 auxHx[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,r_]:={
 {0,0,0,0,-K[[r,1]] \[Chi][[1,r,2,2]],K[[r,1]] \[Chi][[1,r, 2,1]],0,0},
 {0,0,0,0, K[[r,1]] \[Chi][[1,r, 1,2]],-K[[r,1]] \[Chi][[1,r, 1,1]],0,0},
@@ -417,6 +433,9 @@ HMF[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,L1_,L2_,\[Lambda]1_,\[Lambda]2_,
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 EnMF[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,L1_,L2_] := Module[{Nc=L1 L2,E},
 E= Sum[Module[{r,mx,ny,\[CurlyEpsilon]=Abs@LeviCivitaTensor[3]}, 	mx=Mod[m+1,L1];ny=Mod[n+1,L2];   r={mx+n L1+1,m+ny L1+1,m+n L1+1};
 -h[[ \[Gamma]]] (   \[Omega][[1,r[[3]], \[Gamma]+1,1]]+\[Omega][[2,r[[ 3]] , \[Gamma]+1,1]]    )         
@@ -433,6 +452,9 @@ E= Sum[Module[{r,mx,ny,\[CurlyEpsilon]=Abs@LeviCivitaTensor[3]}, 	mx=Mod[m+1,L1]
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 EnMF0[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,L1_,L2_] := Module[{Nc=L1 L2,E},
 E= Sum[Module[{r,mx,ny,\[CurlyEpsilon]=Abs@LeviCivitaTensor[3]}, 	mx=Mod[m+1,L1];ny=Mod[n+1,L2];   r={mx+n L1+1,m+ny L1+1,m+n L1+1};
 -h[[ \[Gamma]]] (   \[Omega][[1,r[[3]], \[Gamma]+1,1]]+\[Omega][[2,r[[ 3]] , \[Gamma]+1,1]]    )         
@@ -459,15 +481,6 @@ E= 1/2 \[Lambda] Sum[Module[{r,mx,ny}, 	mx=Mod[m+1,L1];ny=Mod[n+1,L2];   r={mx+n
 (*Mean field*)
 
 
-(* ::Text::Bold:: *)
-(*T matrix: from c Majorana fermions to f complex fermions *)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-(* ::Code::Bold:: *)
 Tx = KroneckerProduct[ {{1,1},{I,-I}}, SparseArray[{Band[{1,1}]-> {0,1,0,0}},{4,4}]  ]; 
 Ty = KroneckerProduct[ {{1,1},{I,-I}}, SparseArray[{Band[{1,1}]-> {0,0,1,0}},{4,4}]  ];
 Tz = KroneckerProduct[ {{1,1},{I,-I}}, SparseArray[{Band[{1,1}]-> {1,0,0,1}},{4,4}]  ]; 
@@ -477,50 +490,9 @@ Tmat[L1_,L2_] := Module[{Nc=L1 L2,T}, T=Sum[Module[{rx,ry,rz,mx,ny},
 
 
 
-(* ::Text::Bold:: *)
-(*Eigen-values, eigen-vectors and U matrix*)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-(* ::Code::Bold:: *)
 Umat[H_]:= Module[ {R=Quiet@Eigensystem@N[H]},ReverseSort[R\[Transpose]]\[Transpose][[2]]\[Transpose] ];
 EandU[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H]},{R[[1]],R[[2]]\[Transpose] }];
 \[DoubleStruckCapitalU]occupied[TU_,Nc_]:= Drop[Take[TU\[Transpose],-4Nc-1],{2}]\[Transpose];
-
-
-(* ::Text::Bold:: *)
-(*Changing individual JK\[CapitalGamma] values due to electric field to trap the vortex*)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-(* ::Code::Bold:: *)
-uniform[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2]; (* for K = J,K,\[CapitalGamma]*)
-addVortex[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
-r[[1]]=m+n L1 +1;r[[2]]=Mod[m,L1]+Mod[n+1,L2] L1 +1;r[[3]]=Mod[m-1,L1]+Mod[n+1,L2]L1 +1;r[[4]]=Mod[m-1,L1]+Mod[n+1,L2]L1 +1;r[[5]]=Mod[m-1,L1]+n L1 +1;r[[6]]=m+n L1 +1;
-K[[ r[[1]],1]]=K0;K[[ r[[2]],3]]=K0;K[[ r[[3]],2]]=K0;
-K[[ r[[4]],1]]=K0;K[[ r[[5]],3]]=K0;K[[ r[[6]],2]]=K0;
-K];
-
-
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-(* ::Code::Bold:: *)
-add2Vortices[ Ko_,K1_,K2_, R1_,R2_,L1_,L2_] :=Module[ {K}, K = addVortex[ Ko,K1, R1,L1,L2]; addVortex[ K,K2, R2,L1,L2]];
-add2VorticesMaxSpaced[ Ko_,K1_,K2_,L1_,L2_] := Module[{R1,R2,d}, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= {\[LeftFloor]L1/2\[RightFloor] ,\[LeftFloor](L2+1)/2\[RightFloor] };R2= {\[LeftFloor]L1/2\[RightFloor]   +d,\[LeftFloor](L2+1)/2\[RightFloor] -d};
-	add2Vortices[ Ko,K1,K2, R1,R2,L1,L2]];
-flipBondsZMaxSpaced[\[Chi]0_,L1_,L2_]:= Module[{R1,d,\[Chi]=\[Chi]0,m0=\[LeftCeiling]L1/2\[RightCeiling] -1,n0=\[LeftCeiling](L2+1)/2\[RightCeiling]-1}, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= { m0,n0};
-Do[  Module[{r,m,n}, m =Mod[R1[[1]]+i,L1] ; n=Mod[R1[[2]]-i,L2] ; r = m+n L1+1;       \[Chi][[3, r ]][[4,4]] =-\[Chi]0[[3, r ]][[4,4]] ;       \[Chi][[3, r ]][[1,1]] =-\[Chi]0[[3, r ]][[1,1]]  ]   , {i,0,d-1}];
-\[Chi]           ];
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -532,6 +504,9 @@ Do[  Module[{r,m,n}, m =Mod[R1[[1]]+i,L1] ; n=Mod[R1[[2]]-i,L2] ; r = m+n L1+1; 
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^-12]; icc=I TUh . TUh\[ConjugateTranspose];icc=(icc-ConjugateTranspose[icc])/2   ];
 
 
@@ -540,6 +515,9 @@ icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^-1
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 MFpParallel[U_,L_,T_] :=Module[  { Nc=L^2,TU,TUh,u,\[Chi],\[Omega]},
 \[Chi]=Array[Null,{3,Nc,4,4}];\[Omega]=Array[Null,{2,Nc,4,4}];
 TU=T . U;TUh=TU[[;;,-4Nc;;-1]];u=Chop[I TUh . TUh\[ConjugateTranspose],10^-12];
@@ -560,6 +538,9 @@ TU=T . U;TUh=TU[[;;,-4Nc;;-1]];u=Chop[I TUh . TUh\[ConjugateTranspose],10^-12];
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 BiParallel[U_,L_,T_] :=Module[  { Nc=L^2,TU,TUh,\[Chi],\[Omega],\[Xi],u},
 \[Chi]=Array[Null,{3,Nc,4,4}];\[Omega]=Array[Null,{2,Nc,4,4}];\[Xi]=Array[Null,{6,Nc,4,4}];
 TU=T . U;TUh=TU[[;;,-4Nc;;-1]];u=Chop[I TUh . TUh\[ConjugateTranspose],10^-12];u=(u-ConjugateTranspose[u])/2;
@@ -589,6 +570,9 @@ R={m+Mod[n+1,L]L,Mod[m-1,L]+n L,Mod[m+1,L]+Mod[n-1,L] L,m+Mod[n-1,L]L,Mod[m+1,L]
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 \[Chi]gauge4v[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ;  r = m+n L+1;    \[Chi][[1,r]][[2,2]] =Abs@\[Chi]0[[1,r]][[2,2]]; \[Chi][[1,r]][[1,1]] =-Abs@\[Chi]0[[1,r]][[1,1]];      ]   , {i,1,d1}];   
 Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;    \[Chi][[1,r]][[2,2]] =Abs@\[Chi]0[[1,r]][[2,2]];   \[Chi][[1,r]][[1,1]] =-Abs@\[Chi]0[[1,r]][[1,1]];      ]   , {i,1,d1}];       \[Chi] ];
@@ -628,6 +612,9 @@ Do[ Module[{m,n,mT,nT},
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 (*\[Chi]gauge4vChangeXtoY[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ;          r=m+n L+1;   \[Chi][[1,r]][[2,2]] =-Abs@\[Chi]0[[1,r]][[2,2]];   \[Chi][[1,r]][[1,1]] =Abs@\[Chi]0[[1,r]][[1,1]];      ]   , {i,1,d1}];   
 Do[  Module[{r,m,n}, m =mN ; n=nN-i+1;        r=m+n L+1;    \[Chi][[1,r]][[2,2]] =-Abs@\[Chi]0[[1,r]][[2,2]];  \[Chi][[1,r]][[1,1]] =Abs@\[Chi]0[[1,r]][[1,1]];         ]   , {i,1,d1}];
@@ -646,6 +633,9 @@ Do[  Module[{r,m,n}, m =Mod[mW+i,L]; n=Mod[nW-i+1,L]; r=m+n L+1;    \[Chi][[3,r]
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 (*changeSign[m_,s_]:={{s m\[LeftDoubleBracket]1,1\[RightDoubleBracket],m\[LeftDoubleBracket]1,2\[RightDoubleBracket],m\[LeftDoubleBracket]1,3\[RightDoubleBracket],m\[LeftDoubleBracket]1,4\[RightDoubleBracket]},{m\[LeftDoubleBracket]2,1\[RightDoubleBracket],s m\[LeftDoubleBracket]2,2\[RightDoubleBracket],s m\[LeftDoubleBracket]2,3\[RightDoubleBracket],s m\[LeftDoubleBracket]2,4\[RightDoubleBracket]},{m\[LeftDoubleBracket]3,1\[RightDoubleBracket],s m\[LeftDoubleBracket]3,2\[RightDoubleBracket],s m\[LeftDoubleBracket]3,3\[RightDoubleBracket],s m\[LeftDoubleBracket]3,4\[RightDoubleBracket]},{m\[LeftDoubleBracket]4,1\[RightDoubleBracket],s m\[LeftDoubleBracket]4,2\[RightDoubleBracket],s m\[LeftDoubleBracket]4,3\[RightDoubleBracket],s m\[LeftDoubleBracket]4,4\[RightDoubleBracket]}};
 \[Chi]gauge4vChangeX[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ;         r=m+n L+1;   \[Chi][[1,r]]=changeSign[\[Chi]0[[1,r]],-1];  \[Chi][[2,r]]=-changeSign[\[Chi]0[[2,r]],-1]; \[Chi][[3,r]]=-changeSign[\[Chi]0[[3,r]],-1];         ]   , {i,1,d1}];   
@@ -668,6 +658,9 @@ Do[  Module[{r,m,n}, m =Mod[mW+i,L]; n=Mod[nW-i+1,L];   r=m+n L+1;     \[Chi][[3
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 changeSign[m_,s_]:={{s m[[1,1]],m[[1,2]],m[[1,3]],m[[1,4]]},{m[[2,1]],s m[[2,2]],s m[[2,3]],s m[[2,4]]},{m[[3,1]],s m[[3,2]],s m[[3,3]],s m[[3,4]]},{m[[4,1]],s m[[4,2]],s m[[4,3]],s m[[4,4]]}};
 \[Chi]gauge4vChangeX[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ;         r=m+n L+1;   \[Chi][[1,r]]=-\[Chi]0[[1,r]];          ]   , {i,1,d1}];   
@@ -690,6 +683,9 @@ Do[  Module[{r,m,n}, m =Mod[mW+i,L]; n=Mod[nW-i+1,L];   r=m+n L+1;     \[Chi][[3
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 reflectXinternal[m_]:={
 {m[[1,1]],m[[1,3]],m[[1,2]],m[[1,4]]},
 {m[[3,1]],m[[3,3]],m[[3,2]],m[[3,4]]},
@@ -716,6 +712,9 @@ Do[ Module[{m,n},
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 Jc[eV0_,JH_,U_,t_]:=1/54 ((2 (t[[1]]-t[[3]])^2)/(eV0-JH+U)-(2 (t[[1]]-t[[3]])^2)/(eV0+JH-U)-(6 t[[1]] (t[[1]]+2 t[[3]]))/(eV0+3 JH-U)+(6 t[[1]] (t[[1]]+2 t[[3]]))/(eV0-3 JH+U)+(2 t[[1]]+t[[3]])^2/(-eV0+2 JH+U)+(2 t[[1]]+t[[3]])^2/(eV0+2 JH+U));
 Kc[eV0_,JH_,U_,t_]:=(2JH )/9 ( (t[[1]]-t[[3]])^2-3 t[[2]]^2 ) (eV0^2+3 JH^2-4 JH U+U^2)/((eV0+JH-U) (eV0+3 JH-U) (eV0-3 JH+U) (eV0-JH+U));
 \[CapitalGamma]c[eV0_,JH_,U_,t_]:= (4 JH t[[2]] (t[[1]]-t[[3]]) )/9  (eV0^2+3 JH^2-4 JH U+U^2)/( (eV0+JH-U) (eV0+3 JH-U) (eV0-3 JH+U) (eV0-JH+U));
@@ -726,6 +725,9 @@ Kc[eV0_,JH_,U_,t_]:=(2JH )/9 ( (t[[1]]-t[[3]])^2-3 t[[2]]^2 ) (eV0^2+3 JH^2-4 JH
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 Jr[eV0_,JH_,U_,t_]:=Jc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 Kr[eV0_,JH_,U_,t_]:=Kc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 \[CapitalGamma]r[eV0_,JH_,U_,t_]:= \[CapitalGamma]c[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
@@ -744,6 +746,9 @@ Kr[eV0_,JH_,U_,t_]:=Kc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 mx= 2\[Pi] {1 , 1/Sqrt[3]}; my= 2\[Pi] {-1 , 1/Sqrt[3]};
 
 
@@ -752,6 +757,9 @@ mx= 2\[Pi] {1 , 1/Sqrt[3]}; my= 2\[Pi] {-1 , 1/Sqrt[3]};
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 (*toMomentum[n_,Nb_]:= If[FractionalPart[Sqrt@Nb] \[NotEqual] 0, Print["Nb=",Nb,", is not a perfect square."];Abort[],
 				Module[ {L = IntegerPart[Sqrt@Nb],p1,p2},  p1 =  Mod[n-1,L]+1; p2 =   (n-p1)/L+1;   mxp1/L +myp2/L]
 ];*)
@@ -772,6 +780,9 @@ kD1=2/3 mx+1/3 my;
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 HMFk[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,\[Eta]_, k_] := 
 Module[{hx,hy,hz,kx,ky,H},
 kx=k . nx;hx=Re@Hx[J,K,\[CapitalGamma],h,\[Chi],\[Omega]]; hy=Re@Hy[J,K,\[CapitalGamma],h,\[Chi],\[Omega]];hz=Re@Hz[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta]];ky=k . ny; H=I(hx) Exp[I kx]+I (hy)Exp[I ky]+I(hz); N@(H+H\[ConjugateTranspose] ) ];
@@ -804,6 +815,9 @@ TU=Tk . U;TUh=TU[[;;,-4;;-1]];uu=(1/Nc)Chop[I TUh . TUh\[ConjugateTranspose] ];u
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 Hx[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_]:={
 {0,0,0,0,-K \[Chi][[1,2,2]],K \[Chi][[1, 2,1]],0,0},
 {0,0,0,0, K \[Chi][[1, 1,2]],-K \[Chi][[1, 1,1]],0,0},
@@ -877,6 +891,9 @@ m=Table[ \[Omega][[\[Sigma],2,1]]\[Omega][[\[Sigma],3,4]]+\[Omega][[\[Sigma],3,1
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 heffM0[J_,K_,\[CapitalGamma]_,h_,\[Omega]_,\[Sigma]_]:={ 
 h[[1]] -  K \[Omega][[\[Sigma], 2,1]]-3J \[Omega][[\[Sigma], 2,1]] -2\[CapitalGamma] (\[Omega][[\[Sigma], 3,1]] +\[Omega][[\[Sigma], 4,1]]), 
 h[[2]] -  K \[Omega][[\[Sigma], 3,1]]-3 J \[Omega][[\[Sigma], 3,1]]-2\[CapitalGamma] (\[Omega][[\[Sigma], 2,1]] +\[Omega][[\[Sigma], 4,1]]), 
@@ -900,6 +917,9 @@ sym\[Omega][\[Omega]_]:= Module[ {\[Omega]A,\[Omega]B},
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300;
@@ -907,7 +927,6 @@ eV0=0;U=2600;JH=300;
 parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
 
 
-(* ::Code::Bold:: *)
 Print[" "];
 Print["    NbName=",NbName,"; "];
 Print["    Ls=",Ls,"; "];
@@ -1005,11 +1024,9 @@ Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls  ];
 (*vortex free*)
 
 
-(* ::Code::Bold:: *)
 tvf=AbsoluteTime[];Print["Definition timing= ",round[tvf-t0] ]; t0=tvf;
 
 
-(* ::Code::Bold:: *)
 Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
@@ -1060,6 +1077,9 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;Print[" "] Print[" "];];
@@ -1068,6 +1088,9 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,hp,
@@ -1183,6 +1206,9 @@ Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalD
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Minutes" ];   
 Print["Free loop + electric field timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t4v;Print[" "] Print[" "];];
@@ -1190,6 +1216,9 @@ Print["    Starting four vortex -fixed eV- gradually changing parameters  "];Pri
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g4"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp,
@@ -1305,10 +1334,16 @@ Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalD
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 CloseKernels[];
 
 
 (* ::Code::Bold:: *)
+(**)
+
+
 Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-t4v], "Seconds" ], "Hours" ];
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
