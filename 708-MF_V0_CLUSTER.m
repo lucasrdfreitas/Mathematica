@@ -1,15 +1,7 @@
 (* ::Package:: *)
 
-(* ::Code::Bold:: *)
-(**)
-
-
 t0=AbsoluteTime[];
 Print["Before Starting Kernels"];
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 Needs["ClusterIntegration`"];
@@ -20,10 +12,6 @@ Print["Starting Kernels"];
 
 (* ::Section::Bold:: *)
 (*Definitions *)
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 NbName="708"; \[Lambda]0=0.5; 
@@ -78,8 +66,10 @@ KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If
 (*file*)
 
 
-(* ::Code::Bold:: *)
-(**)
+createDir[path_] :=
+Module[ {l=Length@FileNames[path]},		
+	If[ l==0,  (*CreateDirectory@File@FileNameJoin[{path}];*) 
+	CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path,"graph" }]; , Null]  ];
 
 
 dataToFilePure[ parameters0_,L_,acuracy_,data_,gauge_,NbName_]:=
@@ -916,10 +906,6 @@ sym\[Omega][\[Omega]_]:= Module[ {\[Omega]A,\[Omega]B},
 (*MF Loop -- microscopic parameters*)
 
 
-(* ::Code::Bold:: *)
-(**)
-
-
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300;
@@ -977,11 +963,11 @@ Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
 {\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];
 (*   \[Chi]0=\[Chi]gauge4v[\[Chi]0,L];*)
 dataToFilePure[parameters[[ev,p]],L,acuracy,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} }, gauge,NbName ]; 
-Print["Pure data saved: "];
-Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h] ,"; Epure=",Epure,"; "];
+(*Print["Pure data saved: "];*)
+If[ ev==1, Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h], "L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "]; ];
        ]; 
-Print["L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); ", " eV0=",parameters[[ev,p]][[10]]/1700 ," x 1700 "];
-Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls  ];
+Print[ " eV0=",N[Round[ 1000  parameters[[ev,p]][[10]]/1700 ] /1000] ," x 1700","; Epure=",Epure,"; "];
+(*Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls  ];*)
         ]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   
 
 
@@ -1012,11 +998,9 @@ Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
 {\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];   
 \[Chi]0=\[Chi]gauge4v[\[Chi]0,L];
 dataToFilePure[parameters[[ev,p]],L,acuracy,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} }, gauge,NbName ]; 
-Print["Pure data saved: "];
-Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h] ,"; Epure=",Epure,"; "];
+If[ ev==1, Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h], "L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "]; ];
        ]; 
-Print["L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); ", " eV0=",N[Round[ 100  parameters[[ev,p]][[10]]/1700 ] /100]," x 1700 "];
-Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls  ];
+Print[ " eV0=",N[Round[ 1000  parameters[[ev,p]][[10]]/1700 ] /1000] ," x 1700","; Epure=",Epure,"; "];
         ]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   
 
 
@@ -1076,19 +1060,11 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
 (*vortex free *)
 
 
-(* ::Code::Bold:: *)
-(**)
-
-
 Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;Print[" "] Print[" "];];
 Print["    Starting vortex free + electric field loop: "];Print[" "]
 
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 minSteps=2;

@@ -1,0 +1,128 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=708; 
+    Ls={16}; 
+    tV={0}; 
+    ts={{0, 160, 0, 0, -60}}; 
+    hV={{0.1, 0, 0}};
+    Steps=30; 
+    acuracy=1.5; 
+    ΔeV=0.099999; 
+    ξs={0., 0.09999899999999999, 0.19999799999999998, 0.299997, 0.39999599999999996, 0.499995, 0.599994}; 
+    eVs={0., 169.9983, 339.9966, 509.99490000000003, 679.9932, 849.9915000000001, 1019.9898000000001}; 
+ 
+    Parameters=
+{0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -0.9999999999999999, 0., {0.1, 0, 0}, 0, 0.}
+{0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -1.0231561506525837, 0., {0.1, 0, 0}, 0, 169.9983}
+{0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -1.0964213845770023, 0., {0.1, 0, 0}, 0, 339.9966}
+{0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -1.232601781443451, 0., {0.1, 0, 0}, 0, 509.99490000000003}
+{0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -1.4587633065740533, 0., {0.1, 0, 0}, 0, 679.9932}
+{0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -1.8295694477715645, 0., {0.1, 0, 0}, 0, 849.9915000000001}
+{0., -1., 0., {0.05773502691896259, 0.05773502691896259, 0.05773502691896259}, 0., -2.462534601777602, 0., {0.1, 0, 0}, 0, 1019.9898000000001}
+ 
+
+OpenAppend::noopen: Cannot open /home/rodrigues/Mathematica2/Files/708/pure/g0/t=0_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.1,0,0)_L=16_A=1.5.txt.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5850433758917457; 
+L=16; h=(0.1,0,0);  eV0=0. x 1700 
+p=1/1; l=1/1
+
+OpenAppend::noopen: Cannot open /home/rodrigues/Mathematica2/Files/708/pure/g0/t=0_eV=169.998_JKG={0, -1., 0}_JKGmod={0, -1.02316, 0}/data/h=(0.1,0,0)_L=16_A=1.5.txt.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5861924392254665; 
+L=16; h=(0.1,0,0);  eV0=0.09999899999999999 x 1700 
+p=1/1; l=1/1
+
+OpenAppend::noopen: Cannot open /home/rodrigues/Mathematica2/Files/708/pure/g0/t=0_eV=339.997_JKG={0, -1., 0}_JKGmod={0, -1.09642, 0}/data/h=(0.1,0,0)_L=16_A=1.5.txt.
+
+General::stop: Further output of OpenAppend::noopen will be suppressed during this calculation.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+General::stop: Further output of Write::strml will be suppressed during this calculation.
+
+Write::noopen: Cannot open $Failed.
+
+General::stop: Further output of Write::noopen will be suppressed during this calculation.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+General::stop: Further output of Close::stream will be suppressed during this calculation.
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5899525224657918; 
+L=16; h=(0.1,0,0);  eV0=0.19999799999999998 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5974126254906282; 
+L=16; h=(0.1,0,0);  eV0=0.299997 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.6109950383388707; 
+L=16; h=(0.1,0,0);  eV0=0.39999599999999996 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.6358487777392883; 
+L=16; h=(0.1,0,0);  eV0=0.499995 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.6833880108999908; 
+L=16; h=(0.1,0,0);  eV0=0.599994 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5823406718100703; 
+L=16; h=(0.1,0,0);  eV0=0. x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5835742183292698; 
+L=16; h=(0.1,0,0);  eV0=0.1 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5875809875015159; 
+L=16; h=(0.1,0,0);  eV0=0.2 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.5954243022130195; 
+L=16; h=(0.1,0,0);  eV0=0.3 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.6094685902281547; 
+L=16; h=(0.1,0,0);  eV0=0.4 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.6347670612132865; 
+L=16; h=(0.1,0,0);  eV0=0.5 x 1700 
+p=1/1; l=1/1
+Pure data saved: 
+Kappa=0.0075; Lambda={0.006361323155216287, 0.006361323155216287, 0.006361323155216287}; Epure=-1.6826351226415912; 
+L=16; h=(0.1,0,0);  eV0=0.6 x 1700 
+p=1/1; l=1/1
+Definition timing= 50.
+ 
+ 
+    Starting free loop
+ 
+J=0.; K=-1.; G=0.; L=16; h=(0.1,0,0); 
+Max Step = 18; Delta=1.8031*^-9; E={-1.5802387311679507, -1.5747505157400092, -1.5808348298735595};  p=1/1
+ 
+Free loop timing= Quantity[0, Minutes]Quantity[1, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+
+OpenRead::noopen: Cannot open /home/rodrigues/Mathematica2/Files/708/pure/g0/t=0_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.1,0,0)_L=16_A=1.5.txt.
+Failed to OpenRead file at: 
+/home/rodrigues/Mathematica2/Files/708/pure/g0/t=0_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.1,0,0)_L=16_A=1.5.txt
