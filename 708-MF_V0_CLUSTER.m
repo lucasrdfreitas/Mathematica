@@ -16,11 +16,11 @@ Print["Starting Kernels"];
 
 NbName="708"; \[Lambda]0=0.5; 
 
-		Ls = Range[34,34,4]; 				tV={2.5};				
-		hV=With[{h=0.01 ,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
+		Ls = Range[40,40,4]; 				tV={0,1,1.5};				
+		hV=With[{h=0.2 ,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 
-		steps=80;				acuracy=4;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.65,\[CapitalDelta]ev}][[1;;-1]];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=50;				acuracy=4;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.65,\[CapitalDelta]ev}][[1;;-1]];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -923,7 +923,7 @@ Print[ parameters[[i,j]] ],
 Print[" "]; 
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*pure loop w/o vortices*)
 
 
@@ -960,7 +960,7 @@ Print[ " eV0=",N[Round[ 1000  parameters[[ev,p]][[10]]/1700 ] /1000] ," x 1700",
         ]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*pure loop w/ vortices*)
 
 
@@ -1008,7 +1008,7 @@ Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,
 If[ p==1, \[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}; ];\[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   (*Print[MatrixForm/@\[Chi],MatrixForm/@\[Omega]];*)
 Print["J=",J,"; K=",K, "; G=",\[CapitalGamma], "; L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "];
 kTable=toMomentumTable[L];
-For[j=1,( ( j<(steps+200))\[And](Chop[ \[CapitalDelta]1,10^(-acuracy-6) ]!= 0) ), j++,  
+For[j=1,( ( j<(steps+400))\[And](Chop[ \[CapitalDelta]1,10^(-acuracy-6) ]!= 0) ), j++,  
     If[j<=1, loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
     If[!(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata]];
 u=Chop@Total@Table[ Module[{H0,Hr,U,TU,TUh,k,uu},
@@ -1046,8 +1046,8 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
  ];  , {p,1,Length[parameters[[1]]]}  ],{l,1,Length@Ls}];Print[" "];
 
 
-(* ::Subsubsection::Bold:: *)
-(*vortex free *)
+(* ::Subsubsection::Bold::Closed:: *)
+(*vortex free + eV0*)
 
 
 Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];

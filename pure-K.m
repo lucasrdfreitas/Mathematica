@@ -20,10 +20,10 @@ Print["Starting Kernels"];
 
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = Range[60,80,2]; 				tV={0};				
-		hV=With[{\[Phi]=0,h=0.3},{ {h,0,\[Phi]},{h,15,\[Phi]},{h,30,\[Phi]},{h,45,\[Phi]},{h,60,\[Phi]},{h,75,\[Phi]},{h,90,\[Phi]}    }];
+		Ls = Range[40,40,2]; 				tV={0};				
+		hV=With[{\[CurlyPhi]=90,h=0.2},Table[{h,\[Theta],\[CurlyPhi]} ,{\[Theta],0.1,180,1}   ]        ]; 
 
-		steps=500;				acuracy=7;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=500;				acuracy=5;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -1070,10 +1070,9 @@ u0=gauge4v[uniformU[-1,L],L];
 (* for Pure Kitaev model: *)
   
 Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,\[Omega]0,Hpure,Tpure,Epure,Upure},   
-\[Kappa]0=(h0/Sqrt[3])^3/(0.262)^2; 
+\[Kappa]0=toKappa[h]; 
 \[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
 \[Chi]0={0,0,0};  
-\[Omega]0=Table[\[Omega]GA,2,{r,1,Nc} ];
 Hpure=Hreal[Kv,\[Kappa],\[Lambda],u0,L,0, {0,0}] ;   
 Tpure=TmatPure[L]; 
 Upure=UmatPure[Tpure\[ConjugateTranspose] . Hpure . Tpure]; 
