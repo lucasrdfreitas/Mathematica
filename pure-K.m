@@ -21,7 +21,7 @@ Print["Starting Kernels"];
 NbName="705"; \[Lambda]0=0.5; 
 
 		Ls = Range[40,40,2]; 				tV={0};				
-		hV=With[{\[CurlyPhi]=90,h=0.2},Table[{h,\[Theta],\[CurlyPhi]} ,{\[Theta],0.1,180,1}   ]        ]; 
+		hV=With[{\[CurlyPhi]=0,h=0.1},Table[{h,\[Theta],\[CurlyPhi]} ,{\[Theta],-0.5,180,1}   ]        ]; 
 
 		steps=500;				acuracy=5;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
