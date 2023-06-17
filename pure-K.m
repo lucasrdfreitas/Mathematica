@@ -19,9 +19,8 @@ Print["Starting Kernels"];
 
 
 NbName="705"; \[Lambda]0=0.5; 
-
 		Ls = Range[40,40,2]; 				tV={0};				
-		hV=With[{\[CurlyPhi]=0,h=0.1},Table[{h,\[Theta],\[CurlyPhi]} ,{\[Theta],-0.5,180,1}   ]        ]; 
+		hV=With[{h=0.2},Flatten[Table[{h,\[Theta],\[CurlyPhi]} ,{\[Theta],0.5,180,5},{\[CurlyPhi],0.5,180,5}   ],1]        ]; 
 
 		steps=500;				acuracy=5;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -1030,7 +1029,7 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 
 Print[" "];
 Print["    NbName=",NbName,"; "];
-Print["    Ls=",Ls,"; "];
+Print["    Ls=",Ls,"; "];(*
 Print["    tV=",tV,";    ts=", ts,"; "];
 Print["    hV=",hV,";"]
 Print["    hs=", hs,"; "];
@@ -1043,7 +1042,7 @@ Do[
 Print[ parameters[[i,j]] ],
 {i,1,Length@parameters},
 {j,1,Length@parameters[[i]] }
-];
+];*)
 Print[" "];
 Print["    ---- ---- ---- "];
 Print[" "];
