@@ -1,0 +1,66 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=705; 
+    Ls={40}; 
+ 
+    ---- ---- ---- 
+ 
+    Starting four vortex - pure Kitaev model + Kappa + Lambda  
+ 
+
+OpenAppend::noopen: Cannot open /home/rodrigues/Mathematica2/Files/pure/g4/t=0_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.2,0.5,0.5)_L=40_A=5.txt.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Kappa=0.0598; Lambda={0.0258, 0.0258, 0.0248}; Epure=-1.6289; 
+    L=40; h=(0.2,0.5,0.5);  eV0=0. x 1700 
+p=1/1296; l=1/1; Δt = 0 hours : 0 minutes : 21 seconds
+ 
+
+OpenAppend::noopen: Cannot open /home/rodrigues/Mathematica2/Files/pure/g4/t=0_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.2,5.5,0.5)_L=40_A=5.txt.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Kappa=0.0598; Lambda={0.0258, 0.0257, 0.0248}; Epure=-1.6289; 
+    L=40; h=(0.2,0.5,5.5);  eV0=0. x 1700 
+p=2/1296; l=1/1; Δt = 0 hours : 0 minutes : 20 seconds
+ 
+
+OpenAppend::noopen: Cannot open /home/rodrigues/Mathematica2/Files/pure/g4/t=0_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.2,10.5,0.5)_L=40_A=5.txt.
+
+General::stop: Further output of OpenAppend::noopen will be suppressed during this calculation.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+General::stop: Further output of Write::strml will be suppressed during this calculation.
+
+Write::noopen: Cannot open $Failed.
+
+General::stop: Further output of Write::noopen will be suppressed during this calculation.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+General::stop: Further output of Close::stream will be suppressed during this calculation.
+Kappa=0.0598; Lambda={0.0259, 0.0257, 0.0248}; Epure=-1.6289; 
+    L=40; h=(0.2,0.5,10.5);  eV0=0. x 1700 
+p=3/1296; l=1/1; Δt = 0 hours : 0 minutes : 19 seconds
+ 
+Kappa=0.0598; Lambda={0.0259, 0.0256, 0.0248}; Epure=-1.6289; 
+    L=40; h=(0.2,0.5,15.5);  eV0=0. x 1700 
+p=4/1296; l=1/1; Δt = 0 hours : 0 minutes : 19 seconds
+ 
+Kappa=0.0598; Lambda={0.0259, 0.0255, 0.0249}; Epure=-1.6289; 
+    L=40; h=(0.2,0.5,20.5);  eV0=0. x 1700 
+p=5/1296; l=1/1; Δt = 0 hours : 0 minutes : 20 seconds
+ 
+Kappa=0.0598; Lambda={0.026, 0.0255, 0.0249}; Epure=-1.6289; 
+    L=40; h=(0.2,0.5,25.5);  eV0=0. x 1700 
+p=6/1296; l=1/1; Δt = 0 hours : 0 minutes : 19 seconds
+ 
