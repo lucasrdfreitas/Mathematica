@@ -18,9 +18,9 @@ Print["Starting Kernels"];
 (**)
 
 
-NbName="705"; \[Lambda]0=0.5; 
+NbName="709"; \[Lambda]0=0.5; 
 		Ls = Range[40,40,2]; 				tV={0};				
-		hV=With[{h=0.2},Flatten[Table[{h,\[Theta],\[CurlyPhi]} ,{\[CurlyPhi],0.1,180.1,1},{\[Theta],0.1,180.1,1}   ],1]        ]; 
+		hV=With[{h=0.2},Flatten[Table[{h,\[Theta],\[CurlyPhi]} ,{\[CurlyPhi],0.1,120.1,1},{\[Theta],0.1,90.1,1}   ],1]        ]; 
 
 		steps=500;				acuracy=3;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -92,6 +92,20 @@ data=ReadList[f];
 Close[f];			
 data[[-1]]
 ];
+
+quadrupoleToFilePure[parameters0_,L_,acuracy_,gauge_,data_,hI_]:= Module[{h,hS,path,r1,\[Theta]1,\[Phi]1,r2,\[Theta]2,\[Phi]2,f,parameters=parameters0,dirPath},
+	parameters[[1]]=0; parameters[[3]]=0; parameters[[5]]=0; parameters[[7]]=0;		
+	h=parameters[[4]]; hS=parameters[[8]]; {r1,\[Theta]1,\[Phi]1}=hI[[1]];  {r2,\[Theta]2,\[Phi]2}=hI[[-1]];  
+	dirPath=FileNameJoin[{Directory[],"Files",NbName,"pure",gauge,"QuadrupoleData"}];
+	createDir@dirPath;
+	path = FileNameJoin[{dirPath,"data", 
+StringReplace["h=(M1,N1,T1)(M2,N2,T2)_L=Y_A=Z.txt",
+{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M1"->  ToString[r1,InputForm] ,"N1"->ToString@\[Phi]1,"T1"->ToString@\[Theta]1
+,"M2"->  ToString[r2,InputForm] ,"N2"->ToString@\[Phi]2,"T2"->ToString@\[Theta]2}]   }];		
+		(*Print["Quadrupole path path=",path];Print[];*)
+		f = OpenAppend[path];
+		 Write[ f, data];
+		 Close[f];                ];
 
 
 
@@ -324,10 +338,6 @@ gauge2v[u0_,L_,\[Alpha]_]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1
 (*correlation*)
 
 
-(* ::Code::Bold:: *)
-(*spin-spin correlation*)
-
-
 ssC[\[Chi]_,\[Omega]_,r_,L_,M_]:=Module[ {m,n,mx,my,ny,R},n=\[LeftFloor](r-1)/L\[RightFloor];m=r-1-n L;mx=Mod[m+1,L];ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];
  R={ mx+n L +1,my+ny L +1,m+n L +1};
 Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]]
@@ -339,6 +349,22 @@ ssC2[\[Chi]_,\[Omega]_,m_,n_,L_]:=Module[ {mx,ny,R,r=Mod[m,L] +Mod[n,L] L +1},mx
 Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]],
 {\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]                                      ];
 
+
+
+sscNN[\[Chi]_,\[Omega]_,L_]:=Table[
+Module[ {m,n,R}, n=\[LeftFloor](r-1)/L\[RightFloor];m=r-n L-1;   R={ Mod[m+1,L]+n L +1,m+Mod[n+1,L] L +1,r};
+Table[    \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]] - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]] ,
+{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]
+],{r,1,L^2}];   
+        
+sscNNN[\[Xi]_,\[Omega]_,L_]:=Table[
+Module[ {m,n,R}, n=\[LeftFloor](r-1)/L\[RightFloor];m=r-n L-1;  
+R={    { m+Mod[n+1,L] L +1,Mod[m-1,L]+n L +1,Mod[m+1,L]+Mod[n-1,L] L +1},
+	{ m+Mod[n-1,L] L +1,Mod[m+1,L]+n L +1,Mod[m-1,L]+Mod[n+1,L] L +1}  };
+Table[ \[Omega][[\[Sigma],r,\[Alpha]+1,0+1]]   \[Omega][[\[Sigma],R[[\[Sigma],\[Gamma]]],\[Beta]+1,0+1]]  - \[Xi][[\[Sigma],\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Xi][[\[Sigma],\[Gamma],r,0+1,0+1]]  +  \[Xi][[\[Sigma],\[Gamma],r,\[Alpha]+1,0+1]] \[Xi][[\[Sigma],\[Gamma],r,0+1,\[Beta]+1]]  ,
+{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]
+]
+,{\[Sigma],1,2},{r,1,L^2}];
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -1016,6 +1042,174 @@ sym\[Omega][\[Omega]_]:= Module[ {\[Omega]A,\[Omega]B},
 \[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
 
 
+(* ::Subsection::Bold::Closed:: *)
+(*Charge density def*)
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*Couplings  *)
+
+
+Jc[eV0_,JH_,U_,t_]:=1/54 ((2 (t[[1]]-t[[3]])^2)/(eV0-JH+U)-(2 (t[[1]]-t[[3]])^2)/(eV0+JH-U)-(6 t[[1]] (t[[1]]+2 t[[3]]))/(eV0+3 JH-U)+(6 t[[1]] (t[[1]]+2 t[[3]]))/(eV0-3 JH+U)+(2 t[[1]]+t[[3]])^2/(-eV0+2 JH+U)+(2 t[[1]]+t[[3]])^2/(eV0+2 JH+U));
+Kc[eV0_,JH_,U_,t_]:=(2JH )/9 ( (t[[1]]-t[[3]])^2-3 t[[2]]^2 ) (eV0^2+3 JH^2-4 JH U+U^2)/((eV0+JH-U) (eV0+3 JH-U) (eV0-3 JH+U) (eV0-JH+U));
+\[CapitalGamma]c[eV0_,JH_,U_,t_]:= (4 JH t[[2]] (t[[1]]-t[[3]]) )/9  (eV0^2+3 JH^2-4 JH U+U^2)/( (eV0+JH-U) (eV0+3 JH-U) (eV0-3 JH+U) (eV0-JH+U));
+Jr[eV0_,JH_,U_,t_]:=Jc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
+Kr[eV0_,JH_,U_,t_]:=Kc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
+\[CapitalGamma]r[eV0_,JH_,U_,t_]:= \[CapitalGamma]c[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*Coefficients - charge density  *)
+
+
+coefTriang11[JH_,U_,t_]:={{{0,0,0,0},{0,(JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3),1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) t[[5]] (2 JH^5 (298 t[[1]]^2-87 t[[1]] t[[3]]-211 t[[3]]^2)+2 JH^4 (-10 t[[1]]^2+9 t[[1]] t[[3]]+t[[3]]^2) U+JH^3 (-312 t[[1]]^2+107 t[[1]] t[[3]]+205 t[[3]]^2) U^2+14 JH^2 (5 t[[1]]^2-2 t[[1]] t[[3]]-3 t[[3]]^2) U^3+JH (44 t[[1]]^2-13 t[[1]] t[[3]]-31 t[[3]]^2) U^4+12 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^5),1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (4 JH^4 (63 t[[1]]+44 t[[3]])-9 JH^3 (16 t[[1]]+9 t[[3]]) U-2 JH^2 (45 t[[1]]+28 t[[3]]) U^2+JH (92 t[[1]]+49 t[[3]]) U^3-12 (2 t[[1]]+t[[3]]) U^4)},{0,1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) t[[5]] (JH^5 (-636 t[[1]]^2+386 t[[1]] t[[3]]+250 t[[3]]^2)+2 JH^4 (-30 t[[1]]^2+23 t[[1]] t[[3]]+7 t[[3]]^2) U+JH^3 (392 t[[1]]^2-219 t[[1]] t[[3]]-173 t[[3]]^2) U^2+2 JH^2 (-45 t[[1]]^2+22 t[[1]] t[[3]]+23 t[[3]]^2) U^3+JH (-44 t[[1]]^2+25 t[[1]] t[[3]]+19 t[[3]]^2) U^4+12 (2 t[[1]]^2-t[[1]] t[[3]]-t[[3]]^2) U^5),(JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3),(JH t[[2]] t[[5]] (JH^4 (-62 t[[1]]+11 t[[3]])+4 JH^3 (17 t[[1]]+7 t[[3]]) U-JH^2 (19 t[[1]]+29 t[[3]]) U^2+4 JH (t[[1]]+2 t[[3]]) U^3-9 t[[1]] U^4))/(54 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3)},{0,1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (-4 JH^4 (97 t[[1]]+34 t[[3]])+45 JH^3 (4 t[[1]]+t[[3]]) U+2 JH^2 (59 t[[1]]+26 t[[3]]) U^2-JH (104 t[[1]]+37 t[[3]]) U^3+12 (2 t[[1]]+t[[3]]) U^4),-((JH t[[2]] t[[5]] (JH^2 (22 t[[1]]+29 t[[3]])+3 (t[[1]]+2 t[[3]]) U^2+JH (-8 t[[1]] U+14 t[[3]] U)))/(54 (JH-U) (3 JH-U)^3 (2 JH+U)^2)),-((JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3))}},{{0,0,1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (-2 JH^3 (98 t[[1]]^2-115 t[[1]] t[[3]]+17 t[[3]]^2)+JH^2 (106 t[[1]]^2-125 t[[1]] t[[3]]+19 t[[3]]^2) U+2 JH (19 t[[1]]^2-26 t[[1]] t[[3]]+7 t[[3]]^2) U^2+(-22 t[[1]]^2+29 t[[1]] t[[3]]-7 t[[3]]^2) U^3),(JH t[[2]] t[[5]] (JH^3 (236 t[[1]]+250 t[[3]])-9 JH^2 (14 t[[1]]+15 t[[3]]) U-2 JH (13 t[[1]]+23 t[[3]]) U^2+9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3)},{-((JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3)),0,0,0},{1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (JH^4 (-276 t[[1]]^2+250 t[[1]] t[[3]]+26 t[[3]]^2)+20 JH^3 (t[[1]]-t[[3]]) t[[3]] U+JH^2 (94 t[[1]]^2-87 t[[1]] t[[3]]-7 t[[3]]^2) U^2+2 JH (3 t[[1]]^2-t[[1]] t[[3]]-2 t[[3]]^2) U^3+(-22 t[[1]]^2+17 t[[1]] t[[3]]+5 t[[3]]^2) U^4),0,0,0},{(JH t[[2]] t[[5]] (JH^3 (68 t[[1]]+66 t[[3]])-9 JH^2 (2 t[[1]]+3 t[[3]]) U-2 JH (13 t[[1]]+9 t[[3]]) U^2+(10 t[[1]]+11 t[[3]]) U^3))/(36 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,0,0}},{{0,1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (-2 JH^3 (98 t[[1]]^2-115 t[[1]] t[[3]]+17 t[[3]]^2)+JH^2 (106 t[[1]]^2-125 t[[1]] t[[3]]+19 t[[3]]^2) U+2 JH (19 t[[1]]^2-26 t[[1]] t[[3]]+7 t[[3]]^2) U^2+(-22 t[[1]]^2+29 t[[1]] t[[3]]-7 t[[3]]^2) U^3),(JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3),0},{1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (JH^4 (-244 t[[1]]^2+186 t[[1]] t[[3]]+58 t[[3]]^2)+4 JH^3 (4 t[[1]]^2-3 t[[1]] t[[3]]-t[[3]]^2) U+JH^2 (86 t[[1]]^2-71 t[[1]] t[[3]]-15 t[[3]]^2) U^2+2 JH (t[[1]]^2+3 t[[1]] t[[3]]-4 t[[3]]^2) U^3+(-22 t[[1]]^2+17 t[[1]] t[[3]]+5 t[[3]]^2) U^4),0,0,0},{(JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3),0,0,0},{(JH t[[2]] t[[5]] (JH^4 (62 t[[1]]-11 t[[3]])-4 JH^3 (17 t[[1]]+7 t[[3]]) U+JH^2 (19 t[[1]]+29 t[[3]]) U^2-4 JH (t[[1]]+2 t[[3]]) U^3+9 t[[1]] U^4))/(54 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3),0,0,0}},{{0,(JH t[[2]] t[[5]] (JH^3 (236 t[[1]]+250 t[[3]])-9 JH^2 (14 t[[1]]+15 t[[3]]) U-2 JH (13 t[[1]]+23 t[[3]]) U^2+9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,-((JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3))},{(JH t[[2]] t[[5]] (2 JH^3 (122 t[[1]]+79 t[[3]])-45 JH^2 (2 t[[1]]+t[[3]]) U-2 JH (41 t[[1]]+25 t[[3]]) U^2+21 (2 t[[1]]+t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,0,0},{(JH t[[2]] t[[5]] (JH^2 (22 t[[1]]+29 t[[3]])+3 (t[[1]]+2 t[[3]]) U^2+JH (-8 t[[1]] U+14 t[[3]] U)))/(54 (JH-U) (3 JH-U)^3 (2 JH+U)^2),0,0,0},{-((JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3)),0,0,0}}}
+
+
+coefTriang12[JH_,U_,t_]:={{{0,0,0,0},{0,(JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3),1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) t[[5]] (JH^5 (-636 t[[1]]^2+386 t[[1]] t[[3]]+250 t[[3]]^2)+2 JH^4 (-30 t[[1]]^2+23 t[[1]] t[[3]]+7 t[[3]]^2) U+JH^3 (392 t[[1]]^2-219 t[[1]] t[[3]]-173 t[[3]]^2) U^2+2 JH^2 (-45 t[[1]]^2+22 t[[1]] t[[3]]+23 t[[3]]^2) U^3+JH (-44 t[[1]]^2+25 t[[1]] t[[3]]+19 t[[3]]^2) U^4+12 (2 t[[1]]^2-t[[1]] t[[3]]-t[[3]]^2) U^5),(JH t[[2]] t[[5]] (JH^4 (-62 t[[1]]+11 t[[3]])+4 JH^3 (17 t[[1]]+7 t[[3]]) U-JH^2 (19 t[[1]]+29 t[[3]]) U^2+4 JH (t[[1]]+2 t[[3]]) U^3-9 t[[1]] U^4))/(54 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3)},{0,1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) t[[5]] (2 JH^5 (298 t[[1]]^2-87 t[[1]] t[[3]]-211 t[[3]]^2)+2 JH^4 (-10 t[[1]]^2+9 t[[1]] t[[3]]+t[[3]]^2) U+JH^3 (-312 t[[1]]^2+107 t[[1]] t[[3]]+205 t[[3]]^2) U^2+14 JH^2 (5 t[[1]]^2-2 t[[1]] t[[3]]-3 t[[3]]^2) U^3+JH (44 t[[1]]^2-13 t[[1]] t[[3]]-31 t[[3]]^2) U^4+12 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^5),(JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3),1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (4 JH^4 (63 t[[1]]+44 t[[3]])-9 JH^3 (16 t[[1]]+9 t[[3]]) U-2 JH^2 (45 t[[1]]+28 t[[3]]) U^2+JH (92 t[[1]]+49 t[[3]]) U^3-12 (2 t[[1]]+t[[3]]) U^4)},{0,-((JH t[[2]] t[[5]] (JH^2 (22 t[[1]]+29 t[[3]])+3 (t[[1]]+2 t[[3]]) U^2+JH (-8 t[[1]] U+14 t[[3]] U)))/(54 (JH-U) (3 JH-U)^3 (2 JH+U)^2)),1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (-4 JH^4 (97 t[[1]]+34 t[[3]])+45 JH^3 (4 t[[1]]+t[[3]]) U+2 JH^2 (59 t[[1]]+26 t[[3]]) U^2-JH (104 t[[1]]+37 t[[3]]) U^3+12 (2 t[[1]]+t[[3]]) U^4),-((JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3))}},{{0,(JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3),1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (-2 JH^3 (98 t[[1]]^2-115 t[[1]] t[[3]]+17 t[[3]]^2)+JH^2 (106 t[[1]]^2-125 t[[1]] t[[3]]+19 t[[3]]^2) U+2 JH (19 t[[1]]^2-26 t[[1]] t[[3]]+7 t[[3]]^2) U^2+(-22 t[[1]]^2+29 t[[1]] t[[3]]-7 t[[3]]^2) U^3),0},{(JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3),0,0,0},{1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (JH^4 (-244 t[[1]]^2+186 t[[1]] t[[3]]+58 t[[3]]^2)+4 JH^3 (4 t[[1]]^2-3 t[[1]] t[[3]]-t[[3]]^2) U+JH^2 (86 t[[1]]^2-71 t[[1]] t[[3]]-15 t[[3]]^2) U^2+2 JH (t[[1]]^2+3 t[[1]] t[[3]]-4 t[[3]]^2) U^3+(-22 t[[1]]^2+17 t[[1]] t[[3]]+5 t[[3]]^2) U^4),0,0,0},{(JH t[[2]] t[[5]] (JH^4 (62 t[[1]]-11 t[[3]])-4 JH^3 (17 t[[1]]+7 t[[3]]) U+JH^2 (19 t[[1]]+29 t[[3]]) U^2-4 JH (t[[1]]+2 t[[3]]) U^3+9 t[[1]] U^4))/(54 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3),0,0,0}},{{0,1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (-2 JH^3 (98 t[[1]]^2-115 t[[1]] t[[3]]+17 t[[3]]^2)+JH^2 (106 t[[1]]^2-125 t[[1]] t[[3]]+19 t[[3]]^2) U+2 JH (19 t[[1]]^2-26 t[[1]] t[[3]]+7 t[[3]]^2) U^2+(-22 t[[1]]^2+29 t[[1]] t[[3]]-7 t[[3]]^2) U^3),0,(JH t[[2]] t[[5]] (JH^3 (236 t[[1]]+250 t[[3]])-9 JH^2 (14 t[[1]]+15 t[[3]]) U-2 JH (13 t[[1]]+23 t[[3]]) U^2+9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3)},{1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (JH^4 (-276 t[[1]]^2+250 t[[1]] t[[3]]+26 t[[3]]^2)+20 JH^3 (t[[1]]-t[[3]]) t[[3]] U+JH^2 (94 t[[1]]^2-87 t[[1]] t[[3]]-7 t[[3]]^2) U^2+2 JH (3 t[[1]]^2-t[[1]] t[[3]]-2 t[[3]]^2) U^3+(-22 t[[1]]^2+17 t[[1]] t[[3]]+5 t[[3]]^2) U^4),0,0,0},{-((JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3)),0,0,0},{(JH t[[2]] t[[5]] (JH^3 (68 t[[1]]+66 t[[3]])-9 JH^2 (2 t[[1]]+3 t[[3]]) U-2 JH (13 t[[1]]+9 t[[3]]) U^2+(10 t[[1]]+11 t[[3]]) U^3))/(36 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,0,0}},{{0,0,(JH t[[2]] t[[5]] (JH^3 (236 t[[1]]+250 t[[3]])-9 JH^2 (14 t[[1]]+15 t[[3]]) U-2 JH (13 t[[1]]+23 t[[3]]) U^2+9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),-((JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3))},{(JH t[[2]] t[[5]] (JH^2 (22 t[[1]]+29 t[[3]])+3 (t[[1]]+2 t[[3]]) U^2+JH (-8 t[[1]] U+14 t[[3]] U)))/(54 (JH-U) (3 JH-U)^3 (2 JH+U)^2),0,0,0},{(JH t[[2]] t[[5]] (2 JH^3 (122 t[[1]]+79 t[[3]])-45 JH^2 (2 t[[1]]+t[[3]]) U-2 JH (41 t[[1]]+25 t[[3]]) U^2+21 (2 t[[1]]+t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,0,0},{-((JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3)),0,0,0}}};
+
+coefTriang21[JH_,U_,t_]:=
+{{{0,0,0,0},{0,(JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3),1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (2 JH^4 (122 t[[1]]^2-93 t[[1]] t[[3]]-29 t[[3]]^2)+4 JH^3 (-4 t[[1]]^2+3 t[[1]] t[[3]]+t[[3]]^2) U+JH^2 (-86 t[[1]]^2+71 t[[1]] t[[3]]+15 t[[3]]^2) U^2-2 JH (t[[1]]^2+3 t[[1]] t[[3]]-4 t[[3]]^2) U^3+(22 t[[1]]^2-17 t[[1]] t[[3]]-5 t[[3]]^2) U^4),(JH t[[2]] t[[5]] (-2 JH^3 (122 t[[1]]+79 t[[3]])+45 JH^2 (2 t[[1]]+t[[3]]) U+2 JH (41 t[[1]]+25 t[[3]]) U^2-21 (2 t[[1]]+t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3)},{0,1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (JH^4 (276 t[[1]]^2-250 t[[1]] t[[3]]-26 t[[3]]^2)-20 JH^3 (t[[1]]-t[[3]]) t[[3]] U+JH^2 (-94 t[[1]]^2+87 t[[1]] t[[3]]+7 t[[3]]^2) U^2+2 JH (-3 t[[1]]^2+t[[1]] t[[3]]+2 t[[3]]^2) U^3+(22 t[[1]]^2-17 t[[1]] t[[3]]-5 t[[3]]^2) U^4),-((JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3)),-((JH t[[2]] t[[5]] (JH^2 (22 t[[1]]+29 t[[3]])+3 (t[[1]]+2 t[[3]]) U^2+JH (-8 t[[1]] U+14 t[[3]] U)))/(54 (JH-U) (3 JH-U)^3 (2 JH+U)^2))},{0,-((JH t[[2]] t[[5]] (JH^3 (68 t[[1]]+66 t[[3]])-9 JH^2 (2 t[[1]]+3 t[[3]]) U-2 JH (13 t[[1]]+9 t[[3]]) U^2+(10 t[[1]]+11 t[[3]]) U^3))/(36 (2 JH+U) (3 JH^2-4 JH U+U^2)^3)),(JH t[[2]] t[[5]] (JH^4 (-62 t[[1]]+11 t[[3]])+4 JH^3 (17 t[[1]]+7 t[[3]]) U-JH^2 (19 t[[1]]+29 t[[3]]) U^2+4 JH (t[[1]]+2 t[[3]]) U^3-9 t[[1]] U^4))/(54 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3),(JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3)}},{{0,0,1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (2 JH^3 (98 t[[1]]^2-115 t[[1]] t[[3]]+17 t[[3]]^2)+JH^2 (-106 t[[1]]^2+125 t[[1]] t[[3]]-19 t[[3]]^2) U-2 JH (19 t[[1]]^2-26 t[[1]] t[[3]]+7 t[[3]]^2) U^2+(22 t[[1]]^2-29 t[[1]] t[[3]]+7 t[[3]]^2) U^3),(JH t[[2]] t[[5]] (-2 JH^3 (118 t[[1]]+125 t[[3]])+9 JH^2 (14 t[[1]]+15 t[[3]]) U+2 JH (13 t[[1]]+23 t[[3]]) U^2-9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3)},{-((JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3)),0,0,0},{1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3) t[[5]] (JH^5 (636 t[[1]]^2-386 t[[1]] t[[3]]-250 t[[3]]^2)+2 JH^4 (30 t[[1]]^2-23 t[[1]] t[[3]]-7 t[[3]]^2) U+JH^3 (-392 t[[1]]^2+219 t[[1]] t[[3]]+173 t[[3]]^2) U^2+2 JH^2 (45 t[[1]]^2-22 t[[1]] t[[3]]-23 t[[3]]^2) U^3+JH (44 t[[1]]^2-25 t[[1]] t[[3]]-19 t[[3]]^2) U^4+12 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^5),0,0,0},{1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (4 JH^4 (97 t[[1]]+34 t[[3]])-45 JH^3 (4 t[[1]]+t[[3]]) U-2 JH^2 (59 t[[1]]+26 t[[3]]) U^2+JH (104 t[[1]]+37 t[[3]]) U^3-12 (2 t[[1]]+t[[3]]) U^4),0,0,0}},{{0,1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) JH t[[5]] (2 JH^3 (98 t[[1]]^2-115 t[[1]] t[[3]]+17 t[[3]]^2)+JH^2 (-106 t[[1]]^2+125 t[[1]] t[[3]]-19 t[[3]]^2) U-2 JH (19 t[[1]]^2-26 t[[1]] t[[3]]+7 t[[3]]^2) U^2+(22 t[[1]]^2-29 t[[1]] t[[3]]+7 t[[3]]^2) U^3),-((JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3)),0},{-(1/(108 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3))t[[5]] (2 JH^5 (298 t[[1]]^2-87 t[[1]] t[[3]]-211 t[[3]]^2)+2 JH^4 (-10 t[[1]]^2+9 t[[1]] t[[3]]+t[[3]]^2) U+JH^3 (-312 t[[1]]^2+107 t[[1]] t[[3]]+205 t[[3]]^2) U^2+14 JH^2 (5 t[[1]]^2-2 t[[1]] t[[3]]-3 t[[3]]^2) U^3+JH (44 t[[1]]^2-13 t[[1]] t[[3]]-31 t[[3]]^2) U^4+12 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^5),0,0,0},{-((JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3)),0,0,0},{(JH t[[2]] t[[5]] (JH^2 (22 t[[1]]+29 t[[3]])+3 (t[[1]]+2 t[[3]]) U^2+JH (-8 t[[1]] U+14 t[[3]] U)))/(54 (JH-U) (3 JH-U)^3 (2 JH+U)^2),0,0,0}},{{0,(JH t[[2]] t[[5]] (-2 JH^3 (118 t[[1]]+125 t[[3]])+9 JH^2 (14 t[[1]]+15 t[[3]]) U+2 JH (13 t[[1]]+23 t[[3]]) U^2-9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,(JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3)},{1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (-4 JH^4 (63 t[[1]]+44 t[[3]])+9 JH^3 (16 t[[1]]+9 t[[3]]) U+2 JH^2 (45 t[[1]]+28 t[[3]]) U^2-JH (92 t[[1]]+49 t[[3]]) U^3+12 (2 t[[1]]+t[[3]]) U^4),0,0,0},{(JH t[[2]] t[[5]] (JH^4 (62 t[[1]]-11 t[[3]])-4 JH^3 (17 t[[1]]+7 t[[3]]) U+JH^2 (19 t[[1]]+29 t[[3]]) U^2-4 JH (t[[1]]+2 t[[3]]) U^3+9 t[[1]] U^4))/(54 (2 JH+U)^2 (3 JH^2-4 JH U+U^2)^3),0,0,0},{(JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3),0,0,0}}};
+coefTriang22[JH_,U_,t_]:={{{0,0,0,0},{0,(JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3),1/(54 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[5]] (JH^4 (214 t[[1]]^2-115 t[[1]] t[[3]]-99 t[[3]]^2)+45 JH^3 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U+JH^2 (-70 t[[1]]^2+37 t[[1]] t[[3]]+33 t[[3]]^2) U^2+27 JH (2 t[[1]]^2-t[[1]] t[[3]]-t[[3]]^2) U^3+6 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^4),-((JH t[[2]] t[[5]] (JH^3 (68 t[[1]]+66 t[[3]])-9 JH^2 (2 t[[1]]+3 t[[3]]) U-2 JH (13 t[[1]]+9 t[[3]]) U^2+(10 t[[1]]+11 t[[3]]) U^3))/(36 (2 JH+U) (3 JH^2-4 JH U+U^2)^3))},{0,-(1/(54 (2 JH+U) (3 JH^2-4 JH U+U^2)^3))t[[5]] (JH^4 (94 t[[1]]^2-25 t[[1]] t[[3]]-69 t[[3]]^2)+18 JH^3 (-3 t[[1]]^2+t[[1]] t[[3]]+2 t[[3]]^2) U+JH^2 (-34 t[[1]]^2+13 t[[1]] t[[3]]+21 t[[3]]^2) U^2+2 JH (19 t[[1]]^2-8 t[[1]] t[[3]]-11 t[[3]]^2) U^3+6 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^4),-((JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3)),1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (-4 JH^4 (97 t[[1]]+34 t[[3]])+45 JH^3 (4 t[[1]]+t[[3]]) U+2 JH^2 (59 t[[1]]+26 t[[3]]) U^2-JH (104 t[[1]]+37 t[[3]]) U^3+12 (2 t[[1]]+t[[3]]) U^4)},{0,(JH t[[2]] t[[5]] (-2 JH^3 (122 t[[1]]+79 t[[3]])+45 JH^2 (2 t[[1]]+t[[3]]) U+2 JH (41 t[[1]]+25 t[[3]]) U^2-21 (2 t[[1]]+t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (4 JH^4 (63 t[[1]]+44 t[[3]])-9 JH^3 (16 t[[1]]+9 t[[3]]) U-2 JH^2 (45 t[[1]]+28 t[[3]]) U^2+JH (92 t[[1]]+49 t[[3]]) U^3-12 (2 t[[1]]+t[[3]]) U^4),(JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3)}},{{0,(JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3),0,(JH t[[2]] t[[5]] (-2 JH^3 (118 t[[1]]+125 t[[3]])+9 JH^2 (14 t[[1]]+15 t[[3]]) U+2 JH (13 t[[1]]+23 t[[3]]) U^2-9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3)},{(JH t[[2]]^2 t[[5]] (7 JH^2-8 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3),0,0,0},{-(1/(54 (2 JH+U) (3 JH^2-4 JH U+U^2)^3))t[[5]] (JH^4 (214 t[[1]]^2-115 t[[1]] t[[3]]-99 t[[3]]^2)+45 JH^3 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U+JH^2 (-70 t[[1]]^2+37 t[[1]] t[[3]]+33 t[[3]]^2) U^2+27 JH (2 t[[1]]^2-t[[1]] t[[3]]-t[[3]]^2) U^3+6 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^4),0,0,0},{1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (-4 JH^4 (63 t[[1]]+44 t[[3]])+9 JH^3 (16 t[[1]]+9 t[[3]]) U+2 JH^2 (45 t[[1]]+28 t[[3]]) U^2-JH (92 t[[1]]+49 t[[3]]) U^3+12 (2 t[[1]]+t[[3]]) U^4),0,0,0}},{{0,0,-((JH t[[2]]^2 t[[5]] (22 JH^2-23 JH U+6 U^2))/(27 (3 JH^2-4 JH U+U^2)^3)),(JH t[[2]] t[[5]] (JH^3 (236 t[[1]]+250 t[[3]])-9 JH^2 (14 t[[1]]+15 t[[3]]) U-2 JH (13 t[[1]]+23 t[[3]]) U^2+9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3)},{1/(54 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[5]] (JH^4 (94 t[[1]]^2-25 t[[1]] t[[3]]-69 t[[3]]^2)+18 JH^3 (-3 t[[1]]^2+t[[1]] t[[3]]+2 t[[3]]^2) U+JH^2 (-34 t[[1]]^2+13 t[[1]] t[[3]]+21 t[[3]]^2) U^2+2 JH (19 t[[1]]^2-8 t[[1]] t[[3]]-11 t[[3]]^2) U^3+6 (-2 t[[1]]^2+t[[1]] t[[3]]+t[[3]]^2) U^4),0,0,0},{-((JH t[[2]]^2 t[[5]] (11 JH^2-10 JH U+3 U^2))/(18 (3 JH^2-4 JH U+U^2)^3)),0,0,0},{(JH t[[2]] t[[5]] (2 JH^3 (122 t[[1]]+79 t[[3]])-45 JH^2 (2 t[[1]]+t[[3]]) U-2 JH (41 t[[1]]+25 t[[3]]) U^2+21 (2 t[[1]]+t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,0,0}},{{0,(JH t[[2]] t[[5]] (-2 JH^3 (118 t[[1]]+125 t[[3]])+9 JH^2 (14 t[[1]]+15 t[[3]]) U+2 JH (13 t[[1]]+23 t[[3]]) U^2-9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),(JH t[[2]] t[[5]] (JH^3 (236 t[[1]]+250 t[[3]])-9 JH^2 (14 t[[1]]+15 t[[3]]) U-2 JH (13 t[[1]]+23 t[[3]]) U^2+9 (2 t[[1]]+3 t[[3]]) U^3))/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0},{1/(108 (2 JH+U) (3 JH^2-4 JH U+U^2)^3) t[[2]] t[[5]] (4 JH^4 (97 t[[1]]+34 t[[3]])-45 JH^3 (4 t[[1]]+t[[3]]) U-2 JH^2 (59 t[[1]]+26 t[[3]]) U^2+JH (104 t[[1]]+37 t[[3]]) U^3-12 (2 t[[1]]+t[[3]]) U^4),0,0,0},{(JH t[[2]] t[[5]] (JH^3 (68 t[[1]]+66 t[[3]])-9 JH^2 (2 t[[1]]+3 t[[3]]) U-2 JH (13 t[[1]]+9 t[[3]]) U^2+(10 t[[1]]+11 t[[3]]) U^3))/(36 (2 JH+U) (3 JH^2-4 JH U+U^2)^3),0,0,0},{-((JH t[[2]]^2 t[[5]] (19 JH^2-14 JH U+3 U^2))/(54 (3 JH^2-4 JH U+U^2)^3)),0,0,0}}};
+
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*Map *)
+
+
+map[list_,tNum_]:= Module[ {p0,pS,i0},
+i0= ((Sign[(Mod[ #,9,1] -3.1)]+1)/2+1)& @tNum;
+p0={ {1,2,3}, {1,3,2} }[[i0]];
+pS= {{3,1,2},{1,2,3},{2,3,1},
+{1,3,2},{1,2,3},{2,1,3},{2,3,1},{3,2,1},{3,1,2},
+{3,1,2},{1,2,3},{2,3,1},
+{2,3,1},{2,1,3},{1,2,3},{1,3,2},{3,1,2},{3,2,1}   }[[tNum]];
+list/.{pS[[1]]->p0[[1]],pS[[2]]->p0[[2]],    pS[[3]]->p0[[3]]   }  (* list/.{p0[[1]]->pS[[1]],p0[[2]]->pS[[2]],    p0[[3]]->pS[[3]]   }*)
+];
+
+
+densityTriangLocal[m_,n_,L_,C1_,C2_,sNN_,sNNN_]:=   Module[{\[Delta]nA,\[Delta]nB,\[Delta]n=Table[0,18],r,R}, 
+r=m +n L +1;
+R={
+Mod[m+1,L]+Mod[n-1,L] L+1, (* R[[1]] : m+1, n-1 *)
+Mod[m+1,L]+n L+1,                         (* R[[2]] : m+1, n   *)
+m+Mod[n+1,L] L+1,                         (* R[[3]] : m  , n+1 *)
+Mod[m-1,L]+Mod[n+1,L] L+1, (* R[[4]] : m-1, n+1 *)
+Mod[m-1,L]+n L+1,                         (* R[[5]] : m-1, n   *)
+m+ Mod[n-1,L] L+1                            (* R[[6]] : m  , n-1 *)
+};
+
+\[Delta]n[[1]]=Sum[      C1@@map[ {\[Alpha],0,\[Beta]},1 ] sNN[[r]][[ 3,\[Beta],\[Alpha] ]]        +C1@@map[ {0,\[Alpha],\[Beta]},1 ] sNN[[r]][[ 1,\[Beta],\[Alpha] ]]                   +C1@@map[ {\[Alpha],\[Beta],0},1 ] sNNN[[2,r]][[ 2,\[Alpha],\[Beta] ]]                        ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[2]]=Sum[      C1@@map[ {\[Alpha],0,\[Beta]},2 ] sNN[[r]][[ 1,\[Beta],\[Alpha] ]]        +C1@@map[ {0,\[Alpha],\[Beta]},2 ] sNN[[r]][[ 2,\[Beta],\[Alpha] ]]                   +C1@@map[ {\[Alpha],\[Beta],0},2 ] sNNN[[2,R[[2]] ]][[ 3,\[Alpha],\[Beta] ]]                ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[3]]=Sum[      C1@@map[ {\[Alpha],0,\[Beta]},3 ] sNN[[r]][[ 2,\[Beta],\[Alpha] ]]        +C1@@map[ {0,\[Alpha],\[Beta]},3 ] sNN[[r]][[ 3,\[Beta],\[Alpha] ]]                   +C1@@map[ {\[Alpha],\[Beta],0},3 ] sNNN[[2,R[[3]] ]][[ 1,\[Alpha],\[Beta] ]]                ,{\[Alpha],1,3},{\[Beta],1,3}];
+
+\[Delta]n[[4]]=Sum[      C2@@map[ {\[Alpha],0,\[Beta]},4 ] sNN[[r]][[ 1,\[Beta],\[Alpha] ]]        +C2@@map[ {0,\[Alpha],\[Beta]},4 ] sNNN[[1,r]][[ 3,\[Beta],\[Alpha] ]]           +C2@@map[ {\[Alpha],\[Beta],0},4 ] sNN[[R[[1]]]][[ 2,\[Beta],\[Alpha]  ]]                     ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[5]]=Sum[      C2@@map[ {\[Alpha],0,\[Beta]},5 ]sNN[[r]][[ 1,\[Beta],\[Alpha] ]]        +C2@@map[ {0,\[Alpha],\[Beta]},5 ]sNNN[[1,R[[2]] ]][[ 2,\[Alpha],\[Beta] ]]   +C2@@map[ {\[Alpha],\[Beta],0},5 ] sNN[[R[[2]]]][[ 3,\[Beta],\[Alpha]  ]]                ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[6]]=Sum[      C2@@map[ {\[Alpha],0,\[Beta]},6 ] sNN[[r]][[ 2,\[Beta],\[Alpha] ]]        +C2@@map[ {0,\[Alpha],\[Beta]},6 ]sNNN[[1,r ]][[ 1,\[Beta],\[Alpha]  ]]          +C2@@map[ {\[Alpha],\[Beta],0},6 ] sNN[[R[[3]]]][[ 3,\[Beta],\[Alpha]  ]]                      ,{\[Alpha],1,3},{\[Beta],1,3}];
+
+\[Delta]n[[7]]=Sum[      C2@@map[ {\[Alpha],0,\[Beta]},7 ] sNN[[r]][[ 2,\[Beta],\[Alpha] ]]        +C2@@map[ {0,\[Alpha],\[Beta]},7 ]sNNN[[1,R[[4]] ]][[ 3,\[Alpha],\[Beta] ]]   +C2@@map[ {\[Alpha],\[Beta],0},7 ]  sNN[[R[[4]]]][[ 1,\[Beta],\[Alpha]  ]]                  ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[8]]=Sum[      C2@@map[ {\[Alpha],0,\[Beta]},8 ] sNN[[r]][[ 3,\[Beta],\[Alpha] ]]        +C2@@map[ {0,\[Alpha],\[Beta]},8 ] sNNN[[1,r ]][[ 2,\[Beta],\[Alpha]  ]]          +C2@@map[ {\[Alpha],\[Beta],0},8 ] sNN[[R[[5]]]][[ 1,\[Beta],\[Alpha]  ]]                        ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[9]]=Sum[      C2@@map[ {\[Alpha],0,\[Beta]},9 ] sNN[[r]][[ 3,\[Beta],\[Alpha] ]]        +C2@@map[ {0,\[Alpha],\[Beta]},9 ] sNNN[[1,R[[6]] ]][[ 1,\[Alpha],\[Beta] ]]   +C2@@map[ {\[Alpha],\[Beta],0},9 ]sNN[[R[[6]]]][[ 2,\[Beta],\[Alpha]  ]]                 ,{\[Alpha],1,3},{\[Beta],1,3}];
+
+\[Delta]n[[10]]=Sum[    C1@@map[{\[Alpha],0,\[Beta]},10]  sNN[[r]][[3,\[Alpha],\[Beta]]]        +C1@@map[{0,\[Alpha],\[Beta]},10] sNN[[R[[5]]]][[1,\[Alpha],\[Beta]]]              +C1@@map[{\[Alpha],\[Beta],0},10] sNNN[[1,r]][[2,\[Alpha],\[Beta]]]                    ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[11]]=Sum[    C1@@map[{\[Alpha],0,\[Beta]},11]  sNN[[R[[5]]]][[1,\[Alpha],\[Beta]]] +C1@@map[{0,\[Alpha],\[Beta]},11] sNN[[R[[6]]]][[2,\[Alpha],\[Beta]]]              +C1@@map[{\[Alpha],\[Beta],0},11] sNNN[[1,R[[5]]]][[3,\[Alpha],\[Beta]]]             ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[12]]=Sum[    C1@@map[{\[Alpha],0,\[Beta]},12]  sNN[[R[[6]]]][[2,\[Alpha],\[Beta]]] +C1@@map[{0,\[Alpha],\[Beta]},12] sNN[[r]][[3,\[Alpha],\[Beta]]]                     +C1@@map[{\[Alpha],\[Beta],0},12 ] sNNN[[1,R[[6]]]][[1,\[Alpha],\[Beta]]]            ,{\[Alpha],1,3},{\[Beta],1,3}];
+
+\[Delta]n[[13]]=Sum[    C2@@map[{\[Alpha],0,\[Beta]},13] sNN[[R[[6]]]][[2,\[Alpha],\[Beta]]] +C2@@map[{0,\[Alpha],\[Beta]},13] sNNN[[2,R[[1]]]][[3,\[Alpha],\[Beta]]]      +C2@@map[{\[Alpha],\[Beta],0},13] sNN[[R[[6]]]][[1,\[Alpha],\[Beta]]]                ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[14]]=Sum[    C2@@map[{\[Alpha],0,\[Beta]},14] sNN[[R[[6]]]][[2,\[Alpha],\[Beta]]] +C2@@map[{0,\[Alpha],\[Beta]},14] sNNN[[2,r]][[1,\[Beta],\[Alpha]]]      +C2@@map[{\[Alpha],\[Beta],0},14] sNN[[R[[6]]]][[3,\[Alpha],\[Beta]]]                ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[15]]=Sum[    C2@@map[{\[Alpha],0,\[Beta]},15] sNN[[R[[5]]]][[1,\[Alpha],\[Beta]]] +C2@@map[{0,\[Alpha],\[Beta]},15] sNNN[[2,R[[5]]]][[2,\[Alpha],\[Beta]]]      +C2@@map[{\[Alpha],\[Beta],0},15] sNN[[R[[5]]]][[3,\[Alpha],\[Beta]]]               ,{\[Alpha],1,3},{\[Beta],1,3}];
+
+\[Delta]n[[16]]=Sum[    C2@@map[{\[Alpha],0,\[Beta]},16] sNN[[R[[5]]]][[1,\[Alpha],\[Beta]]] +C2@@map[{0,\[Alpha],\[Beta]},16] sNNN[[2,r]][[3,\[Beta],\[Alpha]]]              +C2@@map[{\[Alpha],\[Beta],0},16] sNN[[R[[5]]]][[2,\[Alpha],\[Beta]]]                     ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[17]]=Sum[    C2@@map[{\[Alpha],0,\[Beta]},17] sNN[[r]][[3,\[Alpha],\[Beta]]]        +C2@@map[{0,\[Alpha],\[Beta]},17] sNNN[[2,R[[3]]]][[1,\[Alpha],\[Beta]]]       +C2@@map[{\[Alpha],\[Beta],0},17] sNN[[r]][[2,\[Alpha],\[Beta]]]              ,{\[Alpha],1,3},{\[Beta],1,3}];
+\[Delta]n[[18]]=Sum[    C2@@map[{\[Alpha],0,\[Beta]},18] sNN[[r]][[3,\[Alpha],\[Beta]]]        +C2@@map[{0,\[Alpha],\[Beta]},18] sNNN[[2,r]][[2,\[Beta],\[Alpha]]]       +C2@@map[{\[Alpha],\[Beta],0},18] sNN[[r]][[1,\[Alpha],\[Beta]]]              ,{\[Alpha],1,3},{\[Beta],1,3}];
+
+\[Delta]nA=Sum[\[Delta]n[[i]]       ,{i,1,9}];
+\[Delta]nB=Sum[\[Delta]n[[i+9]] ,{i,1,9}];
+
+(*Re@*)Chop[{\[Delta]nA,\[Delta]nB},10^(-16)]          ]; 
+
+
+densityTriang[L_,c11_,c21_,c12_,c22_,sNN_,sNNN_]:= Module[{C1,C2},     
+Do[C1[\[Mu],\[Nu],\[Rho]]=c11[[\[Mu]+1,\[Nu]+1,\[Rho]+1]] +c12[[\[Nu]+1,\[Mu]+1,\[Rho]+1]] ;C2[\[Mu],\[Nu],\[Rho]]=c21[[\[Mu]+1,\[Nu]+1,\[Rho]+1]] +c22[[\[Nu]+1,\[Mu]+1 ,\[Rho]+1]] ;  
+ ,{\[Mu],0,3},{\[Nu],0,3},{\[Rho],0,3} ];
+Table[    Module[{m,n}, n=\[LeftFloor](r-1)/L\[RightFloor]; m=r-n L-1; densityTriangLocal[m,n,L,C1,C2,sNN,sNNN] ]   ,{r,1,L^2}  ]                                       ];
+
+
+(* ::Subsection::Bold::Closed:: *)
+(*Charge config *)
+
+
+Norm2[v_]:=1/Sqrt[3] (  Abs[v[[2]]]+1/2  Abs[Sqrt[3] v[[1]]- v[[2]]]+1/2 Abs[Sqrt[3]v[[1]]+ v[[2]]] );
+position[\[Sigma]_,m_,n_]:=m nx+n ny-\[Sigma] \[Delta]z;
+
+
+densityTriangVortexHex[L_,c11_,c21_,c12_,c22_,sNN_,sNNN_,v_,R0_]:= Module[{C1,C2,m0,n0,d1,d2,Rv,rings,mnIndexes,rIndexes,R=5,r,d0,r2,\[Delta]n},   
+	r2=\[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;d0=Min[d1,d2];r=d2;
+	{m0,n0}=positionVortex[v,L];  Rv=m0 nx+n0 ny+{0,1/Sqrt[3]};If[R0==1,R=5,R=R0];
+	rings=Select[Flatten[Table[{\[Sigma],m,n,m+n L+1,N@Norm2[position[\[Sigma],m,n]-Rv]},{\[Sigma],0,1},{m,m0-r,m0+r},{n,n0-r,n0+r} ],2], #[[-1]]<=R&];
+	rIndexes=Sort@rings[[;;,4]];  
+	Do[C1[\[Mu],\[Nu],\[Rho]]=c11[[\[Mu]+1,\[Nu]+1,\[Rho]+1]] +c12[[\[Nu]+1,\[Mu]+1,\[Rho]+1]] ;C2[\[Mu],\[Nu],\[Rho]]=c21[[\[Mu]+1,\[Nu]+1,\[Rho]+1]] +c22[[\[Nu]+1,\[Mu]+1 ,\[Rho]+1]] ; ,{\[Mu],0,3},{\[Nu],0,3},{\[Rho],0,3} ];
+	\[Delta]n=Table[{0,0} ,L^2  ];
+	Do[\[Delta]n[[r]] = Module[{m,n}, n=\[LeftFloor](r-1)/L\[RightFloor]; m=r-n L-1;densityTriangLocal[m,n,L,C1,C2,sNN,sNNN]]  , {r,rIndexes}];
+	\[Delta]n];
+             
+
+
+chargeVortexHex[\[Delta]n_,L_,v_,R0_:1]:=Module[{m0,n0,d1,d2,Rv,rings,R,r=6,\[Rho]=-1.92289705 10^-6  ,d0,r2},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;d0=Min[d1,d2];
+{m0,n0}=positionVortex[v,L];  Rv=m0 nx+n0 ny+{0,1/Sqrt[3]};If[R0==1,R=d0/2,R=R0];
+rings=Select[SortBy[Flatten[Table[{\[Sigma],m,n,N@Norm2[position[\[Sigma],m,n]-Rv]},{\[Sigma],0,1},{m,-r,L+r},{n,-r,L+r} ],2] ,Last], #[[4]]<R&];
+Sum[        Module[{\[Sigma]=rings[[l,1]],m=rings[[l,2]],n=rings[[l,3]]},      1/\[Rho] \[Delta]n[[m+n L+1,\[Sigma]+1]]               ],{l,1,Length@rings} ]
+];
+dipoleVortexHex[\[Delta]n_,L_,v_,R0_:1]:=Module[{m0,n0,d1,d2,Rv,rings,R,r=6,\[Rho]=-1.92289705 10^-6,d0,r2},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;d0=Min[d1,d2];
+{m0,n0}=positionVortex[v,L]; Rv=m0 nx+n0 ny+{0,1/Sqrt[3]};If[R0==1,R=d0/2,R=R0];
+rings=Select[SortBy[Flatten[Table[{\[Sigma],m,n,N@Norm2[position[\[Sigma],m,n]-Rv]},{\[Sigma],0,1},{m,-r,L+r},{n,-r,L+r} ],2] ,Last], #[[4]]<R&];
+Sum[        Module[{\[Sigma]=rings[[l,1]],m=rings[[l,2]],n=rings[[l,3]]},       1/\[Rho] \[Delta]n[[m+n L+1,\[Sigma]+1]] (position[\[Sigma],m,n]-Rv)               ],{l,1,Length@rings} ]
+];
+quadrupoleVortexHex[\[Delta]n_,L_,v_,R0_:1]:=Module[{m0,n0,d1,d2,Rv,rings,R,r=6,\[Rho]=-1.92289705 10^-6,d0,r2},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;d0=Min[d1,d2];
+{m0,n0}=positionVortex[v,L];Rv=m0 nx+n0 ny+{0,1/Sqrt[3]};If[R0==1,R=d0/2,R=R0];
+rings=Select[SortBy[Flatten[Table[{\[Sigma],m,n,N@Norm2[position[\[Sigma],m,n]-Rv]},{\[Sigma],0,1},{m,-r,L+r},{n,-r,L+r} ],2] ,Last], #[[4]]<R&];
+Sum[        Module[{\[Sigma]=rings[[l,1]],m=rings[[l,2]],n=rings[[l,3]],\[Delta]R0,\[Delta]R}, \[Delta]R0=position[\[Sigma],m,n]-Rv;\[Delta]R={\[Delta]R0[[1]],\[Delta]R0[[2]],0};
+
+       1/\[Rho] \[Delta]n[[m+n L+1,\[Sigma]+1]] (  3 TensorProduct[\[Delta]R,\[Delta]R ]  -Norm[\[Delta]R]^2 {{1,0,0},{0,1,0},{0,0,1}}      )            ],{l,1,Length@rings} ]
+
+];
+
+
+(* ::Subsection::Closed:: *)
+(*Charge density *)
+
+
+(*
+\[Theta]Qzz[charge_]:=Table[ {charge[[i,6]][[2]],charge[[i,5]][[3,3]]  },{i,1,Length@charge}   ];
+\[Theta]QxxQyy[charge_]:=Table[ {charge[[i,6]][[2]],charge[[i,5]][[1,1]] -charge[[i,5]][[2,2]]  },{i,1,Length@charge}   ];
+\[Theta]Qxy[charge_]:=Table[ {charge[[i,6]][[2]],charge[[i,5]][[1,2]] +charge[[i,5]][[2,1]]  },{i,1,Length@charge}   ];
+
+anisotropy[Q_]:=Sqrt[(Q\[LeftDoubleBracket]1,1\[RightDoubleBracket]^2)+4 Q\[LeftDoubleBracket]1,2\[RightDoubleBracket] Q\[LeftDoubleBracket]2,1\[RightDoubleBracket]-2 Q\[LeftDoubleBracket]1,1\[RightDoubleBracket] Q\[LeftDoubleBracket]2,2\[RightDoubleBracket]+(Q\[LeftDoubleBracket]2,2\[RightDoubleBracket]^2)    ];    (*  2 Sqrt[ ((Qxx-Qyy)/2)^2+ QxyQyx   ]   *)
+\[Theta]Ani[charge_]:=Table[ {charge[[i,6]][[2]],anisotropy@charge[[i,5]]  },{i,1,Length@charge}   ];
+\[Theta]Ani2[charge_]:=Table[ {charge[[i,6]][[2]],1/Abs[charge[[i,5]][[3,3]]]anisotropy@charge[[i,5]]  },{i,1,Length@charge}   ];
+*)
+chargeHex[par0_,\[Chi]0_,L_,t_,hv_,R0_:5]:=
+Module[{NbName="709",R,l,\[Chi],\[Omega],\[Xi],Jv,Kv,\[CapitalGamma]v,J,K,\[CapitalGamma],Nc,h,c11,c21,c12,c22,sNN,sNNN,\[Delta]n,v}, 	
+	Nc=L^2;	 
+	{J,K,\[CapitalGamma],h}=par0[[1;;4]];
+	\[Chi]=\[Chi]0;
+	\[Omega]=Table[\[Omega]GA,2,{r,1,Nc} ];
+    \[Xi]=Table[0 \[Omega]GA,2,3,{r,1,Nc} ];
+	Kv= uniform[K,L,L];Jv=uniform[J,L,L];\[CapitalGamma]v=uniform[\[CapitalGamma],L,L];
+	c11=coefTriang11[JH,U,t];
+	c21=coefTriang21[JH,U,t];  
+	c12=coefTriang12[JH,U,t];
+	c22=coefTriang22[JH,U,t];  
+	sNN = sscNN[\[Chi],\[Omega],L]; 
+	sNNN= sscNNN[\[Xi],\[Omega],L];
+	
+	R=R0;
+	v=1;
+	\[Delta]n=densityTriangVortexHex[L,c11,c21,c12,c22,sNN,sNNN,v,R];
+
+{L,R,chargeVortexHex[\[Delta]n,L,v,R],dipoleVortexHex[\[Delta]n,L,v,R],quadrupoleVortexHex[\[Delta]n,L,v,R],hv}]
+
+
 (* ::Section::Bold:: *)
 (*MF Loop -- microscopic parameters*)
 
@@ -1052,50 +1246,51 @@ Print[" "];
 (*pure Kitaev*)
 
 
-t0=AbsoluteTime[];tpK=t0;
+t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
+	\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+	\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+	\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+	t0=t1; tpK=t0;
 
 
 Print["    Starting four vortex - pure Kitaev model + Kappa + Lambda  "];Print[" "]
 
 
 Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1],\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec }, 
+	{J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; 
+	Nc=L^2;
+	T=Tmat[L,L];
+	Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L]; 
+	u0=gauge4v[uniformU[-1,L],L];
+(* for Pure Kitaev model: *)  
+	Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,\[Omega]0,Hpure,Tpure,Epure,Upure},   
+	\[Kappa]0=toKappa[h]; 
+	\[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
+	\[Chi]0={0,0,0};  
+	Hpure=Hreal[Kv,\[Kappa],\[Lambda],u0,L,0, {0,0}] ;   
+	Tpure=TmatPure[L]; 
+	Upure=UmatPure[Tpure\[ConjugateTranspose] . Hpure . Tpure]; 
+	Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
 
- {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; 
-Nc=L^2;
-T=Tmat[L,L];
-Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L]; 
-u0=gauge4v[uniformU[-1,L],L];
+	{\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];   
 
-(* for Pure Kitaev model: *)
-  
-Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,\[Omega]0,Hpure,Tpure,Epure,Upure},   
-\[Kappa]0=toKappa[h]; 
-\[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
-\[Chi]0={0,0,0};  
-Hpure=Hreal[Kv,\[Kappa],\[Lambda],u0,L,0, {0,0}] ;   
-Tpure=TmatPure[L]; 
-Upure=UmatPure[Tpure\[ConjugateTranspose] . Hpure . Tpure]; 
-Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
-
-{\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];   
-
-\[Chi]0=\[Chi]gauge4v[\[Chi]0,L];
-
-dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} } ]; 
+	\[Chi]0=\[Chi]gauge4v[\[Chi]0,L];
+	chargehex=chargeHex[parameters[[ev,p]],\[Chi]0,L,ts[[1]] ,hV[[hp]]  ];
+	dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure,chargehex} } ];
+	quadrupoleToFilePure[parameters[[ev,p]],L,acuracy,gauge,chargehex,{hV[[1]],hV[[-1]]}]; 
 Print["Kappa=",\[Kappa],"; Lambda=",round/@\[Lambda] ,"; Epure=",round@Epure,"; "];
        ]; 
 
 Print["    L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); ", " eV0=",parameters[[ev,p]][[10]]/1700 ," x 1700 "];
 
-t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
-\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
-\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
-\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
-t0=t1; 
-Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec   ];
-Print[" "];
-
-]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   
+	t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
+	\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+	\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+	\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+	t0=t1; 
+	Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec   ];
+	Print[" "];
+]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1, Length[parameters[[1]] ], Round[Length[parameters[[1]] ]/6]  }  ]   
 
 
 CloseKernels[];
