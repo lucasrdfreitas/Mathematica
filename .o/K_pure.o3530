@@ -1,0 +1,13 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=709; 
+    Ls={40}; 
+ 
+    ---- ---- ---- 
+ 
+    Starting four vortex - pure Kitaev model + Kappa + Lambda  
+ 
+
+Syntax::sntx: Invalid syntax in or before "]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1, Length[parameters[[1]] ] ]  }  ]   " (line 1293 of "pure-K.m").
+                                                                                                                            ^
