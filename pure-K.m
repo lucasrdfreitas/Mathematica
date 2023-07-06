@@ -18,11 +18,14 @@ Print["Starting Kernels"];
 (**)
 
 
-NbName="709"; \[Lambda]0=0.5; 
-		Ls = Range[40,40,2]; 				tV={0};				
-		hV=With[{h=0.2},Flatten[Table[{h,\[Theta],\[CurlyPhi]},{\[CurlyPhi],0.1,120.1,1},{\[Theta],90.1,180.1,1}],1]        ]; 
+NbName="709"; 
+		\[Lambda]0=0.5; 
+		Ls = Range[40,40,2]; 				tV={0};		
+		\[CurlyPhi]V = Table[\[CurlyPhi],{\[CurlyPhi],0,60,4}];
+		\[Theta]V = Table[\[Theta],{\[Theta],0.528779,180.528779,1}];		
+		hV = With[{h=0.2},Flatten[Table[{h,\[Theta],\[CurlyPhi]},{\[CurlyPhi],\[CurlyPhi]V},{\[Theta],\[Theta]V}],1]        ]; 
 
-		steps=500;				acuracy=3;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=500;				acuracy=4;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -152,6 +155,9 @@ KroneckerProduct[ one[r[[3]],RB[[\[Alpha]]],Nc],HnnnB[[\[Alpha]]]]   ,{\[Alpha],
 
 TmatPure[L_] :=KroneckerProduct[   IdentityMatrix[L^2],  {{1,1},{I,-I}} ];
 UmatPure[H_]:= Module[ {R=Quiet@Eigensystem@N[H]},ReverseSort[R\[Transpose]]\[Transpose][[2]]\[Transpose] ];
+
+UmatPure[H_]:=ReverseSort[Quiet[Eigensystem@N[H]]\[Transpose]]\[Transpose][[2]]\[Transpose];
+
 EandUPure[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H]},{R[[1]],R[[2]]\[Transpose] }];
 \[DoubleStruckCapitalU]occupiedPure[TU_,Nc_]:= Drop[Take[TU\[Transpose],-Nc-1],{2}]\[Transpose];
 
@@ -1189,7 +1195,7 @@ anisotropy[Q_]:=Sqrt[(Q\[LeftDoubleBracket]1,1\[RightDoubleBracket]^2)+4 Q\[Left
 \[Theta]Ani2[charge_]:=Table[ {charge[[i,6]][[2]],1/Abs[charge[[i,5]][[3,3]]]anisotropy@charge[[i,5]]  },{i,1,Length@charge}   ];
 *)
 chargeHex[par0_,\[Chi]0_,L_,t_,hv_,R0_:5]:=
-Module[{NbName="709",R,l,\[Chi],\[Omega],\[Xi],Jv,Kv,\[CapitalGamma]v,J,K,\[CapitalGamma],Nc,h,c11,c21,c12,c22,sNN,sNNN,\[Delta]n,v}, 	
+Module[{R,l,\[Chi],\[Omega],\[Xi],Jv,Kv,\[CapitalGamma]v,J,K,\[CapitalGamma],Nc,h,c11,c21,c12,c22,sNN,sNNN,\[Delta]n,v}, 	
 	Nc=L^2;	 
 	{J,K,\[CapitalGamma],h}=par0[[1;;4]];
 	\[Chi]=\[Chi]0;
@@ -1246,39 +1252,81 @@ Print[" "];
 (*pure Kitaev*)
 
 
-t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
+(*t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
 	\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 	\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
 	\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
 	t0=t1; tpK=t0;
-
-
 Print["    Starting four vortex - pure Kitaev model + Kappa + Lambda  "];Print[" "]
 
-
-Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1],\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec }, 
+AbsoluteTiming@Do[   Module[{gauge="g4",ev=1,l=1,Tpure,p= p\[Theta] + Length[\[Theta]V] (p\[CurlyPhi]-1),hp,
+	J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[1]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec }, 
+	hp=p;
 	{J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; 
 	Nc=L^2;
 	T=Tmat[L,L];
 	Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L]; 
 	u0=gauge4v[uniformU[-1,L],L];
+	Tpure=TmatPure[L];
 (* for Pure Kitaev model: *)  
-	Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,\[Omega]0,Hpure,Tpure,Epure,Upure},   
+	Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,\[Omega]0,Hpure,Upure},   
 	\[Kappa]0=toKappa[h]; 
 	\[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
 	\[Chi]0={0,0,0};  
-	Hpure=Hreal[Kv,\[Kappa],\[Lambda],u0,L,0, {0,0}] ;   
-	Tpure=TmatPure[L]; 
+	Hpure=Tpure\[ConjugateTranspose] . Hreal[Kv,\[Kappa],\[Lambda],u0,L,0, {0,0}] . Tpure;    
+	Upure=ReverseSort[Quiet[Eigensystem@N[Hpure]]\[Transpose]]\[Transpose][[2]]\[Transpose];(*UmatPure[ Hpure ]; *) 
+	(*Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);*)
+	{\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0]; 
+	\[Chi]0=\[Chi]gauge4v[\[Chi]0,L];
+	Print@AbsoluteTiming[
+	chargehex=chargeHex[parameters[[ev,p]],\[Chi]0,L,ts[[1]] ,hV[[p]]  ];   ];
+	(*dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure,chargehex} } ];*)
+	Print@AbsoluteTiming[quadrupoleToFilePure[parameters[[ev,p]],L,acuracy,gauge,chargehex,{hV[[1]],hV[[-1]]}];  ];
+Print["Kappa=",\[Kappa],"; Lambda=",round/@\[Lambda] ];
+       ]; 
+
+Print["    L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); ", " eV0=",parameters[[ev,p]][[10]]/1700 ," x 1700 "];
+
+	t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
+	\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+	\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+	\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+	t0=t1; 
+	Print[ "p=",p,"/",Length@parameters[[1]],"; p\[CurlyPhi]=",p\[CurlyPhi],"; p\[Theta]=", p\[Theta],"; \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec   ];
+	Print[" "];
+]  , {p\[CurlyPhi],1, 1+ 0Length[\[CurlyPhi]V]}, {p\[Theta],1, 1 +0Length[\[Theta]V]}  ]   *)
+
+
+t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];
+	\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+	\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+	\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+	t0=t1; tpK=t0;
+Print["    Starting four vortex - pure Kitaev model + Kappa + Lambda  "];Print[" "]
+
+Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Tpure,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1],\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec }, 
+	{J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; 
+	Nc=L^2;
+	T=Tmat[L,L];
+	Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L]; 
+	u0=gauge4v[uniformU[-1,L],L];
+	Tpure=TmatPure[L];
+(* for Pure Kitaev model: *)  
+	Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,\[Omega]0,Hpure,Epure,Upure,chargehex},   
+	\[Kappa]0=toKappa[h]; 
+	\[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
+	\[Chi]0={0,0,0};  
+	Hpure=Hreal[Kv,\[Kappa],\[Lambda],u0,L,0, {0,0}] ;    
 	Upure=UmatPure[Tpure\[ConjugateTranspose] . Hpure . Tpure]; 
-	Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);
+	(*Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);*)
 
 	{\[Chi]0[[1]],\[Chi]0[[2]],\[Chi]0[[3]]}=toMFparametersPure[Upure,u0,L,0];   
 
 	\[Chi]0=\[Chi]gauge4v[\[Chi]0,L];
 	chargehex=chargeHex[parameters[[ev,p]],\[Chi]0,L,ts[[1]] ,hV[[hp]]  ];
-	dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure,chargehex} } ];
+	(*dataToFilePure[parameters[[ev,p]],L,acuracy,gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure,chargehex} } ];*)
 	quadrupoleToFilePure[parameters[[ev,p]],L,acuracy,gauge,chargehex,{hV[[1]],hV[[-1]]}]; 
-Print["Kappa=",\[Kappa],"; Lambda=",round/@\[Lambda] ,"; Epure=",round@Epure,"; "];
+Print["Kappa=",NumberForm[#,{3,3}]&@\[Kappa],"; Lambda=",NumberForm[#,{3,3}]&@\[Lambda] (*,"; Epure=",round@Epure,"; "*), "; Q=",NumberForm[#,{3,3}]&@Chop[chargehex[[3;;-2]],10^-8] ];
        ]; 
 
 Print["    L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); ", " eV0=",parameters[[ev,p]][[10]]/1700 ," x 1700 "];
