@@ -1,0 +1,19 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=709; 
+    Ls={44}; 
+    hV={0.2, 0, 61}...{0.2, 180, 120};
+ 
+    ---- ---- ---- 
+ 
+    Starting four vortex - pure Kitaev model + Kappa + Lambda  
+ 
+Kappa=0.0598; Lambda={0.0254, 0.0254, 0.0254}; Q={-0.0077, {0., 0.}, {{0.8614, 0., 0.}, {0., 0.8617, 0.}, {0., 0., -1.723}}}
+    L=44; h=(0.2,0,61);  eV0=0. x 1700 
+p=1/11160; l=1/1; Δt = 0 hours : 0 minutes : 43 seconds
+ 
+Kappa=0.0598; Lambda={0.0267, 0.0248, 0.0248}; Q={-0.0077, {0., 0.}, {{0.8602, -0.0022, 0.}, {-0.0022, 0.8629, 0.}, {0., 0., -1.723}}}
+    L=44; h=(0.2,1,61);  eV0=0. x 1700 
+p=2/11160; l=1/1; Δt = 0 hours : 0 minutes : 52 seconds
+ 

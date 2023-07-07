@@ -20,9 +20,9 @@ Print["Starting Kernels"];
 
 NbName="709"; 
 		\[Lambda]0=0.5; 
-		Ls = Range[32,32,2]; 				tV={0};		
-		\[CurlyPhi]V = Table[\[CurlyPhi],{\[CurlyPhi],304,360,4}];
-		\[Theta]V = Table[\[Theta],{\[Theta],0.528779,180.528779,1}];		
+		Ls = Range[40,44,2]; 				tV={0};		
+		\[CurlyPhi]V = Table[\[CurlyPhi],{\[CurlyPhi],0,0,1}];
+		\[Theta]V = Sort@Union[  Table[\[Theta],{\[Theta],0,180,0.5}] ];		
 		hV = With[{h=0.2},Flatten[Table[{h,\[Theta],\[CurlyPhi]},{\[CurlyPhi],\[CurlyPhi]V},{\[Theta],\[Theta]V}],1]        ]; 
 
 		steps=500;				acuracy=8;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
