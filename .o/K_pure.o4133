@@ -1,0 +1,5 @@
+Before Starting Kernels
+Starting Kernels
+
+Syntax::sntx: Invalid syntax in or before "hV = Flatten[Table[{h,\[Theta],120},{h,{.05,.15,.25,.35}},{\[Theta],\[Theta]V}],1]        ]; " (line 26 of "pure-K.m").
+                                                                                                                                      ^
