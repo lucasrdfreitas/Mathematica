@@ -16,11 +16,12 @@ Print["Starting Kernels"];
 
 NbName="708"; \[Lambda]0=0.5; 
 
-		Ls = Range[36,36,4]; 				tV={-1,-1.5};				
+		Ls = Range[41,41,4]; 				tV={0,2.74356};				
 		hV=With[{h=0.01,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
+		hV={{0.0001,0,0},{0.2,0,0}};
 
-		steps=50;				acuracy=4;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,.65,\[CapitalDelta]ev}][[1;;-1]];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=350;				acuracy=8;     \[CapitalDelta]ev=0.099999; eVs=Table[1700 x, {x,0,0,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -909,7 +910,7 @@ Print["    ts=",ts,"; "];
 Print["    hV=",hV,";"];
 (*Print["    hs=", hs,"; "];*)
 Print["    Steps=",steps,"; "];
-Print["    acuracy=",acuracy,"; "];
+Print["    acuracy=",acuracy,"; "];(*
 Print["    \[CapitalDelta]eV=",\[CapitalDelta]ev,"; "];
 Print["    \[Xi]s=",N[eVs/1700],"; "];
 Print["    eVs=",eVs,"; "];
@@ -919,7 +920,7 @@ Do[
 Print[ parameters[[i,j]] ],
 {i,1,Length@parameters},
 {j,1,Length@parameters[[i]] }
-];
+];*)
 Print[" "]; 
 
 
@@ -927,7 +928,7 @@ Print[" "];
 (*pure loop w/o vortices*)
 
 
-Print[];Print["    Pure and without vortices "];Print[];
+(*Print[];Print["    Pure and without vortices "];Print[];
 Do[   Module[{gauge="g0",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
 
  {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;7]]; 
@@ -957,10 +958,10 @@ If[ ev==1, Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h], "; L=",L,"; h=(",
 Print[ " eV0=",N[Round[ 1000  parameters[[ev,p]][[10]]/1700 ] /1000] ," x 1700","; Epure=",Epure,"; "];
        ]; 
 (*Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls  ];*)
-        ]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   
+        ]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   *)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*pure loop w/ vortices*)
 
 
@@ -992,16 +993,17 @@ dataToFilePure[parameters[[ev,p]],L,acuracy,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{}
 Print[ " eV0=",N[Round[ 1000  parameters[[ev,p]][[10]]/1700 ] /1000] ," x 1700","; Epure=",Epure,"; "];
        ]; 
         ]  , {ev,1,Length[parameters]}, {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]   
+        
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*vortex free*)
 
 
-tvf=AbsoluteTime[];Print["Definition timing= ",round[tvf-t0] ]; t0=tvf;
+Print[" "];tvf=AbsoluteTime[];Print["Definition timing= ",round[tvf-t0] ]; t0=tvf;
 
 
-Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
+Print[" "]; Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
 {J,K,\[CapitalGamma],h}=parameters[[1,p]][[1;;4]]; Nc=L^2;
@@ -1057,6 +1059,7 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
 
+(*
 minSteps=2;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g0"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,hp,
@@ -1167,7 +1170,8 @@ Print["Memory in use = ",N[UnitConvert[Quantity[MemoryInUse[],"Bytes"],"GB"]]   
 Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ] 
 
   ];
-]  , {p,1,Length[parameters[[1]] ]} , {l,1,Length@Ls} , {ev,1,Length[parameters]} ];     
+]  , {p,1,Length[parameters[[1]] ]} , {l,1,Length@Ls} , {ev,1,Length[parameters]} ];   
+*)  
 
 
 (* ::Subsubsection::Bold:: *)
@@ -1264,7 +1268,7 @@ u2=u1;
 Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1, ";  E=", N[Round[1000000(#)]/1000000]&@{EMF,Esum,EMF+E\[Lambda]},"; "  ];     
          ];  
 Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]]; 
-\[Lambda]1=1/2 Heff;\[Lambda]2=1/2 Heff;
+\[Lambda]1=(0.46) Heff;\[Lambda]2=(0.46) Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
     u=Umat[T\[ConjugateTranspose] . H . T];
@@ -1283,9 +1287,9 @@ H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];
 (*If[j0\[NotEqual]-1, {j,EnList,\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}={j0,EnList0,\[CapitalDelta]seq0,\[CapitalDelta]\[Omega]seq0};   ];*)
 	dataToFile[parameters[[ev,p]],L,acuracy,{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}},gauge,NbName];   
   
-Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ];
+Print[ "ev=",ev ,"/", Length@eVs,"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ];
 t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1 -t0], "Seconds" ], "Hours" ];t0=t1; 
-Print["Memory in use = ",N[UnitConvert[Quantity[MemoryInUse[],"Bytes"],"GB"]]    ];  Print[" "];
+Print["Memory in use = ",ToString@N[UnitConvert[Quantity[MemoryInUse[],"Bytes"],"GB"]]    ];  Print[" "];
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
@@ -1293,6 +1297,9 @@ Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalD
 
   
   ];         ], {p,1,Length[parameters[[1]] ]}    , {l,1,Length@Ls} , {ev,1,Length[parameters]} ]                                                   
+
+
+ 
 
 
 CloseKernels[];
