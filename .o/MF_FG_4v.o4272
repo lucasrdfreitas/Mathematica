@@ -1,0 +1,54 @@
+Before Starting Kernels
+Starting Kernels
+
+Set::write: Tag Times in 0.099999 eVs is Protected.
+ 
+    NbName=705; 
+    Ls={41}; 
+    tV={0, 2.74356}; 
+    ts={{0, 160, 0, 0, -60}, {13.7178, 160, -32.92272, 0, -60}}; 
+    hV={{0.0001, 0, 0}, {0.2, 0, 0}};
+    Steps=350; 
+    acuracy=8; 
+    ΔeV={0}; 
+    ξs=0.000588235294117647*eVs; 
+    eVs=eVs; 
+ 
+    Parameters=
+ 
+Definition timing= 46.4519
+ 
+ 
+    Starting free loop
+ 
+
+Part::partw: Part 1 of {} does not exist.
+
+Part::partw: Part 1 of {} does not exist.
+
+Part::take: Cannot take positions 1 through 4 in {}[[1,1]].
+
+Set::shape: Lists {J$2103, K$2103, Γ$2103, h$2103} and {}[[1,1]][[1 ;; 4]] are not the same shape.
+J=J$2103; K=K$2103; G=Γ$2103; L=41; h=(0.0001,0,0); 
+
+Part::partw: Part 1 of {} does not exist.
+
+General::stop: Further output of Part::partw will be suppressed during this calculation.
+
+FindFile::string: String expected at position 1 in FindFile[toPath[{}[[1,1]], 41, 8, free, 705]].
+
+OpenRead::fstr: File specification toPath[{}[[1,1]], 41, 8, free, 705] is not a string of one or more characters.
+
+ReadList::stream: OpenRead[toPath[{}[[1,1]], 41, 8, free, 705]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+Close::stream: OpenRead[toPath[{}[[1,1]], 41, 8, free, 705]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+Set::shape: Lists {j$2103, L$2103, χ$2103, ω$2103, ξ$2103, {EnList$2103[[1]], EnList$2103[[2]], EnList$2103[[3]], Δseq$2103, Δωseq$2103}} and OpenRead[toPath[{}[[1,1]], 41, 8, free, 705]] are not the same shape.
+
+Part::partd: Part specification h$2103[[1]] is longer than depth of object.
+
+Part::partd: Part specification h$2103[[2]] is longer than depth of object.
+
+Part::partd: Part specification h$2103[[3]] is longer than depth of object.
+
+General::stop: Further output of Part::partd will be suppressed during this calculation.

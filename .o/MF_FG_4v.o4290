@@ -1,0 +1,109 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=706; 
+    Ls={41}; 
+    tV={0, 2.74356}; 
+    ts={{0, 160, 0, 0, -60}, {13.7178, 160, -32.92272, 0, -60}}; 
+    hV={{0.0001, 0, 0}, {0.2, 0, 0}};
+    Steps=350; 
+    acuracy=8; 
+    ΔeV=0.099999; 
+    ξs={0.}; 
+    eVs={0.}; 
+ 
+    Parameters=
+{0., -1., 0., {0.000057735026918962585, 0.000057735026918962585, 0.000057735026918962585}, 0., -0.9999999999999999, 0., {0.0001, 0, 0}, 0, 0.}
+{0., -1., 0., {0.11547005383792518, 0.11547005383792518, 0.11547005383792518}, 0., -0.9999999999999999, 0., {0.2, 0, 0}, 0, 0.}
+{-0.01812863516578724, -1., 0.20000045589719553, {0.000057735026918962585, 0.000057735026918962585, 0.000057735026918962585}, -0.01812863516578724, -1., 0.20000045589719553, {0.0001, 0, 0}, 2.74356, 0.}
+{-0.01812863516578724, -1., 0.20000045589719553, {0.11547005383792518, 0.11547005383792518, 0.11547005383792518}, -0.01812863516578724, -1., 0.20000045589719553, {0.2, 0, 0}, 2.74356, 0.}
+ 
+Definition timing= 46.4696
+ 
+ 
+    Starting free loop
+ 
+J=0.; K=-1.; G=0.; L=41; h=(0.0001,0,0); 
+
+FindFile::string: String expected at position 1 in FindFile[toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706]].
+
+OpenRead::fstr: File specification toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706] is not a string of one or more characters.
+
+ReadList::stream: OpenRead[toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+Close::stream: OpenRead[toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+Set::shape: Lists {j$2099, L$2099, χ$2099, ω$2099, ξ$2099, {EnList$2099[[1]], EnList$2099[[2]], EnList$2099[[3]], Δseq$2099, Δωseq$2099}} and OpenRead[toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706]] are not the same shape.
+Max Step = 23; Delta=0.; E={-1.5746043835194974, -1.5746043780587928, -1.5746043841112136};  p=1/4
+
+OpenRead::fstr: File specification toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706] is not a string of one or more characters.
+
+ReadList::stream: OpenRead[toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+Close::stream: OpenRead[toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+Set::shape: Lists {jG, LG, χG, ωG, ξG, EnG} and OpenRead[toPath[{0., -1., 0., {0.000057735, 0.000057735, 0.000057735}, 0., -1., 0., {0.0001, 0, 0}, 0, 0.}, 41, 8, free, 706]] are not the same shape.
+J=0.; K=-1.; G=0.; L=41; h=(0.2,0,0); 
+
+FindFile::string: String expected at position 1 in FindFile[toPath[{0., -1., 0., {0.11547, 0.11547, 0.11547}, 0., -1., 0., {0.2, 0, 0}, 0, 0.}, 41, 8, free, 706]].
+
+OpenRead::fstr: File specification toPath[{0., -1., 0., {0.11547, 0.11547, 0.11547}, 0., -1., 0., {0.2, 0, 0}, 0, 0.}, 41, 8, free, 706] is not a string of one or more characters.
+
+General::stop: Further output of OpenRead::fstr will be suppressed during this calculation.
+
+ReadList::stream: OpenRead[toPath[{0., -1., 0., {0.11547, 0.11547, 0.11547}, 0., -1., 0., {0.2, 0, 0}, 0, 0.}, 41, 8, free, 706]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+General::stop: Further output of ReadList::stream will be suppressed during this calculation.
+
+Close::stream: OpenRead[toPath[{0., -1., 0., {0.11547, 0.11547, 0.11547}, 0., -1., 0., {0.2, 0, 0}, 0, 0.}, 41, 8, free, 706]] is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+
+General::stop: Further output of Close::stream will be suppressed during this calculation.
+
+Set::shape: Lists {j$168705, L$168705, χ$168705, ω$168705, ξ$168705, {EnList$168705[[1]], EnList$168705[[2]], EnList$168705[[3]], Δseq$168705, Δωseq$168705}} and OpenRead[toPath[{0., -1., 0., {0.11547, 0.11547, 0.11547}, 0., -1., 0., {0.2, 0, 0}, 0, 0.}, 41, 8, free, 706]] are not the same shape.
+
+General::stop: Further output of Set::shape will be suppressed during this calculation.
+Max Step = 34; Delta=0.; E={-1.5967447976115114, -1.5742961735019683, -1.5991735027631406};  p=2/4
+J=-0.01812863516578724; K=-1.; G=0.20000045589719553; L=41; h=(0.0001,0,0); 
+
+FindFile::string: String expected at position 1 in FindFile[toPath[{-0.0181286, -1., 0.2, {0.000057735, 0.000057735, 0.000057735}, -0.0181286, -1., 0.2, {0.0001, 0, 0}, 2.74356, 0.}, 41, 8, free, 706]].
+
+General::stop: Further output of FindFile::string will be suppressed during this calculation.
+Max Step = 13; Delta=0.; E={-1.425559070667477, -1.566730170418173, -1.4255590711115735};  p=3/4
+J=-0.01812863516578724; K=-1.; G=0.20000045589719553; L=41; h=(0.2,0,0); 
+Max Step = 20; Delta=0.; E={-1.4340615318093966, -1.5626575607294548, -1.4358703449529227};  p=4/4
+ 
+Free loop timing= Quantity[3, Minutes]Quantity[2, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+
+Part::partd: Part specification ωG$654563[[1]] is longer than depth of object.
+
+Part::partd: Part specification ωG$654563[[2]] is longer than depth of object.
+
+Part::partd: Part specification χG$654563[[1]] is longer than depth of object.
+
+General::stop: Further output of Part::partd will be suppressed during this calculation.
+Pure data saved: 
+Kappa=0.; Lambda={6.3613231552162864*^-9, 6.3613231552162864*^-9, 6.3613231552162864*^-9}; Epure=-1.5746043880753609; 
+
+
+Set::partd: Part specification χ$654564[[1,r,1,1]] is longer than depth of object.
+
+Set::partd: Part specification χ$654564[[2,r,1,1]] is longer than depth of object.
+
+Set::partd: Part specification χ$654564[[3,r,1,1]] is longer than depth of object.
+
+General::stop: Further output of Set::partd will be suppressed during this calculation.
+ 
+J=0.; K=-1.; G=0.; Jmod=0.; Kmod=-0.9999999999999999; Gmod=0.; L=41; h=(0.0001,0,0); eV=0.
+ 
+
+Part::partw: Part 4 of ωG$654563[[2]] does not exist.
+
+Part::partw: Part 3 of ωG$654563[[2]] does not exist.
+
+Part::partw: Part 3 of ωG$654563[[2]] does not exist.
+
+General::stop: Further output of Part::partw will be suppressed during this calculation.
