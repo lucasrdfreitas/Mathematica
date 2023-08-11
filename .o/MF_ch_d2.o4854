@@ -1,0 +1,60 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=705; 
+    Ls={40}; 
+    tV={0, 2.74356}; 
+    ts={{0, 160, 0, 0, -60}, {13.7178, 160, -32.92272, 0, -60}}; 
+    hV={{0.0001, 0, 0}, {0.2, 0, 0}};
+    Steps=500; 
+    acuracy=7; 
+ 
+Definition timing= 31.4649
+ 
+ 
+    Starting free loop
+ 
+J=0.; K=-1.; G=0.; L=40; h=(0.0001,0,0); 
+Max Step = 19; Delta=4.*^-13; E={-1.5746069011609887, -1.5746068957004085, -1.5746069017527191};  p=1/4
+J=0.; K=-1.; G=0.; L=40; h=(0.2,0,0); 
+Max Step = 29; Delta=6.*^-13; E={-1.5967466581121361, -1.5742988184491962, -1.599175425050255};  p=2/4
+J=-0.01812863516578724; K=-1.; G=0.20000045589719553; L=40; h=(0.0001,0,0); 
+Max Step = 15; Delta=9.*^-13; E={-1.4255613499999205, -1.5667326754697186, -1.4255613504440423};  p=3/4
+J=-0.01812863516578724; K=-1.; G=0.20000045589719553; L=40; h=(0.2,0,0); 
+Max Step = 17; Delta=4.*^-13; E={-1.4340638465366584, -1.5626603102232548, -1.4358727670696108};  p=4/4
+ 
+Free loop timing= Quantity[2, Minutes]Quantity[56, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+Free loop + electric field timing= 0 hours : 0 minutes : 0 seconds
+
+                                             9
+Set::write: Tag Times in 3.900755514799673 10  Null is Protected.
+ 
+ 
+    Starting four vortex + electric field loop: 
+ 
+4 vortices loop timing Δt = 0 hours : 0 minutes : 0 seconds
+
+OpenAppend::noopen: Cannot open /home/rodrigues/Mathematica2/Files/pure/g4/t=0_eV=0._JKG={0, -1., 0}_JKGmod={0, -1., 0}/data/h=(0.0001,0,0)_L=40_A=7.txt.
+
+Write::strml: $Failed is not a string, stream, or list of strings and streams.
+
+Write::noopen: Cannot open $Failed.
+
+Close::stream: $Failed is not a string, SocketObject, InputStream[ ], or OutputStream[ ].
+Pure data saved: 
+Kappa=0.; Lambda={6.3613231552162864*^-9, 6.3613231552162864*^-9, 6.3613231552162864*^-9}; Epure=-1.5742088167665014; 
+
+ 
+J=0.; K=-1.; G=0.; Jmod=0.; Kmod=-0.9999999999999999; Gmod=0.; L=40; h=(0.0001,0,0); eV=0.
+ 
+ j =1/500; Delta=1.;  E={-1.574209, -1.574209, -1.574209}; 
+ j =2/500; Delta=3.8672311*^-6;  E={-1.574209, -1.574209, -1.574209}; 
+ j =3/500; Delta=1.8090614*^-6;  E={-1.574209, -1.574209, -1.574209}; 
+ j =4/500; Delta=6.702308*^-7;  E={-1.574209, -1.574209, -1.574209}; 
+ j =5/500; Delta=2.508088*^-7;  E={-1.574209, -1.574209, -1.574209}; 
+ j =6/500; Delta=1.053911*^-7;  E={-1.574209, -1.574209, -1.574209}; 
+ j =7/500; Delta=4.43913*^-8;  E={-1.574209, -1.574209, -1.574209}; 
