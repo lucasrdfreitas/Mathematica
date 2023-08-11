@@ -16,13 +16,13 @@ Print["Starting Kernels"];
 
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = {14}; 				tV={0,2.74356};				
+		Ls = {40}; 				tV={0,2.74356};				
 		hV=With[{h=0.2,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 		hV= { {0.0001,0,0},{0.2,0,0}};
 		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
 
-		steps=500;				acuracy=3;     eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=500;				acuracy=8;     eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -51,7 +51,7 @@ round[\[Kappa]_]:=N[Round[10000\[Kappa]]/10000];round\[CapitalDelta][\[Kappa]_]:
 \[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*for pure*)
 
 
@@ -60,7 +60,7 @@ toKappa[h_,\[CapitalDelta]v_:0.262]:=8h[[1]]h[[2]]h[[3]]/(  3 \[CapitalDelta]v^2
 KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If[C==0,{0,0,0},  d CubeRoot[3  \[CapitalDelta]v^2 \[Kappa]/(8C)]   ]] ;
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*file*)
 
 
@@ -68,18 +68,46 @@ dataToFilePure[ parameters0_,L_,acuracy_,gauge_,data_] :=
 Module[ {path,f,parameters=parameters0},
 parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;		
 (*createDir@FileNameJoin[{Directory[],"Files","pure", gauge}] ;*)
-createDir@FileNameJoin[{Directory[],"Files","pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+createDir@FileNameJoin[{Directory[],"Files",NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->ToString[parameters[[9]]],"X2"->ToString[parameters[[10]]],"X3"->ToString[parameters[[1;;3]]],"X4"->ToString[parameters[[5;;7]]] }] }];
-		path = toPathPure[parameters,L,acuracy,gauge];		
+		path = toPathPure[parameters,L,acuracy,gauge,NbName];		
 		(*Print["Pure path=",path];Print[];*)
 		f = OpenAppend[path];
 		 Write[ f, data];
-		 Close[f];                ];
-		 
-		 
-toPathPure[parameters0_,L_,acuracy_,gauge_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
+		 Close[f];                ];	
+		 		 
+toPathPure[parameters0_,L_,acuracy_,gauge_]:= 
+ Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
 parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;
-FileNameJoin[{Directory[], "Files" ,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+FileNameJoin[{Directory[], "Files" ,NbName,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],
+"X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
+StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
+   }]];
+ 
+
+
+createDir[path_] :=
+Module[ {l=Length@FileNames[path]},		
+	If[ l==0,  (*CreateDirectory@File@FileNameJoin[{path}];*) 
+	CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path,"graph" }]; , Null]  ];
+
+
+dataToFilePure[ parameters0_,L_,acuracy_,data_,gauge_,NbName_]:=
+Module[ {path,f,parameters=parameters0},
+parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;		
+(*createDir@FileNameJoin[{Directory[],"Files","pure", gauge}] ;*)
+createDir@FileNameJoin[{Directory[],"Files",NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+{"X1"->ToString[parameters[[9]]],"X2"->ToString[parameters[[10]]],"X3"->ToString[parameters[[1;;3]]],"X4"->ToString[parameters[[5;;7]]] }] }];
+		path = toPathPure[parameters,L,acuracy,gauge,NbName];		
+		(*Print["Pure path=",path];Print[];*)
+		f = OpenAppend[path];
+		 Write[ f, data];
+		 Close[f];                ];		 
+		 
+toPathPure[parameters0_,L_,acuracy_,gauge_,NbName_:]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
+parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;
+FileNameJoin[{Directory[], "Files" ,NbName,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],
 "X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
 StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
