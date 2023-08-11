@@ -1028,11 +1028,11 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 
 
 		(* for equally spaced Gamma values *)
-		(*
+		
 		Js={0.};
 		Ks={-1.};
 		\[CapitalGamma]s=Join[ Table[\[Gamma],{\[Gamma],0,1,.01}], Table[\[Gamma],{\[Gamma],0,-1,-.01}] ];
-		hV={{0.2,0,0}};
+		hV={{0.005,0,0}};
 
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
@@ -1042,7 +1042,7 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 				parameters0=Tuples[{Js,Ks,\[CapitalGamma]s,hs}];
 				parameters1=Tuples[{Js,Ks,\[CapitalGamma]s,hV}];
 				parameters={Table[  Flatten[{ parameters0[[i]],parameters1[[i]],{0},{0}},1],  {i,1,Length@parameters0}]}  ];  
-		*)
+		
 
 
 Print[" "];
@@ -1492,6 +1492,7 @@ Print["Free loop + electric field timing= ", IntegerPart[\[CapitalDelta]t],Integ
 Print["    Starting four vortex -fixed eV- gradually changing parameters  "];Print[" "]*)
 
 
+(*
 minSteps=10;
 Do[   Module[{\[Chi]G,\[Omega]G,jG,LG,EnG ,gauge="g4"},   (* <-  the 1st difference : g0 \[UndirectedEdge] g4 *)
 Module[{ J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h ,\[CapitalLambda],T,En,EMF,Esum,E\[Lambda],EnList={{},{},{}},\[Xi]G,\[CapitalDelta]seq={},\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]\[Omega],u2,u1,u0,\[Chi]={0,0,0},\[Omega]={0,0},\[Xi]={0,0},j,\[CapitalDelta]1=1,\[CapitalDelta]2=2.56,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec ,hp}, 
@@ -1604,7 +1605,7 @@ Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalD
 
   ];         ]  , {l,1,Length@Ls} , {ev,1,Length[parameters]} ] 
   
- 
+ *)
 
 
 CloseKernels[];
