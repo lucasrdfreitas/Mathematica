@@ -1,0 +1,5 @@
+Before Starting Kernels
+Starting Kernels
+
+Syntax::sntx: Invalid syntax in or before "toPathPure[parameters0_,L_,acuracy_,gauge_,NbName_:]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   " (line 108 of "705-MF_V0_CLUSTER.m").
+                                                                                               ^

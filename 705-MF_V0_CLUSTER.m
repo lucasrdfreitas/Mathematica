@@ -105,7 +105,7 @@ createDir@FileNameJoin[{Directory[],"Files",NbName,"pure",gauge, StringReplace["
 		 Write[ f, data];
 		 Close[f];                ];		 
 		 
-toPathPure[parameters0_,L_,acuracy_,gauge_,NbName_:]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
+toPathPure[parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
 parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;
 FileNameJoin[{Directory[], "Files" ,NbName,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],
