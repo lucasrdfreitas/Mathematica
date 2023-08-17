@@ -16,10 +16,10 @@ Print["Starting Kernels"];
 
 NbName="710"; \[Lambda]0=0.5; 
 
-		Ls = Range[20,20,4]; 				tV={-2.74356, 0, 2.74356};				
+		Ls = Range[16,16,4]; 				tV={-2.74356, 0, 2.74356};				
 		hV=With[{h=0.01,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
-		hV={(*{0.0001,0,0},*){0.1,0,0}};
+		hV={(*{0.0001,0,0},*){0.001,0,0}};
 
 		steps=65;				acuracy=4;     \[CapitalDelta]ev=0.09; eVs=Table[1700 x, {x,0,.8,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
