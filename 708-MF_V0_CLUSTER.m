@@ -434,13 +434,13 @@ E= Sum[Module[{r,mx,ny,\[CurlyEpsilon]=Abs@LeviCivitaTensor[3]}, 	mx=Mod[m+1,L1]
 
 
 
-EnMF0[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,L1_,L2_] := Module[{Nc=L1 L2,E},
+EnMF0[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,L1_,L2_,u_] := Module[{Nc=L1 L2,E},
 E= Sum[Module[{r,mx,ny,\[CurlyEpsilon]=Abs@LeviCivitaTensor[3]}, 	mx=Mod[m+1,L1];ny=Mod[n+1,L2];   r={mx+n L1+1,m+ny L1+1,m+n L1+1};
 -h[[ \[Gamma]]] (   \[Omega][[1,r[[3]], \[Gamma]+1,1]]+\[Omega][[2,r[[ 3]] , \[Gamma]+1,1]]    )         
 
 +J[[r[[3]] ,\[Gamma]]]  Sum[    \[Omega][[1,r[[3]],\[Beta]+1,1]]\[Omega][[2,r[[ \[Gamma]]] ,\[Beta]+1,1]]  +Abs[- \[Chi][[ \[Gamma],r[[3]],\[Beta]+1,\[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ]  +\[Chi][[ \[Gamma],r[[3]],\[Beta]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+\[Beta]]]      ,{\[Beta],1,3}] 
 
-+K[[r[[3]] ,\[Gamma]]] (  \[Omega][[1,r[[3]], \[Gamma]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Gamma]+1,1]]  + Abs[- \[Chi][[ \[Gamma],r[[3]], \[Gamma]+1, \[Gamma]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Gamma]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Gamma]]]    )
++K[[r[[3]] ,\[Gamma]]] (  \[Omega][[1,r[[3]], \[Gamma]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Gamma]+1,1]]+( -u[[r[[3]],\[Gamma]]] ) Abs[- \[Chi][[ \[Gamma],r[[3]], \[Gamma]+1, \[Gamma]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Gamma]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Gamma]]]    )
 
 +Sum[    2\[CapitalGamma][[r[[3]] ,\[Gamma]]]  \[CurlyEpsilon][[\[Alpha],\[Beta],\[Gamma]]] (  \[Omega][[1,r[[3]], \[Alpha]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Beta]+1,1]]  +Abs[- \[Chi][[ \[Gamma],r[[3]], \[Alpha]+1, \[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Alpha]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Beta]]]    )
 ,     {\[Alpha],1,3},  {\[Beta],1,3}]    ]
@@ -487,14 +487,6 @@ EandU[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H]},{
 
 
 icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^-12]; icc=I TUh . TUh\[ConjugateTranspose];icc=(icc-ConjugateTranspose[icc])/2   ];
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 MFpParallel[U_,L_,T_] :=Module[  { Nc=L^2,TU,TUh,u,\[Chi],\[Omega]},
@@ -1048,7 +1040,7 @@ t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1 -t0, "Seconds" ], "
 Module[{\[Omega]v,\[Chi]v},
 \[Omega]v={Table[\[Omega][[1]],{r,1,Nc} ],Table[\[Omega][[2]],{r,1,Nc} ] };
 \[Chi]v={Table[\[Chi][[1]],{r,1,Nc} ], Table[\[Chi][[2]],{r,1,Nc}], Table[\[Chi][[3]],{r,1,Nc}]  };
-EMF=EnMF[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\[Omega]v,L,L];
+EMF=EnMF0[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\[Omega]v,L,L];
 E\[Lambda]=EnLagMF[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\[Omega]v,L,L];
 ];                                        (* <- EnMF0 ?  *)
 Esum=Sum[  Total[Select[Eigenvalues[HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],kTable[[l]] ]  ],#<0&]] ,{l,1,Nc}]/(2Nc); 
@@ -1130,7 +1122,7 @@ H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];
 u=Umat[T\[ConjugateTranspose] . H . T];
 u1=Re@Chop@icc[u,L,T];
 
-	EMF=EnMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];                                        (* <- EnMF0 ?  *)
+	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];                                        (* <- EnMF0 ?  *)
 	Esum=Total[Select[Quiet@Eigenvalues[H],#<0&]]/(2Nc);
 	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];
 	EnList[[1]]={EnList[[1]],{j,EMF}};
@@ -1156,7 +1148,7 @@ Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
     u=Umat[T\[ConjugateTranspose] . H . T];
 	{\[Chi][[1]],\[Chi][[2]],\[Chi][[3]],\[Omega][[1]],\[Omega][[2]],\[Xi][[1]],\[Xi][[2]],u1}=BiParallel[u,L,T]; 
-	EMF=EnMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L]; 
+	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L]; 
 	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];
 	Esum=Total[Select[Quiet@Eigenvalues[H],#<0&]]/(2Nc);
 	EnList[[1]]={EnList[[1]],{j,EMF}};
@@ -1254,7 +1246,7 @@ H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff];
 u=Umat[T\[ConjugateTranspose] . H . T];
 u1=Re@Chop@icc[u,L,T];
 
-	EMF=EnMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];                                        (* <- EnMF0 ?  *)
+	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];                                        (* <- EnMF0 ?  *)
 	Esum=Total[Select[Quiet@Eigenvalues[H],#<0&]]/(2Nc);
 	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];
 	EnList[[1]]={EnList[[1]],{j,EMF}};
@@ -1282,7 +1274,7 @@ Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
     u=Umat[T\[ConjugateTranspose] . H . T];
 	{\[Chi][[1]],\[Chi][[2]],\[Chi][[3]],\[Omega][[1]],\[Omega][[2]],\[Xi][[1]],\[Xi][[2]],u1}=BiParallel[u,L,T]; 
-	EMF=EnMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L]; 
+	EMF=EnMF0[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L]; 
 	E\[Lambda]=EnLagMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L];
 	Esum=Total[Select[Quiet@Eigenvalues[H],#<0&]]/(2Nc);
 	EnList[[1]]={EnList[[1]],{j,EMF}};
