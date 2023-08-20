@@ -1040,7 +1040,7 @@ t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1 -t0, "Seconds" ], "
 Module[{\[Omega]v,\[Chi]v},
 \[Omega]v={Table[\[Omega][[1]],{r,1,Nc} ],Table[\[Omega][[2]],{r,1,Nc} ] };
 \[Chi]v={Table[\[Chi][[1]],{r,1,Nc} ], Table[\[Chi][[2]],{r,1,Nc}], Table[\[Chi][[3]],{r,1,Nc}]  };
-EMF=EnMF0[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\[Omega]v,L,L];
+EMF=EnMF0[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\[Omega]v,L,L,uniformU[-1,L] ];
 E\[Lambda]=EnLagMF[uniform[J,L,L],uniform[K,L,L],uniform[\[CapitalGamma],L,L],h,\[Chi]v,\[Omega]v,L,L];
 ];                                        (* <- EnMF0 ?  *)
 Esum=Sum[  Total[Select[Eigenvalues[HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],kTable[[l]] ]  ],#<0&]] ,{l,1,Nc}]/(2Nc); 
