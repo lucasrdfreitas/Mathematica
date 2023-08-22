@@ -16,12 +16,12 @@ Print["Starting Kernels"];
 
 NbName="710"; \[Lambda]0=0.5; 
 
-		Ls = Range[40,40,4]; 				tV={-2, 0, 2};				
+		Ls = Range[16,16,4]; 				tV={-2, 0, 2};				
 		hV=With[{h=0.01,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
 		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
 		hV={(*{0.0001,0,0},*){0.001,0,0}};
 
-		steps=65;				acuracy=4;     \[CapitalDelta]ev=0.09; eVs=Table[1700 x, {x,0,.8,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=65;				acuracy=4;     \[CapitalDelta]ev=0.09; eVs=Table[1700 x, {x,0,.9,\[CapitalDelta]ev}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -438,11 +438,11 @@ EnMF0[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,L1_,L2_,u_] := Module[{Nc=L1 L
 E= Sum[Module[{r,mx,ny,\[CurlyEpsilon]=Abs@LeviCivitaTensor[3]}, 	mx=Mod[m+1,L1];ny=Mod[n+1,L2];   r={mx+n L1+1,m+ny L1+1,m+n L1+1};
 -h[[ \[Gamma]]] (   \[Omega][[1,r[[3]], \[Gamma]+1,1]]+\[Omega][[2,r[[ 3]] , \[Gamma]+1,1]]    )         
 
-+J[[r[[3]] ,\[Gamma]]]  Sum[    \[Omega][[1,r[[3]],\[Beta]+1,1]]\[Omega][[2,r[[ \[Gamma]]] ,\[Beta]+1,1]]  +Abs[- \[Chi][[ \[Gamma],r[[3]],\[Beta]+1,\[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ]  +\[Chi][[ \[Gamma],r[[3]],\[Beta]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+\[Beta]]]      ,{\[Beta],1,3}] 
++J[[r[[3]] ,\[Gamma]]]  Sum[    \[Omega][[1,r[[3]],\[Beta]+1,1]]\[Omega][[2,r[[ \[Gamma]]] ,\[Beta]+1,1]]  - \[Chi][[ \[Gamma],r[[3]],\[Beta]+1,\[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]]   +\[Chi][[ \[Gamma],r[[3]],\[Beta]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+\[Beta]]]      ,{\[Beta],1,3}] 
 
 +K[[r[[3]] ,\[Gamma]]] (  \[Omega][[1,r[[3]], \[Gamma]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Gamma]+1,1]]+( -u[[r[[3]],\[Gamma]]] ) Abs[- \[Chi][[ \[Gamma],r[[3]], \[Gamma]+1, \[Gamma]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Gamma]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Gamma]]]    )
 
-+Sum[    2\[CapitalGamma][[r[[3]] ,\[Gamma]]]  \[CurlyEpsilon][[\[Alpha],\[Beta],\[Gamma]]] (  \[Omega][[1,r[[3]], \[Alpha]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Beta]+1,1]]  +Abs[- \[Chi][[ \[Gamma],r[[3]], \[Alpha]+1, \[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Alpha]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Beta]]]    )
++Sum[   \[CapitalGamma][[r[[3]] ,\[Gamma]]]  \[CurlyEpsilon][[\[Alpha],\[Beta],\[Gamma]]] (  \[Omega][[1,r[[3]], \[Alpha]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Beta]+1,1]]  - \[Chi][[ \[Gamma],r[[3]], \[Alpha]+1, \[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]]  +\[Chi][[ \[Gamma],r[[3]], \[Alpha]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Beta]]]    )
 ,     {\[Alpha],1,3},  {\[Beta],1,3}]    ]
 
 ,     { \[Gamma],1,3},{m,0,L1-1},{n,0,L2-1} ]; Chop@(E/ Nc )   ];
