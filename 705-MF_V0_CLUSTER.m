@@ -16,21 +16,21 @@ Print["Starting Kernels"];
 
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = {40}; 				tV={0(*,2.74356*)};				
-		hV=With[{h=0.2,\[CurlyPhi]=0},{ {h,0,\[CurlyPhi]} (*,{h,15,\[CurlyPhi]},{h,30,\[CurlyPhi]},{h,45,\[CurlyPhi]},{h,60,\[CurlyPhi]},{h,75,\[CurlyPhi]},{h,90,\[CurlyPhi]} *)
-		(*,{0.2612,45,45},{0.2612,45,90},{0.2612,90,0},{0.2612,90,45}*)   }   ];
+		Ls = {40}; 				tV={ 0 (*,2.74356*) };	
+					
+		hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];
+		
 		hV= { (*{0.0001,0,0},*){0.3,0,0}};
+		
 		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
 
-		steps=300;				acuracy=12;     eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=300;   acuracy=12;   
+		
+		eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
 (*Constants*)
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 one[i_,j_,N_]:= SparseArray[ {i,j} -> 1, {N,N}];  block[i_,j_] := one[i,j,8];
@@ -48,7 +48,7 @@ round[\[Kappa]_]:=N[Round[10000\[Kappa]]/10000];round\[CapitalDelta][\[Kappa]_]:
 (* NN vectors  *)
 \[Chi]Gx = {{0.5249,0,0,0},{0,-1,0,0},{0,0,0,0},{0,0,0,0}};\[Chi]Gy = {{0.5249,0,0,0},{0,0,0,0},{0,0,-1,0},{0,0,0,0}};\[Chi]Gz ={{0.5249,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,-1}};
 
-\[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
+\[Omega]GA = {{I,0.00001,0.00001,0.00001},{-0.00001,I,0.00001,-0.00001},{-0.00001,-0.00001,I,0.00001},{-0.00001,0.00001,-0.00001,I}}; \[Omega]GB = \[Omega]GA;
 
 
 (* ::Subsection::Bold::Closed:: *)
@@ -1055,12 +1055,16 @@ eV0=0;U=2600;JH=300;
 parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
 
 
+\[Omega]GA = {{I,.0001,.0001,.0001},{-.0001,I,.0001,-.0001},{-.0001,-.0001,I,.0001},{-.0001,.0001,-.0001,I}}; \[Omega]GB = \[Omega]GA;
+
+
+
 		(* for equally spaced Gamma values *)
 				
 		Js={0.};
 		Ks={-1.};
-		\[CapitalGamma]s=Join[ Table[\[Gamma],{\[Gamma],0,0,.01}], Table[\[Gamma],{\[Gamma],0,.5,.01}] ];
-		hV={{0.005,0,0}(*,{0.2,90,0},{0.2,0,0}*)};
+		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],-.7,.7,.02}];
+		hV=Table[{h,0,0},{h,0,.6,.02}];
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eV0=0;U=2600;JH=300;
@@ -1098,7 +1102,7 @@ Print[" "];
 
 
 tvf=AbsoluteTime[];Print["Definition timing= ",round[tvf-t0] ]; t0=tvf;
-
+\[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}
 
 
 Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
@@ -1106,11 +1110,11 @@ t0=AbsoluteTime[];
 Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
 {J,K,\[CapitalGamma],h}=parameters[[1,p]][[1;;4]]; Nc=L^2;
 (*If[ p==1 (*Abs[\[CapitalGamma]]==1*), \[Chi]G=0{\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G=0{\[Omega]GA,\[Omega]GB}; ];*)
-\[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB};
+\[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}+.01 \[Omega]G;
 \[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   (*Print[MatrixForm/@\[Chi],MatrixForm/@\[Omega]];*)
 Print["J=",J,"; K=",K, "; G=",\[CapitalGamma], "; L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "];
 kTable=toMomentumTable[L];
-For[j=1,( ( j<(steps+200))\[And](Chop[ \[CapitalDelta]1,10^(-14) ]!= 0) ), j++,  
+For[j=1,( ( j<(steps))\[And](Chop[ \[CapitalDelta]1,10^(-9) ]!= 0) ), j++,  
   (*  If[j<=1, loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
     If[!(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata]];
     *)
