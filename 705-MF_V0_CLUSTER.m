@@ -1059,7 +1059,7 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 				
 		Js={0.};
 		Ks={-1.};
-		\[CapitalGamma]s=Join[ Table[\[Gamma],{\[Gamma],-.7,0,.01}], Table[\[Gamma],{\[Gamma],.7,0,-.01}] ];
+		\[CapitalGamma]s=Join[ Table[\[Gamma],{\[Gamma],0,0,.01}], Table[\[Gamma],{\[Gamma],0,.5,.01}] ];
 		hV={{0.005,0,0}(*,{0.2,90,0},{0.2,0,0}*)};
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
