@@ -24,7 +24,7 @@ NbName="705"; \[Lambda]0=0.5;
 		
 		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
 
-		steps=500;   acuracy=12;   
+		steps=500;   acuracy=11;   
 		
 		eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -1058,13 +1058,13 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 \[Omega]GA = {{I,.0001,.0001,.0001},{-.0001,I,.0001,-.0001},{-.0001,-.0001,I,.0001},{-.0001,.0001,-.0001,I}}; \[Omega]GB = \[Omega]GA;
 
 
-
 		(* for equally spaced Gamma values *)
 				
 		Js={0.};
 		Ks={-1.};
-		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],-.7,.7,.02}][[36;;-1]];
-		hV=Table[{h,90,0},{h,0,.6,.02}];
+		(*\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],-.7,.7,.02}][[36;;-1]];*)
+		\[CapitalGamma]s={0,.1};
+		hV=Join[ Table[{h,0,0},{h,0,1.2,.01}], Table[{h,90,0},{h,0,1.2,.01}]  ]  ;
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eV0=0;U=2600;JH=300;
@@ -1073,7 +1073,14 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 				parameters0=Tuples[{Js,Ks,\[CapitalGamma]s,hs}];
 				parameters1=Tuples[{Js,Ks,\[CapitalGamma]s,hV}];
 				parameters={Table[  Flatten[{ parameters0[[i]],parameters1[[i]],{0},{0}},1],  {i,1,Length@parameters0}]}  ];  
-	
+				
+				
+		
+		Module[{parameters0,parameters1},
+				parameters0=Tuples[{Js,Ks,\[CapitalGamma]s,hs}];
+				parameters1=Tuples[{Js,Ks,\[CapitalGamma]s,hV}];
+				parameters={Table[  Flatten[{ parameters0[[i]],parameters1[[i]],{0},{0}},1],  {i,1,  363  (*Length@parameters0*)  }]}  ];  
+	 
 
 
 Print[" "];
@@ -1109,9 +1116,10 @@ Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,\[Chi],\[Omega],j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]\[Omega],\[CapitalDelta]\[Omega]seq={},\[CapitalDelta]seq={},EMF,Esum,E\[Lambda],\[Eta]=\[Lambda]0,hp=Mod[p,Length@hV,1]},
 {J,K,\[CapitalGamma],h}=parameters[[1,p]][[1;;4]]; Nc=L^2;
-(*If[ p==1 (*Abs[\[CapitalGamma]]==1*), \[Chi]G=0{\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G=0{\[Omega]GA,\[Omega]GB}; ];*)
-\[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}+.01 \[Omega]G;
-\[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   (*Print[MatrixForm/@\[Chi],MatrixForm/@\[Omega]];*)
+(* change here:*)
+	If[ Norm[h]==0 (*p==1 Abs[\[CapitalGamma]]==1*), \[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}; ];
+	(*\[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB};*)
+	\[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   
 Print["J=",J,"; K=",K, "; G=",\[CapitalGamma], "; L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "];
 kTable=toMomentumTable[L];
 For[j=1,( ( j<(steps))\[And](Chop[ \[CapitalDelta]1,10^(-9) ]!= 0) ), j++,  
