@@ -24,7 +24,7 @@ NbName="705"; \[Lambda]0=0.5;
 		
 		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
 
-		steps=500;   acuracy=11;   
+		steps=1000;   acuracy=11;   
 		
 		eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -419,7 +419,7 @@ asites[m_,n_]:=m nx+n ny;
 bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*MF definitions*)
 
 
@@ -509,13 +509,13 @@ HeffList[J_,K_,\[CapitalGamma]_,h_,\[Omega]_]:=Module[{L,Nc},Nc=Length@K; L= Rou
 Module[ {RA,RB,m,n,mAx,nAy,mBx,nBy},  n=\[LeftFloor](r-1)/L\[RightFloor];m=r-1-n L;  
 mAx=Mod[m+1,L];nAy=Mod[n+1,L]; mBx=Mod[m-1,L]; nBy=Mod[n-1,L];  RA={mAx+n L+1,m+nAy L+1,m+n L+1}; RB={mBx+n L+1,m+nBy L+1,m+n L+1}; 
 
-{ {   h[[1]]-K [[r,1]] \[Omega][[2,r,2,1]]-(J[[r,1]]+J[[r,2]]+J[[r,3]]) \[Omega][[2,r,2,1]] -2\[CapitalGamma][[r,2]] \[Omega][[2,RA[[2]],4,1]] -2\[CapitalGamma][[r,3]] \[Omega][[2,RA[[3]],3,1]] 
-,h[[2]]-K [[r,2]] \[Omega][[2,r,3,1]]-(J[[r,1]]+J[[r,2]]+J[[r,3]]) \[Omega][[2,r,3,1]] -2\[CapitalGamma][[r,3]] \[Omega][[2,RA[[3]],2,1]] -2\[CapitalGamma][[r,1]] \[Omega][[2,RA[[1]],4,1]]  
-,h[[3]]-K [[r,3]] \[Omega][[2,r,4,1]]-(J[[r,1]]+J[[r,2]]+J[[r,3]]) \[Omega][[2,r,4,1]] -2\[CapitalGamma][[r,1]] \[Omega][[2,RA[[1]],3,1]] -2\[CapitalGamma][[r,2]] \[Omega][[2,RA[[2]],2,1]] 
+{ {   h[[1]]-K [[r,1]] \[Omega][[2,r,2,1]]-(J[[r,1]]+J[[r,2]]+J[[r,3]]) \[Omega][[2,r,2,1]] -\[CapitalGamma][[r,2]] \[Omega][[2,RA[[2]],4,1]] -\[CapitalGamma][[r,3]] \[Omega][[2,RA[[3]],3,1]] 
+,h[[2]]-K [[r,2]] \[Omega][[2,r,3,1]]-(J[[r,1]]+J[[r,2]]+J[[r,3]]) \[Omega][[2,r,3,1]] -\[CapitalGamma][[r,3]] \[Omega][[2,RA[[3]],2,1]] -\[CapitalGamma][[r,1]] \[Omega][[2,RA[[1]],4,1]]  
+,h[[3]]-K [[r,3]] \[Omega][[2,r,4,1]]-(J[[r,1]]+J[[r,2]]+J[[r,3]]) \[Omega][[2,r,4,1]] -\[CapitalGamma][[r,1]] \[Omega][[2,RA[[1]],3,1]] -\[CapitalGamma][[r,2]] \[Omega][[2,RA[[2]],2,1]] 
 } ,
-{    h[[1]]-K [[RB[[1]],1]] \[Omega][[1,RB[[1]],2,1]]-Sum[J[[RB[[\[Beta]]],\[Beta]]]\[Omega][[1,RB[[\[Beta]]],2,1]],{\[Beta],1,3}] -2\[CapitalGamma][[RB[[2]],2]] \[Omega][[1,RB[[2]],4,1]] -2\[CapitalGamma][[RB[[3]],3]] \[Omega][[1,RB[[3]],3,1]] 
-,h[[2]]-K [[RB[[2]],2]] \[Omega][[1,RB[[2]],3,1]]-Sum[J[[RB[[\[Beta]]],\[Beta]]]\[Omega][[1,RB[[\[Beta]]],3,1]],{\[Beta],1,3}] -2\[CapitalGamma][[RB[[3]],3]] \[Omega][[1,RB[[3]],2,1]] -2\[CapitalGamma][[RB[[1]],1]] \[Omega][[1,RB[[3]],4,1]]  
-,h[[3]]-K [[RB[[3]],3]] \[Omega][[1,RB[[3]],4,1]]-Sum[J[[RB[[\[Beta]]],\[Beta]]]\[Omega][[1,RB[[\[Beta]]],4,1]],{\[Beta],1,3}] -2\[CapitalGamma][[RB[[1]],1]] \[Omega][[1,RB[[1]],3,1]] -2\[CapitalGamma][[RB[[2]],2]] \[Omega][[1,RB[[2]],2,1]] 
+{    h[[1]]-K [[RB[[1]],1]] \[Omega][[1,RB[[1]],2,1]]-Sum[J[[RB[[\[Beta]]],\[Beta]]]\[Omega][[1,RB[[\[Beta]]],2,1]],{\[Beta],1,3}] -\[CapitalGamma][[RB[[2]],2]] \[Omega][[1,RB[[2]],4,1]] -\[CapitalGamma][[RB[[3]],3]] \[Omega][[1,RB[[3]],3,1]] 
+,h[[2]]-K [[RB[[2]],2]] \[Omega][[1,RB[[2]],3,1]]-Sum[J[[RB[[\[Beta]]],\[Beta]]]\[Omega][[1,RB[[\[Beta]]],3,1]],{\[Beta],1,3}] -\[CapitalGamma][[RB[[3]],3]] \[Omega][[1,RB[[3]],2,1]] -\[CapitalGamma][[RB[[1]],1]] \[Omega][[1,RB[[3]],4,1]]  
+,h[[3]]-K [[RB[[3]],3]] \[Omega][[1,RB[[3]],4,1]]-Sum[J[[RB[[\[Beta]]],\[Beta]]]\[Omega][[1,RB[[\[Beta]]],4,1]],{\[Beta],1,3}] -\[CapitalGamma][[RB[[1]],1]] \[Omega][[1,RB[[1]],3,1]] -\[CapitalGamma][[RB[[2]],2]] \[Omega][[1,RB[[2]],2,1]] 
 }}
 ],    {r,1,Nc}]    ];
 
@@ -530,6 +530,7 @@ Table[
 {{   Heff[[r,1,1]] (-\[Omega][[2,r,3,4]] )/(\[Omega][[2,r,2,1]] -\[Omega][[2,r,3,4]] ),   Heff[[r,1,2]] (-\[Omega][[2,r,4,2]])/(\[Omega][[2,r,3,1]] -\[Omega][[2,r,4,2]] ),   Heff[[r,1,3]] (-\[Omega][[2,r,2,3]] )/(\[Omega][[2,r,4,1]] -\[Omega][[2,r,2,3]] )} ,
 {   Heff[[r,2,1]] (-\[Omega][[1,r,3,4]])/(\[Omega][[1,r,2,1]] -\[Omega][[1,r,3,4]] ),   Heff[[r,2,2]] (-\[Omega][[1,r,4,2]])/(\[Omega][[1,r,3,1]] -\[Omega][[1,r,4,2]] ),   Heff[[r,2,3]] (-\[Omega][[1,r,2,3]] )/(\[Omega][[1,r,4,1]] -\[Omega][[1,r,2,3]] )}}
 ,    {r,1,Nc}] ];*)
+(*
 \[Lambda]2List[Heff_,\[Omega]_]:=Module[{L,Nc},Nc=Length@Heff; L= Round[Sqrt[Nc] ];
 Table[Module[ {RA,RB,m,n,mAx,nAy,mBx,nBy},  n=\[LeftFloor](r-1)/L\[RightFloor];m=r-1-n L;  
 mAx=Mod[m+1,L];nAy=Mod[n+1,L]; mBx=Mod[m-1,L];nBy=Mod[n-1,L];  RA={mAx+n L+1,m+nAy L+1,m+n L+1}; RB={mBx+n L+1,m+nBy L+1,m+n L+1}; 
@@ -540,7 +541,7 @@ Re@{{   Heff[[r,1,1]] \[Omega][[2,r,2,1]] /(\[Omega][[2,r,2,1]] -\[Omega][[2,r,3
 Table[
 Re@{{   Heff[[r,1,1]] (-\[Omega][[2,r,3,4]] )/(\[Omega][[2,r,2,1]] -\[Omega][[2,r,3,4]]+I (10^-9.9) ),   Heff[[r,1,2]] (-\[Omega][[2,r,4,2]])/(\[Omega][[2,r,3,1]] -\[Omega][[2,r,4,2]] +I 10^-9.9),   Heff[[r,1,3]] (-\[Omega][[2,r,2,3]] )/(\[Omega][[2,r,4,1]] -\[Omega][[2,r,2,3]]+I (10^-9.9) )} ,
 {   Heff[[r,2,1]] (-\[Omega][[1,r,3,4]])/(\[Omega][[1,r,2,1]] -\[Omega][[1,r,3,4]]+I (10^-9.9) ),   Heff[[r,2,2]] (-\[Omega][[1,r,4,2]])/(\[Omega][[1,r,3,1]] -\[Omega][[1,r,4,2]] +I 10^-9.9),   Heff[[r,2,3]] (-\[Omega][[1,r,2,3]] )/(\[Omega][[1,r,4,1]] -\[Omega][[1,r,2,3]]+I (10^-9.9) )}}
-,    {r,1,Nc}] ];
+,    {r,1,Nc}] ];*)
 
 auxHz[J_,K_,\[CapitalGamma]_,h_,\[Chi]_,\[Omega]_,r_,\[Lambda]1_,\[Lambda]2_,heff_]:={
 {0,0,0,0,         -K[[r,3]] \[Chi][[3,r, 4,4]],0,0, K[[r,3]] \[Chi][[3,r, 4,1]]    },
@@ -605,7 +606,7 @@ E= Sum[Module[{r,mx,ny,\[CurlyEpsilon]=Abs@LeviCivitaTensor[3]}, 	mx=Mod[m+1,L1]
 
 +K[[r[[3]] ,\[Gamma]]] (  \[Omega][[1,r[[3]], \[Gamma]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Gamma]+1,1]]  + Abs[- \[Chi][[ \[Gamma],r[[3]], \[Gamma]+1, \[Gamma]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Gamma]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Gamma]]]    )
 
-+Sum[    2\[CapitalGamma][[r[[3]] ,\[Gamma]]]  \[CurlyEpsilon][[\[Alpha],\[Beta],\[Gamma]]] (  \[Omega][[1,r[[3]], \[Alpha]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Beta]+1,1]]  +Abs[- \[Chi][[ \[Gamma],r[[3]], \[Alpha]+1, \[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Alpha]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Beta]]]    )
++Sum[    \[CapitalGamma][[r[[3]] ,\[Gamma]]]  \[CurlyEpsilon][[\[Alpha],\[Beta],\[Gamma]]] (  \[Omega][[1,r[[3]], \[Alpha]+1,1]]\[Omega][[2,r[[ \[Gamma]]] , \[Beta]+1,1]]  +Abs[- \[Chi][[ \[Gamma],r[[3]], \[Alpha]+1, \[Beta]+1]]   \[Chi][[ \[Gamma],r[[3]],1,1]] ] +\[Chi][[ \[Gamma],r[[3]], \[Alpha]+1,1]]   \[Chi][[ \[Gamma],r[[3]],1,1+ \[Beta]]]    )
 ,     {\[Alpha],1,3},  {\[Beta],1,3}]    ]
 
 ,     { \[Gamma],1,3},{m,0,L1-1},{n,0,L2-1} ]; Chop@(E/ Nc )   ];
@@ -1062,9 +1063,9 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 				
 		Js={0.};
 		Ks={-1.};
-		(*\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],-.7,.7,.02}][[36;;-1]];*)
-		\[CapitalGamma]s={0,.1};
-		hV=Join[ Table[{h,0,0},{h,0,1.2,.01}], Table[{h,90,0},{h,0,1.2,.01}]  ]  ;
+		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01,.7,.02}];
+		(*\[CapitalGamma]s={0,.1};*)
+		hV=Join[ Table[{h,0,0},{h,0.01,1.2,.01}] (*, Table[{h,90,0},{h,0,1.2,.01}]*)  ]  ;
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eV0=0;U=2600;JH=300;
@@ -1074,12 +1075,12 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 				parameters1=Tuples[{Js,Ks,\[CapitalGamma]s,hV}];
 				parameters={Table[  Flatten[{ parameters0[[i]],parameters1[[i]],{0},{0}},1],  {i,1,Length@parameters0}]}  ];  
 				
-				
+				(*
 		
 		Module[{parameters0,parameters1},
 				parameters0=Tuples[{Js,Ks,\[CapitalGamma]s,hs}];
 				parameters1=Tuples[{Js,Ks,\[CapitalGamma]s,hV}];
-				parameters={Table[  Flatten[{ parameters0[[i]],parameters1[[i]],{0},{0}},1],  {i,1,  363  (*Length@parameters0*)  }]}  ];  
+				parameters={Table[  Flatten[{ parameters0[[i]],parameters1[[i]],{0},{0}},1],  {i,1,  Length@parameters0  }]}  ];  *)
 	 
 
 
@@ -1141,7 +1142,7 @@ uu=(uu-ConjugateTranspose[uu])/2;  {uu Exp[I k . nx],uu Exp[I k . ny],uu }  ],{l
 \[Omega][[1]]=Table[ u[[3]][[\[Beta],\[Alpha]]]     ,  {\[Alpha],1,4},{\[Beta],1,4} ];
 \[Omega][[2]]=Table[ u[[3]][[\[Beta]+4,\[Alpha]+4]] ,  {\[Alpha],1,4},{\[Beta],1,4} ];
 If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u-u2) ];\[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}}  ;  
-\[CapitalDelta]\[Omega]=1/6 Sum[Abs[\[Omega][[\[Sigma],2,1]]+\[Omega][[\[Sigma],3,4]]]+Abs[\[Omega][[\[Sigma],3,1]]+\[Omega][[\[Sigma],4,2]]]+Abs[\[Omega][[\[Sigma],4,1]]+\[Omega][[\[Sigma],2,3]]],{\[Sigma],1,2}]; \[CapitalDelta]\[Omega]seq={\[CapitalDelta]\[Omega]seq,{j,\[CapitalDelta]\[Omega]}} ;]; 
+\[CapitalDelta]\[Omega]=1/12 Sum[Abs[\[Omega][[\[Sigma],2,1]]+\[Omega][[\[Sigma],3,4]]]+Abs[\[Omega][[\[Sigma],3,1]]+\[Omega][[\[Sigma],4,2]]]+Abs[\[Omega][[\[Sigma],4,1]]+\[Omega][[\[Sigma],2,3]]],{\[Sigma],1,2}]; \[CapitalDelta]\[Omega]seq={\[CapitalDelta]\[Omega]seq,{j,\[CapitalDelta]\[Omega]}} ;]; 
 u2=u;  (*
 If[j\[LessEqual]3\[Or]j\[GreaterEqual]steps-2,Print["j=",j,"; \[CapitalDelta]=",\[CapitalDelta]1,"; \[CapitalDelta]\[Omega]=",\[CapitalDelta]\[Omega], ";  ",MatrixForm/@{  \[Chi][[1]],\[Omega][[1]] }];  ] *)
 	];
