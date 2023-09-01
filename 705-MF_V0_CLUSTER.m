@@ -1063,7 +1063,7 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 				
 		Js={0.};
 		Ks={-1.};
-		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],-0.01,-.7,-.02}];
+		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01,.7,.02}][[15;;-1]];
 		(*\[CapitalGamma]s={0,.1};*)
 		hV=Join[ Table[{h,0,0},{h,0.01,1.2,.01}] (*, Table[{h,90,0},{h,0,1.2,.01}]*)  ]  ;
 		 
@@ -1126,7 +1126,7 @@ kTable=toMomentumTable[L];
 For[j=1,( ( j<(steps))\[And](Chop[ \[CapitalDelta]1,10^(-9) ]!= 0) ), j++,  
   (*  If[j<=1, loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
     If[!(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata]];
-    *)
+    *)If[ (Mod[j,200]==80)\[And]( \[CapitalDelta]1>10^(-7) ), \[Chi]=0.6{\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; Module[{rm=RandomReal[.1,{4,4}]}, \[Omega]={\[Omega]GA+( rm-Transpose[rm]),\[Omega]GB+( rm-Transpose[rm])}] ];
 u=Chop@Total@Table[ Module[{H0,Hr,U,TU,TUh,k,uu},
 k=kTable[[l]];
 H0=HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],k];
