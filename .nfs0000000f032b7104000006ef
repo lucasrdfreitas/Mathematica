@@ -1061,9 +1061,10 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 
 		(* for equally spaced Gamma values *)
 						
+		steps=400;
 		Js={0.};
 		Ks={-1.};
-		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],-0.01,-.7,-.02}];
+		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01,.7,.02}][[28;;-1]];
 		(*\[CapitalGamma]s={0,.1};*)
 		hV=Join[ Table[{h,0,0},{h,0.01,1,.02}] (*, Table[{h,90,0},{h,0,1.2,.01}]*)  ]  ;
 		 

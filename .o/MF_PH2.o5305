@@ -3509,3 +3509,23 @@ Max Step = 13; Delta=1.9148*^-9; E={-4.200000000000189, -4.670000000000076, -4.2
 J=0.; K=-1.; G=-0.6900000000000001; L=40; h=(0.93,0,0); 
 Max Step = 13; Delta=3.6058*^-9; E={-4.24000000000019, -4.690000000000265, -4.24000000000019};  p=1747/1750
 J=0.; K=-1.; G=-0.6900000000000001; L=40; h=(0.9500000000000001,0,0); 
+Max Step = 13; Delta=5.1452*^-9; E={-4.2800000000001965, -4.710000000000049, -4.2800000000001965};  p=1748/1750
+J=0.; K=-1.; G=-0.6900000000000001; L=40; h=(0.97,0,0); 
+Max Step = 13; Delta=6.4819*^-9; E={-4.320000000000195, -4.730000000000242, -4.320000000000195};  p=1749/1750
+J=0.; K=-1.; G=-0.6900000000000001; L=40; h=(0.99,0,0); 
+Max Step = 13; Delta=7.9061*^-9; E={-4.360000000000195, -4.750000000000015, -4.360000000000195};  p=1750/1750
+ 
+Free loop timing= Quantity[1953, Minutes]Quantity[27, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+Free loop + electric field timing= 0 hours : 0 minutes : 0 seconds
+
+                                             9
+Set::write: Tag Times in 3.902700266691739 10  Null is Protected.
+ 
+ 
+    Starting four vortex + electric field loop: 
+ 
+4 vortices loop timing Δt = 0 hours : 0 minutes : 0 seconds
