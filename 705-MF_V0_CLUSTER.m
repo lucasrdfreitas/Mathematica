@@ -1174,7 +1174,8 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
 
 Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
-Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;Print[" "] Print[" "];];
+Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
+Print[" "] Print[" "];];
 Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
@@ -1294,7 +1295,7 @@ Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quan
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
-Print[ "Free loop + electric field timing= ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ] 
+Print[ "Free loop + electric field timing= ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ];
 t0=t4v;Print[" "] Print[" "];
 ];
 Print["    Starting four vortex + electric field loop: "];Print[" "]
