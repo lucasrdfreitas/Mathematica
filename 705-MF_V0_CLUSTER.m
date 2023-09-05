@@ -1095,7 +1095,7 @@ Print["    Ls=",Ls,"; "];
 Print["    tV=",tV,"; "];
 Print["    ts=",ts,"; "];
 Print["    hV=",hV,";"]
-Print["    Gammas=", \[CapitalGamma]]s,"; "];
+Print["    Gammas=", \[CapitalGamma]s,"; "];
 Print["    Steps=",steps,"; "];
 Print["    acuracy=",acuracy,"; "];
 (*
