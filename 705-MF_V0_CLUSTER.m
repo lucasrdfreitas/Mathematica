@@ -1056,11 +1056,8 @@ eV0=0;U=2600;JH=300;
 parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
 
 
-\[Omega]GA={{I,.0001,.0001,.0001},{-.0001,I,.0001,-.0001},{-.0001,-.0001,I,.0001},{-.0001,.0001,-.0001,I}}; \[Omega]GB = \[Omega]GA;
-
-
-
-	Table[{h,0,0},{h,0.01,1.2,.02}][[51;;-1]]
+\[Omega]GA={{I,.0001,.0001,.0001},{-.0001,I,.0001,-.0001},{-.0001,-.0001,I,.0001},{-.0001,.0001,-.0001,I}}; 
+\[Omega]GB = \[Omega]GA;
 
 
 		(* for equally spaced Gamma values *)
@@ -1070,7 +1067,7 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 		Ks={-1.};
 		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01,.7,.02}];		(*\[CapitalGamma]s={0,.1};*)
 		hV=Join[ Table[{h,0,0},{h,0.01,1,.02}] (*, Table[{h,90,0},{h,0,1.2,.01}]*)  ]  ;
-		hV=Table[{h,0,0},{h,0.01,1.2,.02}][[51;;-1]];
+		hV=Table[{h,0,0},{h,0.01,1.4,.02}][[-10;;-1]];
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eV0=0;U=2600;JH=300;
