@@ -24,7 +24,7 @@ NbName="705"; \[Lambda]0=0.5;
 		
 		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
 
-		steps=400;   acuracy=12;   
+		steps=400;   acuracy=15;   
 		
 		eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -1068,6 +1068,11 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01,.7,.02}];		(*\[CapitalGamma]s={0,.1};*)
 		hV=Join[ Table[{h,0,0},{h,0.01,1,.02}] (*, Table[{h,90,0},{h,0,1.2,.01}]*)  ]  ;
 		hV=Table[{h,0,0},{h,0.01,1.4,.02}][[-10;;-1]];
+		
+		
+		(* for a [1,1,-2] direction *)		
+		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01,.7,.02}];
+		hV=Table[{h,90,0},{h,0.01,1.4,.06}];
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eV0=0;U=2600;JH=300;
