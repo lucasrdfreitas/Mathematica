@@ -1071,8 +1071,8 @@ parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\
 		
 		
 		(* for a [1,1,-2] direction *)		
-		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01,.7,.04}];
-		hV=Table[{h,90,0},{h,0.01+.02,.6,.04}][[2;;-1]];
+		\[CapitalGamma]s=Table[\[Gamma],{\[Gamma],0.01+.02,.7,.04}];
+		hV=Table[{h,90,0},{h,0.01+.02,.6,.04}];
 		 
 		hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eV0=0;U=2600;JH=300;
