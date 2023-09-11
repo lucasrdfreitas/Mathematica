@@ -22,7 +22,13 @@ tV={1};
 steps=600;
 acuracy=6;    
 \[CapitalDelta]eV=0.099999; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
-\[Eta]s=Table[\[Eta],{\[Eta],-1.5,1.5,0.1}];
+\[Eta]s=Join[
+Table[\[Eta]+.02,{\[Eta],-1.5,0.5,0.1}],
+Table[\[Eta]+.04,{\[Eta],-1.5,0.5,0.1}],
+Table[\[Eta]+.06,{\[Eta],-1.5,0.5,0.1}],
+Table[\[Eta]+.08,{\[Eta],-1.5,0.5,0.1}]
+(*,Table[\[Eta]+.08,{-1.5,0.5,0.1}]*)
+];
 		
 		
 
