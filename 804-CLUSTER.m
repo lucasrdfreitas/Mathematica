@@ -849,10 +849,10 @@ t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1 -t0, "Seconds" ], "
 EMF   = enMFmom[Jmat,U,V,h,\[Eta]];
 Esum  = enSUMmom[Jmat,U,V,h,L,\[Eta]];
 cMF   = cMFmom[Jmat,U,V];
+Print["Eta=",\[Eta],(*"p=",p,"/",Length@parametersMat[[1]], *)"; j= ", j,"; Delta=",round@\[CapitalDelta]1,"; EMF=",EMF,"; Esum=",Esum,"; EMF-Esum=",round[EMF-Esum]   ];
 
 	(*dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},\[CapitalDelta]seq,\[CapitalDelta]Vseq}},"free",NbName]; 
-Print["Max Step = ", j,"; Delta=",round@\[CapitalDelta]1,(*,"; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]*)"; E=",{EMF,Esum,cMF},
-";  p=",p,"/",Length@parametersMat[[1]]];
+
 {jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];*)
 AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}];
 
