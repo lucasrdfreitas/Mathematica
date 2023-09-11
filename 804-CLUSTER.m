@@ -20,14 +20,14 @@ Ls =Range[40,40,2];
 tV={1};	  
  hV={{0.1,0,0}};
 steps=600;
-acuracy=6;    
+acuracy=7;    
 \[CapitalDelta]eV=0.099999; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
 \[Eta]s=Join[
-Table[\[Eta]+.01,{\[Eta],-1.5,-0.5,0.1}],
-Table[\[Eta]+.03,{\[Eta],-1.5,-0.5,0.1}],
-Table[\[Eta]+.05,{\[Eta],-1.5,-0.5,0.1}],
-Table[\[Eta]+.07,{\[Eta],-1.5,-0.5,0.1}]
-,Table[\[Eta]+.09,{\[Eta],-1.5,-0.5,0.1}]
+Table[\[Eta],{\[Eta],-.5,.5,0.05}]
+(*,
+Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}],
+Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}]
+*)
 ];
 		
 		
@@ -444,7 +444,7 @@ asites[m_,n_]:=m nx+n ny;
 bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Momentum*)
 
 
@@ -487,7 +487,7 @@ Flatten[ Table[ Table[ ks[[i]]+t(  ks[[i+1]]-ks[[i]]  ),{t,Ne/M (1-KroneckerDelt
     
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*ham*)
 
 
@@ -500,22 +500,22 @@ Bb=Sum[    Sum[    Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] N[[\[Alpha]]] traceN[ V[[1
 {KroneckerProduct[ {{1,0},{0,0}},Re@Ba],KroneckerProduct[ {{0,0},{0,1}},Re@Bb] }];
 
 cMFmom[Jm_,U_,V_]:=Module[{N=Nmat}, Sum[ 1/8  Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] (traceN[ V[[1]] ][[\[Alpha]]]  traceN[ V[[2]] ][[\[Beta]]] +2  Tr[ U[[\[Gamma]]]\[Transpose] . N[[\[Alpha]]] . U[[\[Gamma]]] . N[[\[Beta]]] ]   ),{\[Alpha],1,3},{\[Beta],1,3},{\[Gamma],1,3}]          ];
-enMFmom[Jm_,U_,V_,h_,\[Eta]_:1]   :=Module[{M=Mmat,N=Nmat,G=Gmat,\[Lambda]},\[Lambda]=\[Eta] \[Lambda]effmom[Jm,h,V];  cMFmom[Jm,U,V]+1/4  Sum[-2h[[\[Gamma]]] traceN[ V[[\[Sigma]]] ][[\[Gamma]]] + \[Lambda][[\[Sigma],\[Gamma]]] traceG[ V[[\[Sigma]]] ][[\[Gamma]]]
+enMFmom[Jm_,U_,V_,h_,\[Eta]_:0]   :=Module[{M=Mmat,N=Nmat,G=Gmat,\[Lambda]},\[Lambda]=\[Eta] h + \[Lambda]effmom[Jm,h,V];  cMFmom[Jm,U,V]+1/4  Sum[-2h[[\[Gamma]]] traceN[ V[[\[Sigma]]] ][[\[Gamma]]] + \[Lambda][[\[Sigma],\[Gamma]]] traceG[ V[[\[Sigma]]] ][[\[Gamma]]]
 ,{\[Sigma],1,2},{\[Gamma],1,3}]        ];
-enSUMmom[Jm_,U_,V_,h_,L_:30,\[Eta]_:1]:=Module[{\[Lambda],mT=toMomentumTable[L]},\[Lambda]=\[Eta] \[Lambda]effmom[Jm,h,V];-cMFmom[Jm,U,V]+1/(2L^2) Sum[Total@Select[Eigenvalues@N@HmfMomentum[Jm,h,U,V,mT[[i]]  ] ,#<=0& ] , {i,1,L^2}] ];
+enSUMmom[Jm_,U_,V_,h_,L_:30,\[Eta]_:0]:=Module[{\[Lambda],mT=toMomentumTable[L]},\[Lambda]=\[Eta] h + \[Lambda]effmom[Jm,h,V];-cMFmom[Jm,U,V]+1/(2L^2) Sum[Total@Select[Eigenvalues@N@HmfMomentum[Jm,h,U,V,mT[[i]]  ] ,#<=0& ] , {i,1,L^2}] ];
 
-HmfMomentum[Jmatrice_,h_,U_,V_, k_,\[Eta]_:1] := Module[{Ax,Ay,Az,BA,BB, hx,hy,hz, kx,ky,ha,HA,HB,\[Lambda]}, kx=k . nx;ky=k . ny;
-\[Lambda]=\[Eta] \[Lambda]effmom[Jmatrice,h,V];
+HmfMomentum[Jmatrice_,h_,U_,V_, k_,\[Eta]_:0] := Module[{Ax,Ay,Az,BA,BB, hx,hy,hz, kx,ky,ha,HA,HB,\[Lambda]}, kx=k . nx;ky=k . ny;
+\[Lambda]=\[Eta] h + \[Lambda]effmom[Jmatrice,h,V];
 {Ax,Ay,Az}=I AMFmom[Jmatrice,U];  ha= Exp[ I kx]  Ax + Exp[ I ky] Ay + Az;   
  (*ha=Exp[-I k.\[Delta]x] Ax + Exp[-I k.\[Delta]y] Ay +Exp[-I k.\[Delta]z] Az;*)   HA=N@( ha+ConjugateTranspose@ha );
 {BA,BB}= I BMFmom[Jmatrice,h,\[Lambda],V];   HB=BA+BB ; (*  HB=N[   ( HB+ConjugateTranspose@HB )/2 ];*)
 1/2 (HA+HB)   ];
 UmatK[H_]:= Module[ {R=Eigensystem@N[H]},ReverseSort[ R\[Transpose] ]\[Transpose][[ 2 ]]\[Transpose] ];
-\[Lambda]effmom[Jmat_,h_,V_]:=Module[{M},M=Table[1/2 traceN[V[[\[Sigma]]] ],{\[Sigma],1,2} ];  Table[ h- Sum[ Jmat[[\[Gamma]]] . M[[  Mod[\[Sigma]+1,2,1]  ]]  ,{\[Gamma],1,3}],    {\[Sigma],1,2}]     ];
-HmfMomentumVec[Jmatrice_,h_,U_,V_, kTable_,\[Eta]_:1] :=Table[HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]],{l,1,Length@kTable}];
+\[Lambda]effmom[Jmat_,h_,V_]:=Module[{M},M=Table[1/2 traceN[V[[\[Sigma]]] ],{\[Sigma],1,2} ];  Table[ -h + 1/2 Sum[ Jmat[[\[Gamma]]] . M[[  Mod[\[Sigma]+1,2,1]  ]]  ,{\[Gamma],1,3}],    {\[Sigma],1,2}]     ];
+HmfMomentumVec[Jmatrice_,h_,U_,V_, kTable_,\[Eta]_:0] :=Table[HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]],{l,1,Length@kTable}];
 
 
-UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:1] :=UmatK/@Table[ Tk\[ConjugateTranspose] . HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]] . Tk,{l,1,Length@kTable}];
+UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[ConjugateTranspose] . HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]] . Tk,{l,1,Length@kTable}];
 
 
 (* ::Subsection::Bold:: *)
