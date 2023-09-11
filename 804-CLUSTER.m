@@ -537,8 +537,8 @@ If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ pathData ]; Abort[]
 		        Close[f];			data[[-1]]
 ];
 toPath800 [parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, filename,r,\[Phi],\[Theta],},h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS;   
-If[gauge=="free",parameters[[3]]=parameters0[[1]];parameters[[6]]=0;];
 filename="t=X1_eV=X2_JKG=X3_JKGmod=X4";
+If[gauge=="free",parameters[[3]]=parameters0[[1]];parameters[[6]]=0;filename="free_X2_JKG=X3";];
 If[gauge=="free_lambda",parameters[[3]]=parameters0[[1]];filename="lambda_X2_JKG=X3"; ];
 FileNameJoin[{       Directory[]   , "Files" ,NbName,gauge,StringReplace[filename,{"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
 "X3"->  ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[1]]  ],
@@ -547,8 +547,8 @@ StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy
    }]];
 dataToFile800[ parameters0_,L_,acuracy_,data_,gauge_,NbName_] :=
 Module[ {path,f,filename,parameters=parameters0}, 
-If[gauge=="free",parameters[[3]]=parameters0[[1]];parameters[[6]]=0;];
 filename="t=X1_eV=X2_JKG=X3_JKGmod=X4";
+If[gauge=="free",parameters[[3]]=parameters0[[1]];parameters[[6]]=0;filename="free_X2_JKG=X3";];
 If[gauge=="free_lambda",parameters[[3]]=parameters0[[1]];filename="lambda_X2_JKG=X3"; ];
 		createDir@FileNameJoin[{ Directory[] ,"Files",  NbName,gauge, StringReplace[filename,
 {"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],"X3"->  ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[1]]  ],"X4"->  ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[3]]]   }]     }] ;
