@@ -516,7 +516,7 @@ UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:1] :=UmatK/@Table[ Tk\[Conjugate
 (*MF model definitions*)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Saving and Loading data*)
 
 
@@ -524,7 +524,7 @@ cyclicPermutation[A_,s_:1]:= If[ Length[A]==3 \[And] Length[A[[1]]]==3, Table[ A
 fromJmat[Jm_]:= Module[{J,K,\[CapitalGamma],\[CapitalGamma]p,DM,jm}, jm=(  cyclicPermutation[Jm[[1]] ,2] + cyclicPermutation[Jm[[2]] ,1] + Jm[[3]] )/3; 
 \[CapitalGamma]p=(jm[[1,3]]+jm[[2,3]]+jm[[3,1]]+jm[[3,2]])/4; 
 K=( jm[[3,3]]-(jm[[2,2]] +jm[[1,1]] )/2); J=(jm[[3,3]]-K);DM=(jm[[1,2]]-jm[[2,1]])/2;\[CapitalGamma]=(jm[[1,2]]+jm[[2,1]])/2;
-{J,K,\[CapitalGamma],\[CapitalGamma]p,DM}    ];
+N@{J,K,\[CapitalGamma],\[CapitalGamma]p,DM}    ];
 createDir[path_] :=
 Module[ {l=Length@FileNames[path]},		
 	If[ l==0,  CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }]; 
@@ -779,13 +779,15 @@ JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 
 
 Print[" "];
+Print[NumberForm[0.55556666,{4,4}] ];
 Print["    NbName=",NbName,"; "];
 Print["    Lambda s=", \[Eta]s,"; "];
 Print["    Ls=",Ls,"; "];
 Print["    tV=",tV,"; "];
 Print["    ts=",ts,"; "];
 Print["    hV=",hV,";"]
-Print["    Couplings=",Column[fromJmat/@parametersMat[[1,;;,1]]] ];
+Print["    Couplings="];
+Do[Print["    ", round[ fromJmat@parametersMat[[1,i,1]] ] ] , {i,1,Length@parametersMat[[1]] }];
 (*Print["    Gammas=", \[CapitalGamma]s,"; "];*)
 Print["    Steps=",steps,"; "];
 Print["    acuracy=",acuracy,"; "];
@@ -809,14 +811,23 @@ t0=tvf;
 (*vortex free - Lagrange multiplier*)
 
 
+\[CapitalDelta]V\[Lambda]={};\[CapitalDelta]en\[Lambda]={};\[CapitalDelta]enSum\[Lambda]={};
+
+
+dataToFile800[parametersMat[[1,1]],Ls[[1]],acuracy,
+{NumberForm[N@\[Pi],{6,6}],round[N@\[Pi]],{0},{0},{0,0},{{0},{0},{0},{0},{0},{\[CapitalDelta]V\[Lambda],\[CapitalDelta]en\[Lambda],\[CapitalDelta]enSum\[Lambda]}  }},
+"free",NbName];
+
+
 Print[" "];Print[" "];Print["    Starting Lagrange multiplier free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 
 
-\[CapitalDelta]V\[Lambda]={};\[CapitalDelta]en\[Lambda]={};\[CapitalDelta]enSum\[Lambda]={};
+
 Do[
 Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1,p=1}, L=Ls[[l]]; hp=Mod[p,Length@hV,1];
 \[Eta]=\[Eta]s[[\[Eta]0]];
+Print["Eta=",\[Eta]];
 {Jmat,h}=parametersMat[[1,p]][[1;;2]];Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  
 UG=Uguess; VG=Vguess;  U=UG; V=VG;   kTable=toMomentumTable[L];
 
@@ -832,7 +843,7 @@ u=Chop@Sum [  Module[{k,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]less,\[Do
 U[[1]]=u[[1]][[1;;4,5;;8]] ;U[[2]]=u[[2]][[1;;4,5;;8]];U[[3]]=u[[3]][[1;;4,5;;8]];V[[1]]=u[[3]][[1;;4,1;;4]];V[[2]]=u[[3]][[5;;8,5;;8]];
 \[CapitalDelta]V=1/12 Sum[Sqrt@ Total[Power[#,2]&/@traceG[V[[\[Sigma]]]]  ],{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}} ;   
 If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u-u2) ];\[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}}  ;   ]; u2=u;                    
-Print["j=",j,"; \[CapitalDelta]V=",\[CapitalDelta]V,"; \[CapitalDelta]=",\[CapitalDelta]1];
+Print["    j=",j,"; \[CapitalDelta]V=",\[CapitalDelta]V,"; \[CapitalDelta]=",\[CapitalDelta]1];
                              ];
 t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1 -t0, "Seconds" ], "Minutes" ]; t0=t1;
 \[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2]; \[CapitalDelta]Vseq=Partition[Flatten[\[CapitalDelta]Vseq],2];
