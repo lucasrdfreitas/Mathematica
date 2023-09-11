@@ -485,7 +485,6 @@ Flatten[ Table[ Table[ ks[[i]]+t(  ks[[i+1]]-ks[[i]]  ),{t,Ne/M (1-KroneckerDelt
 (*ham*)
 
 
-
 (*Tmom[k_]:=Module[{kx=k.mx,ky=k.my},{{1,0,0,0,1,0,0,0},{0,1,0,0,0,1,0,0},{0,0,1,0,0,0,1,0},{0,0,0,1,0,0,0,1},{\[ImaginaryI],0,0,0,-\[ImaginaryI],0,0,0},{0,\[ImaginaryI] \[ExponentialE]^(\[ImaginaryI] kx),0,0,0,-\[ImaginaryI] \[ExponentialE]^(\[ImaginaryI] kx),0,0},{0,0,\[ImaginaryI] \[ExponentialE]^(\[ImaginaryI] ky),0,0,0,-\[ImaginaryI] \[ExponentialE]^(\[ImaginaryI] ky),0},{0,0,0,\[ImaginaryI],0,0,0,-\[ImaginaryI]}}];*)
 Tkmom=KroneckerProduct[ {{1,1},{I,-I}}, SparseArray[{Band[{1,1}]-> {1,1,1,1}},{4,4}] ]; 
 AMFmom[Jm_,U_]:=Module[{AMF,N=Nmat},  AMF=Table[    Sum[   2 Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] N[[\[Alpha]]] . U[[\[Gamma]]] . N[[\[Beta]]] ,{\[Alpha],1,3},{\[Beta],1,3}]    ,{\[Gamma],1,3}];   KroneckerProduct[ {{0,1},{0,0}},#]&/@Re@AMF];
@@ -517,21 +516,8 @@ UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:1] :=UmatK/@Table[ Tk\[Conjugate
 (*MF model definitions*)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Saving and Loading data*)
-
-
-(* ::Text::Bold:: *)
-(*To create a given NotebookDirectory  "path" if it does not exist:*)
-
-
-(* ::Input:: *)
-(*(**)
-(*FullSimplify@fromJmat[Jmat[J{1,1,1},K{1,1,1},\[CapitalGamma]{1,1,1},\[CapitalGamma]p {1,1,1},DM {1,1,1} ] ]*)
-(*Jm=Jmat[J{1,1,1},K{1,1,1},\[CapitalGamma]{1,1,1},\[CapitalGamma]p {1,1,1},DM {1,1,1} ] ; MatrixForm/@jm*)
-(*((    cyclicPermutation[Jm[[1]] ,2] + cyclicPermutation[Jm[[2]] ,1] + Jm[[3]] )/3)*)
-(*MatrixForm@(    cyclicPermutation[jm[[1]] ,2] + cyclicPermutation[jm[[2]] ,1] + jm[[3]] )*)
-(**)*)
 
 
 cyclicPermutation[A_,s_:1]:= If[ Length[A]==3 \[And] Length[A[[1]]]==3, Table[ A[[Mod[i-s,3,1],Mod[j-s,3,1]]],{i,1,3},{j,1,3}]  ];
@@ -581,7 +567,7 @@ If[path==$Failed,(*Print["New entry at:",pathData];*)Return[$Failed]];
 
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Hamiltonian  matrices*)
 
 
@@ -838,7 +824,9 @@ For[j=1,( ( j<(steps))\[And](Chop[ \[CapitalDelta]1,10^(-acuracy) ]!= 0) ), j++,
 
 	Umatvec=UmatVec[Jmat,h,U,V, kTable,Tk,\[Eta]] ;
 u=Chop@Sum [  Module[{k,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]less,\[DoubleStruckCapitalU]gtr},k=kTable[[l]];\[DoubleStruckCapitalU]=Tk . Umatvec[[l]];\[DoubleStruckCapitalU]less=\[DoubleStruckCapitalU][[;;,5;;8]]; \[DoubleStruckCapitalU]gtr=\[DoubleStruckCapitalU][[;;,1;;4]];
-(I/Nc)Conjugate@Chop@{Conjugate[\[DoubleStruckCapitalU]gtr] . Transpose[\[DoubleStruckCapitalU]gtr] Exp[I k . nx]+\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . nx], Conjugate[\[DoubleStruckCapitalU]gtr] . Transpose[\[DoubleStruckCapitalU]gtr] Exp[I k . ny]+\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . ny], Conjugate[\[DoubleStruckCapitalU]gtr] . Transpose[\[DoubleStruckCapitalU]gtr]+ \[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose]} 
+(2I/Nc)Conjugate@Chop@{(*Conjugate[\[DoubleStruckCapitalU]gtr].Transpose[\[DoubleStruckCapitalU]gtr] Exp[I k.nx]+*)\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . nx], 
+(*Conjugate[\[DoubleStruckCapitalU]gtr].Transpose[\[DoubleStruckCapitalU]gtr] Exp[I k.ny]+*)\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . ny], 
+(*Conjugate[\[DoubleStruckCapitalU]gtr].Transpose[\[DoubleStruckCapitalU]gtr]+ *)\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose]} 
   ],{l,1,Nc} ]; 
 
 U[[1]]=u[[1]][[1;;4,5;;8]] ;U[[2]]=u[[2]][[1;;4,5;;8]];U[[3]]=u[[3]][[1;;4,5;;8]];V[[1]]=u[[3]][[1;;4,1;;4]];V[[2]]=u[[3]][[5;;8,5;;8]];
@@ -848,9 +836,9 @@ Print["j=",j,"; \[CapitalDelta]V=",\[CapitalDelta]V,"; \[CapitalDelta]=",\[Capit
                              ];
 t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1 -t0, "Seconds" ], "Minutes" ]; t0=t1;
 \[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2]; \[CapitalDelta]Vseq=Partition[Flatten[\[CapitalDelta]Vseq],2];
-EMF    = enMFmom[Jmat,U,V,h];
-Esum =enSUMmom[Jmat,U,V,h,L];
-cMF   =cMFmom[Jmat,U,V];
+EMF   = enMFmom[Jmat,U,V,h];
+Esum  = enSUMmom[Jmat,U,V,h,L];
+cMF   = cMFmom[Jmat,U,V];
 
 	(*dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},\[CapitalDelta]seq,\[CapitalDelta]Vseq}},"free",NbName]; 
 Print["Max Step = ", j,"; Delta=",round@\[CapitalDelta]1,(*,"; \[CapitalDelta]t = ",IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]*)"; E=",{EMF,Esum,cMF},
@@ -859,6 +847,12 @@ Print["Max Step = ", j,"; Delta=",round@\[CapitalDelta]1,(*,"; \[CapitalDelta]t 
 AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}];
 
  ];  , {\[Eta]0,1,Length@\[Eta]s}] 
+
+
+
+dataToFile800[parametersMat[[1,1]],Ls[[1]],acuracy,
+{0,Ls[[1]],{0},{0},{0,0},{{0},{0},{0},{0},{0},{\[CapitalDelta]V\[Lambda],\[CapitalDelta]en\[Lambda],\[CapitalDelta]enSum\[Lambda],\[Eta]s}  }},
+"free",NbName]; 
 
 
 
@@ -875,7 +869,6 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 (*Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
-
 
 
 Print[" "]; *)
