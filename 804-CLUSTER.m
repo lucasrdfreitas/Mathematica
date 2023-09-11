@@ -16,14 +16,14 @@ Print["Starting Kernels"];
 
 NbName="804"; \[Lambda]0=0.5; 
 
-Ls =Range[40,40,2]; 	    
+Ls =Range[60,60,2]; 	    
 tV={1};	  
  hV={{0.1,0,0}};
 steps=600;
-acuracy=7;    
-\[CapitalDelta]eV=0.099999; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
+acuracy=8;    
+\[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
 \[Eta]s=Join[
-Table[\[Eta],{\[Eta],-1+.025,1,0.1}]
+Table[\[Eta],{\[Eta],-.15,-.05,.005}]
 (*,
 Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}],
 Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}]
@@ -502,7 +502,7 @@ Bb=Sum[    Sum[    Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] N[[\[Alpha]]] traceN[ V[[1
 cMFmom[Jm_,U_,V_]:=Module[{N=Nmat}, Sum[ 1/8  Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] (traceN[ V[[1]] ][[\[Alpha]]]  traceN[ V[[2]] ][[\[Beta]]] +2  Tr[ U[[\[Gamma]]]\[Transpose] . N[[\[Alpha]]] . U[[\[Gamma]]] . N[[\[Beta]]] ]   ),{\[Alpha],1,3},{\[Beta],1,3},{\[Gamma],1,3}]          ];
 enMFmom[Jm_,U_,V_,h_,\[Eta]_:0]   :=Module[{M=Mmat,N=Nmat,G=Gmat,\[Lambda]},\[Lambda]=\[Eta] {h,h} + \[Lambda]effmom[Jm,h,V];  cMFmom[Jm,U,V]+1/4  Sum[-2h[[\[Gamma]]] traceN[ V[[\[Sigma]]] ][[\[Gamma]]] + \[Lambda][[\[Sigma],\[Gamma]]] traceG[ V[[\[Sigma]]] ][[\[Gamma]]]
 ,{\[Sigma],1,2},{\[Gamma],1,3}]        ];
-enSUMmom[Jm_,U_,V_,h_,L_:30,\[Eta]_:0]:=Module[{\[Lambda],mT=toMomentumTable[L]},-cMFmom[Jm,U,V]+1/(2L^2) Sum[Total@Select[Eigenvalues@N@HmfMomentum[Jm,h,U,V,mT[[i]],\[Eta]],#<=0&], {i,1,L^2}] ];
+enSUMmom[Jm_,U_,V_,h_,L_:30,\[Eta]_:0]:=Module[{\[Lambda],mT=toMomentumTable[L]},-cMFmom[Jm,U,V]+1/(2L^2) Sum[Total@Select[Eigenvalues@N@HmfMomentum[Jm,h,U,V,mT[[i]],\[Eta]],#<=0& ], {i,1,L^2}] ];
 
 HmfMomentum[Jmatrice_,h_,U_,V_, k_,\[Eta]_:0] := Module[{Ax,Ay,Az,BA,BB, hx,hy,hz, kx,ky,ha,HA,HB,\[Lambda]}, kx=k . nx;ky=k . ny;
 \[Lambda]=\[Eta] {h,h} + \[Lambda]effmom[Jmatrice,h,V];
@@ -542,7 +542,7 @@ If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ pathData ]; Abort[]
 		        data=ReadList[f];
 		        Close[f];			data[[-1]]
 ];
-toPath800 [parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, filename,r,\[Phi],\[Theta],},h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS;   
+toPath800 [parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, filename,r,\[Phi],\[Theta]},h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS;   
 filename="t=X1_eV=X2_JKG=X3_JKGmod=X4";
 If[gauge=="free",parameters[[3]]=parameters0[[1]];parameters[[6]]=0;filename="free_X2_JKG=X3";];
 If[gauge=="free_lambda",parameters[[3]]=parameters0[[1]];filename="lambda_X2_JKG=X3"; ];
