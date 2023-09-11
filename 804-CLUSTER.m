@@ -18,14 +18,14 @@ NbName="804"; \[Lambda]0=0.5;
 
 Ls =Range[61,61,2]; 	    
 tV={1};	  
-hV={{.2,0,0}};
+hV={{.1,0,0}};
 steps=600;
 acuracy=8.1;    
 \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
 \[Eta]s=Join[
 Table[3.5 \[Eta]-.113,{\[Eta],-1,1,.1}]
 (*,
-Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}],git pul
+Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}],
 Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}]
 *)
 ];
