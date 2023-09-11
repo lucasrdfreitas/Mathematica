@@ -516,7 +516,7 @@ UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:1] :=UmatK/@Table[ Tk\[Conjugate
 (*MF model definitions*)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Saving and Loading data*)
 
 
@@ -779,7 +779,6 @@ JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 
 
 Print[" "];
-Print[NumberForm[0.55556666,{4,4}] ];
 Print["    NbName=",NbName,"; "];
 Print["    Lambda s=", \[Eta]s,"; "];
 Print["    Ls=",Ls,"; "];
@@ -812,11 +811,6 @@ t0=tvf;
 
 
 \[CapitalDelta]V\[Lambda]={};\[CapitalDelta]en\[Lambda]={};\[CapitalDelta]enSum\[Lambda]={};
-
-
-dataToFile800[parametersMat[[1,1]],Ls[[1]],acuracy,
-{NumberForm[N@\[Pi],{6,6}],round[N@\[Pi]],{0},{0},{0,0},{{0},{0},{0},{0},{0},{\[CapitalDelta]V\[Lambda],\[CapitalDelta]en\[Lambda],\[CapitalDelta]enSum\[Lambda]}  }},
-"free",NbName];
 
 
 Print[" "];Print[" "];Print["    Starting Lagrange multiplier free loop"];Print[" "];
