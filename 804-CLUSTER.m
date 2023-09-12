@@ -16,20 +16,13 @@ Print["Starting Kernels"];
 
 NbName="804"; \[Lambda]0=0.5; 
 
-Ls =Range[61,61,2]; 	    
-tV={0,1,2,3,4,5};	  
-hV={{.3,0,0}};
+Ls =Range[40,40,2]; 	    
+tV={0};	  
+hV={{.2,0,0}};
 steps=150;
-acuracy=7.8;    
+acuracy=7;    
 \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
-\[Eta]s=Join[
-Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]
-(*,
-Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}],
-Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}]
-*)
-];
-		
+\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}] (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) ];
 		
 
 
@@ -522,7 +515,7 @@ UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[Conjugate
 (*MF model definitions*)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Saving and Loading data*)
 
 
@@ -533,18 +526,14 @@ K=( jm[[3,3]]-(jm[[2,2]] +jm[[1,1]] )/2); J=(jm[[3,3]]-K);DM=(jm[[1,2]]-jm[[2,1]
 N@{J,K,\[CapitalGamma],\[CapitalGamma]p,DM}    ];
 createDir[path_] :=
 Module[ {l=Length@FileNames[path]},		
-	If[ l==0,  CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }]; 
-,Null]  ];
+	If[ l==0,  CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }];  , Null]  ];
 loadData[pathData_]:=
-Module[ {f,data},
-		        f = OpenRead[pathData];
-If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ pathData ]; Abort[] ];
-		        data=ReadList[f];
-		        Close[f];			data[[-1]]
-];
+Module[{f,data},  f = OpenRead[pathData];
+If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ pathData ]; Abort[]  ];
+	data=ReadList[f]; Close[f]; data[[-1]]   ];
 toPath800 [parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, filename,r,\[Phi],\[Theta]},h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS;   
 filename="t=X1_eV=X2_JKG=X3_JKGmod=X4";
-If[gauge=="free",parameters[[3]]=parameters0[[1]];parameters[[6]]=0;filename="free_X2_JKG=X3";];
+If[gauge=="free", parameters[[3]]=parameters0[[1]]; parameters[[6]]=0; filename="free_X2_JKG=X3";];
 If[gauge=="free_lambda",parameters[[3]]=parameters0[[1]];filename="lambda_X2_JKG=X3"; ];
 FileNameJoin[{       Directory[]   , "Files" ,NbName,gauge,StringReplace[filename,{"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
 "X3"->  ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[1]]  ],
@@ -557,10 +546,10 @@ filename="t=X1_eV=X2_JKG=X3_JKGmod=X4";
 If[gauge=="free",parameters[[3]]=parameters0[[1]];parameters[[6]]=0;filename="free_X2_JKG=X3";];
 If[gauge=="free_lambda",parameters[[3]]=parameters0[[1]];filename="lambda_X2_JKG=X3"; ];
 		createDir@FileNameJoin[{ Directory[] ,"Files",  NbName,gauge, StringReplace[filename,
-{"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],"X3"->  ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[1]]  ],"X4"->  ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[3]]]   }]     }] ;
-		path = toPath800[ parameters,L,acuracy,gauge,NbName];		
+{"X1"->ToString[parameters[[5]]],"X2"->ToString[parameters[[6]]],"X3"->ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[1]]  ],"X4"->ToString[NumberForm[#,{4,4}]&/@fromJmat@parameters[[3]]]   }]     }] ;
+		path = toPath800[parameters,L,acuracy,gauge,NbName];		
 		f = OpenAppend[path];
-		 Write[ f, data];
+		 Write[f, data];
 		 Close[f];                ];
 loadDataTry[pathData_]:=
 Module[ {f,data,path=FindFile[pathData]},
@@ -783,6 +772,14 @@ JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 
 
 
+\[CapitalGamma]s=Table[x,{x,-.5,.5,.5}];
+hV=Table[{x,0,0},{x,0.0001,1,.4}];
+hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
+parametersMat={
+Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]
+};
+
+
 Print[" "];
 Print["    NbName=",NbName,"; "];
 Print["    Lambda s=", \[Eta]s,"; "];
@@ -811,19 +808,18 @@ t0=tvf;
 
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*vortex free - Lagrange multiplier*)
 
 
-\[CapitalDelta]V\[Lambda]={};\[CapitalDelta]en\[Lambda]={};\[CapitalDelta]enSum\[Lambda]={};
-
-
-Print[" "];Print[" "];Print["    Starting Lagrange multiplier free loop"];Print[" "];
-t0=AbsoluteTime[]; 
 
 
 
-Do[
+(*Print[" "];Print[" "];Print["    Starting Lagrange multiplier free loop"];Print[" "];
+t0=AbsoluteTime[]; *)
+
+
+(*Do[
 \[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];
 \[Alpha]0=-0.199+1.13 \[CapitalGamma]0;
 \[Eta]s=Table[.1 \[Eta]+\[Alpha]0,{\[Eta],-1,1,.5}];
@@ -870,7 +866,7 @@ AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[Capital
 "free",NbName];  
  
  ,{p,1,Length@parametersMat[[1]] }] 
-
+*)
 
 
 (*dataToFile800[parametersMat[[1,1]],Ls[[1]],acuracy,
@@ -879,22 +875,55 @@ AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[Capital
 
 
 
-Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+(*Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
 Print[" "] Print[" "];];
-Print["    Starting vortex free + electric field loop: "];Print[" "]
+Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 
 
 (* ::Subsubsection::Bold:: *)
 (*vortex free*)
 
 
-(*Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
+Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 
+Do[ \[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];  \[Alpha]0=-0.2+1.13 \[CapitalGamma]0;
+Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
+L=Ls[[l]]; hp=Mod[p,Length@hV,1];
+\[Eta]=\[Alpha]0; Print["Eta=",\[Eta]];
+{Jmat,h}=parametersMat[[1,p]][[1;;2]]; Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  
+UG=Uguess;  VG=Vguess;  U=UG;  V=VG;  kTable=toMomentumTable[L];
 
-Print[" "]; *)
+For[j=1,( (j<(steps))\[And](Chop[\[CapitalDelta]1,10^(-acuracy)]!=0) ), j++, Umatvec=UmatVec[Jmat,h,U,V,kTable,Tk,\[Eta]];
+u=Chop@Sum[Module[{k,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]less,\[DoubleStruckCapitalU]gtr},k=kTable[[l]];\[DoubleStruckCapitalU]=Tk . Umatvec[[l]];\[DoubleStruckCapitalU]less=\[DoubleStruckCapitalU][[;;,5;;8]]; (*\[DoubleStruckCapitalU]gtr=\[DoubleStruckCapitalU][[;;,1;;4]];*)(2I/Nc)Conjugate@Chop@{\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . nx], \[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . ny],\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose]} ],{l,1,Nc} ]; 
+U[[1]]=u[[1]][[1;;4,5;;8]]; U[[2]]=u[[2]][[1;;4,5;;8]]; U[[3]]=u[[3]][[1;;4,5;;8]]; V[[1]]=u[[3]][[1;;4,1;;4]]; V[[2]]=u[[3]][[5;;8,5;;8]];
+\[CapitalDelta]V=1/(8Sqrt[3]) Sum[Sqrt@Total[  Power[#,2]&/@traceG[V[[\[Sigma]]]]  ],{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}} ;   
+If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u-u2) ];\[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};   ];  u2=u;                    
+Print["    j=",j,"; \[CapitalDelta]V=",\[CapitalDelta]V,"; \[CapitalDelta]=",\[CapitalDelta]1];                          ];
+t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1-t0, "Seconds" ], "Minutes" ]; t0=t1;
+\[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2]; \[CapitalDelta]Vseq=Partition[Flatten[\[CapitalDelta]Vseq],2];
+EMF   = enMFmom[Jmat,U,V,h,\[Eta]];
+Esum  = enSUMmom[Jmat,U,V,h,L,\[Eta]];
+cMF   = cMFmom[Jmat,U,V];
+Print[];
+Print[fromJmat[parametersMat[[1,p]][[1]]]];
+Print["Eta=",\[Eta],"p=",p,"/",Length@parametersMat[[1]],"; j= ", j,"; Delta=",round@\[CapitalDelta]1,"; EMF=",EMF,"; Esum=",Esum,"; EMF-Esum=",round[EMF-Esum]   ];
+Print[];
+	
+dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},\[CapitalDelta]seq,\[CapitalDelta]Vseq}},"free",NbName]; 
+(*{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];  AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}]; *)  ];   
+,{p,1,Length@parametersMat[[1]]} ]; Print[" "]; 
+
+
+
+Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+\[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
+Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
+Print[" "];
+Print[" "];   ];
+Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
 (* ::Subsubsection::Bold:: *)
