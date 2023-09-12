@@ -18,7 +18,7 @@ NbName="804"; \[Lambda]0=0.5;
 
 Ls =Range[61,61,2]; 	    
 tV={0,1,2,3,4,5};	  
-hV={{.01,0,0}};
+hV={{.4,0,0}};
 steps=150;
 acuracy=7.8;    
 \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
