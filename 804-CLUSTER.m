@@ -766,14 +766,14 @@ hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];
 eV0=0;U=2600;JH=300; dmax=.5; s0=1;
 
 parametersMat=Table[Flatten[ Table[{
-JmatMicro[     0,JH,U,ts[[t]],dmax,s0],hs[[h]],
+JmatMicro[  0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
 
 
-\[CapitalGamma]s=Table[x,{x,-.5,.5,.5}];
-hV=Table[{x,0,0},{x,0.0001,1,.4}];
+\[CapitalGamma]s=Table[x,{x,-.6,.6,.1}];
+hV=Table[{x,0,0},{x,0.0001,1.2,.1}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 parametersMat={
 Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]
@@ -810,9 +810,6 @@ t0=tvf;
 
 (* ::Subsubsection::Bold::Closed:: *)
 (*vortex free - Lagrange multiplier*)
-
-
-
 
 
 (*Print[" "];Print[" "];Print["    Starting Lagrange multiplier free loop"];Print[" "];
@@ -892,14 +889,14 @@ t0=AbsoluteTime[];
 Do[ \[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];  \[Alpha]0=-0.2+1.13 \[CapitalGamma]0;
 Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
 L=Ls[[l]]; hp=Mod[p,Length@hV,1];
-\[Eta]=\[Alpha]0; Print["Eta=",\[Eta]];
+\[Eta]=\[Alpha]0;(* Print["Eta=",\[Eta]];*)
 {Jmat,h}=parametersMat[[1,p]][[1;;2]]; Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  
-UG=Uguess;  VG=Vguess;  U=UG;  V=VG;  kTable=toMomentumTable[L];
+If[h=hs[[1]],UG=Uguess;  VG=Vguess;]  U=UG;  V=VG;  kTable=toMomentumTable[L];
 
 For[j=1,( (j<(steps))\[And](Chop[\[CapitalDelta]1,10^(-acuracy)]!=0) ), j++, Umatvec=UmatVec[Jmat,h,U,V,kTable,Tk,\[Eta]];
 u=Chop@Sum[Module[{k,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]less,\[DoubleStruckCapitalU]gtr},k=kTable[[l]];\[DoubleStruckCapitalU]=Tk . Umatvec[[l]];\[DoubleStruckCapitalU]less=\[DoubleStruckCapitalU][[;;,5;;8]]; (*\[DoubleStruckCapitalU]gtr=\[DoubleStruckCapitalU][[;;,1;;4]];*)(2I/Nc)Conjugate@Chop@{\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . nx], \[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . ny],\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose]} ],{l,1,Nc} ]; 
 U[[1]]=u[[1]][[1;;4,5;;8]]; U[[2]]=u[[2]][[1;;4,5;;8]]; U[[3]]=u[[3]][[1;;4,5;;8]]; V[[1]]=u[[3]][[1;;4,1;;4]]; V[[2]]=u[[3]][[5;;8,5;;8]];
-\[CapitalDelta]V=1/(8Sqrt[3]) Sum[Sqrt@Total[  Power[#,2]&/@traceG[V[[\[Sigma]]]]  ],{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}} ;   
+\[CapitalDelta]V=1/(8 Sqrt[3]) Sum[Sqrt@Total[  Power[#,2]&/@traceG[V[[\[Sigma]]]]  ],{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}} ;   
 If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u-u2) ];\[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};   ];  u2=u;                    
 Print["    j=",j,"; \[CapitalDelta]V=",\[CapitalDelta]V,"; \[CapitalDelta]=",\[CapitalDelta]1];                          ];
 t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1-t0, "Seconds" ], "Minutes" ]; t0=t1;
@@ -908,12 +905,13 @@ EMF   = enMFmom[Jmat,U,V,h,\[Eta]];
 Esum  = enSUMmom[Jmat,U,V,h,L,\[Eta]];
 cMF   = cMFmom[Jmat,U,V];
 Print[];
-Print[fromJmat[parametersMat[[1,p]][[1]]]];
-Print["Eta=",\[Eta],"p=",p,"/",Length@parametersMat[[1]],"; j= ", j,"; Delta=",round@\[CapitalDelta]1,"; EMF=",EMF,"; Esum=",Esum,"; EMF-Esum=",round[EMF-Esum]   ];
+Print[fromJmat[parametersMat[[1,p]][[1]]]]; Print[];
+Print["Eta=",round@\[Eta],"; p=",p,"/",Length@parametersMat[[1]],"; j= ", j,"; Delta=",round@\[CapitalDelta]1,"; EMF=",EMF,"; Esum=",Esum,"; EMF-Esum=",round[EMF-Esum]   ];
 Print[];
 	
 dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},\[CapitalDelta]seq,\[CapitalDelta]Vseq}},"free",NbName]; 
-(*{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];  AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}]; *)  ];   
+{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];  
+(*AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}]; *)  ];   
 ,{p,1,Length@parametersMat[[1]]} ]; Print[" "]; 
 
 
