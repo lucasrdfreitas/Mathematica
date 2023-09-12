@@ -17,13 +17,13 @@ Print["Starting Kernels"];
 NbName="804"; \[Lambda]0=0.5; 
 
 Ls =Range[61,61,2]; 	    
-tV={1};	  
-hV={{.1,0,0}};
-steps=600;
-acuracy=8.1;    
+tV={0,1,2,3,4,5};	  
+hV={{.4,0,0}};
+steps=150;
+acuracy=7.8;    
 \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
 \[Eta]s=Join[
-Table[3.5 \[Eta]-.113,{\[Eta],-1,1,.1}]
+Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]
 (*,
 Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}],
 Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}]
@@ -487,7 +487,7 @@ Flatten[ Table[ Table[ ks[[i]]+t(  ks[[i+1]]-ks[[i]]  ),{t,Ne/M (1-KroneckerDelt
     
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*ham*)
 
 
@@ -500,7 +500,7 @@ Bb=Sum[    Sum[    Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] N[[\[Alpha]]] traceN[ V[[1
 {KroneckerProduct[ {{1,0},{0,0}},Re@Ba],KroneckerProduct[ {{0,0},{0,1}},Re@Bb] }];
 
 cMFmom[Jm_,U_,V_]:=Module[{N=Nmat}, Sum[ 1/8  Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] (traceN[ V[[1]] ][[\[Alpha]]]  traceN[ V[[2]] ][[\[Beta]]] +2  Tr[ U[[\[Gamma]]]\[Transpose] . N[[\[Alpha]]] . U[[\[Gamma]]] . N[[\[Beta]]] ]   ),{\[Alpha],1,3},{\[Beta],1,3},{\[Gamma],1,3}]          ];
-enMFmom[Jm_,U_,V_,h_,\[Eta]_:0]   :=Module[{M=Mmat,N=Nmat,G=Gmat,\[Lambda]},\[Lambda]=\[Eta]{h,h}+ \[Lambda]effmom[Jm,h,V];  cMFmom[Jm,U,V]+1/4  Sum[-2h[[\[Gamma]]] traceN[ V[[\[Sigma]]] ][[\[Gamma]]] + \[Lambda][[\[Sigma],\[Gamma]]] traceG[ V[[\[Sigma]]] ][[\[Gamma]]]
+enMFmom[Jm_,U_,V_,h_,\[Eta]_:0]:=Module[{M=Mmat,N=Nmat,G=Gmat,\[Lambda]},\[Lambda]=\[Eta]{h,h}+\[Lambda]effmom[Jm,h,V];  cMFmom[Jm,U,V]+1/4  Sum[-2h[[\[Gamma]]] traceN[ V[[\[Sigma]]] ][[\[Gamma]]] + \[Lambda][[\[Sigma],\[Gamma]]] traceG[ V[[\[Sigma]]] ][[\[Gamma]]]
 ,{\[Sigma],1,2},{\[Gamma],1,3}]        ];
 enSUMmom[Jm_,U_,V_,h_,L_:30,\[Eta]_:0]:=Module[{\[Lambda],mT=toMomentumTable[L]},-cMFmom[Jm,U,V]+1/(2L^2) Sum[Total@Select[Eigenvalues@N@HmfMomentum[Jm,h,U,V,mT[[i]],\[Eta]],#<=0& ], {i,1,L^2}] ];
 
@@ -823,8 +823,8 @@ t0=AbsoluteTime[];
 
 
 
-Do[
-Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1,p=1}, L=Ls[[l]]; hp=Mod[p,Length@hV,1];
+Do[Do[
+Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, L=Ls[[l]]; hp=Mod[p,Length@hV,1];
 \[Eta]=\[Eta]s[[\[Eta]0]];
 Print["Eta=",\[Eta]];
 {Jmat,h}=parametersMat[[1,p]][[1;;2]];Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  
@@ -856,7 +856,7 @@ Print["Eta=",\[Eta],(*"p=",p,"/",Length@parametersMat[[1]], *)"; j= ", j,"; Delt
 {jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];*)
 AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}];
 
- ];  , {\[Eta]0,1,Length@\[Eta]s}] 
+ ]; , {\[Eta]0,1,Length@\[Eta]s}]  ,{p,1,Length@parametersMat[[1]] }] 
 
 
 
