@@ -762,7 +762,7 @@ add4Vortices[ Jarray,JmatMicro, RS,RW, RE,RN,L] ];
 
 
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
-hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
+hs = Table[  h[[1]]  hAngle[ h[[2]],h[[3]] ], {h,hV}];  
 eV0=0;U=2600;JH=300; dmax=.5; s0=1;
 
 parametersMat=Table[Flatten[ Table[{
@@ -788,8 +788,8 @@ Print["    tV=",tV,"; "];
 Print["    ts=",ts,"; "];
 Print["    hV=",hV,";"]
 Print["    Couplings="];
-Do[Print["    ", round[ fromJmat@parametersMat[[1,i,1]] ] ] , {i,1,Length@parametersMat[[1]] }];
-(*Print["    Gammas=", \[CapitalGamma]s,"; "];*)
+(*Do[Print["    ", round[ fromJmat@parametersMat[[1,i,1]] ] ] , {i,1,Length@parametersMat[[1]] }];*)
+Print["    Gammas=", \[CapitalGamma]s,"; "];
 Print["    Steps=",steps,"; "];
 Print["    acuracy=",acuracy,"; "];
 (*
@@ -887,11 +887,11 @@ Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 
 Do[ \[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];  \[Alpha]0=-0.2+1.13 \[CapitalGamma]0;
-Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
+Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},UG,VG,u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
 L=Ls[[l]]; hp=Mod[p,Length@hV,1];
 \[Eta]=\[Alpha]0;(* Print["Eta=",\[Eta]];*)
 {Jmat,h}=parametersMat[[1,p]][[1;;2]]; Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  
-If[h=hs[[1]],UG=Uguess;  VG=Vguess;]  U=UG;  V=VG;  kTable=toMomentumTable[L];
+If[h==hs[[1]],UG=Uguess;  VG=Vguess;]  U=UG;  V=VG;  kTable=toMomentumTable[L];
 
 For[j=1,( (j<(steps))\[And](Chop[\[CapitalDelta]1,10^(-acuracy)]!=0) ), j++, Umatvec=UmatVec[Jmat,h,U,V,kTable,Tk,\[Eta]];
 u=Chop@Sum[Module[{k,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]less,\[DoubleStruckCapitalU]gtr},k=kTable[[l]];\[DoubleStruckCapitalU]=Tk . Umatvec[[l]];\[DoubleStruckCapitalU]less=\[DoubleStruckCapitalU][[;;,5;;8]]; (*\[DoubleStruckCapitalU]gtr=\[DoubleStruckCapitalU][[;;,1;;4]];*)(2I/Nc)Conjugate@Chop@{\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . nx], \[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . ny],\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose]} ],{l,1,Nc} ]; 
