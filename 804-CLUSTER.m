@@ -18,7 +18,7 @@ NbName="804"; \[Lambda]0=0.5;
 
 Ls =Range[61,61,2]; 	    
 tV={0,1,2,3,4,5};	  
-hV={{.01,0,0}};
+hV={{.3,0,0}};
 steps=150;
 acuracy=7.8;    
 \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ] ;
@@ -522,7 +522,7 @@ UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[Conjugate
 (*MF model definitions*)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Saving and Loading data*)
 
 
@@ -823,7 +823,12 @@ t0=AbsoluteTime[];
 
 
 
-Do[Do[
+Do[
+\[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];
+\[Alpha]0=-0.199+1.13 \[CapitalGamma]0;
+\[Eta]s=Table[.1 \[Eta]+\[Alpha]0,{\[Eta],-1,1,.5}];
+\[CapitalDelta]V\[Lambda]={};\[CapitalDelta]en\[Lambda]={};\[CapitalDelta]enSum\[Lambda]={};
+Do[
 Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, L=Ls[[l]]; hp=Mod[p,Length@hV,1];
 \[Eta]=\[Eta]s[[\[Eta]0]];
 Print["Eta=",\[Eta]];
@@ -849,20 +854,28 @@ t1=AbsoluteTime[]; \[CapitalDelta]t=UnitConvert[ Quantity[t1 -t0, "Seconds" ], "
 EMF   = enMFmom[Jmat,U,V,h,\[Eta]];
 Esum  = enSUMmom[Jmat,U,V,h,L,\[Eta]];
 cMF   = cMFmom[Jmat,U,V];
+Print[];
+Print[fromJmat[parametersMat[[1,p]][[1]]]];
 Print["Eta=",\[Eta],(*"p=",p,"/",Length@parametersMat[[1]], *)"; j= ", j,"; Delta=",round@\[CapitalDelta]1,"; EMF=",EMF,"; Esum=",Esum,"; EMF-Esum=",round[EMF-Esum]   ];
-
+Print[];
 	(*dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},\[CapitalDelta]seq,\[CapitalDelta]Vseq}},"free",NbName]; 
 
 {jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];*)
 AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}];
 
- ]; , {\[Eta]0,1,Length@\[Eta]s}]  ,{p,1,Length@parametersMat[[1]] }] 
+ ]; , {\[Eta]0,1,Length@\[Eta]s}] ;
+ 
+  dataToFile800[parametersMat[[1,p]],Ls[[1]],acuracy,
+{fromJmat[parametersMat[[1,p]][[1]]],Ls[[1]],{0},{0},{0,0},{{0},{0},{0},{0},{0},{\[CapitalDelta]V\[Lambda],\[CapitalDelta]en\[Lambda],\[CapitalDelta]enSum\[Lambda],\[Eta]s}  }},
+"free",NbName];  
+ 
+ ,{p,1,Length@parametersMat[[1]] }] 
 
 
 
-dataToFile800[parametersMat[[1,1]],Ls[[1]],acuracy,
+(*dataToFile800[parametersMat[[1,1]],Ls[[1]],acuracy,
 {0,Ls[[1]],{0},{0},{0,0},{{0},{0},{0},{0},{0},{\[CapitalDelta]V\[Lambda],\[CapitalDelta]en\[Lambda],\[CapitalDelta]enSum\[Lambda],\[Eta]s}  }},
-"free",NbName]; 
+"free",NbName]; *)
 
 
 
