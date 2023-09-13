@@ -16,10 +16,10 @@ Print["Starting Kernels"];
 
 NbName="804"; \[Lambda]0=0.5; 
 
-Ls =Range[40,40,2]; 	    
+Ls =Range[61,61,2]; 	    
 tV={0};	  
 hV={{.2,0,0}};
-steps=150;
+steps=500;
 acuracy=7;    
 \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ];
 \[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ];    (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
@@ -772,8 +772,8 @@ JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 
 
 
-\[CapitalGamma]s=Table[x,{x,-.6,.6,.1}];
-hV=Table[{x,0,0},{x,0.0001,1.2,.1}];
+\[CapitalGamma]s=Chop@Table[x,{x,0,1,.01}];
+hV=Chop@Table[{x,90,0},{x,0.0001,2,.01}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 parametersMat={
 Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]
@@ -883,17 +883,24 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 (*vortex free*)
 
 
+antisymmetrize[a_]:=(a-Transpose[a])/2;
+
+
 Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 
 Do[ \[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];  \[Alpha]0=-0.2+1.13 \[CapitalGamma]0;
-Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},UG,VG,u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
+Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},jG,LG,UG,VG,\[Xi]G,EnG,u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
 L=Ls[[l]]; hp=Mod[p,Length@hV,1];
-\[Eta]=\[Alpha]0;(* Print["Eta=",\[Eta]];*)
-{Jmat,h}=parametersMat[[1,p]][[1;;2]]; Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  (*If[h==hs[[1]], UG=Uguess;  VG=Vguess;];*)  
-UG=Uguess; VG=Vguess; U=UG;  V=VG;  kTable=toMomentumTable[L];
+\[Eta]=If[Abs[\[Alpha]0]<1,\[Alpha]0,Sign[\[Alpha]0] ];(* Print["Eta=",\[Eta]];*)
+{Jmat,h}=parametersMat[[1,p]][[1;;2]]; Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  
+If[h==hs[[1]], UG=Uguess;  VG=Vguess;];(*UG=Uguess; VG=Vguess; *)
+U=UG;  V=VG;  kTable=toMomentumTable[L];
 
-For[j=1,( (j<(steps))\[And](Chop[\[CapitalDelta]1,10^(-acuracy)]!=0) ), j++, Umatvec=UmatVec[Jmat,h,U,V,kTable,Tk,\[Eta]];
+For[j=1,( (j<(steps))\[And](Chop[\[CapitalDelta]1,10^(-acuracy)]!=0) ), j++, 
+If[(Mod[j,20]==0 \[And] \[CapitalDelta]1>1.1)\[Or]( (j==50 \[Or] j==90) \[And] \[CapitalDelta]1>=10^-2), {U,V}={Uguess+antisymmetrize/@RandomReal[{-.4,.4},{3,4,4}],Vguess+antisymmetrize/@RandomReal[{-.4,.4},{2,4,4}]}];
+If[(j==150) \[And] \[CapitalDelta]1>=4 10^-2, j=steps-5; ];
+Umatvec=UmatVec[Jmat,h,U,V,kTable,Tk,\[Eta]];
 u=Chop@Sum[Module[{k,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]less,\[DoubleStruckCapitalU]gtr},k=kTable[[l]];\[DoubleStruckCapitalU]=Tk . Umatvec[[l]]; \[DoubleStruckCapitalU]less=\[DoubleStruckCapitalU][[;;,5;;8]]; (*\[DoubleStruckCapitalU]gtr=\[DoubleStruckCapitalU][[;;,1;;4]];*)(2I/Nc)Conjugate@Chop@{\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . nx], \[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose] Exp[-I k . ny],\[DoubleStruckCapitalU]less . \[DoubleStruckCapitalU]less\[ConjugateTranspose]} ],{l,1,Nc} ]; 
 U[[1]]=u[[1]][[1;;4,5;;8]]; U[[2]]=u[[2]][[1;;4,5;;8]]; U[[3]]=u[[3]][[1;;4,5;;8]]; V[[1]]=u[[3]][[1;;4,1;;4]]; V[[2]]=u[[3]][[5;;8,5;;8]];
 \[CapitalDelta]V=1/(8 Sqrt[3]) Sum[Sqrt@Total[  Power[#,2]&/@traceG[V[[\[Sigma]]]]  ],{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}} ;   
@@ -910,7 +917,8 @@ Print["Eta=",round@\[Eta],"; p=",p,"/",Length@parametersMat[[1]],"; j= ", j,"; D
 Print[];
 	
 dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},\[CapitalDelta]seq,\[CapitalDelta]Vseq}},"free",NbName]; 
-{jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];  
+{jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];  
+{UG,VG}={U,V};
 (*AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}]; *)  ];   
 ,{p,1,Length@parametersMat[[1]]} ]; Print[" "]; 
 
