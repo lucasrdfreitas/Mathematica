@@ -772,8 +772,8 @@ JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 
 
 
-\[CapitalGamma]s=Chop@Table[x,{x,0,1,.01}];
-hV=Chop@Table[{x,90,0},{x,0.0001,2,.01}];
+\[CapitalGamma]s=round@Table[x,{x,0,1,.01}];
+hV=round@Table[{x,90,0},{x,0.0001,2.01,.01}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 parametersMat={
 Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]
@@ -890,7 +890,7 @@ Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 
 Do[ \[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];  \[Alpha]0=-0.2+1.13 \[CapitalGamma]0;
-Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},jG,LG,UG,VG,\[Xi]G,EnG,u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
+Module[{ L,Jmat,Nc,h,\[CapitalLambda],T,H,\[Xi],EnG0,En,EnList={{},{},{}},\[Xi]G,EnG,u,u2,U,V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},EMF,Esum,cMF,\[Eta],hp ,Tk=1/Sqrt[2] Tkmom,Umatvec,l=1}, 
 L=Ls[[l]]; hp=Mod[p,Length@hV,1];
 \[Eta]=If[Abs[\[Alpha]0]<1,\[Alpha]0,Sign[\[Alpha]0] ];(* Print["Eta=",\[Eta]];*)
 {Jmat,h}=parametersMat[[1,p]][[1;;2]]; Nc=L^2;(*If[ p==1, UG=Uguess; VG=Vguess; ];*)  
@@ -917,7 +917,7 @@ Print["Eta=",round@\[Eta],"; p=",p,"/",Length@parametersMat[[1]],"; j= ", j,"; D
 Print[];
 	
 dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},\[CapitalDelta]seq,\[CapitalDelta]Vseq}},"free",NbName]; 
-{jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];  
+(*{jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];*)  
 {UG,VG}={U,V};
 (*AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}]; *)  ];   
 ,{p,1,Length@parametersMat[[1]]} ]; Print[" "]; 
