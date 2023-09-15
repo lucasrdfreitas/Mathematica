@@ -16,12 +16,12 @@ Print["Starting Kernels"];
 
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = {40}; 				tV={ 3 (*, 2.74356 *) };	
+		Ls = {40}; 				tV={ 2 (*, 2.74356 *) };	
 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)
 		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
 		
-		hV={ (*{0.3,0,0},*) {0.3,180/\[Pi] ArcTan[Sqrt[2]],180} };		
+		hV={ (*{0.3,0,0},*) {0.2,180/\[Pi] ArcTan[Sqrt[2]],180} };		
 
 		steps=600;   acuracy=5;   
 		
@@ -1049,7 +1049,7 @@ sym\[Omega][\[Omega]_]:= Module[ {\[Omega]A,\[Omega]B},
 
 
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
-hs = FullSimplify/@Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
+hs = FullSimplify/@Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  hV=N@hV;
 eV0=0; U=2600; JH=300;
 (*  \[Kappa]=0.1 : h=0.3292;   \[Kappa]=0.2 : 0.41475; \[Kappa]=0.05 : 0.2612 *)
 parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
