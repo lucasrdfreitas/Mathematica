@@ -1,0 +1,38 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=705; 
+    Ls={40}; 
+    tV={3}; 
+    ts={{15, 160, -36, 0, -60}}; 
+    hV={{0.3, (180*ArcTan[Sqrt[2]])/Pi, 180}};
+    Gammas=Γs; 
+    Steps=600; 
+    acuracy=5; 
+ 
+Definition timing= 31.5935
+ 
+ 
+    Starting free loop
+ 
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; L=40; h=(0.3,(180*ArcTan[Sqrt[2]])/Pi,180); 
+Max Step = 205; Delta=9.1013*^-9; E={-1.537170021550153, -1.5605507306781365, -1.5434838904849264};  p=1/1
+ 
+Free loop timing= Quantity[9, Minutes]Quantity[58, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+Free loop + electric field timing= 0 hours : 0 minutes : 0 seconds
+ 
+ 
+    Starting four vortex + electric field loop: 
+ 
+4 vortices loop timing Δt = 0 hours : 0 minutes : 0 seconds
+Pure data saved: 
+Kappa=0.; Lambda={0., 0., 0.17175572519083968}; Epure=-1.6697265724803885; 
+
+ 
+J=-0.02180032749767517; K=-1.; G=0.21994905591719566; Jmod=-0.02180032749767517; Kmod=-0.9999999999999999; Gmod=0.2199490559171956; L=40; h=(0.3,(180*ArcTan[Sqrt[2]])/Pi,180); eV=0.
+ 
+ j =1/600; Delta=1.;  E={-1.573242, -1.589196, -1.579555}; 
