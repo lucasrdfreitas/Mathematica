@@ -1,0 +1,39 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=705; 
+    Ls={40}; 
+    tV={2}; 
+    ts={{10, 160, -24, 0, -60}}; 
+    hV={{0.2, 54.735610317245346, 180.}};
+    Gammas=Γs; 
+    Steps=600; 
+    acuracy=5; 
+ 
+Definition timing= 31.8023
+ 
+ 
+    Starting free loop
+ 
+J=-0.009503948319320325; K=-1.; G=0.143831632383269; L=40; h=(0.2,54.735610317245346,180.); 
+Max Step = 70; Delta=8.5773*^-9; E={-1.5590566969967758, -1.5710087526460843, -1.5615419463275284};  p=1/1
+ 
+Free loop timing= Quantity[3, Minutes]Quantity[20, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+Free loop + electric field timing= 0 hours : 0 minutes : 0 seconds
+ 
+ 
+    Starting four vortex + electric field loop: 
+ 
+4 vortices loop timing Δt = 0 hours : 0 minutes : 0 seconds
+Pure data saved: 
+Kappa=0.; Lambda={0., 0., 0.07633587786259542}; Epure=-1.6153441761319902; 
+
+ 
+J=-0.009503948319320325; K=-1.; G=0.143831632383269; Jmod=-0.009503948319320324; Kmod=-0.9999999999999999; Gmod=0.14383163238326901; L=40; h=(0.2,54.735610317245346,180.); eV=0.
+ 
+ j =1/600; Delta=1.;  E={-1.570202, -1.580637, -1.572687}; 
+ j =2/600; Delta=0.0153195930552;  E={-1.556259, -1.571251, -1.559474}; 
