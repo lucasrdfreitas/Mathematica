@@ -20,8 +20,7 @@ tV={0};
 hV={{.05,0,0}};
 steps=150;
 acuracy=6;    
-dmax=.5; s0=1;
-\[CapitalDelta]eV=0.1; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ] ;
+\[CapitalDelta]eV=0.1; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ] 
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
 
@@ -31,7 +30,7 @@ dmax=.5; s0=1;
 
 
 ReverseSort[list_]:=Reverse@Sort@list;
-uniform[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2];  
+
 
 
 one[i_,j_,N_]:= SparseArray[ {i,j} -> 1, {N,N}];  block[i_,j_] := one[i,j,8];
@@ -511,7 +510,7 @@ HmfMomentumVec[Jmatrice_,h_,U_,V_, kTable_,\[Eta]_:0] :=Table[HmfMomentum[Jmatri
 UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[ConjugateTranspose] . HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]] . Tk,{l,1,Length@kTable}];
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*MF model definitions*)
 
 
@@ -787,7 +786,7 @@ add4Vortices[ Jarray,JmatMicro, RS,RW, RE,RN,L] ];
 
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
-U=2600;JH=300; 
+eV0=0;U=2600;JH=300; dmax=.8; s0=1;
 
 parametersMat=N@Table[Flatten[ Table[{
 JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
@@ -906,10 +905,11 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 (*pure loop w/out  vortices*)
 
 
+
 Print[];
 
 Print["    Pure and with vortices "];Print[];
-Do[   Module[{gauge="g0",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jmat,JmatMod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hv,hp=Mod[p,Length@hV,1] }, 
+Do[   Module[{gauge="g0",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jmat,JmatMod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
       (* {J,K,\[CapitalGamma],h,Jmod,Kmod,\[CapitalGamma]mod}=parameters[[ev,p]][[1;;2]];*) 
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
 (* Print["Jmat[z] ",MatrixForm[ Jmat[[3]] ],"; L=",L,"; h=(", hV[[ ph,1 ]],",",hV[[ ph,2 ]],",",hV[[ ph,3]],"); "];*)
@@ -932,8 +932,9 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
 (*pure loop w/ vortices*)
 
 
+
 Print[];Print["    Pure and with vortices "];Print[];
-Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jmat,JmatMod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,hv,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
+Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jmat,JmatMod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];Nc=L^2;
 T=Tmat[L,L];K=fromJmat[Jmat][[2]]; Kmod=fromJmat[JmatMod][[2]];
 Kv=uniform[K,L,L];Kv=add4VorticesMaxSpaced[ Kv,Kmod,L];
@@ -1010,6 +1011,7 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 (*vortex free  + electric field*)
 
 
+
 Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
@@ -1068,6 +1070,7 @@ Print[" "];
 (*four vortex + gradually increase  electric field*)
 
 
+
 Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Hours" ];
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
@@ -1101,7 +1104,7 @@ Do[         U[[r,1]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; U[[r,2]][[1,1]]=\[Chi]0[[2,r]
 (*Implement gauge field*),{r,1,Nc}];           ]; 
 
 (*Module[{r2,i,r0}, r2=\[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];i=1; r0=r2+L (-1+i+r2);  Print[MatrixForm/@(round[#,1000]&/@U[[r0]])     ];];*)
-(*Jmat0=Jmat;JmatMod0=JmatMod;*)
+Jmat0=Jmat;JmatMod0=JmatMod;
 Jarray=Jarray4v[Table[Jmat,{r,1,L^2}],JmatMod,L];
 
 For[j=1,  ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^(-acuracy+1) ]!= 0)    ) , j++,   
