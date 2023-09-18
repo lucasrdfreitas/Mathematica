@@ -510,11 +510,11 @@ HmfMomentumVec[Jmatrice_,h_,U_,V_, kTable_,\[Eta]_:0] :=Table[HmfMomentum[Jmatri
 UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[ConjugateTranspose] . HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]] . Tk,{l,1,Length@kTable}];
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*MF model definitions*)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Saving and Loading data*)
 
 
@@ -562,7 +562,7 @@ If[path==$Failed,(*Print["New entry at:",pathData];*)Return[$Failed]];
 dataToFilePure800[ parameters0_,L_,acuracy_,gauge_,data_,NbName_] :=
 Module[ {path,parameters=parameters0,f},		
 (*createDir@FileNameJoin[{NotebookDirectory[],"Files","pure", gauge}] ;*)
-createDir@FileNameJoin[{NotebookDirectory[],"Files",ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+createDir@FileNameJoin[{Directory[],"Files",ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
 "X3"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[1]]  ],
 "X4"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[3]]] }]
@@ -575,7 +575,7 @@ createDir@FileNameJoin[{NotebookDirectory[],"Files",ToString@NbName,"pure",gauge
 
 toPathPure800[parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},
 h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS; 
-FileNameJoin[{NotebookDirectory[], "Files" ,ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+FileNameJoin[{Directory[], "Files" ,ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
 "X3"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[1]]  ],
 "X4"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[3]]] } ] , "data"  , 
