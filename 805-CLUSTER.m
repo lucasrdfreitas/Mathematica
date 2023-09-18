@@ -17,11 +17,12 @@ Print["Starting Kernels"];
 NbName="805";  (*\[Lambda]0=0.5; *)
 Ls =Range[28,28,2]; 	    
 tV={0};	  
-hV={{.05,0,0}};
+hV={{.1,0,0}};
 steps=150;
 acuracy=6;    
 dmax=.5; s0=1;
-\[CapitalDelta]eV=0.1; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ] ;
+\[CapitalDelta]eV=0.1; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
+eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ] ;
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
 
@@ -58,7 +59,7 @@ KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If
 Uguess=-{\[Chi]Gx,\[Chi]Gy,\[Chi]Gz};
 Vguess={\[Omega]GA,\[Omega]GB};
 to3digits[list0_]:=Module[{list=list0},If[ Length@list>=3, list, list=Flatten[{{0},list},1]; If[ Length@list>=3, list,  list=Flatten[{{0},list},1] ] ]; StringJoin[ToString/@list]     ];
-round[x_]:=N[Round[1000000(x)]/1000000];
+round[x_,pow_:1000000]:=N[Round[pow(x)]/pow];
 (* Module[{V=Table[v[[i,j]],{i,1,4},{j,1,4}]  },Table[Tr[V^\[Transpose].Nmat[[\[Gamma]]]],{\[Gamma],1,3}]] *)
 sumtraceG[v_]:=-v[[1,2]]-v[[1,3]]-v[[1,4]]+v[[2,1]]-v[[2,3]]+v[[2,4]]+v[[3,1]]+v[[3,2]]-v[[3,4]]+v[[4,1]]-v[[4,2]]+v[[4,3]];
 traceG[v_]:={-v[[1,2]]+v[[2,1]]-v[[3,4]]+v[[4,3]],-v[[1,3]]+v[[2,4]]+v[[3,1]]-v[[4,2]],-v[[1,4]]-v[[2,3]]+v[[3,2]]+v[[4,1]]};
@@ -68,7 +69,6 @@ sumtraceN[v_]:=v[[1,2]]+v[[1,3]]+v[[1,4]]-v[[2,1]]-v[[3,1]]-v[[4,1]];
 traceN[v_]:={v[[1,2]]-v[[2,1]],v[[1,3]]-v[[3,1]],v[[1,4]]-v[[4,1]]};
 traceUNUN[u_]:=2{{u[[1,2]] u[[2,1]]-u[[1,1]] u[[2,2]],u[[1,3]] u[[2,1]]-u[[1,1]] u[[2,3]],u[[1,4]] u[[2,1]]-u[[1,1]] u[[2,4]]},
 {u[[1,2]] u[[3,1]]-u[[1,1]] u[[3,2]],u[[1,3]] u[[3,1]]-u[[1,1]] u[[3,3]],u[[1,4]] u[[3,1]]-u[[1,1]] u[[3,4]]},{u[[1,2]] u[[4,1]]-u[[1,1]] u[[4,2]],u[[1,3]] u[[4,1]]-u[[1,1]] u[[4,3]],u[[1,4]] u[[4,1]]-u[[1,1]] u[[4,4]]}};
-
 
 
 (* ::Subsection::Bold::Closed:: *)
@@ -372,7 +372,7 @@ UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[Conjugate
 
 
 (* ::Subsection::Bold:: *)
-(*MF model definitions*)
+(*MF model definitions *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -424,7 +424,7 @@ If[path==$Failed,(*Print["New entry at:",pathData];*)Return[$Failed]];
 
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Hamiltonian  matrices*)
 
 
@@ -436,18 +436,38 @@ Jmat[J_,K_,G_:{0,0,0},Gp_:{0,0,0},D_:{0,0,0}]:={
 Hmf[Jmat_,h_,U_,V_,L_,\[Eta]_:0] := Module[{Nc=L^2,H,Hmat,\[Lambda]}, 
 \[Lambda]=\[Eta] Table[{h,h},Nc]+\[Lambda]eff[Jmat,h,V,L];
 Hmat=Haux[Jmat,h,U,V,\[Lambda],L];
-H= I Sum[Module[{rx,ry,rz,mx,ny}, mx=Mod[m+1,L];ny=Mod[n+1,L];  rx=mx+n L+1;ry=m+ny L+1;rz=m+n L+1;
+H= Sum[Module[{rx,ry,rz,mx,ny}, mx=Mod[m+1,L];ny=Mod[n+1,L];  rx=mx+n L+1;ry=m+ny L+1;rz=m+n L+1;
   KroneckerProduct[ one[rz,rx,Nc],Hmat[[rz,1]]      ]+ KroneckerProduct[ one[rz,ry,Nc],Hmat[[rz,2]]    ]+ KroneckerProduct[ one[rz,rz,Nc],Hmat[[rz,3]]    ]
-] ,{m,0,L-1},{n,0,L-1}];  1/2 (H+H\[ConjugateTranspose])];
+] ,{m,0,L-1},{n,0,L-1}];  
+1/2 symmetryze@H ];
+symmetryze[H_]:= 1/2 (H+ConjugateTranspose[H]);
 Haux[Jmat_,h_,U_,V_,\[Lambda]_,L_]:=Module[{M=Mmat,Nm=Nmat,G=Gmat},Table[Module[{ Ax,Ay,Az,BA,BB},
-{Ax,Ay,Az}=I KroneckerProduct[ {{0,1},{0,0}},#]&/@Re@Table[    Sum[   2  Jmat[[r,\[Gamma]]][[\[Alpha],\[Beta]]] Nm[[\[Alpha]]] . U[[r,\[Gamma]]] . Nm[[\[Beta]]] ,{\[Alpha],1,3},{\[Beta],1,3}], {\[Gamma],1,3}]   ;
-{BA,BB}        =I{
+{Ax,Ay,Az}= 2 I KroneckerProduct[ {{0,1},{0,0}},#]&/@Re@Table[    Sum[   2  Jmat[[r,\[Gamma]]][[\[Alpha],\[Beta]]] Nm[[\[Alpha]]] . U[[r,\[Gamma]]] . Nm[[\[Beta]]] ,{\[Alpha],1,3},{\[Beta],1,3}], {\[Gamma],1,3}]   ;
+{BA,BB}   =I{
 KroneckerProduct[ {{1,0},{0,0}},Re@Sum[Sum[ Jmat[[r,\[Gamma]]][[\[Alpha],\[Beta]]] Nm[[\[Alpha]]] Tr[Transpose[V[[r,2]]] . Nm[[\[Beta]]] ],{\[Alpha],1,3},{\[Beta],1,3}] -2 h[[\[Gamma]]] Nm[[\[Gamma]]]+\[Lambda][[r,1]][[\[Gamma]]] G[[\[Gamma]]],{\[Gamma],1,3}]],
 KroneckerProduct[ {{0,0},{0,1}},Re@Sum[Sum[ Jmat[[r,\[Gamma]]][[\[Alpha],\[Beta]]] Nm[[\[Alpha]]] Tr[Transpose[V[[r,1]]] . Nm[[\[Beta]]] ],{\[Alpha],1,3},{\[Beta],1,3}] -2 h[[\[Gamma]]] Nm[[\[Gamma]]]+\[Lambda][[r,2]][[\[Gamma]]] G[[\[Gamma]]],{\[Gamma],1,3}]]   };
 {Ax,Ay,Az+BA+BB} ],{r,1,L^2}]                  ];
-UmatK[H_]:= Module[ {R=Eigensystem@N[H]},ReverseSort[R\[Transpose]]\[Transpose][[2]]\[Transpose] ];
 \[Lambda]eff[Jmat_,h_,V_,L_]:=Module[{M},  M=Table[1/2 traceN[V[[r,\[Sigma]]] ],{r,1,L^2},{\[Sigma],1,2} ] ; Table[ -h+1/2 Sum[ 
 Jmat[[r,\[Gamma]]] . M[[   Mod[r+{ Mod[r,L]-Mod[r-1(2\[Sigma]-3),L] ,(Mod[\[LeftFloor](r-1)/L\[RightFloor]+1(2\[Sigma]-3),L]-Mod[\[LeftFloor](r-1)/L\[RightFloor],L])  L,0 }[[\[Gamma]]]  ,L^2,1],Mod[\[Sigma]+1,2,1]]]  ,{\[Gamma],1,3}],{r,1,L^2},{\[Sigma],1,2}]    ];
+
+
+\[Lambda]eff[Jmat_,h_,V_,L_]:=Module[{M},  M=Table[1/2 traceN[V[[r,\[Sigma]]] ],{r,1,L^2},{\[Sigma],1,2} ] ; 
+Table[ -h+1/2 Sum[ Jmat[[r,\[Gamma]]] . M[[r,Mod[\[Sigma]+1,2,1]]]  ,{\[Gamma],1,3}],{r,1,L^2},{\[Sigma],1,2}]    ];
+
+
+
+
+UmatK[H_]:= Module[ {R=Eigensystem@N[H]},ReverseSort[R\[Transpose]]\[Transpose][[2]]\[Transpose] ];
+   
+icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^-12];
+icc= I TUh . ConjugateTranspose[TUh]; (icc-ConjugateTranspose[icc] )/2  ];
+
+Ugauge4v[U0_,L_]:= Module[{d1,d2,U=U0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
+Do[  Module[{r,m,n}, m =mS ; n=nS+i ;       r = m+n L+1;    U[[r,1]][[1,1]] =-U0[[r,1]][[1,1]]; U[[r,1]][[2,2]] =-U0[[r,1]][[2,2]];      ]   , {i,1,d1}];   
+Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;     U[[r,1]][[1,1]] =-U0[[r,1]][[1,1]];U[[r,1]][[2,2]] =-U0[[r,1]][[2,2]];       ]   , {i,1,d1}];     U];
+(*
+icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^(-12)];icc= I TUh.TUh\[ConjugateTranspose] 
+(*; (icc-ConjugateTranspose[icc] )/2*) ];*)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -458,8 +478,8 @@ Tx = KroneckerProduct[ {{1,1},{I,-I}}, SparseArray[{Band[{1,1}]-> {0,1,0,0}},{4,
 Ty = KroneckerProduct[ {{1,1},{I,-I}}, SparseArray[{Band[{1,1}]-> {0,0,1,0}},{4,4}]  ];
 Tz = KroneckerProduct[ {{1,1},{I,-I}}, SparseArray[{Band[{1,1}]-> {1,0,0,1}},{4,4}]  ]; 
 Tmat[L1_,L2_] := Module[{Nc=L1 L2,T}, T=Sum[Module[{rx,ry,rz,mx,ny},
- mx=Mod[m+1,L1,1];ny=Mod[n+1,L2,1]; rx=mx+(n-1)L1;ry=m+(ny-1)L1;rz=m+(n-1)L1;
- KroneckerProduct[ one[rz,rx,Nc],Tx]+  KroneckerProduct[ one[rz,ry,Nc],Ty]+ KroneckerProduct[ one[rz,rz,Nc],Tz ]] ,{m,1,L1},{n,1,L2}];T];
+ mx=Mod[m+1,L1];ny=Mod[n+1,L2]; rx=mx+n L1+1;ry=m+ny L1+1;rz=m+n L1+1;
+ KroneckerProduct[ one[rz,rx,Nc],Tx]+  KroneckerProduct[ one[rz,ry,Nc],Ty]+ KroneckerProduct[ one[rz,rz,Nc],Tz ]] ,{m,0,L1-1},{n,0,L2-1}];T];
 
 bilinears[U_,L_] :=Module[  { Nc=L^2,TU,TUh,u,\[Chi]=Array[Null,3],\[Omega]=Array[Null,2],\[Xi]=Array[Null,6]},
 TU=Tmat[L,L] . U;TUh=TU[[;;,-4Nc;;-1]];u=I  TUh . TUh\[ConjugateTranspose] ;
@@ -494,13 +514,6 @@ Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;    \[Chi][[1,r]][[2,2]] =-\[
 \[Chi]fixgauge[\[Chi]0_,u0_,L_]:= Module[{\[Chi]=\[Chi]0 }, 
 Do[  \[Chi][[\[Alpha],r]][[\[Alpha]+1,\[Alpha]+1]] = u0[[r,\[Alpha]]]Abs@\[Chi]0[[\[Alpha],r]][[\[Alpha]+1,\[Alpha]+1]];      ,{\[Alpha],1,3} , {r,1,L^2}];   
    \[Chi] ];
-icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^-12];icc= I TUh . TUh\[ConjugateTranspose] ; (icc-ConjugateTranspose[icc] )/2 ];
-
-Ugauge4v[U0_,L_]:= Module[{d1,d2,U=U0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ;       r = m+n L+1;    U[[r,1]][[1,1]] =-U0[[r,1]][[1,1]]; U[[r,1]][[2,2]] =-U0[[r,1]][[2,2]];      ]   , {i,1,d1}];   
-Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;     U[[r,1]][[1,1]] =-U0[[r,1]][[1,1]];U[[r,1]][[2,2]] =-U0[[r,1]][[2,2]];       ]   , {i,1,d1}];     U];
-
-icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^(-12)];icc= I  TUh . TUh\[ConjugateTranspose] (*; (icc-ConjugateTranspose[icc] )/2*) ];
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -612,14 +625,6 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-
-
-(*\[CapitalGamma]s=Table[x,{x,-.6,.6,.1}];
-hV=Table[{x,0,0},{x,0.0001,1.2,.1}];
-hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
-parametersMat={
-Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]
-};*)
 
 
 Print[" "];
@@ -746,7 +751,7 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
         ]  , {ev,1,Length[parametersMat]}, {l,1,Length@Ls}, {p,1,Length[parametersMat[[1]] ]}  ]   
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*pure loop w/ vortices*)
 
 
@@ -813,7 +818,7 @@ Print[" "];   ];
 Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*vortex free + gradually increase  electric field*)
 
 
@@ -838,11 +843,11 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]
 minSteps=5;
 Do[  Module[
 { L=Ls[[l]],Nc,h,En,EnList={{},{},{}},EMF,Esum,Econst,u0,u1,u2,U,\[Xi],V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},\[Eta],p,Jmat,JmatMod,hv,gauge="g0",Jarray,T},
- p=Length[hV](pt-1)+ph;         Nc=L^2; T=Tmat[L,L]; 
+ p=Length[hV](pt-1)+ph;         Nc=L^2; T=1/Sqrt[2] Tmat[L,L]; 
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
 Print["JmatMod=",fromJmat[JmatMod],"; L=",L,"; h=(", hV[[ ph,1 ]],",",hV[[ ph,2 ]],",",hV[[ ph,3]],"); "];
 	u0=uniformU[1,L]; (* <-  the 2nd difference : gauge4v *) 	
-    \[Eta]=-0.2;
+    \[Eta]=-0.2 +1.13 fromJmat[Jmat][[3]];
 {jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];
 	U=Table[UG,{r,1,Nc}];
 	V=Table[VG,{r,1,Nc}];
@@ -850,12 +855,18 @@ Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure},
 {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure}=Chop@loadDataPure[toPathPure800[parametersMat[[ev,p]],L,acuracy, gauge,NbName]    ];
 Do[ U[[r,1]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; U[[r,2]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; U[[r,3]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; ,{r,1,Nc}];           ]; 
 
+Module[{r2,i,r0}, r2=\[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];i=1; r0=r2+L (-1+i+r2);
+Print[MatrixForm/@round[#,1000]&@U[[r0]] ];
+Print[MatrixForm/@round[#,100000]&@V[[r0]] ];
+];
+
 Jarray=Jarray4v[Table[Jmat,{r,1,L^2}],JmatMod,L];
+
 For[j=1,  ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^(-acuracy+1)]!= 0)    ) , j++,   
 
-Module[{H,u},  H=Hmf[Jarray,h,U,V,L,\[Eta]] ;u=Quiet@UmatK[T\[ConjugateTranspose] . H . T];  u1=Im@Chop@icc[u,L,T]; (*umat=u;*)
+Module[{H,u},  H=Hmf[Jarray,h,U,V,L,\[Eta]]; u=Quiet@UmatK[ConjugateTranspose[T] . H . T];  u1=2 Chop@icc[u,L,T ]; (*umat=u;*)
+If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};      ]; 
 
-If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};  \[CapitalDelta]V=1/(2 Nc) Sum[Abs[traceG[V[[r,\[Sigma]]]]],{r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}}    ]; 
 
 EMF=EnMF[ Jarray,h,U,V, L,\[Eta]];Esum=Quiet@eigenvaluesEmf[ Jarray,h,U,V, L,\[Eta]];Econst=constantMF[Jarray,U,V,L];
 EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnList[[3]]={EnList[[3]],{j,Econst}};   
@@ -864,8 +875,15 @@ Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor]
     n=\[LeftFloor]rz/L\[RightFloor];m=rz-n L;rx=Mod[m+1,L]+n L;ry=m+Mod[n+1,L] L;Io=Mod[\[Alpha]+8rz,8Nc,1]; 
     U[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];    U[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8ry,8Nc,1],Io]];    U[[rz+1,3,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Io]];
     V[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+8rz,8Nc,1],Io]];    V[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Mod[Io+4,8Nc,1] ]];    ]; , {R0,0,16Nc-1}  ];    ]; 
-(*u00=u1; *)
-u2=u1;      Print[" j =",j, "/",steps, "; Delta V=",InputForm[\[CapitalDelta]V], "; Delta=",InputForm[\[CapitalDelta]1], ";  E=", round/@(2{EMF,Esum,Econst}),"; "  ];     
+ 
+ If[ev==1\[And]p==1,Module[{r2,i,r0}, r2=\[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];i=1; r0=r2+L (-1+i+r2);
+Print[MatrixForm/@round[#,1000]&@U[[r0]] ];
+Print[MatrixForm/@round[#,100000]&@V[[r0]] ];
+];   ]; 
+\[CapitalDelta]V=1/(8 Sqrt[3] Nc) Sum[Sqrt@Total[ Power[#,2]&/@traceG[V[[r,\[Sigma]]]] ] , {r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}};
+(*Do[ V[[r,\[Sigma]]]=Sum[ 1/4 Mmat[[\[Gamma]]] traceM[ V[[r,\[Sigma]]] ][[\[Gamma]]] ,{\[Gamma],1,3}],{\[Sigma],1,2},{r,1,Nc}];*)
+  
+u2=u1;      Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@({EMF,Esum,Econst}),"; "  ];     
 ];  
 (*Module[{H,u}, H=Hmf[Jarray,h,U,V,L,1]; u=Quiet@UmatK[T\[ConjugateTranspose] . H . T]; {U,V,\[Xi],u1}=(*BiParallel*)bilinears[u,L,T];       ];  	*)    (*<-- rewrite bilinears   *)
 \[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2];
