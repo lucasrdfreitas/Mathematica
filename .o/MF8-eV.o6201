@@ -1,0 +1,42 @@
+Before Starting Kernels
+Starting Kernels
+ 
+    NbName=805; 
+    Lambda s=ηs; 
+    Ls={28}; 
+    tV={0}; 
+    ts={{0, 160, 0, 0, -60}}; 
+    hV={{0.05, 0, 0}};
+    Couplings=
+    Gammas=Γs; 
+    Steps=150; 
+    acuracy=6; 
+ 
+Definition timing= 31.445159
+
+    Pure and with vortices 
+
+
+Set::partw: Part 175 of uniform[-1., 28, 28] does not exist.
+
+Set::partw: Part 148 of uniform[-1., 28, 28] does not exist.
+
+Set::partw: Part 176 of uniform[-1., 28, 28] does not exist.
+
+General::stop: Further output of Set::partw will be suppressed during this calculation.
+
+Part::partd: Part specification uniform[-1., 28, 28][[1,1]] is longer than depth of object.
+
+Part::partd: Part specification uniform[-1., 28, 28][[1,2]] is longer than depth of object.
+
+Part::partd: Part specification uniform[-1., 28, 28][[1,3]] is longer than depth of object.
+
+General::stop: Further output of Part::partd will be suppressed during this calculation.
+
+Part::partw: Part 29 of uniform[-1., 28, 28] does not exist.
+
+Part::partw: Part 29 of uniform[-1., 28, 28] does not exist.
+
+Part::partw: Part 29 of uniform[-1., 28, 28] does not exist.
+
+General::stop: Further output of Part::partw will be suppressed during this calculation.

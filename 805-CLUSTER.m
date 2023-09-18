@@ -786,7 +786,7 @@ add4Vortices[ Jarray,JmatMicro, RS,RW, RE,RN,L] ];
 
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
-eV0=0;U=2600;JH=300; dmax=.5; s0=1;
+eV0=0;U=2600;JH=300; dmax=.8; s0=1;
 
 parametersMat=N@Table[Flatten[ Table[{
 JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],

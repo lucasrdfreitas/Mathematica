@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #$ -l hostname=micro4.local 
-#$ -N MF8-PH_c
+#$ -N MF8-eV
 #$ -l h_rt=120:00:00                   #estimate max run time
 #$ -q all.q
 #$ -m ea
@@ -13,4 +13,4 @@
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/sge/lib/lx-amd64
 export CLASSPATH=/opt/sge/lib/drmaa.jar:/opt/sge/lib/juti.jar:/opt/sge/lib/jgdi.jar
 #
-math -script 804-CLUSTER.m
+math -script 805-CLUSTER.m
