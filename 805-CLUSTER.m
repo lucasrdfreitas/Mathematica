@@ -239,7 +239,7 @@ flipUoneZbond[u0_,L1_,L2_]:= Module[{R1,u=u0,m0=\[LeftCeiling]L1/2\[RightCeiling
   Module[{r,m,n}, m =Mod[R1[[1]],L1] ; n=Mod[R1[[2]],L2] ; r = m+n L1+1;    u[[r, 3 ]] =-u0[[r,3 ]];      ]   ;  u           ];
 flipUZMaxSpaced[u0_,L1_,L2_]:= Module[{R1,d,u=u0,m0=\[LeftCeiling]L1/2\[RightCeiling] -1,n0=\[LeftCeiling](L2+1)/2\[RightCeiling]-1 }, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= { m0,n0};
 Do[  Module[{r,m,n}, m =Mod[R1[[1]]+i,L1] ; n=Mod[R1[[2]]-i,L2] ; r = m+n L1+1;    u[[r, 3 ]] =-u0[[r,3 ]];      ]   , {i,0,d-1}];  u           ];
-		consider other gauge configurations: 
+
 uniformU[u_,L_]:=Table[ {u,u,u},L^2];
 gauge4v[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  
 mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
@@ -254,8 +254,8 @@ positionVortex[v_,L_]:=Module[{d1,d2,r2,mS,nS,mW,nW,mE,nE,mN,nN},
 		 mN=L-r2-1;     nN=L-r2-1;
 
 		{{mS,nS},{mW,nW},{mE,nE},{mN,nN}}[[v]]
-]
-v=1  South, v=2 West, v=3 East, v=4 North
+];
+(*v=1  South, v=2 West, v=3 East, v=4 North*)
 gauge2v[u0_,L_,\[Alpha]_]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];   Do[  Module[{r,m,n},
 							m={r2-1,             r2-1+i,              r2-1+i   }[[\[Alpha]]]; 
 							n={r2-1+i,       L-r2-1,             L-r2-i   }[[\[Alpha]]];
