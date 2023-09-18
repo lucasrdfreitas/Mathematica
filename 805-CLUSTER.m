@@ -32,6 +32,8 @@ dmax=.5; s0=1;
 
 ReverseSort[list_]:=Reverse@Sort@list;
 uniform[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2];  
+asites[m_,n_]:=m nx+n ny;
+bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 
 one[i_,j_,N_]:= SparseArray[ {i,j} -> 1, {N,N}];  block[i_,j_] := one[i,j,8];
@@ -70,12 +72,7 @@ traceUNUN[u_]:=2{{u[[1,2]] u[[2,1]]-u[[1,1]] u[[2,2]],u[[1,3]] u[[2,1]]-u[[1,1]]
 
 
 (* ::Subsection::Bold::Closed:: *)
-(*for pure*)
-
-
-to\[Lambda][h_,\[CapitalDelta]v_:0.262]:= {h[[1]]^2,h[[2]]^2,h[[3]]^2}/(2\[CapitalDelta]v);
-toKappa[h_,\[CapitalDelta]v_:0.262]:=8h[[1]]h[[2]]h[[3]]/(  3 \[CapitalDelta]v^2 );
-KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If[C==0,{0,0,0},  d CubeRoot[3  \[CapitalDelta]v^2 \[Kappa]/(8C)]   ]] ;
+(*Pure Kitaev model definitions*)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -83,49 +80,21 @@ KappaToH[\[Kappa]_,d_,\[CapitalDelta]v_:0.262]:=Module[{C=d[[1]]d[[2]]d[[3]]},If
 
 
 dataToFilePure[ parameters0_,L_,acuracy_,gauge_,data_] :=
-Module[ {path,f,parameters=parameters0},
-parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;		
-(*createDir@FileNameJoin[{Directory[],"Files","pure", gauge}] ;*)
-createDir@FileNameJoin[{Directory[],"Files",NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
-{"X1"->ToString[parameters[[9]]],"X2"->ToString[parameters[[10]]],"X3"->ToString[parameters[[1;;3]]],"X4"->ToString[parameters[[5;;7]]] }] }];
-		path = toPathPure[parameters,L,acuracy,gauge,NbName];		
-		(*Print["Pure path=",path];Print[];*)
-		f = OpenAppend[path];
-		 Write[ f, data];
-		 Close[f];                ];	
-		 		 
-toPathPure[parameters0_,L_,acuracy_,gauge_]:= 
- Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
+Module[ {path,parameters=parameters0,f},		
+(*createDir@FileNameJoin[{NotebookDirectory[],"Files","pure", gauge}] ;*)
 parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;
-FileNameJoin[{Directory[], "Files" ,NbName,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
-{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],
-"X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
-StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
-   }]];
- 
-
-
-createDir[path_] :=
-Module[ {l=Length@FileNames[path]},		
-	If[ l==0,  (*CreateDirectory@File@FileNameJoin[{path}];*) 
-	CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path,"graph" }]; , Null]  ];
-
-
-dataToFilePure[ parameters0_,L_,acuracy_,data_,gauge_,NbName_]:=
-Module[ {path,f,parameters=parameters0},
-parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;		
-(*createDir@FileNameJoin[{Directory[],"Files","pure", gauge}] ;*)
-createDir@FileNameJoin[{Directory[],"Files",NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
-{"X1"->ToString[parameters[[9]]],"X2"->ToString[parameters[[10]]],"X3"->ToString[parameters[[1;;3]]],"X4"->ToString[parameters[[5;;7]]] }] }];
-		path = toPathPure[parameters,L,acuracy,gauge,NbName];		
-		(*Print["Pure path=",path];Print[];*)
-		f = OpenAppend[path];
+createDir@FileNameJoin[{NotebookDirectory[],"Files","pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+{"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],"X4"->  ToString[parameters[[5;;7]]]   }]
+           }] ;
+		path = toPathPure[parameters,L,acuracy,gauge];		
+		Print["Pure path=",path];Print[];
+		f = OpenWrite[path];
 		 Write[ f, data];
-		 Close[f];                ];		 
-		 
-toPathPure[parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
+		 Close[f];                ];
+
+toPathPure[parameters0_,L_,acuracy_,gauge_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},h=parameters[[4]] ;hS=parameters[[8]]; {r,\[Theta],\[Phi]}=hS;   
 parameters[[1]]=0;parameters[[3]]=0;parameters[[5]]=0;parameters[[7]]=0;
-FileNameJoin[{Directory[], "Files" ,NbName,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+FileNameJoin[{NotebookDirectory[], "Files" ,"pure",gauge,StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
 {"X1"->  ToString[parameters[[9]]],"X2"->  ToString[parameters[[10]]],"X3"->  ToString[parameters[[1;;3]]  ],
 "X4"->  ToString[parameters[[5;;7]]]   }] , "data"  , 
 StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
@@ -138,19 +107,39 @@ data=ReadList[f];
 Close[f];			
 data[[-1]]
 ];
+createDir[path_] :=
+Module[ {l=Length@FileNames[path]},		
+	If[ l==0,  CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }]; 
+,Null]  ];
+
+
+dataToFilePure800[ parameters0_,L_,acuracy_,gauge_,data_,NbName_] :=
+Module[ {path,parameters=parameters0,f},		
+(*createDir@FileNameJoin[{NotebookDirectory[],"Files","pure", gauge}] ;*)
+createDir@FileNameJoin[{Directory[],"Files",ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+{"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
+"X3"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[1]]  ],
+"X4"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[3]]] }]
+           }] ;
+		path = toPathPure800[parameters,L,acuracy,gauge,NbName];		
+		Print["Pure path=",path];Print[];
+		f = OpenWrite[path];
+		 Write[ f, data];
+		 Close[f];                ];
+
+toPathPure800[parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},
+h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS; 
+FileNameJoin[{Directory[], "Files" ,ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
+{"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
+"X3"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[1]]  ],
+"X4"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[3]]] } ] , "data"  , 
+StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
+   }]];
 
 
 
 (* ::Subsubsection::Bold::Closed:: *)
 (*Auxiliary matrices for the Hamiltonian  [2x2 matrices]*)
-
-
-(* ::Text::Bold:: *)
-(*we define Z2 gauge field u[r] for each unit cell r as a three component vector which each component correspond \[Alpha] to the gauge field in the \[Alpha] bond for the A site in the unit cell r.*)
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 toR[m0_,n0_,L_,M_]:= Module[{\[CapitalDelta]n=\[LeftFloor]n0/L\[RightFloor],n,m},n=Mod[n0 ,L]; m=Mod[m0+M \[CapitalDelta]n,L]; m + n L+1];
@@ -188,10 +177,6 @@ EandUPure[H_]:= Module[ {R=Transpose@ReverseSort@Transpose@Quiet@Eigensystem@N[H
 \[DoubleStruckCapitalU]occupiedPure[TU_,Nc_]:= Drop[Take[TU\[Transpose],-Nc-1],{2}]\[Transpose];
 
 
-(* ::Code::Bold:: *)
-(**)
-
-
 correlations[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS },
 \[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
 
@@ -207,104 +192,38 @@ icc[[J,Io]]    ]    , {m,1,L},{n,1,L},  {\[Alpha],1,4},{\[Beta],1,4} ];
 SS
 ];
 
-(* writting the exp values in the form of the MF parameters:   *)
+
+
+(* ::Subsubsection::Bold::Closed:: *)
+(*to MF pure + gauge*)
+
+
 toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
 \[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
 
 SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ 
 Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];
- {{    1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0.01,0,0},{0,0,0.01,0},{0,0,0,u[[ Mod[rz+1, L^2,1] ,3]] }}    ],{n,0,L-1} , {m,0,L-1}];
+ {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,u[[rz+1,3]]}}    ],{n,0,L-1} , {m,0,L-1}];
 
 SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];
- {{   1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,u[[ Mod[rz+1,L^2,1] ,1]] ,0,0},{0,0,0.01,0},{0,0,0,0.01}}     ] ,{n,0,L-1} , {m,0,L-1}];
+ {{   1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,u[[ rz+1 ,1]] ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];
 SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;
 rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];
- {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0.01,0,0},{0,0,u[[ Mod[rz+1,L^2,1],2]] ,0},{0,0,0,0.01}}        ],{n,0,L-1} , {m,0,L-1}];
+ {{    1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,u[[rz+1,2]]  ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];
 SS        ];
-
-toMFparametersOccupiedPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
-\[DoubleStruckCapitalU]=TmatPure[L] . U;(*\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];*)\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU]occupiedPure[\[DoubleStruckCapitalU],Nc];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
+toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },
+\[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];
 
 SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ 
 Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];
- {{    1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,u[[ Mod[rz+1, L^2,1] ,3]] }}    ],{n,0,L-1} , {m,0,L-1}];
+ {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,u[[rz+1,3]] }}    ],{n,0,L-1} , {m,0,L-1}];
 
 SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];
- {{   1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,u[[ Mod[rz+1,L^2,1] ,1]] ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];
+ {{  1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,u[[ rz+1 ,1]]  ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];
 SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;
 rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];
- {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,u[[ Mod[rz+1,L^2,1],2]] ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];
+ {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,u[[rz+1,2]] ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];
 SS        ];
-
-
-
-
-(* ::Subsubsection::Bold::Closed:: *)
-(*to MF pure*)
-
-
-(* ::Input:: *)
-(*(* writting the exp values in the form of the MF parameters:   *)*)
-(*toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },*)
-(*\[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];*)
-(**)
-(*SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ *)
-(*Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];*)
-(* {{    1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,u[[ Mod[rz+1, L^2,1] ,3]] }}    ],{n,0,L-1} , {m,0,L-1}];*)
-(**)
-(*SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];*)
-(* {{   1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,u[[ Mod[rz+1,L^2,1] ,1]] ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];*)
-(*SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;*)
-(*rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];*)
-(* {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,u[[ Mod[rz+1,L^2,1],2]] ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];*)
-(*SS        ];*)
-(**)
-(*toMFparametersOccupiedPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },*)
-(*\[DoubleStruckCapitalU]=TmatPure[L] . U;(*\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];*)\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU]occupiedPure[\[DoubleStruckCapitalU],Nc];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];*)
-(**)
-(*SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ *)
-(*Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];*)
-(* {{    1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,u[[ Mod[rz+1, L^2,1] ,3]] }}    ],{n,0,L-1} , {m,0,L-1}];*)
-(**)
-(*SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];*)
-(* {{   1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,u[[ Mod[rz+1,L^2,1] ,1]] ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];*)
-(*SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;*)
-(*rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];*)
-(* {{     1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,u[[ Mod[rz+1,L^2,1],2]] ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];*)
-(*SS        ];*)
-(**)
-
-
-(* ::Input:: *)
-(*(* writting the exp values in the form of the MF parameters:   *)*)
-(*toMFparametersPure[U_,u_,L_,M_] :=Module[  { Nc=L^2,\[DoubleStruckCapitalU],\[DoubleStruckCapitalU]h,icc,SS=Array[Null,3]  },*)
-(*\[DoubleStruckCapitalU]=TmatPure[L] . U;\[DoubleStruckCapitalU]h=\[DoubleStruckCapitalU][[;;,-Nc;;-1]];icc=Chop[I  \[DoubleStruckCapitalU]h . \[DoubleStruckCapitalU]h\[ConjugateTranspose] ];*)
-(**)
-(*SS[[3]]=ArrayFlatten[ # ,1]& @ Table[ *)
-(*Module[{ rz,Io,J},rz=m+n L; Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1 +2rz,2L^2,1];*)
-(* {{   -u[[rz+1,3]]  1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,-1 }}    ],{n,0,L-1} , {m,0,L-1}];*)
-(**)
-(*SS[[1]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,rx,mx,Io,J},mx=Mod[m+1,L]; rz=m+n L;rx= mx+n L ;Io=Mod[1+2rz,2L^2,1];J=Mod[1 + 1+2rx,2L^2,1];*)
-(* {{ -u[[ rz+1 ,1]]  1/2 (icc[[J,Io]]-icc[[Io,J]] ) ,0,0,0},{0,-1 ,0,0},{0,0,0,0},{0,0,0,0}}     ] ,{n,0,L-1} , {m,0,L-1}];*)
-(*SS[[2]]=ArrayFlatten[ # ,1]& @ Table[ Module[{ rz,ry,my,ny,Io,J}, ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];  ry= my+ny L;*)
-(*rz=m+n L;Io=Mod[1+2rz,2L^2,1];J=Mod[1+ 1+2ry,2L^2,1];*)
-(* {{   -u[[rz+1,2]]  1/2 (icc[[J,Io]]-icc[[Io,J]] ),0,0,0},{0,0,0,0},{0,0,-1 ,0},{0,0,0,0}}        ],{n,0,L-1} , {m,0,L-1}];*)
-(*SS        ];*)
-(**)
-
-
-(* ::Subsubsection::Bold::Closed:: *)
-(*gauge pure*)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-nx={1/2,Sqrt[3]/2};ny={-(1/2),Sqrt[3]/2};     \[Delta]x={-Sqrt[3]/2,-1/2}/Sqrt[3];\[Delta]y={Sqrt[3]/2,-1/2}/Sqrt[3];\[Delta]z={0,1}/Sqrt[3];
- 
-asites[m_,n_]:=m nx+n ny;
-bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 gaugeConfigUPure[\[Sigma]_,L1_,L2_]:=Module[{bonds,linethick=.012 (Log[49]/Log[L1 L2]),lattice,size}, size = 0.01 (Log[49]/Log[L1 L2])^2 ;
 lattice=Flatten[Table[{  {Black,PointSize[4 size],Point[asites[m,n]]},{Black,PointSize[4 size],Point[bsites[m,n]]}  , {Gray,PointSize[2  size ],Point[asites[m,n]]},{White,PointSize[2  size],Point[bsites[m,n]]}     },{m,0,L1-1},{n,0,L2-1} ], 2    ];
 bonds=Flatten[Table[
@@ -320,24 +239,10 @@ flipUoneZbond[u0_,L1_,L2_]:= Module[{R1,u=u0,m0=\[LeftCeiling]L1/2\[RightCeiling
   Module[{r,m,n}, m =Mod[R1[[1]],L1] ; n=Mod[R1[[2]],L2] ; r = m+n L1+1;    u[[r, 3 ]] =-u0[[r,3 ]];      ]   ;  u           ];
 flipUZMaxSpaced[u0_,L1_,L2_]:= Module[{R1,d,u=u0,m0=\[LeftCeiling]L1/2\[RightCeiling] -1,n0=\[LeftCeiling](L2+1)/2\[RightCeiling]-1 }, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= { m0,n0};
 Do[  Module[{r,m,n}, m =Mod[R1[[1]]+i,L1] ; n=Mod[R1[[2]]-i,L2] ; r = m+n L1+1;    u[[r, 3 ]] =-u0[[r,3 ]];      ]   , {i,0,d-1}];  u           ];
-
-
-(* ::Text::Bold:: *)
-(*		consider other gauge configurations: *)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
+		consider other gauge configurations: 
 uniformU[u_,L_]:=Table[ {u,u,u},L^2];
-gauge2vX[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ; r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];               u           ];
-gauge2vY[u0_,L_]:= Module[{d1,d2,u=u0,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mW=r2-1;nW=L-r2-1;
-Do[  Module[{r,m,n}, m =mW+i; n=nW; r = m+n L+1;    u[[r,2]] =-u0[[r,2]];      ]   , {i,1,d1}];                u           ];
-gauge2vZ[u0_,L_]:= Module[{d1,d2,u=u0,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mW=r2-1;nW=L-r2-1;
-Do[  Module[{r,m,n}, m =mW+i; n=nW-i+1; r = m+n L+1;    u[[r,3]] =-u0[[r,3]];      ]   , {i,1,d1}];                u           ];
-gauge4v[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
+gauge4v[u0_,L_]:= Module[{d1,d2,u=u0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  
+mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ;       r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];   
 Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;    u[[r,1]] =-u0[[r,1]];      ]   , {i,1,d1}];               u           ];
 positionVortex[v_,L_]:=Module[{d1,d2,r2,mS,nS,mW,nW,mE,nE,mN,nN},
@@ -349,41 +254,21 @@ positionVortex[v_,L_]:=Module[{d1,d2,r2,mS,nS,mW,nW,mE,nE,mN,nN},
 		 mN=L-r2-1;     nN=L-r2-1;
 
 		{{mS,nS},{mW,nW},{mE,nE},{mN,nN}}[[v]]
-] ;
-
-
-(* ::Text::Bold:: *)
-(*v=1  South, v=2 West, v=3 East, v=4 North*)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
+]
+v=1  South, v=2 West, v=3 East, v=4 North
 gauge2v[u0_,L_,\[Alpha]_]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];   Do[  Module[{r,m,n},
 							m={r2-1,             r2-1+i,              r2-1+i   }[[\[Alpha]]]; 
 							n={r2-1+i,       L-r2-1,             L-r2-i   }[[\[Alpha]]];
  r = m+n L+1;    u[[r,\[Alpha]]] =-u0[[r,\[Alpha]]];      ]   , {i,1,d1}];                u           ];
-
-
-(* ::Subsubsection::Bold::Closed:: *)
-(*correlation*)
-
-
-(* ::Code::Bold:: *)
-(*spin-spin correlation*)
-
-
-ssC[\[Chi]_,\[Omega]_,r_,L_,M_]:=Module[ {m,n,mx,my,ny,R},n=\[LeftFloor](r-1)/L\[RightFloor];m=r-1-n L;mx=Mod[m+1,L];ny=Mod[n+1,L];my=If[ny==0,Mod[m-M,L] , m];
- R={ mx+n L +1,my+ny L +1,m+n L +1};
-Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]]
-,
-{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]
-];
-
-ssC2[\[Chi]_,\[Omega]_,m_,n_,L_]:=Module[ {mx,ny,R,r=Mod[m,L] +Mod[n,L] L +1},mx=Mod[m+1,L];ny=Mod[n+1,L]; R={ mx+n L +1,m+ny L +1,r};
-Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]]   - \[Chi][[\[Gamma],r,\[Alpha]+1,\[Beta]+1]] \[Chi][[\[Gamma],r,0+1,0+1]]  +  \[Chi][[\[Gamma],r,\[Alpha]+1,0+1]] \[Chi][[\[Gamma],r,0+1,\[Beta]+1]],
-{\[Gamma],1,3}, {\[Alpha],1,3},{\[Beta],1,3}]                                      ];
+gaugeConfig[\[Chi]_,L1_,L2_]:=Module[{bonds,linethick=.012 (Log[49]/Log[L1 L2]),lattice,size}, size = 0.01 (Log[49]/Log[L1 L2])^2 ;
+lattice=Flatten[Table[{  {Black,PointSize[4 size],Point[asites[m,n]]},{Black,PointSize[4 size],Point[bsites[m,n]]}  , {Gray,PointSize[2  size ],Point[asites[m,n]]},{White,PointSize[2  size],Point[bsites[m,n]]}     },{m,0,L1-1},{n,0,L2-1} ], 2    ];
+bonds=Flatten[Table[
+{    
+{ If[\[Chi][[3,m+n L1+1]][[4,4]]>= 0, Darker@Yellow ,Darker@Blue],If[\[Chi][[3,m+n L1+1]][[4,4]]>= 0,  Thickness[1.5linethick] ,Thickness[linethick] ] ,Line[{asites[m,n],bsites[m,n]}]},                   (*z-bonds*)
+{If[\[Chi][[1,m+n L1+1]][[2,2]]>= 0, Cyan,Darker@Red],If[\[Chi][[1,m+n L1+1]][[2,2]]>= 0,Thickness[1.5 linethick] ,Thickness[linethick] ],Line[{asites[m,n],bsites[m+1,n]}]},             (*x-bonds*)
+{If[\[Chi][[2,m+n L1+1]][[3,3]]>= 0, Magenta ,Darker@Green],If[\[Chi][[2,m+n L1+1]][[3,3]]>= 0, Thickness[1.5linethick] ,Thickness[linethick] ],Line[{asites[m,n],bsites[m,n+1]}]}              (*y-bonds*)
+},{m,0,L1-1},{n,0,L2-1} ], 2    ];
+Graphics[{bonds,lattice},ImageSize->300]             ];
 
 
 
@@ -391,14 +276,10 @@ Table[ \[Omega][[1,r,\[Alpha]+1,0+1]]   \[Omega][[2,R[[\[Gamma]]],\[Beta]+1,0+1]
 (*electric field*)
 
 
-(* ::Code::Bold:: *)
-(**)
+uniform[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2];  
 
-
-uniformK[K_,L1_,L2_]:=Table[   {K,K,K}     ,L1 L2];
-
-addVortex[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko},
-K[[ m+n L1 +1,3    ]]=K0;
+addVortex[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
+K[[ m+n L1 +1,3    ]]=K0;  
 K[[ Mod[m+1,L1]+Mod[n-1,L2] L1 +1  ,2    ]]=K0;
 K[[ Mod[m+1,L1]+n L1 +1,1    ]]=K0;
 K[[ Mod[m+1,L1]+Mod[n+1,L2] L1 +1  ,3   ]]=K0;
@@ -407,34 +288,15 @@ K[[ Mod[m-1,L1]+Mod[n+1,L2] L1 +1  ,1   ]]=K0;
 K];
 
 add2Vortices[ Ko_,K1_,K2_, R1_,R2_,L1_,L2_] :=Module[ {K}, K = addVortex[ Ko,K1, R1,L1,L2]; addVortex[ K,K2, R2,L1,L2]];
-add4Vortices[ Ko_,Kmod_, R1_,R2_, R3_,R4_,L_] :=Module[ {K}, K = addVortex[ Ko,Kmod, R1,L,L]; K = addVortex[ K,Kmod, R2,L,L]; K = addVortex[ K,Kmod, R3,L,L]; addVortex[ K,Kmod, R4,L,L]];
-
+add4Vortices[ K0_,Kmod_, R1_,R2_, R3_,R4_,L_] :=Module[ {K}, K = addVortex[ K0,Kmod, R1,L,L]; K = addVortex[ K,Kmod, R2,L,L]; K = addVortex[ K,Kmod, R3,L,L]; addVortex[ K,Kmod, R4,L,L]];
 add2VorticesMaxSpaced[ Ko_,K1_,K2_,L1_,L2_] := Module[{R1,R2,d}, d=\[LeftFloor](L1-1)/2\[RightFloor]; R1= {\[LeftFloor]L1/2\[RightFloor] ,\[LeftFloor](L2+1)/2\[RightFloor] };R2= {\[LeftFloor]L1/2\[RightFloor]   +d,\[LeftFloor](L2+1)/2\[RightFloor] -d};
 	add2Vortices[ Ko,K1,K2, R1,R2,L1,L2]];
-
 add4VorticesMaxSpaced[ K0_,Kmod_,L_] :=Module[ {RS,RE,RW,RN,r2},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];
 		RS={(r2-1),(r2-1)};
 		RW={(r2-1),(L-r2-1)};
 		RE={(L-r2-1),(r2-1)};
 		RN={(L-r2-1),(L-r2-1)};
 add4Vortices[ K0,Kmod, RS,RW, RE,RN,L] ];
-
-\[Chi]Gx = {{0.5249,0,0,0},{0,-1,0,0},{0,0,0,0},{0,0,0,0}};\[Chi]Gy = {{0.5249,0,0,0},{0,0,0,0},{0,0,-1,0},{0,0,0,0}};\[Chi]Gz ={{0.5249,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,-1}};
-
-\[Omega]GA = {{I,0.000001,0.000001,0.000001},{-0.000001,I,0.000001,-0.000001},{-0.000001,-0.000001,I,0.000001},{-0.000001,0.000001,-0.000001,I}}; \[Omega]GB = \[Omega]GA;
-
-
-
-(* ::Subsubsection::Bold::Closed:: *)
-(*more*)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-asites[m_,n_]:=m nx+n ny;
-bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 
 (* ::Subsection::Closed:: *)
@@ -493,29 +355,27 @@ Bb=Sum[    Sum[    Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] N[[\[Alpha]]] traceN[ V[[1
 {KroneckerProduct[ {{1,0},{0,0}},Re@Ba],KroneckerProduct[ {{0,0},{0,1}},Re@Bb] }];
 
 cMFmom[Jm_,U_,V_]:=Module[{N=Nmat}, Sum[ 1/8  Jm[[\[Gamma]]][[\[Alpha],\[Beta]]] (traceN[ V[[1]] ][[\[Alpha]]]  traceN[ V[[2]] ][[\[Beta]]] +2  Tr[ U[[\[Gamma]]]\[Transpose] . N[[\[Alpha]]] . U[[\[Gamma]]] . N[[\[Beta]]] ]   ),{\[Alpha],1,3},{\[Beta],1,3},{\[Gamma],1,3}]          ];
-enMFmom[Jm_,U_,V_,h_,\[Eta]_:0]:=Module[{M=Mmat,N=Nmat,G=Gmat,\[Lambda]},\[Lambda]=\[Eta]{h,h}+\[Lambda]effmom[Jm,h,V];  cMFmom[Jm,U,V]+1/4  Sum[-2h[[\[Gamma]]] traceN[ V[[\[Sigma]]] ][[\[Gamma]]] + \[Lambda][[\[Sigma],\[Gamma]]] traceG[ V[[\[Sigma]]] ][[\[Gamma]]]
+enMFmom[Jm_,U_,V_,h_,\[Eta]_:0]   :=Module[{M=Mmat,N=Nmat,G=Gmat,\[Lambda]},\[Lambda]=\[Eta] {h,h}+ \[Lambda]effmom[Jm,h,V];  cMFmom[Jm,U,V]+1/4  Sum[-2h[[\[Gamma]]] traceN[ V[[\[Sigma]]] ][[\[Gamma]]] + \[Lambda][[\[Sigma],\[Gamma]]] traceG[ V[[\[Sigma]]] ][[\[Gamma]]]
 ,{\[Sigma],1,2},{\[Gamma],1,3}]        ];
-enSUMmom[Jm_,U_,V_,h_,L_:30,\[Eta]_:0]:=Module[{\[Lambda],mT=toMomentumTable[L]},-cMFmom[Jm,U,V]+1/(2L^2) Sum[Total@Select[Eigenvalues@N@HmfMomentum[Jm,h,U,V,mT[[i]],\[Eta]],#<=0& ], {i,1,L^2}] ];
+enSUMmom[Jm_,U_,V_,h_,L_:30,\[Eta]_:0]:=Module[{\[Lambda],mT=toMomentumTable[L]},(*\[Lambda]=\[Eta] {h,h}+ \[Lambda]effmom[Jm,h,V];*)-cMFmom[Jm,U,V]+1/(2L^2) Sum[Total@Select[Eigenvalues@N@HmfMomentum[Jm,h,U,V,mT[[i]],\[Eta]  ] ,#<=0& ] , {i,1,L^2}] ];
 
 HmfMomentum[Jmatrice_,h_,U_,V_, k_,\[Eta]_:0] := Module[{Ax,Ay,Az,BA,BB, hx,hy,hz, kx,ky,ha,HA,HB,\[Lambda]}, kx=k . nx;ky=k . ny;
-\[Lambda]=\[Eta]{h,h}+ \[Lambda]effmom[Jmatrice,h,V];
+\[Lambda]=\[Eta] {h,h}+ \[Lambda]effmom[Jmatrice,h,V];
 {Ax,Ay,Az}=I AMFmom[Jmatrice,U];  ha= Exp[ I kx]  Ax + Exp[ I ky] Ay + Az;   
  (*ha=Exp[-I k.\[Delta]x] Ax + Exp[-I k.\[Delta]y] Ay +Exp[-I k.\[Delta]z] Az;*)   HA=N@( ha+ConjugateTranspose@ha );
 {BA,BB}= I BMFmom[Jmatrice,h,\[Lambda],V];   HB=BA+BB ; (*  HB=N[   ( HB+ConjugateTranspose@HB )/2 ];*)
 1/2 (HA+HB)   ];
 UmatK[H_]:= Module[ {R=Eigensystem@N[H]},ReverseSort[ R\[Transpose] ]\[Transpose][[ 2 ]]\[Transpose] ];
-\[Lambda]effmom[Jmat_,h_,V_]:=Module[{M},M=Table[1/2 traceN[V[[\[Sigma]]] ],{\[Sigma],1,2} ];  Table[ -h + 1/2 Sum[ Jmat[[\[Gamma]]] . M[[  Mod[\[Sigma]+1,2,1]  ]]  ,{\[Gamma],1,3}],    {\[Sigma],1,2}]     ];
+\[Lambda]effmom[Jmat_,h_,V_]:=Module[{M},M=Table[1/2 traceN[V[[\[Sigma]]] ],{\[Sigma],1,2} ];  Table[- h+1/2 Sum[ Jmat[[\[Gamma]]] . M[[  Mod[\[Sigma]+1,2,1]  ]]  ,{\[Gamma],1,3}],    {\[Sigma],1,2}]     ];
 HmfMomentumVec[Jmatrice_,h_,U_,V_, kTable_,\[Eta]_:0] :=Table[HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]],{l,1,Length@kTable}];
-
-
 UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[ConjugateTranspose] . HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]] . Tk,{l,1,Length@kTable}];
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*MF model definitions*)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Saving and Loading data*)
 
 
@@ -531,7 +391,8 @@ loadData[pathData_]:=
 Module[{f,data},  f = OpenRead[pathData];
 If[f==$Failed, Print["Failed to OpenRead file at: "]; Print[ pathData ]; Abort[]  ];
 	data=ReadList[f]; Close[f]; data[[-1]]   ];
-toPath800 [parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, filename,r,\[Phi],\[Theta]},h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS;   
+	
+toPath800[parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, filename,r,\[Phi],\[Theta]},h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS;   
 filename="t=X1_eV=X2_JKG=X3_JKGmod=X4";
 If[gauge=="free", parameters[[3]]=parameters0[[1]]; parameters[[6]]=0; filename="free_X2_JKG=X3";];
 If[gauge=="free_lambda",parameters[[3]]=parameters0[[1]];filename="lambda_X2_JKG=X3"; ];
@@ -551,37 +412,15 @@ If[gauge=="free_lambda",parameters[[3]]=parameters0[[1]];filename="lambda_X2_JKG
 		f = OpenAppend[path];
 		 Write[f, data];
 		 Close[f];                ];
-loadDataTry[pathData_]:=
+
+(*loadDataTry[pathData_]:=
 Module[ {f,data,path=FindFile[pathData]},
 If[path==$Failed,(*Print["New entry at:",pathData];*)Return[$Failed]];
 		        f = OpenRead[pathData];
 (*If[f==$Failed, Print["Failed to OpenRead file at: ", pathData ]; Abort[] ];*)
 		        data=ReadList[f];
 		        Close[f];			data[[-1]]
-];
-
-dataToFilePure800[ parameters0_,L_,acuracy_,gauge_,data_,NbName_] :=
-Module[ {path,parameters=parameters0,f},		
-(*createDir@FileNameJoin[{NotebookDirectory[],"Files","pure", gauge}] ;*)
-createDir@FileNameJoin[{Directory[],"Files",ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
-{"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
-"X3"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[1]]  ],
-"X4"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[3]]] }]
-           }] ;
-		path = toPathPure800[parameters,L,acuracy,gauge,NbName];		
-		Print["Pure path=",path];Print[];
-		f = OpenWrite[path];
-		 Write[ f, data];
-		 Close[f];                ];
-
-toPathPure800[parameters0_,L_,acuracy_,gauge_,NbName_]:= Module[{h ,hS,parameters=parameters0, r,\[Phi],\[Theta]},
-h=parameters[[2]] ;hS=parameters[[4]]; {r,\[Theta],\[Phi]}=hS; 
-FileNameJoin[{Directory[], "Files" ,ToString@NbName,"pure",gauge, StringReplace["t=X1_eV=X2_JKG=X3_JKGmod=X4",
-{"X1"->  ToString[parameters[[5]]],"X2"->  ToString[parameters[[6]]],
-"X3"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[1]]  ],
-"X4"->  ToString[NumberForm[#,{4,4}]&/@N@fromJmat@parameters[[3]]] } ] , "data"  , 
-StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy],"M"->  ToString[r,InputForm] ,"N"->ToString@\[Phi],"T"->ToString@\[Theta]}   ] 
-   }]];
+];*)
 
 
 
@@ -589,19 +428,16 @@ StringReplace["h=(M,N,T)_L=Y_A=Z.txt",{"Y"-> ToString[L], "Z"-> ToString[acuracy
 (*Hamiltonian  matrices*)
 
 
-Jmat[J_,K_,G_,Gp_,D_]:={
+Jmat[J_,K_,G_:{0,0,0},Gp_:{0,0,0},D_:{0,0,0}]:={
 {{J[[1]]+K[[1]],Gp[[1]],Gp[[1]]},{Gp[[1]],J[[1]],G[[1]]+D[[1]]},{Gp[[1]],G[[1]]-D[[1]],J[[1]]}},
 {{J[[2]],Gp[[2]],G[[2]]-D[[2]]},{Gp[[2]],J[[2]]+K[[2]],Gp[[2]]},{G[[2]]+D[[2]],Gp[[2]],J[[2]]}},
 {{J[[3]],G[[3]]+D[[3]],Gp[[3]]},{G[[3]]-D[[3]],J[[3]],Gp[[3]]},{Gp[[3]],Gp[[3]],J[[3]]+K[[3]]}}   
  };
-Hmf[Jmat_,h_,U_,V_,L_,\[Eta]_:1] := Module[{Nc=L^2,H,Hmat,\[Lambda]}, 
-\[Lambda]=\[Eta] \[Lambda]eff[Jmat,h,V,L];
+Hmf[Jmat_,h_,U_,V_,L_,\[Eta]_:0] := Module[{Nc=L^2,H,Hmat,\[Lambda]}, 
+\[Lambda]=\[Eta] Table[{h,h},Nc]+\[Lambda]eff[Jmat,h,V,L];
 Hmat=Haux[Jmat,h,U,V,\[Lambda],L];
-H= I Sum[Module[{rx,ry,rz,mx,ny}, mx=Mod[m+1,L];ny=Mod[n+1,L];
- rx=mx+n L+1;ry=m+ny L+1;rz=m+n L+1;
-  KroneckerProduct[ one[rz,rx,Nc],Hmat[[rz,1]]      ]+ 
-KroneckerProduct[ one[rz,ry,Nc],Hmat[[rz,2]]    ]+ 
-KroneckerProduct[ one[rz,rz,Nc],Hmat[[rz,3]]    ]
+H= I Sum[Module[{rx,ry,rz,mx,ny}, mx=Mod[m+1,L];ny=Mod[n+1,L];  rx=mx+n L+1;ry=m+ny L+1;rz=m+n L+1;
+  KroneckerProduct[ one[rz,rx,Nc],Hmat[[rz,1]]      ]+ KroneckerProduct[ one[rz,ry,Nc],Hmat[[rz,2]]    ]+ KroneckerProduct[ one[rz,rz,Nc],Hmat[[rz,3]]    ]
 ] ,{m,0,L-1},{n,0,L-1}];  1/2 (H+H\[ConjugateTranspose])];
 Haux[Jmat_,h_,U_,V_,\[Lambda]_,L_]:=Module[{M=Mmat,Nm=Nmat,G=Gmat},Table[Module[{ Ax,Ay,Az,BA,BB},
 {Ax,Ay,Az}=I KroneckerProduct[ {{0,1},{0,0}},#]&/@Re@Table[    Sum[   2  Jmat[[r,\[Gamma]]][[\[Alpha],\[Beta]]] Nm[[\[Alpha]]] . U[[r,\[Gamma]]] . Nm[[\[Beta]]] ,{\[Alpha],1,3},{\[Beta],1,3}], {\[Gamma],1,3}]   ;
@@ -610,7 +446,7 @@ KroneckerProduct[ {{1,0},{0,0}},Re@Sum[Sum[ Jmat[[r,\[Gamma]]][[\[Alpha],\[Beta]
 KroneckerProduct[ {{0,0},{0,1}},Re@Sum[Sum[ Jmat[[r,\[Gamma]]][[\[Alpha],\[Beta]]] Nm[[\[Alpha]]] Tr[Transpose[V[[r,1]]] . Nm[[\[Beta]]] ],{\[Alpha],1,3},{\[Beta],1,3}] -2 h[[\[Gamma]]] Nm[[\[Gamma]]]+\[Lambda][[r,2]][[\[Gamma]]] G[[\[Gamma]]],{\[Gamma],1,3}]]   };
 {Ax,Ay,Az+BA+BB} ],{r,1,L^2}]                  ];
 UmatK[H_]:= Module[ {R=Eigensystem@N[H]},ReverseSort[R\[Transpose]]\[Transpose][[2]]\[Transpose] ];
-\[Lambda]eff[Jmat_,h_,V_,L_]:=Module[{M},  M=Table[1/2 traceN[V[[r,\[Sigma]]] ],{r,1,L^2},{\[Sigma],1,2} ] ; Table[ h-1/2 Sum[ 
+\[Lambda]eff[Jmat_,h_,V_,L_]:=Module[{M},  M=Table[1/2 traceN[V[[r,\[Sigma]]] ],{r,1,L^2},{\[Sigma],1,2} ] ; Table[ -h+1/2 Sum[ 
 Jmat[[r,\[Gamma]]] . M[[   Mod[r+{ Mod[r,L]-Mod[r-1(2\[Sigma]-3),L] ,(Mod[\[LeftFloor](r-1)/L\[RightFloor]+1(2\[Sigma]-3),L]-Mod[\[LeftFloor](r-1)/L\[RightFloor],L])  L,0 }[[\[Gamma]]]  ,L^2,1],Mod[\[Sigma]+1,2,1]]]  ,{\[Gamma],1,3}],{r,1,L^2},{\[Sigma],1,2}]    ];
 
 
@@ -660,42 +496,25 @@ Do[  \[Chi][[\[Alpha],r]][[\[Alpha]+1,\[Alpha]+1]] = u0[[r,\[Alpha]]]Abs@\[Chi]0
    \[Chi] ];
 icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^-12];icc= I TUh . TUh\[ConjugateTranspose] ; (icc-ConjugateTranspose[icc] )/2 ];
 
+Ugauge4v[U0_,L_]:= Module[{d1,d2,U=U0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
+Do[  Module[{r,m,n}, m =mS ; n=nS+i ;       r = m+n L+1;    U[[r,1]][[1,1]] =-U0[[r,1]][[1,1]]; U[[r,1]][[2,2]] =-U0[[r,1]][[2,2]];      ]   , {i,1,d1}];   
+Do[  Module[{r,m,n}, m =mN ; n=nN-i+1; r = m+n L+1;     U[[r,1]][[1,1]] =-U0[[r,1]][[1,1]];U[[r,1]][[2,2]] =-U0[[r,1]][[2,2]];       ]   , {i,1,d1}];     U];
+
+icc[U_,L_,T_]:=Module[  { Nc=L^2,TUh,icc}, TUh=Chop[(T . U)[[;;,-4Nc;;-1]],10^(-12)];icc= I  TUh . TUh\[ConjugateTranspose] (*; (icc-ConjugateTranspose[icc] )/2*) ];
 
 
 (* ::Subsubsection::Bold::Closed:: *)
 (*Energy MF*)
 
 
-constantMF[Jmat_,U_,V_,L_]:= Module[{Nc=L^2,C},
-C=Sum[Module[{r,rA,rB,mx,ny,N,G}, 	
-mx=Mod[m+1,L];ny=Mod[n+1,L];
-r=m+n L+1;   
-rA={mx+n L+1,m+ny L+1,m+n L+1};
-mx=Mod[m-1,L];ny=Mod[n-1,L];
-rB={mx+n L+1,m+ny L+1,m+n L+1};
- 1/8 Sum[ traceN[V[[rA[[3]],1]]] . Jmat[[rA[[3]],\[Gamma]]] . traceN[V[[rA[[\[Gamma]]],2]]]+ 
-traceN[V[[rB[[3]],2]]] . Jmat[[rB[[\[Gamma]]],\[Gamma]]] . traceN[V[[rB[[\[Gamma]]],1]]],{\[Gamma],1,3}]
-+1/4 Sum[    2 Tr[Transpose[Jmat[[r,\[Gamma]]]] . traceUNUN[ U[[r,\[Gamma]]] ]]  ,{\[Gamma],1,3}] 
-    ],{m,0,L-1},{n,0,L-1} ];   Re@(C/( 2Nc ))   ];
-EnMF[Jmat_,h_,U_,V_,L_,\[Eta]_:1]:= Module[{Nc=L^2,E,\[Lambda]},
-If[\[Eta]==1,\[Lambda]=\[Lambda]eff[Jmat,h,V,L],\[Lambda]=\[Eta] \[Lambda]eff[Jmat,h,V,L]  ];
-
-E=Sum[Module[{r,rA,rB,mx,ny,N,G}, 	
-mx=Mod[m+1,L];ny=Mod[n+1,L];
-r=m+n L+1;   
-rA={mx+n L+1,m+ny L+1,m+n L+1};
-mx=Mod[m-1,L];ny=Mod[n-1,L];
-rB={mx+n L+1,m+ny L+1,m+n L+1};
-
-1/4 ( \[Lambda][[r,1]] . traceN[V[[r,1]]]+\[Lambda][[r,2]] . traceN[V[[r,2]]]  ) 
--1/2 h . (   traceN[V[[r,1]]]+traceN[V[[r,2]]]  )         
-+ 1/8 Sum[ traceN[V[[rA[[3]],1]]] . Jmat[[rA[[3]],\[Gamma]]] . traceN[V[[rA[[\[Gamma]]],2]]]+ 
-traceN[V[[rB[[3]],2]]] . Jmat[[rB[[\[Gamma]]],\[Gamma]]] . traceN[V[[rB[[\[Gamma]]],1]]],{\[Gamma],1,3}]
-+1/4 Sum[    2 Tr[Transpose[Jmat[[r,\[Gamma]]]] . traceUNUN[ U[[r,\[Gamma]]] ]]  ,{\[Gamma],1,3}] 
-    ],{m,0,L-1},{n,0,L-1} ]; 
-
-Re@(E/( 2Nc ))   ];
+ constantMF[Jmat_,U_,V_,L_]:= Module[{Nc=L^2,C}, C=Sum[Module[{r,rA,rB,mx,ny,N,G}, 	 mx=Mod[m+1,L];ny=Mod[n+1,L]; r=m+n L+1;    rA={mx+n L+1,m+ny L+1,m+n L+1}; mx=Mod[m-1,L];ny=Mod[n-1,L]; rB={mx+n L+1,m+ny L+1,m+n L+1};
+ 1/8 Sum[ traceN[V[[rA[[3]],1]]] . Jmat[[rA[[3]],\[Gamma]]] . traceN[V[[rA[[\[Gamma]]],2]]]+  traceN[V[[rB[[3]],2]]] . Jmat[[rB[[\[Gamma]]],\[Gamma]]] . traceN[V[[rB[[\[Gamma]]],1]]],{\[Gamma],1,3}] +1/4 Sum[    2 Tr[Transpose[Jmat[[r,\[Gamma]]]] . traceUNUN[ U[[r,\[Gamma]]] ]]  ,{\[Gamma],1,3}]      ],{m,0,L-1},{n,0,L-1} ];   Re@(C/( 2 (L^2) ))   ];
+EnMF[Jmat_,h_,U_,V_,L_,\[Eta]_:1]:= Module[{Nc=L^2,E,\[Lambda]}, If[\[Eta]==1,\[Lambda]=\[Lambda]eff[Jmat,h,V,L],\[Lambda]=\[Eta] \[Lambda]eff[Jmat,h,V,L]  ];
+E=Sum[Module[{r,rA,rB,mx,ny,N,G}, 	mx=Mod[m+1,L];ny=Mod[n+1,L];r=m+n L+1;   rA={mx+n L+1,m+ny L+1,m+n L+1};mx=Mod[m-1,L];ny=Mod[n-1,L];rB={mx+n L+1,m+ny L+1,m+n L+1};
+1/4 ( \[Lambda][[r,1]] . traceN[V[[r,1]]]+\[Lambda][[r,2]] . traceN[V[[r,2]]]  ) -1/2 h . (   traceN[V[[r,1]]]+traceN[V[[r,2]]]  )  + 1/8 Sum[ traceN[V[[rA[[3]],1]]] . Jmat[[rA[[3]],\[Gamma]]] . traceN[V[[rA[[\[Gamma]]],2]]]+ traceN[V[[rB[[3]],2]]] . Jmat[[rB[[\[Gamma]]],\[Gamma]]] . traceN[V[[rB[[\[Gamma]]],1]]],{\[Gamma],1,3}]+1/4 Sum[    2 Tr[Transpose[Jmat[[r,\[Gamma]]]] . traceUNUN[ U[[r,\[Gamma]]] ]]  ,{\[Gamma],1,3}] 
+   ],{m,0,L-1},{n,0,L-1} ];  Re@(E/( 2(L^2) ))   ];
 eigenvaluesEmf[Jmat_,h_,U_,V_,L_,\[Lambda]_]:=-constantMF[Jmat,U,V,L]+1/(2L^2) Total@Select[Quiet@Eigenvalues@N@Hmf[Jmat,h,U,V,L,\[Lambda]] ,#<=0& ];
+
 
 
 (* ::Subsubsection::Closed:: *)
@@ -760,24 +579,23 @@ Kc[eV0_,JH_,U_,t_]:=(2JH )/9 ( (t[[1]]-t[[3]])^2-3 t[[2]]^2 ) (eV0^2+3 JH^2-4 JH
 Jr[eV0_,JH_,U_,t_]:=Jc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 Kr[eV0_,JH_,U_,t_]:=Kc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 \[CapitalGamma]r[eV0_,JH_,U_,t_]:= \[CapitalGamma]c[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
-DMr[eV0_,JH_,U_,t_,Dmax_,s_:.8]:=Dmax eV0/ Abs[s(3 JH-U)]  Kc[eV0,JH,U,t]/Abs[Kc[s eV0,JH,U,t]];
-JmatMicro[eV0_,JH_,U_,t_,Dmax_:.5,s_:.8]:=Jmat[Jr[eV0,JH,U,t]{1,1,1},Kr[eV0,JH,U,t]{1,1,1},\[CapitalGamma]r[eV0,JH,U,t]{1,1,1},{0,0,0},DMr[eV0,JH,U,t,Dmax,s]{1,1,1}];
-
-addVortex[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
-K[[ m+n L1 +1,3    ]]=K0;  
-K[[ Mod[m+1,L1]+Mod[n-1,L2] L1 +1  ,2    ]]=K0;
-K[[ Mod[m+1,L1]+n L1 +1,1    ]]=K0;
-K[[ Mod[m+1,L1]+Mod[n+1,L2] L1 +1  ,3   ]]=K0;
-K[[ m+Mod[n+1,L2] L1+1   ,2    ]]=K0;
-K[[ Mod[m-1,L1]+Mod[n+1,L2] L1 +1  ,1   ]]=K0;
+DMr[eV0_,JH_,U_,t_,Dmax_,s_:1]:=Dmax eV0/ Abs[s(3 JH-U)]  Abs[ Kc[eV0,JH,U,t]/Kc[s eV0,JH,U,t]];
+JmatMicro[eV0_,JH_,U_,t_,Dmax_:.5,s_:1]:=Jmat[Jr[eV0,JH,U,t]{1,1,1},Kr[eV0,JH,U,t]{1,1,1},\[CapitalGamma]r[eV0,JH,U,t]{1,1,1},{0,0,0},DMr[eV0,JH,U,t,Dmax,s]{1,1,1}];
+addVortexJarray[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
+K[[ m+n L1 +1,3    ]]=K0[[3]];  
+K[[ Mod[m+1,L1]+Mod[n-1,L2] L1 +1  ,2    ]]=K0[[2]];
+K[[ Mod[m+1,L1]+n L1 +1,1    ]]=K0[[1]];
+K[[ Mod[m+1,L1]+Mod[n+1,L2] L1 +1  ,3   ]]=K0[[3]];
+K[[ m+Mod[n+1,L2] L1+1   ,2    ]]=K0[[2]];
+K[[ Mod[m-1,L1]+Mod[n+1,L2] L1 +1  ,1   ]]=K0[[1]];
 K];
-add4Vortices[ K0_,Kmod_, R1_,R2_, R3_,R4_,L_] :=Module[ {K}, K = addVortex[ K0,Kmod, R1,L,L]; K = addVortex[ K,Kmod, R2,L,L]; K = addVortex[ K,Kmod, R3,L,L]; addVortex[ K,Kmod, R4,L,L]];
+add4VorticesJarray[ K0_,Kmod_, R1_,R2_, R3_,R4_,L_] :=Module[ {K}, K = addVortexJarray[ K0,Kmod, R1,L,L]; K = addVortexJarray[ K,Kmod, R2,L,L]; K = addVortexJarray[ K,Kmod, R3,L,L]; addVortexJarray[ K,Kmod, R4,L,L]];
 Jarray4v[Jarray_,JmatMicro_,L_]:=Module[ {RS,RE,RW,RN,r2},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];
 		RS={(r2-1),(r2-1)};
 		RW={(r2-1),(L-r2-1)};
 		RE={(L-r2-1),(r2-1)};
 		RN={(L-r2-1),(L-r2-1)};
-add4Vortices[ Jarray,JmatMicro, RS,RW, RE,RN,L] ];
+add4VorticesJarray[ Jarray,JmatMicro, RS,RW, RE,RN,L] ];
 
 
 
@@ -1022,7 +840,7 @@ Do[  Module[
 { L=Ls[[l]],Nc,h,En,EnList={{},{},{}},EMF,Esum,Econst,u0,u1,u2,U,\[Xi],V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},\[Eta],p,Jmat,JmatMod,hv,gauge="g0",Jarray,T},
  p=Length[hV](pt-1)+ph;         Nc=L^2; T=Tmat[L,L]; 
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
-Print["JmatMod ",fromJmat[JmatMod],"; L=",L,"; h=(", hV[[ ph,1 ]],",",hV[[ ph,2 ]],",",hV[[ ph,3]],"); "];
+Print["JmatMod=",fromJmat[JmatMod],"; L=",L,"; h=(", hV[[ ph,1 ]],",",hV[[ ph,2 ]],",",hV[[ ph,3]],"); "];
 	u0=uniformU[1,L]; (* <-  the 2nd difference : gauge4v *) 	
     \[Eta]=-0.2;
 {jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];
