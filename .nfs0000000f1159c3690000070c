@@ -20,7 +20,7 @@ tV={0};
 hV={{.1,0,0}};
 steps=150;
 acuracy=6;    
-dmax=1; s0=1;
+dmax=.5; s0=1;
 \[CapitalDelta]eV=0.1; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
 eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ] ;
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
