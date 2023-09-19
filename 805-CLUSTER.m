@@ -725,7 +725,7 @@ Print[" "] Print[" "];];
 Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*pure loop w/out  vortices*)
 
 
@@ -773,7 +773,7 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
 
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*vortex free*)
 
 
@@ -833,7 +833,7 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 (*vortex free  + electric field*)
 
 
-Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+(*Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
 Print[" "]; Print[" "];
@@ -889,7 +889,7 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 
  ]; , {ev,1      ,Length[parametersMat]} , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];
 Print[" "];
-
+*)
 
 
 (* ::Subsubsection::Bold:: *)
@@ -906,53 +906,42 @@ t0=t4v;Print[" "] Print[" "];
 Print["    Starting four vortex + electric field loop: "];Print[" "]
 
 
-
-
-
 minSteps=5;
 Do[  Module[
 { L=Ls[[l]],Nc,h,En,EnList={{},{},{}},EMF,Esum,Econst,u0,u1,u2,U,\[Xi],V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V=1,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},\[Eta],p,Jmat,JmatMod,hv,gauge="g4",Jarray,T},
- p=Length[hV](pt-1)+ph;         Nc=L^2; T=Tmat[L,L]; 
+ p=Length[hV](pt-1)+ph;   Nc=L^2; T=Tmat[L,L]; 
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
 Print["JmatMod ",fromJmat[JmatMod],"; L=",L,"; h=(", hV[[ ph,1 ]],",",hV[[ ph,2 ]],",",hV[[ ph,3]],"); "];
-	u0=gauge4v[uniformU[1,L],L]; (* <-  the 2nd difference : gauge4v *) 	
-\[Eta]=-0.2;
+	u0=gauge4v[uniformU[1,L],L];        (* <-  the 2nd difference : gauge4v *) 	
+	\[Eta]=-0.2 +1.13 fromJmat[Jmat][[3]];
 {jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];
 	U=Table[UG,{r,1,Nc}];
 	V=Table[VG,{r,1,Nc}];
 Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure}, 
 {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure}=Chop@loadDataPure[toPathPure800[parametersMat[[ev,p]],L,acuracy, gauge,NbName]    ];
 
-
-Do[         U[[r,1]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; U[[r,2]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; U[[r,3]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; 
- U[[r,1]][[2,2]]= U[[r,1]][[2,2]]u0[[r,1]]; U[[r,2]][[3,3]]= U[[r,2]][[3,3]]u0[[r,2]]; U[[r,3]][[4,4]]=U[[r,3]][[4,4]]u0[[r,3]];  
-(*Implement gauge field*),{r,1,Nc}];           ]; 
-
-(*Module[{r2,i,r0}, r2=\[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];i=1; r0=r2+L (-1+i+r2);  Print[MatrixForm/@(round[#,1000]&/@U[[r0]])     ];];*)
-(*Jmat0=Jmat;JmatMod0=JmatMod;*)
+Do[ U[[r,1]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; U[[r,2]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; U[[r,3]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; 
+    U[[r,1]][[2,2]]= U[[r,1]][[2,2]]u0[[r,1]]; U[[r,2]][[3,3]]= U[[r,2]][[3,3]]u0[[r,2]]; U[[r,3]][[4,4]]=U[[r,3]][[4,4]]u0[[r,3]];  
+(*Implementing gauge field*),{r,1,Nc}];           ]; 
 Jarray=Jarray4v[Table[Jmat,{r,1,L^2}],JmatMod,L];
 
-For[j=1,  ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^(-acuracy+1) ]!= 0)    ) , j++,   
-
-Module[{H,u},  H=Hmf[Jarray,h,U,V,L,\[Eta]] ;u=Quiet@UmatK[T\[ConjugateTranspose] . H . T];  u1=Im@Chop@icc[u,L,T]; (*umat=u;*)
-
-If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};  \[CapitalDelta]V=1/(2 Nc) Sum[Abs[traceG[V[[r,\[Sigma]]]]],{r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}}    ]; 
+For[j=1,  ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^(-acuracy+1) ]!= 0)    ) , j++, 
+Module[{H,u},  H=Hmf[Jarray,h,U,V,L,\[Eta]]; u=Quiet@UmatK[ConjugateTranspose[T] . H . T];  u1=2 Chop@icc[u,L,T];
+If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};    ]; 
 
 EMF=EnMF[ Jarray,h,U,V, L,\[Eta]];Esum=Quiet@eigenvaluesEmf[ Jarray,h,U,V, L,\[Eta]];Econst=constantMF[Jarray,U,V,L];
 EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnList[[3]]={EnList[[3]],{j,Econst}};   
 
 Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor];\[Beta]=\[LeftFloor]1+(R0-16rz)/4\[RightFloor];\[Alpha]=R0-16rz-4(\[Beta]-1)+1;
     n=\[LeftFloor]rz/L\[RightFloor];m=rz-n L;rx=Mod[m+1,L]+n L;ry=m+Mod[n+1,L] L;Io=Mod[\[Alpha]+8rz,8Nc,1]; 
-    U[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];    U[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8ry,8Nc,1],Io]];    U[[rz+1,3,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Io]];
-    V[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+8rz,8Nc,1],Io]];    V[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Mod[Io+4,8Nc,1] ]];    ]; , {R0,0,16Nc-1}  ];    ]; 
-(*u00=u1; *)
-If[ev==1\[And]p==1,Module[{r2,i,r0}, r2=\[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];i=1; r0=r2+L (-1+i+r2);
-Print[MatrixForm/@round[#,1000]&@U[[r0]] ];
-Print[MatrixForm/@round[#,100000]&@V[[r0]] ];
-];   ];
-u2=u1;      Print[" j =",j, "/",steps, "; Delta V=",InputForm[\[CapitalDelta]V], "; Delta=",InputForm[\[CapitalDelta]1], ";  E=", round/@(2{EMF,Esum,Econst}),"; "  ];     
-];  
-(*Module[{H,u}, H=Hmf[Jarray,h,U,V,L,1]; u=Quiet@UmatK[T\[ConjugateTranspose] . H . T]; {U,V,\[Xi],u1}=(*BiParallel*)bilinears[u,L,T];       ];  	*)    (*<-- rewrite bilinears   *)
+    U[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];  U[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8ry,8Nc,1],Io]];    U[[rz+1,3,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Io]];
+    V[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+8rz,8Nc,1],Io]];    V[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Mod[Io+4,8Nc,1] ]];    ]; , {R0,0,16Nc-1}  ];    
+    ];     u2=u1;
+\[CapitalDelta]V=1/(8 Sqrt[3] Nc) Sum[Sqrt@Total[ Power[#,2]&/@traceG[V[[r,\[Sigma]]]] ] , {r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}};
+      
+Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@(2{EMF,Esum,Econst}),"; "  ];              ];  
+(*Module[{H,u}, H=Hmf[Jarray,h,U,V,L,1]; u=Quiet@UmatK[T\[ConjugateTranspose] . H . T]; {U,V,\[Xi],u1}=(*BiParallel*)bilinears[u,L,T];   ];*)    
+(*<-- rewrite bilinears   *)
 \[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2];
 	EnList[[1]]=Partition[Flatten[EnList[[1]]],2];
 	EnList[[2]]=Partition[Flatten[EnList[[2]]],2];
@@ -960,15 +949,11 @@ u2=u1;      Print[" j =",j, "/",steps, "; Delta V=",InputForm[\[CapitalDelta]V],
 	\[CapitalDelta]Vseq=Partition[Flatten[\[CapitalDelta]Vseq],2]; 
 	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];     
 
-Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ]; 
-
+Print["ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "]; 
  ]; , {ev,1 ,Length[parametersMat]} , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
 
 
 Print[" "];
-
-
-
 Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-t4v], "Seconds" ], "Hours" ];
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
@@ -978,6 +963,131 @@ Print[ "4 vortices loop timing \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHou
 
 
 (* ::Subsubsection::Bold:: *)
+(*zero and four vortex  *)
+
+
+(*Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Hours" ];
+\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+Print[ "Free loop + electric field timing= ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ];
+t0=t4v;Print[" "] Print[" "];
+];
+Print["    Starting Loop zero and four vortex + electric field loop: "];Print[" "]
+*)
+
+
+(*minSteps=5;
+Do[  
+
+Print["    [Starting] No vortex -- ev=",ev,"/", Length@eVs";"];
+
+Module[
+{ L=Ls[[l]],Nc,h,En,EnList={{},{},{}},EMF,Esum,Econst,u0,u1,u2,U,\[Xi],V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},\[Eta],p,Jmat,JmatMod,hv,gauge="g0",Jarray,T},
+ p=Length[hV](pt-1)+ph;         Nc=L^2; T=1/Sqrt[2] Tmat[L,L]; 
+{Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
+Print["JmatMod=",fromJmat[JmatMod],"; L=",L,"; h=(", hV[[ ph,1 ]],",",hV[[ ph,2 ]],",",hV[[ ph,3]],"); "];
+	u0=uniformU[1,L]; (* <-  the 2nd difference : gauge4v *) 	
+    \[Eta]=-0.2 +1.13 fromJmat[Jmat][[3]];
+{jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];
+	U=Table[UG,{r,1,Nc}];
+	V=Table[VG,{r,1,Nc}];
+Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure}, 
+{jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure}=Chop@loadDataPure[toPathPure800[parametersMat[[ev,p]],L,acuracy, gauge,NbName]    ];
+Do[ U[[r,1]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; U[[r,2]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; U[[r,3]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; ,{r,1,Nc}];           ]; 
+Jarray=Jarray4v[Table[Jmat,{r,1,L^2}],JmatMod,L];
+
+For[j=1,  ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^(-acuracy+1)]!= 0)    ) , j++,   
+Module[{H,u},  H=Hmf[Jarray,h,U,V,L,\[Eta]]; u=Quiet@UmatK[ConjugateTranspose[T] . H . T];  u1=2 Chop@icc[u,L,T ]; (*umat=u;*)
+If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};      ]; 
+
+EMF=EnMF[ Jarray,h,U,V, L,\[Eta]];Esum=Quiet@eigenvaluesEmf[ Jarray,h,U,V, L,\[Eta]];Econst=constantMF[Jarray,U,V,L];
+EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnList[[3]]={EnList[[3]],{j,Econst}};   
+
+Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor];\[Beta]=\[LeftFloor]1+(R0-16rz)/4\[RightFloor];\[Alpha]=R0-16rz-4(\[Beta]-1)+1;
+    n=\[LeftFloor]rz/L\[RightFloor];m=rz-n L;rx=Mod[m+1,L]+n L;ry=m+Mod[n+1,L] L;Io=Mod[\[Alpha]+8rz,8Nc,1]; 
+    U[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];    U[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8ry,8Nc,1],Io]];    U[[rz+1,3,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Io]];
+    V[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+8rz,8Nc,1],Io]];    V[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Mod[Io+4,8Nc,1] ]];    ]; , {R0,0,16Nc-1}  ];    ]; 
+ 
+(* If[ev==1\[And]p==1,Module[{r2,i,r0}, r2=\[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];i=1; r0=r2+L (-1+i+r2);
+Print[MatrixForm/@round[#,1000]&@U[[r0]] ];
+Print[MatrixForm/@round[#,100000]&@V[[r0]] ];
+];   ]; *)
+\[CapitalDelta]V=1/(8 Sqrt[3] Nc) Sum[Sqrt@Total[ Power[#,2]&/@traceG[V[[r,\[Sigma]]]] ] , {r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}};
+(*Do[ V[[r,\[Sigma]]]=Sum[ 1/4 Mmat[[\[Gamma]]] traceM[ V[[r,\[Sigma]]] ][[\[Gamma]]] ,{\[Gamma],1,3}],{\[Sigma],1,2},{r,1,Nc}];*)
+  
+u2=u1;      Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@({EMF,Esum,Econst}),"; "  ];     
+];  
+(*Module[{H,u}, H=Hmf[Jarray,h,U,V,L,1]; u=Quiet@UmatK[T\[ConjugateTranspose] . H . T]; {U,V,\[Xi],u1}=(*BiParallel*)bilinears[u,L,T];       ];  	*)    (*<-- rewrite bilinears   *)
+\[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2];
+	EnList[[1]]=Partition[Flatten[EnList[[1]]],2];
+	EnList[[2]]=Partition[Flatten[EnList[[2]]],2];
+	EnList[[3]]=Partition[Flatten[EnList[[3]]],2]; 
+	\[CapitalDelta]Vseq=Partition[Flatten[\[CapitalDelta]Vseq],2]; 
+	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];   
+Print["    [Finishing] No vortex -- ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ];   
+ ]; 
+Print[];
+Print["    [Starting] Four vortex -- ev=",ev,"/", Length@eVs";"];
+
+Module[
+{ L=Ls[[l]],Nc,h,En,EnList={{},{},{}},EMF,Esum,Econst,u0,u1,u2,U,\[Xi],V,j,\[CapitalDelta]1=1,\[CapitalDelta]2=1,ES,gap,\[CapitalDelta]t,\[CapitalDelta]tHours,\[CapitalDelta]tMin,\[CapitalDelta]tSec,kTable,\[CapitalDelta]V=1,\[CapitalDelta]Vseq={},\[CapitalDelta]seq={},\[Eta],p,Jmat,JmatMod,hv,gauge="g4",Jarray,T},
+ p=Length[hV](pt-1)+ph;   Nc=L^2; T=Tmat[L,L]; 
+{Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
+Print["JmatMod ",fromJmat[JmatMod],"; L=",L,"; h=(", hV[[ ph,1 ]],",",hV[[ ph,2 ]],",",hV[[ ph,3]],"); "];
+	u0=gauge4v[uniformU[1,L],L];        (* <-  the 2nd difference : gauge4v *) 	
+	\[Eta]=-0.2 +1.13 fromJmat[Jmat][[3]];
+{jG,LG,UG,VG,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];
+	U=Table[UG,{r,1,Nc}];
+	V=Table[VG,{r,1,Nc}];
+Module[ {jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure}, 
+{jpure,Lpure,\[Chi]0,\[Omega]0,\[Xi]0,Epure}=Chop@loadDataPure[toPathPure800[parametersMat[[ev,p]],L,acuracy, gauge,NbName]    ];
+
+Do[ U[[r,1]][[1,1]]=\[Chi]0[[1,r]][[1,1]]; U[[r,2]][[1,1]]=\[Chi]0[[2,r]][[1,1]]; U[[r,3]][[1,1]]=\[Chi]0[[3,r]][[1,1]]; 
+    U[[r,1]][[2,2]]= U[[r,1]][[2,2]]u0[[r,1]]; U[[r,2]][[3,3]]= U[[r,2]][[3,3]]u0[[r,2]]; U[[r,3]][[4,4]]=U[[r,3]][[4,4]]u0[[r,3]];  
+(*Implementing gauge field*),{r,1,Nc}];           ]; 
+Jarray=Jarray4v[Table[Jmat,{r,1,L^2}],JmatMod,L];
+
+For[j=1,  ( j<steps)\[And]((j<minSteps)\[Or](Chop[ \[CapitalDelta]1, 10^(-acuracy+1) ]!= 0)    ) , j++, 
+Module[{H,u},  H=Hmf[Jarray,h,U,V,L,\[Eta]]; u=Quiet@UmatK[ConjugateTranspose[T].H.T];  u1=2 Chop@icc[u,L,T];
+If[j>=2,\[CapitalDelta]2=\[CapitalDelta]1; \[CapitalDelta]1=Max[ Abs@(u1-u2) ]; \[CapitalDelta]seq={\[CapitalDelta]seq,{j,\[CapitalDelta]1}};    ]; 
+
+EMF=EnMF[ Jarray,h,U,V, L,\[Eta]];Esum=Quiet@eigenvaluesEmf[ Jarray,h,U,V, L,\[Eta]];Econst=constantMF[Jarray,U,V,L];
+EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnList[[3]]={EnList[[3]],{j,Econst}};   
+
+Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor];\[Beta]=\[LeftFloor]1+(R0-16rz)/4\[RightFloor];\[Alpha]=R0-16rz-4(\[Beta]-1)+1;
+    n=\[LeftFloor]rz/L\[RightFloor];m=rz-n L;rx=Mod[m+1,L]+n L;ry=m+Mod[n+1,L] L;Io=Mod[\[Alpha]+8rz,8Nc,1]; 
+    U[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rx,8Nc,1],Io]];  U[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8ry,8Nc,1],Io]];    U[[rz+1,3,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Io]];
+    V[[rz+1,1,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+8rz,8Nc,1],Io]];    V[[rz+1,2,\[Alpha],\[Beta]]]=u1[[Mod[\[Beta]+4+8rz,8Nc,1],Mod[Io+4,8Nc,1] ]];    ]; , {R0,0,16Nc-1}  ];    
+    ];     u2=u1;
+\[CapitalDelta]V=1/(8 Sqrt[3] Nc) Sum[Sqrt@Total[ Power[#,2]&/@traceG[V[[r,\[Sigma]]]] ] , {r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}};
+      
+Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@(2{EMF,Esum,Econst}),"; "  ];              ];  
+(*Module[{H,u}, H=Hmf[Jarray,h,U,V,L,1]; u=Quiet@UmatK[T\[ConjugateTranspose] . H . T]; {U,V,\[Xi],u1}=(*BiParallel*)bilinears[u,L,T];   ];*)    
+(*<-- rewrite bilinears   *)
+\[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2];
+	EnList[[1]]=Partition[Flatten[EnList[[1]]],2];
+	EnList[[2]]=Partition[Flatten[EnList[[2]]],2];
+	EnList[[3]]=Partition[Flatten[EnList[[3]]],2]; 
+	\[CapitalDelta]Vseq=Partition[Flatten[\[CapitalDelta]Vseq],2]; 
+	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];     
+
+Print["ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "];    ]; 
+, {ev,1 ,Length[parametersMat]} , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  *)
+
+
+(*
+Print[" "];
+Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-t4v], "Seconds" ], "Hours" ];
+\[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
+\[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
+\[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
+Print[ "4 vortices loop timing \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ] 
+];
+*)
+
+
+(* ::Subsubsection::Bold::Closed:: *)
 (*vortex free + gradually increase  parameters *)
 
 
@@ -987,7 +1097,7 @@ Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConver
 Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*four vortex + gradually increase  parameters *)
 
 
