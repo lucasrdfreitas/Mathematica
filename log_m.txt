@@ -2,4 +2,14 @@ Catalog for .m jobs
 
 format=(file,description,job_id,date,parameters)
 
-job_id, 804.m, "phase diagram c direction Gamma=-.2;;.6;;.2, h=.0001;;1.21;;.01", 27.09.2023, Ls=Range[41,41,2];    tV={0};	  hV={{.2,0,0}}; steps=200; acuracy=4;     \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ]; \[CapitalGamma]s=round@Table[x,{x,-.02,.6,.02}]; hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}]; hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  parametersMat={Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]};
+job_id 6415, 804.m, "phase diagram c direction Gamma=-.2;;.6;;.2, h=.0001;;1.21;;.01", 09:00  27.09.2023, Ls=Range[41,41,2];    tV={0};	  hV={{.2,0,0}}; steps=200; acuracy=4;     \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ]; \[CapitalGamma]s=round@Table[x,{x,-.02,.6,.02}]; hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}]; hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  parametersMat={Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]};
+
+job_id 6431, 804.m, "phase diagram a direction Gamma=-.2;;.6;;.2, h=.0001;;1.21;;.01", 10:00  27.09.2023, Ls=Range[41,41,2];    tV={0}; steps=200; acuracy=4;     \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ]; \[CapitalGamma]s=round@Table[x,{x,-.02,.6,.02}]; hV=round@Table[{x,90,0},{x,0.0001,1.21,.01}]; hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  parametersMat={Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]};
+
+job_id 6448, 804.m, "phase diagram a direction Gamma=-.1;;.6;;.2, h=.0001;;1.21;;.01", 10:40  27.09.2023, Ls=Range[41,41,2];    tV={0}; steps=200; acuracy=4;     \[CapitalDelta]eV=0.1; eVs=Table[ 1700 \[Xi], {\[Xi],0,0,\[CapitalDelta]eV} ]; \[CapitalGamma]s=round@Table[x,{x,-.02,.6,.02}]; hV=round@Table[{x,90,0},{x,0.0001,1.21,.01}]; hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  parametersMat={Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]};
+
+
+
+
+
+
