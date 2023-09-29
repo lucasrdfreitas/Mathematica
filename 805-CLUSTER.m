@@ -751,7 +751,7 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
         ]  , {ev,1,Length[parametersMat]}, {l,1,Length@Ls}, {p,1,Length[parametersMat[[1]] ]}  ]   
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*pure loop w/ vortices*)
 
 
@@ -773,7 +773,7 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
 
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*vortex free*)
 
 
