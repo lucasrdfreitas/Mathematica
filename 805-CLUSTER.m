@@ -15,13 +15,13 @@ Print["Starting Kernels"];
 
 
 NbName="805";  (*\[Lambda]0=0.5; *)
-Ls =Range[28,28,2]; 	    
+Ls =Range[20,20,2]; 	    
 tV={0};	  
-hV={{.1,0,0}};
+hV={{.01,0,0}};
 steps=150;
-acuracy=6;    
+acuracy=3;    
 dmax=1; s0=1;
-\[CapitalDelta]eV=0.1; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
+\[CapitalDelta]eV=0.05; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
 eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ]
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
@@ -625,6 +625,17 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
+tV={0,0,2,2};
+ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
+hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
+eV0=0;U=2600;JH=300; 
+d0={.5,1,.5,1};
+
+parametersMat=
+N@Table[Flatten[ Table[{
+JmatMicro[              0,JH,U,ts[[t]],d0[[t]],s0],hs[[h]],
+JmatMicro[eVs[[ev]],JH,U,ts[[t]],d0[[t]],s0],hV[[h]],tV[[t]],eVs[[ev]]
+} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
 
 Print[" "];
@@ -751,7 +762,7 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
         ]  , {ev,1,Length[parametersMat]}, {l,1,Length@Ls}, {p,1,Length[parametersMat[[1]] ]}  ]   
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*pure loop w/ vortices*)
 
 
@@ -773,7 +784,7 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
 
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*vortex free*)
 
 
@@ -833,7 +844,7 @@ Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 (*vortex free  + electric field*)
 
 
-(*Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
 Print[" "]; Print[" "];
@@ -889,7 +900,7 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 
  ]; , {ev,1      ,Length[parametersMat]} , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];
 Print[" "];
-*)
+
 
 
 (* ::Subsubsection::Bold:: *)
