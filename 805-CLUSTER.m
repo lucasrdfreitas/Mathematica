@@ -21,7 +21,7 @@ hV={{.01,0,0}};
 steps=150;
 acuracy=3;    
 dmax=1; s0=1;
-\[CapitalDelta]eV=0.05; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
+\[CapitalDelta]eV=2 0.05; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
 eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ]
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
@@ -383,7 +383,7 @@ cyclicPermutation[A_,s_:1]:= If[ Length[A]==3 \[And] Length[A[[1]]]==3, Table[ A
 fromJmat[Jm_]:= Module[{J,K,\[CapitalGamma],\[CapitalGamma]p,DM,jm}, jm=(  cyclicPermutation[Jm[[1]] ,2] + cyclicPermutation[Jm[[2]] ,1] + Jm[[3]] )/3; 
 \[CapitalGamma]p=(jm[[1,3]]+jm[[2,3]]+jm[[3,1]]+jm[[3,2]])/4; 
 K=( jm[[3,3]]-(jm[[2,2]] +jm[[1,1]] )/2); J=(jm[[3,3]]-K);DM=(jm[[1,2]]-jm[[2,1]])/2;\[CapitalGamma]=(jm[[1,2]]+jm[[2,1]])/2;
-N@{J,K,\[CapitalGamma],\[CapitalGamma]p,DM}    ];
+Chop[N@{J,K,\[CapitalGamma],\[CapitalGamma]p,DM},.00000999]       ];
 createDir[path_] :=
 Module[ {l=Length@FileNames[path]},		
 	If[ l==0,  CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }];  , Null]  ];
@@ -592,7 +592,8 @@ Kc[eV0_,JH_,U_,t_]:=(2JH )/9 ( (t[[1]]-t[[3]])^2-3 t[[2]]^2 ) (eV0^2+3 JH^2-4 JH
 Jr[eV0_,JH_,U_,t_]:=Jc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 Kr[eV0_,JH_,U_,t_]:=Kc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 \[CapitalGamma]r[eV0_,JH_,U_,t_]:= \[CapitalGamma]c[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
-DMr[eV0_,JH_,U_,t_,Dmax_,s_:1]:=Dmax eV0/ Abs[s(3 JH-U)]  Abs[ Kc[eV0,JH,U,t]/Kc[s eV0,JH,U,t]];
+(*DMr[eV0_,JH_,U_,t_,Dmax_,s_:1]:=Dmax eV0/ Abs[s(3 JH-U)]  Abs[ Kc[eV0,JH,U,t]/Kc[s eV0,JH,U,t]];*)
+DMr[eV0_,JH_,U_,t_,Dmax_:1,s_:1]:=Dmax eV0/ Abs[s(3 JH-U)]  Abs[ Kc[eV0,JH,U,t]/Kc[0,JH,U,t]];
 JmatMicro[eV0_,JH_,U_,t_,Dmax_:.5,s_:1]:=Jmat[Jr[eV0,JH,U,t]{1,1,1},Kr[eV0,JH,U,t]{1,1,1},\[CapitalGamma]r[eV0,JH,U,t]{1,1,1},{0,0,0},DMr[eV0,JH,U,t,Dmax,s]{1,1,1}];
 addVortexJarray[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
 K[[ m+n L1 +1,3    ]]=K0[[3]];  
@@ -625,11 +626,11 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-tV={0,0,2,2};
+tV={0,0};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
-d0={.5,1,.5,1};
+d0={.5,1};
 
 parametersMat=
 N@Table[Flatten[ Table[{
