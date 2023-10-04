@@ -1,1 +1,1314 @@
 Before Starting Kernels
+Starting Kernels
+ 
+    NbName=805; 
+    Lambda s=ηs; 
+    Ls={20}; 
+    tV={0, 0, 2, 2}; 
+    ts={{0, 160, 0, 0, -60}, {0, 160, 0, 0, -60}, {10, 160, -24, 0, -60}, {10, 160, -24, 0, -60}}; 
+    hV={{0.01, 0, 0}};
+    Couplings=
+    Gammas=Γs; 
+    Steps=150; 
+    acuracy=3; 
+ 
+Definition timing= 41.444127
+
+    Pure and with vortices 
+
+ eV0=0. x 1700; Epure=-1.574850261346807; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=0._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0. x 1700; Epure=-1.574850261346807; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=0._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0. x 1700; Epure=-1.574850261346806; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=0._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0. x 1700; Epure=-1.574850261346806; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=0._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5750311764985356; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=85._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0060, 0.0000, 0.0000, 0.0250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5750311764985356; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=85._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0060, 0.0000, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5750311764985356; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=85._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0096, -1.0060, 0.1447, 0.0000, 0.0250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5750311764985356; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=85._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0096, -1.0060, 0.1447, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.575585813172857; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=170._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0230, 0.0000, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.575585813172857; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=170._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0230, 0.0000, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.5755858131728564; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=170._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0097, -1.0230, 0.1472, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.5755858131728564; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=170._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0097, -1.0230, 0.1472, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.576551184293569; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=255._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0530, 0.0000, 0.0000, 0.0750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.576551184293569; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=255._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0530, 0.0000, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.5765511842935689; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=255._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0100, -1.0530, 0.1515, 0.0000, 0.0750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.5765511842935689; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=255._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0100, -1.0530, 0.1515, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5779936559513354; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=340._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0960, 0.0000, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5779936559513354; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=340._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0960, 0.0000, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5779936559513352; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=340._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0105, -1.0960, 0.1577, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5779936559513352; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=340._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0105, -1.0960, 0.1577, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.580016756892386; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=425._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.1550, 0.0000, 0.0000, 0.1250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.580016756892386; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=425._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.1550, 0.0000, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.5800167568923857; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=425._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0110, -1.1550, 0.1662, 0.0000, 0.1250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.5800167568923857; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=425._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0110, -1.1550, 0.1662, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.5827738726309037; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=510._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.2330, 0.0000, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.5827738726309037; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=510._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.2330, 0.0000, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.582773872630903; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=510._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0118, -1.2330, 0.1773, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.582773872630903; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=510._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0118, -1.2330, 0.1773, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.586488054394251; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=595._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.3320, 0.0000, 0.0000, 0.1750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.586488054394251; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=595._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.3320, 0.0000, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.5864880543942501; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=595._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0128, -1.3320, 0.1916, 0.0000, 0.1750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.5864880543942501; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=595._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0128, -1.3320, 0.1916, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.5914826724164466; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=680._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.4590, 0.0000, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.5914826724164466; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=680._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.4590, 0.0000, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.591482672416446; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=680._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0141, -1.4590, 0.2098, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.591482672416446; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=680._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0141, -1.4590, 0.2098, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.598229259371371; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=765._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.6210, 0.0000, 0.0000, 0.2250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.598229259371371; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=765._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.6210, 0.0000, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.5982292593713703; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=765._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0157, -1.6210, 0.2331, 0.0000, 0.2250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.5982292593713703; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=765._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0157, -1.6210, 0.2331, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.607423785660376; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=850._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.8300, 0.0000, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.607423785660376; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=850._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.8300, 0.0000, 0.0000, 0.5000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.6074237856603757; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=850._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0178, -1.8300, 0.2632, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.6074237856603757; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=850._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0178, -1.8300, 0.2632, 0.0000, 0.5000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6201124445517128; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=935._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.1020, 0.0000, 0.0000, 0.2750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6201124445517128; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=935._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.1020, 0.0000, 0.0000, 0.5500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6201124445517128; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=935._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0205, -2.1020, 0.3023, 0.0000, 0.2750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6201124445517128; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=935._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0205, -2.1020, 0.3023, 0.0000, 0.5500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6379092899719527; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1020._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.4630, 0.0000, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6379092899719527; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1020._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.4630, 0.0000, 0.0000, 0.6000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6379092899719525; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1020._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0241, -2.4630, 0.3542, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6379092899719525; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1020._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0241, -2.4630, 0.3542, 0.0000, 0.6000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.663397775982121; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1105._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.9540, 0.0000, 0.0000, 0.3250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.663397775982121; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1105._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.9540, 0.0000, 0.0000, 0.6500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.663397775982121; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1105._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0290, -2.9540, 0.4249, 0.0000, 0.3250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.663397775982121; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1105._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0290, -2.9540, 0.4249, 0.0000, 0.6500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.700934914562614; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1190._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -3.6470, 0.0000, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.700934914562614; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1190._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -3.6470, 0.0000, 0.0000, 0.7000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.7009349145626138; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1190._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0359, -3.6470, 0.5246, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.7009349145626138; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1190._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0359, -3.6470, 0.5246, 0.0000, 0.7000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.7584346171058678; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1275._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -4.6720, 0.0000, 0.0000, 0.3750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.7584346171058678; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1275._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -4.6720, 0.0000, 0.0000, 0.7500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.7584346171058676; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1275._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0462, -4.6720, 0.6719, 0.0000, 0.3750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.7584346171058676; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1275._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0462, -4.6720, 0.6719, 0.0000, 0.7500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8518697598261877; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1360._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -6.2920, 0.0000, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8518697598261877; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1360._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -6.2920, 0.0000, 0.0000, 0.8000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8518697598261866; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1360._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0624, -6.2920, 0.9049, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8518697598261866; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1360._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0624, -6.2920, 0.9049, 0.0000, 0.8000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.018876860233521; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1445._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -9.1330, 0.0000, 0.0000, 0.4250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.018876860233521; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1445._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -9.1330, 0.0000, 0.0000, 0.8500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.0188768602335205; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1445._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0909, -9.1330, 1.3140, 0.0000, 0.4250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.0188768602335205; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1445._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0909, -9.1330, 1.3140, 0.0000, 0.8500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.37339078441556; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1530._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -15.0900, 0.0000, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.37339078441556; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1530._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -15.0900, 0.0000, 0.0000, 0.9000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.3733907844155593; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1530._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.1507, -15.0900, 2.1710, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.3733907844155593; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1530._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.1507, -15.0900, 2.1710, 0.0000, 0.9000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.4887657242327896; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1615._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -33.7300, 0.0000, 0.0000, 0.4750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.4887657242327896; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=0._eV=1615._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -33.7300, 0.0000, 0.0000, 0.9500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.4887657242327896; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1615._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.3379, -33.7300, 4.8510, 0.0000, 0.4750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.4887657242327896; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g0/t=2._eV=1615._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.3379, -33.7300, 4.8510, 0.0000, 0.9500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+
+    Pure and with vortices 
+
+ eV0=0. x 1700; Epure=-1.5732438013933563; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=0._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0. x 1700; Epure=-1.5732438013933563; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=0._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0. x 1700; Epure=-1.573243801393356; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=0._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0. x 1700; Epure=-1.573243801393356; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=0._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5734386360218275; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=85._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0060, 0.0000, 0.0000, 0.0250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5734386360218275; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=85._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0060, 0.0000, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5734386360218275; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=85._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0096, -1.0060, 0.1447, 0.0000, 0.0250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.05 x 1700; Epure=-1.5734386360218275; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=85._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0096, -1.0060, 0.1447, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.5740347521041105; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=170._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0230, 0.0000, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.5740347521041105; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=170._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0230, 0.0000, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.5740347521041098; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=170._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0097, -1.0230, 0.1472, 0.0000, 0.0500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.1 x 1700; Epure=-1.5740347521041098; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=170._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0097, -1.0230, 0.1472, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.575068266073375; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=255._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0530, 0.0000, 0.0000, 0.0750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.575068266073375; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=255._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0530, 0.0000, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.5750682660733746; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=255._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0100, -1.0530, 0.1515, 0.0000, 0.0750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.15 x 1700; Epure=-1.5750682660733746; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=255._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0100, -1.0530, 0.1515, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5766038553065516; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=340._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0960, 0.0000, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5766038553065516; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=340._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.0960, 0.0000, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5766038553065516; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=340._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0105, -1.0960, 0.1577, 0.0000, 0.1000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.2 x 1700; Epure=-1.5766038553065516; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=340._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0105, -1.0960, 0.1577, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.578742293169278; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=425._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.1550, 0.0000, 0.0000, 0.1250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.578742293169278; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=425._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.1550, 0.0000, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.5787422931692776; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=425._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0110, -1.1550, 0.1662, 0.0000, 0.1250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.25 x 1700; Epure=-1.5787422931692776; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=425._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0110, -1.1550, 0.1662, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.5816328125058516; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=510._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.2330, 0.0000, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.5816328125058516; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=510._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.2330, 0.0000, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.581632812505851; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=510._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0118, -1.2330, 0.1773, 0.0000, 0.1500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.3 x 1700; Epure=-1.581632812505851; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=510._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0118, -1.2330, 0.1773, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.5854926249593408; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=595._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.3320, 0.0000, 0.0000, 0.1750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.5854926249593408; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=595._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.3320, 0.0000, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.5854926249593404; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=595._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0128, -1.3320, 0.1916, 0.0000, 0.1750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.35 x 1700; Epure=-1.5854926249593404; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=595._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0128, -1.3320, 0.1916, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.5906375035314875; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=680._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.4590, 0.0000, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.5906375035314875; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=680._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.4590, 0.0000, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.5906375035314873; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=680._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0141, -1.4590, 0.2098, 0.0000, 0.2000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.4 x 1700; Epure=-1.5906375035314873; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=680._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0141, -1.4590, 0.2098, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.5975300308644707; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=765._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.6210, 0.0000, 0.0000, 0.2250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.5975300308644707; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=765._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.6210, 0.0000, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.59753003086447; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=765._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0157, -1.6210, 0.2331, 0.0000, 0.2250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.45 x 1700; Epure=-1.59753003086447; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=765._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0157, -1.6210, 0.2331, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.6068569982177063; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=850._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.8300, 0.0000, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.6068569982177063; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=850._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -1.8300, 0.0000, 0.0000, 0.5000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.606856998217706; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=850._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0178, -1.8300, 0.2632, 0.0000, 0.2500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.5 x 1700; Epure=-1.606856998217706; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=850._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0178, -1.8300, 0.2632, 0.0000, 0.5000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6196570218309683; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=935._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.1020, 0.0000, 0.0000, 0.2750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6196570218309683; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=935._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.1020, 0.0000, 0.0000, 0.5500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6196570218309676; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=935._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0205, -2.1020, 0.3023, 0.0000, 0.2750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.55 x 1700; Epure=-1.6196570218309676; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=935._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0205, -2.1020, 0.3023, 0.0000, 0.5500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6375401455426044; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1020._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.4630, 0.0000, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6375401455426044; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1020._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.4630, 0.0000, 0.0000, 0.6000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6375401455426044; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1020._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0241, -2.4630, 0.3542, 0.0000, 0.3000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.6 x 1700; Epure=-1.6375401455426044; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1020._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0241, -2.4630, 0.3542, 0.0000, 0.6000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.663090358292312; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1105._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.9540, 0.0000, 0.0000, 0.3250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.663090358292312; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1105._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -2.9540, 0.0000, 0.0000, 0.6500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.6630903582923118; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1105._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0290, -2.9540, 0.4249, 0.0000, 0.3250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.65 x 1700; Epure=-1.6630903582923118; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1105._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0290, -2.9540, 0.4249, 0.0000, 0.6500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.7006688644565697; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1190._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -3.6470, 0.0000, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.7006688644565697; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1190._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -3.6470, 0.0000, 0.0000, 0.7000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.700668864456569; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1190._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0359, -3.6470, 0.5246, 0.0000, 0.3500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.7 x 1700; Epure=-1.700668864456569; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1190._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0359, -3.6470, 0.5246, 0.0000, 0.7000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.758195126528181; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1275._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -4.6720, 0.0000, 0.0000, 0.3750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.758195126528181; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1275._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -4.6720, 0.0000, 0.0000, 0.7500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.7581951265281806; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1275._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0462, -4.6720, 0.6719, 0.0000, 0.3750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.75 x 1700; Epure=-1.7581951265281806; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1275._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0462, -4.6720, 0.6719, 0.0000, 0.7500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8516468434544016; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1360._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -6.2920, 0.0000, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8516468434544016; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1360._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -6.2920, 0.0000, 0.0000, 0.8000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8516468434544013; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1360._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0624, -6.2920, 0.9049, 0.0000, 0.4000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.8 x 1700; Epure=-1.8516468434544013; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1360._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0624, -6.2920, 0.9049, 0.0000, 0.8000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.018663878193506; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1445._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -9.1330, 0.0000, 0.0000, 0.4250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.018663878193506; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1445._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -9.1330, 0.0000, 0.0000, 0.8500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.0186638781935042; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1445._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0909, -9.1330, 1.3140, 0.0000, 0.4250}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.85 x 1700; Epure=-2.0186638781935042; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1445._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.0909, -9.1330, 1.3140, 0.0000, 0.8500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.3731832606204906; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1530._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -15.0900, 0.0000, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.3731832606204906; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1530._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -15.0900, 0.0000, 0.0000, 0.9000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.373183260620491; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1530._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.1507, -15.0900, 2.1710, 0.0000, 0.4500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.9 x 1700; Epure=-2.373183260620491; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1530._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.1507, -15.0900, 2.1710, 0.0000, 0.9000}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.4885606726206926; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1615._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -33.7300, 0.0000, 0.0000, 0.4750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.4885606726206926; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=0._eV=1615._JKG={0.0000, -1.0000, 0.0000, 0.0000, 0.0000}_JKGmod={0.0000, -33.7300, 0.0000, 0.0000, 0.9500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.488560672620692; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1615._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.3379, -33.7300, 4.8510, 0.0000, 0.4750}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ eV0=0.95 x 1700; Epure=-3.488560672620692; 
+Pure path=/home/rodrigues/Mathematica2/Files/805/pure/g4/t=2._eV=1615._JKG={-0.0095, -1.0000, 0.1438, 0.0000, 0.0000}_JKGmod={-0.3379, -33.7300, 4.8510, 0.0000, 0.9500}/data/h=(0.01,0.,0.)_L=20_A=3.txt
+
+ 
+ 
+    Starting free loop
+ 
+    j=1; ΔV=0.0007458223436713267; Δ=1
+    j=2; ΔV=0.0004305126923264121; Δ=0.0010612126655427665
+    j=3; ΔV=0.0002453652705515649; Δ=0.0006230884056828536
+    j=4; ΔV=0.0001366586648030829; Δ=0.0003658536451816626
+    j=5; ΔV=0.00007283105982022948; Δ=0.00021481873250413577
+    j=6; ΔV=0.00003535358052567323; Δ=0.00012613666967880612
+    j=7; ΔV=0.000013347744243999616; Δ=0.00007406504465106052
+
+{0., -1., 0., 0., 0.}
+
+Eta=-0.2; p=1/4; j= 8; Delta=0.000074; EMF=-0.7874370109530813; Esum=-0.7873626315652253; EMF-Esum=-0.000074
+
+    j=1; ΔV=0.0007458223436713267; Δ=1
+    j=2; ΔV=0.0004305126923264121; Δ=0.0010612126655427665
+    j=3; ΔV=0.0002453652705515649; Δ=0.0006230884056828536
+    j=4; ΔV=0.0001366586648030829; Δ=0.0003658536451816626
+    j=5; ΔV=0.00007283105982022948; Δ=0.00021481873250413577
+    j=6; ΔV=0.00003535358052567323; Δ=0.00012613666967880612
+    j=7; ΔV=0.000013347744243999616; Δ=0.00007406504465106052
+
+{0., -1., 0., 0., 0.}
+
+Eta=-0.2; p=2/4; j= 8; Delta=0.000074; EMF=-0.7874370109530813; Esum=-0.7873626315652253; EMF-Esum=-0.000074
+
+    j=1; ΔV=0.00037922980939726435; Δ=1
+    j=2; ΔV=0.00016265868259103454; Δ=0.0007700844042517873
+    j=3; ΔV=0.0000761222228951326; Δ=0.0003037847280319816
+    j=4; ΔV=0.00004198522740120485; Δ=0.00011984012636820363
+    j=5; ΔV=0.00002851852210455048; Δ=0.00004727618083532042
+
+{-0.009503948319320332, -0.9999999999999997, 0.14383163238326896, 0., 0.}
+
+Eta=-0.03747; p=3/4; j= 6; Delta=0.000047; EMF=-0.802439719299618; Esum=-0.8023832159415829; EMF-Esum=-0.000057
+
+    j=1; ΔV=0.00037922980939726435; Δ=1
+    j=2; ΔV=0.00016265868259103454; Δ=0.0007700844042517873
+    j=3; ΔV=0.0000761222228951326; Δ=0.0003037847280319816
+    j=4; ΔV=0.00004198522740120485; Δ=0.00011984012636820363
+    j=5; ΔV=0.00002851852210455048; Δ=0.00004727618083532042
+
+{-0.009503948319320332, -0.9999999999999997, 0.14383163238326896, 0., 0.}
+
+Eta=-0.03747; p=4/4; j= 6; Delta=0.000047; EMF=-0.802439719299618; Esum=-0.8023832159415829; EMF-Esum=-0.000057
+
+ 
+Free loop timing= Quantity[3, Minutes]Quantity[37, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+Free loop timing= Quantity[3, Minutes]Quantity[37, Seconds]
+ 
+ 
+    Starting vortex free + electric field loop: 
+ 
+JmatMod={0., -0.9999999999999998, 0., 0., 0.}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=3.810241808927926*^-7; Delta=1;  E={-0.787376, -0.787363, -0.787312}; 
+ j =2/150; Delta V=7.153639361813766*^-6; Delta=0.000025553520252295445;  E={-0.787352, -0.787363, -0.787288}; 
+ j =3/150; Delta V=0.000011611696598052374; Delta=0.000015004655138491953;  E={-0.787352, -0.787363, -0.787288}; 
+ j =4/150; Delta V=0.00001422939988514886; Delta=8.810518441725035*^-6;  E={-0.787353, -0.787363, -0.787287}; 
+ev=1/20*; j MAX=5/150; Delta=8.810518441725035*^-6; 
+JmatMod={0., -0.9999999999999998, 0., 0., 0.}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=3.810241808927926*^-7; Delta=1;  E={-0.787376, -0.787363, -0.787312}; 
+ j =2/150; Delta V=7.153639361813766*^-6; Delta=0.000025553520252295445;  E={-0.787352, -0.787363, -0.787288}; 
+ j =3/150; Delta V=0.000011611696598052374; Delta=0.000015004655138491953;  E={-0.787352, -0.787363, -0.787288}; 
+ j =4/150; Delta V=0.00001422939988514886; Delta=8.810518441725035*^-6;  E={-0.787353, -0.787363, -0.787287}; 
+ev=1/20*; j MAX=5/150; Delta=8.810518441725035*^-6; 
+JmatMod={-0.009503948319320332, -0.9999999999999997, 0.14383163238326901, 0., 0.}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000023184414727347357; Delta=1;  E={-0.802397, -0.802383, -0.802342}; 
+ j =2/150; Delta V=0.000021112367340118868; Delta=7.368972755144015*^-6;  E={-0.802381, -0.802383, -0.802327}; 
+ j =3/150; Delta V=0.00002028429860168374; Delta=2.90703150863849*^-6;  E={-0.802381, -0.802383, -0.802326}; 
+ j =4/150; Delta V=0.000019957629002197552; Delta=1.1468123890063728*^-6;  E={-0.802382, -0.802383, -0.802326}; 
+ev=1/20*; j MAX=5/150; Delta=1.1468123890063728*^-6; 
+JmatMod={-0.009503948319320332, -0.9999999999999997, 0.14383163238326901, 0., 0.}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000023184414727347357; Delta=1;  E={-0.802397, -0.802383, -0.802342}; 
+ j =2/150; Delta V=0.000021112367340118868; Delta=7.368972755144015*^-6;  E={-0.802381, -0.802383, -0.802327}; 
+ j =3/150; Delta V=0.00002028429860168374; Delta=2.90703150863849*^-6;  E={-0.802381, -0.802383, -0.802326}; 
+ j =4/150; Delta V=0.000019957629002197552; Delta=1.1468123890063728*^-6;  E={-0.802382, -0.802383, -0.802326}; 
+ev=1/20*; j MAX=5/150; Delta=1.1468123890063728*^-6; 
+JmatMod={0., -1.0057323365296222, 0., 0., 0.024999999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=2.5923938202717353*^-6; Delta=1;  E={-0.787467, -0.787458, -0.787403}; 
+ j =2/150; Delta V=9.125766037998017*^-6; Delta=0.00030366593809727505;  E={-0.787448, -0.787458, -0.787383}; 
+ j =3/150; Delta V=0.000013602114423564453; Delta=0.000047196521951612357;  E={-0.787448, -0.787458, -0.787383}; 
+ j =4/150; Delta V=0.000016197203881720284; Delta=0.0000278201766284571;  E={-0.787448, -0.787458, -0.787383}; 
+ev=2/20*; j MAX=5/150; Delta=0.0000278201766284571; 
+JmatMod={0., -1.0057323365296222, 0., 0., 0.049999999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=4.7665285693019035*^-6; Delta=1;  E={-0.787467, -0.787473, -0.787403}; 
+ j =2/150; Delta V=0.000011647289100158745; Delta=0.0012140880898575679;  E={-0.787463, -0.787473, -0.787398}; 
+ j =3/150; Delta V=0.000016383207663390182; Delta=0.00008616845994424693;  E={-0.787463, -0.787473, -0.787398}; 
+ j =4/150; Delta V=0.000019067555412777018; Delta=0.00004682861511132088;  E={-0.787463, -0.787473, -0.787398}; 
+ev=2/20*; j MAX=5/150; Delta=0.00004682861511132088; 
+JmatMod={-0.00956089366358226, -1.005732336529622, 0.1446561237036948, 0., 0.02499999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000023534489169776756; Delta=1;  E={-0.802489, -0.80248, -0.802434}; 
+ j =2/150; Delta V=0.000021747484247632777; Delta=0.0013121558447050097;  E={-0.802478, -0.80248, -0.802423}; 
+ j =3/150; Delta V=0.000021097756628479358; Delta=0.00025652787245666886;  E={-0.802478, -0.80248, -0.802423}; 
+ j =4/150; Delta V=0.0000208939710027077; Delta=0.0000855206713589185;  E={-0.802478, -0.80248, -0.802423}; 
+ev=2/20*; j MAX=5/150; Delta=0.0000855206713589185; 
+JmatMod={-0.00956089366358226, -1.005732336529622, 0.14465612370369482, 0., 0.04999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000024433609929000262; Delta=1;  E={-0.802489, -0.802493, -0.802434}; 
+ j =2/150; Delta V=0.000023093269593543155; Delta=0.0027791070643720106;  E={-0.802491, -0.802493, -0.802436}; 
+ j =3/150; Delta V=0.00002271810713200795; Delta=0.0005393937964967288;  E={-0.802492, -0.802493, -0.802437}; 
+ j =4/150; Delta V=0.00002269088923791714; Delta=0.00019612141793445836;  E={-0.802492, -0.802493, -0.802437}; 
+ev=2/20*; j MAX=5/150; Delta=0.00019612141793445836; 
+JmatMod={0., -1.0231566198949447, 0., 0., 0.049999999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=5.2986861640832955*^-6; Delta=1;  E={-0.787744, -0.787751, -0.78768}; 
+ j =2/150; Delta V=0.000012050166360853502; Delta=0.0012281779169921458;  E={-0.787741, -0.787751, -0.787676}; 
+ j =3/150; Delta V=0.00001679354878340367; Delta=0.00008865698566676294;  E={-0.787741, -0.787751, -0.787676}; 
+ j =4/150; Delta V=0.000019439574562998333; Delta=0.000043556132426824;  E={-0.787741, -0.787751, -0.787676}; 
+ev=3/20*; j MAX=5/150; Delta=0.000043556132426824; 
+JmatMod={0., -1.0231566198949447, 0., 0., 0.09999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=9.63962701761025*^-6; Delta=1;  E={-0.787744, -0.787813, -0.78768}; 
+ j =2/150; Delta V=0.000017243009885980087; Delta=0.004899766186743593;  E={-0.787802, -0.787813, -0.787738}; 
+ j =3/150; Delta V=0.00002277811553246128; Delta=0.0007082106529138418;  E={-0.787803, -0.787813, -0.787738}; 
+ j =4/150; Delta V=0.000025686935041461445; Delta=0.00008234099330642689;  E={-0.787803, -0.787813, -0.787738}; 
+ev=3/20*; j MAX=5/150; Delta=0.00008234099330642689; 
+JmatMod={-0.00973400326472107, -1.0231566198949447, 0.14716228682323773, 0., 0.04999999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000024666602042878093; Delta=1;  E={-0.802771, -0.802777, -0.802717}; 
+ j =2/150; Delta V=0.000023275102950493037; Delta=0.0032782833783023824;  E={-0.802775, -0.802777, -0.80272}; 
+ j =3/150; Delta V=0.000022949713369885248; Delta=0.0007559753382620493;  E={-0.802776, -0.802777, -0.802721}; 
+ j =4/150; Delta V=0.00002289629120132894; Delta=0.00023871429409860756;  E={-0.802776, -0.802777, -0.802721}; 
+ev=3/20*; j MAX=5/150; Delta=0.00023871429409860756; 
+JmatMod={-0.00973400326472107, -1.0231566198949447, 0.14716228682323776, 0., 0.09999999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000027244076594522183; Delta=1;  E={-0.802771, -0.802832, -0.802717}; 
+ j =2/150; Delta V=0.000026648394717236547; Delta=0.007185676862866197;  E={-0.80283, -0.802834, -0.802775}; 
+ j =3/150; Delta V=0.000026952900161112623; Delta=0.0022277716851160367;  E={-0.802832, -0.802834, -0.802777}; 
+ j =4/150; Delta V=0.0000272264419212148; Delta=0.0006490456611430995;  E={-0.802832, -0.802834, -0.802777}; 
+ev=3/20*; j MAX=5/150; Delta=0.0006490456611430995; 
+JmatMod={0., -1.0529743598548036, 0., 0., 0.07499999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=8.795296325381468*^-6; Delta=1;  E={-0.788227, -0.788262, -0.788163}; 
+ j =2/150; Delta V=0.000015658441164301875; Delta=0.002811473595266567;  E={-0.788251, -0.788262, -0.788187}; 
+ j =3/150; Delta V=0.000020795183089679865; Delta=0.00031342524884708095;  E={-0.788252, -0.788262, -0.788187}; 
+ j =4/150; Delta V=0.000023498518563320354; Delta=0.00006287149801735038;  E={-0.788252, -0.788262, -0.788187}; 
+ev=4/20*; j MAX=5/150; Delta=0.00006287149801735038; 
+JmatMod={0., -1.0529743598548036, 0., 0., 0.14999999999999997}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000015369060982271338; Delta=1;  E={-0.788227, -0.788408, -0.788163}; 
+ j =2/150; Delta V=0.000023534695839844195; Delta=0.01117757268216979;  E={-0.788398, -0.788413, -0.788333}; 
+ j =3/150; Delta V=0.000030243636799457998; Delta=0.0025161868161777956;  E={-0.788403, -0.788413, -0.788338}; 
+ j =4/150; Delta V=0.000033348999223305043; Delta=0.00042761361402388065;  E={-0.788403, -0.788413, -0.788338}; 
+ev=4/20*; j MAX=5/150; Delta=0.00042761361402388065; 
+JmatMod={-0.010030295246793886, -1.0529743598548038, 0.15145102103564412, 0., 0.075}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000026713392038143807; Delta=1;  E={-0.803264, -0.803297, -0.803209}; 
+ j =2/150; Delta V=0.0000255285524142719; Delta=0.006074661114761293;  E={-0.803295, -0.803298, -0.80324}; 
+ j =3/150; Delta V=0.00002563346489638428; Delta=0.001839127649535796;  E={-0.803296, -0.803298, -0.803241}; 
+ j =4/150; Delta V=0.000025680195922399565; Delta=0.0005116352267297009;  E={-0.803296, -0.803298, -0.803241}; 
+ev=4/20*; j MAX=5/150; Delta=0.0005116352267297009; 
+JmatMod={-0.010030295246793886, -1.0529743598548038, 0.15145102103564415, 0., 0.15}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000031047613598465037; Delta=1;  E={-0.803264, -0.803427, -0.803209}; 
+ j =2/150; Delta V=0.000030909809910752266; Delta=0.013609477434296302;  E={-0.803425, -0.803434, -0.80337}; 
+ j =3/150; Delta V=0.000032193630774084943; Delta=0.005789019049008498;  E={-0.803432, -0.803435, -0.803377}; 
+ j =4/150; Delta V=0.00003266999120324616; Delta=0.001645638008597461;  E={-0.803433, -0.803435, -0.803378}; 
+ev=4/20*; j MAX=5/150; Delta=0.001645638008597461; 
+JmatMod={0., -1.0964234178519894, 0., 0., 0.09999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000013339760893008284; Delta=1;  E={-0.788948, -0.789027, -0.788884}; 
+ j =2/150; Delta V=0.000020150201825945623; Delta=0.005114458067107419;  E={-0.789017, -0.789029, -0.788953}; 
+ j =3/150; Delta V=0.00002580103020335581; Delta=0.0007963470240693465;  E={-0.789018, -0.789029, -0.788954}; 
+ j =4/150; Delta V=0.000028538441171046374; Delta=0.00009039807786803732;  E={-0.789018, -0.789029, -0.788954}; 
+ev=5/20*; j MAX=5/150; Delta=0.00009039807786803732; 
+JmatMod={0., -1.0964234178519894, 0., 0., 0.19999999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00002236103842126316; Delta=1;  E={-0.788948, -0.789307, -0.788884}; 
+ j =2/150; Delta V=0.00003083517051340907; Delta=0.020218929026089683;  E={-0.789297, -0.789324, -0.789232}; 
+ j =3/150; Delta V=0.00003928419022222541; Delta=0.006422904236210933;  E={-0.789314, -0.789325, -0.789249}; 
+ j =4/150; Delta V=0.0000424872975920006; Delta=0.001431533659255857;  E={-0.789315, -0.789326, -0.78925}; 
+ev=5/20*; j MAX=5/150; Delta=0.001431533659255857; 
+JmatMod={-0.010462155164311149, -1.0964234178519894, 0.15770036997289466, 0., 0.09999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000029753260860474414; Delta=1;  E={-0.803999, -0.804079, -0.803944}; 
+ j =2/150; Delta V=0.000028572892605770673; Delta=0.009961564807060341;  E={-0.804077, -0.804083, -0.804022}; 
+ j =3/150; Delta V=0.00002926843563244724; Delta=0.0037419688159743003;  E={-0.804081, -0.804083, -0.804026}; 
+ j =4/150; Delta V=0.000029355114695605904; Delta=0.000998403147722593;  E={-0.804081, -0.804083, -0.804026}; 
+ev=5/20*; j MAX=5/150; Delta=0.000998403147722593; 
+JmatMod={-0.010462155164311149, -1.0964234178519894, 0.15770036997289466, 0., 0.2}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00003595730756249033; Delta=1;  E={-0.803999, -0.804327, -0.803944}; 
+ j =2/150; Delta V=0.00003598744354719798; Delta=0.022623542645219874;  E={-0.804326, -0.80435, -0.804271}; 
+ j =3/150; Delta V=0.00003879909988443281; Delta=0.012353159069961178;  E={-0.804348, -0.804353, -0.804293}; 
+ j =4/150; Delta V=0.000039339495936272454; Delta=0.003723840668976075;  E={-0.804351, -0.804353, -0.804296}; 
+ev=5/20*; j MAX=5/150; Delta=0.003723840668976075; 
+JmatMod={0., -1.1553924566768603, 0., 0., 0.12499999999999997}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000019182461756664427; Delta=1;  E={-0.789959, -0.790106, -0.789896}; 
+ j =2/150; Delta V=0.000025756008995899852; Delta=0.008215239107654648;  E={-0.790096, -0.790109, -0.790031}; 
+ j =3/150; Delta V=0.00003209769145086521; Delta=0.0017064446693199203;  E={-0.790099, -0.790109, -0.790034}; 
+ j =4/150; Delta V=0.00003483166103060562; Delta=0.00023701182472746218;  E={-0.790099, -0.790109, -0.790034}; 
+ev=6/20*; j MAX=5/150; Delta=0.00023701182472746218; 
+JmatMod={0., -1.1553924566768603, 0., 0., 0.24999999999999994}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000031071640204088725; Delta=1;  E={-0.789959, -0.790586, -0.789896}; 
+ j =2/150; Delta V=0.00003954662952141387; Delta=0.032186832652519204;  E={-0.790575, -0.790633, -0.790511}; 
+ j =3/150; Delta V=0.00005067311751322578; Delta=0.013833505552047237;  E={-0.790622, -0.790638, -0.790558}; 
+ j =4/150; Delta V=0.000053824567264844844; Delta=0.003756321052927003;  E={-0.790628, -0.790639, -0.790563}; 
+ev=6/20*; j MAX=5/150; Delta=0.003756321052927003; 
+JmatMod={-0.01104848377227663, -1.1553924566768603, 0.1661819830871482, 0., 0.12499999999999994}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000033932181512327385; Delta=1;  E={-0.80503, -0.805187, -0.804976}; 
+ j =2/150; Delta V=0.00003256475129877994; Delta=0.01531093387837329;  E={-0.805185, -0.805196, -0.80513}; 
+ j =3/150; Delta V=0.00003411752250196781; Delta=0.006904765550953845;  E={-0.805194, -0.805197, -0.80514}; 
+ j =4/150; Delta V=0.00003417678622516886; Delta=0.0018747359261778174;  E={-0.805195, -0.805197, -0.805141}; 
+ev=6/20*; j MAX=5/150; Delta=0.0018747359261778174; 
+JmatMod={-0.01104848377227663, -1.1553924566768603, 0.16618198308714824, 0., 0.24999999999999992}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00004233525454701889; Delta=1;  E={-0.80503, -0.805612, -0.804976}; 
+ j =2/150; Delta V=0.00004217543749364371; Delta=0.03500029711630115;  E={-0.80561, -0.80567, -0.805555}; 
+ j =3/150; Delta V=0.00004746077290743683; Delta=0.024213694291492976;  E={-0.805668, -0.805681, -0.805613}; 
+ j =4/150; Delta V=0.00004785875917559132; Delta=0.007885171448363426;  E={-0.805679, -0.805683, -0.805624}; 
+ev=6/20*; j MAX=5/150; Delta=0.007885171448363426; 
+JmatMod={0., -1.2326070319270976, 0., 0., 0.14999999999999997}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000026598301753984974; Delta=1;  E={-0.791338, -0.791583, -0.791274}; 
+ j =2/150; Delta V=0.00003277010939862225; Delta=0.012197975334672151;  E={-0.791572, -0.79159, -0.791508}; 
+ j =3/150; Delta V=0.000040071311798603344; Delta=0.003317820628166754;  E={-0.79158, -0.79159, -0.791515}; 
+ j =4/150; Delta V=0.00004275358494880182; Delta=0.0005406869476141107;  E={-0.79158, -0.79159, -0.791515}; 
+ev=7/20*; j MAX=5/150; Delta=0.0005406869476141107; 
+JmatMod={0., -1.2326070319270976, 0., 0., 0.29999999999999993}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00004203392116855811; Delta=1;  E={-0.791338, -0.792358, -0.791274}; 
+ j =2/150; Delta V=0.00005017813742112169; Delta=0.04712238573391947;  E={-0.792347, -0.792469, -0.792283}; 
+ j =3/150; Delta V=0.00006560286847113168; Delta=0.027017035443681836;  E={-0.792458, -0.792489, -0.792394}; 
+ j =4/150; Delta V=0.00006852690823895415; Delta=0.008456840282846323;  E={-0.792479, -0.792493, -0.792414}; 
+ev=7/20*; j MAX=5/150; Delta=0.008456840282846323; 
+JmatMod={-0.011816563509301492, -1.2326070319270979, 0.17728788148917068, 0., 0.14999999999999997}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00003949762823941507; Delta=1;  E={-0.806436, -0.806714, -0.806381}; 
+ j =2/150; Delta V=0.000037750171412192996; Delta=0.022642689101200708;  E={-0.806712, -0.806736, -0.806657}; 
+ j =3/150; Delta V=0.00004061813478568308; Delta=0.012130526137474146;  E={-0.806734, -0.806739, -0.806679}; 
+ j =4/150; Delta V=0.000040577795781199435; Delta=0.003477789767903916;  E={-0.806737, -0.806739, -0.806682}; 
+ev=7/20*; j MAX=5/150; Delta=0.003477789767903916; 
+JmatMod={-0.011816563509301492, -1.2326070319270979, 0.17728788148917068, 0., 0.3}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00005067914917498368; Delta=1;  E={-0.806436, -0.807398, -0.806381}; 
+ j =2/150; Delta V=0.00004988904762152285; Delta=0.05169168921673967;  E={-0.807396, -0.807531, -0.807342}; 
+ j =3/150; Delta V=0.00005929641798493314; Delta=0.04457371210472111;  E={-0.807529, -0.807566, -0.807475}; 
+ j =4/150; Delta V=0.000059255112919278767; Delta=0.015940968485686435;  E={-0.807564, -0.807576, -0.807509}; 
+ j =5/150; Delta V=0.00006243880408357765; Delta=0.013630365173401326;  E={-0.807574, -0.807579, -0.807519}; 
+ j =6/150; Delta V=0.0000623801392590428; Delta=0.005229927263758705;  E={-0.807577, -0.80758, -0.807522}; 
+ev=7/20*; j MAX=7/150; Delta=0.005229927263758705; 
+JmatMod={0., -1.3319213497496407, 0., 0., 0.17499999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00003593609769023416; Delta=1;  E={-0.793195, -0.793584, -0.793131}; 
+ j =2/150; Delta V=0.00004160148648165199; Delta=0.01713252125565734;  E={-0.793574, -0.7936, -0.793509}; 
+ j =3/150; Delta V=0.00005030371167495213; Delta=0.006097395543732662;  E={-0.793589, -0.793601, -0.793525}; 
+ j =4/150; Delta V=0.000052889389682620436; Delta=0.001123274782454775;  E={-0.79359, -0.793601, -0.793526}; 
+ev=8/20*; j MAX=5/150; Delta=0.001123274782454775; 
+JmatMod={0., -1.3319213497496407, 0., 0., 0.3499999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00005590062030563189; Delta=1;  E={-0.793195, -0.79479, -0.793131}; 
+ j =2/150; Delta V=0.00006331763728588517; Delta=0.06474369616684295;  E={-0.79478, -0.79503, -0.794715}; 
+ j =3/150; Delta V=0.00008587118689570383; Delta=0.04964555603305568;  E={-0.795019, -0.795094, -0.794955}; 
+ j =4/150; Delta V=0.0000884119205383311; Delta=0.017011308297810945;  E={-0.795083, -0.795112, -0.795019}; 
+ j =5/150; Delta V=0.00009638516009665988; Delta=0.015390864893929546;  E={-0.795102, -0.795118, -0.795037}; 
+ j =6/150; Delta V=0.00009726413685660665; Delta=0.005497151706970849;  E={-0.795108, -0.79512, -0.795043}; 
+ev=8/20*; j MAX=7/150; Delta=0.005497151706970849; 
+JmatMod={-0.01280498527247853, -1.3319213497496407, 0.19157242194061783, 0., 0.17499999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00004681928042585498; Delta=1;  E={-0.808329, -0.808799, -0.808275}; 
+ j =2/150; Delta V=0.00004451774593862664; Delta=0.03266728332696883;  E={-0.808798, -0.808847, -0.808743}; 
+ j =3/150; Delta V=0.00004948802656623128; Delta=0.02134592861444501;  E={-0.808845, -0.808855, -0.80879}; 
+ j =4/150; Delta V=0.000049260236526327474; Delta=0.006470632055671499;  E={-0.808853, -0.808857, -0.808798}; 
+ev=8/20*; j MAX=5/150; Delta=0.006470632055671499; 
+JmatMod={-0.01280498527247853, -1.3319213497496407, 0.1915724219406178, 0., 0.3499999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00006161000227442429; Delta=1;  E={-0.808329, -0.809861, -0.808275}; 
+ j =2/150; Delta V=0.000059697605443069236; Delta=0.07370124485797924;  E={-0.809859, -0.810142, -0.809805}; 
+ j =3/150; Delta V=0.00007598266131482532; Delta=0.07855133179013551;  E={-0.810141, -0.810241, -0.810086}; 
+ j =4/150; Delta V=0.0000752015588902206; Delta=0.030846572943119155;  E={-0.810239, -0.810281, -0.810185}; 
+ j =5/150; Delta V=0.00008259935776918568; Delta=0.03462363931773654;  E={-0.810279, -0.810299, -0.810224}; 
+ j =6/150; Delta V=0.00008217055264008724; Delta=0.014916244694228753;  E={-0.810297, -0.810308, -0.810242}; 
+ j =7/150; Delta V=0.00008591556520040653; Delta=0.017464632113963985;  E={-0.810305, -0.810312, -0.810251}; 
+ j =8/150; Delta V=0.00008568689669466944; Delta=0.007822156220979148;  E={-0.81031, -0.810315, -0.810255}; 
+ev=8/20*; j MAX=9/150; Delta=0.007822156220979148; 
+JmatMod={0., -1.4587747436367868, 0., 0., 0.19999999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00004768653292869327; Delta=1;  E={-0.795692, -0.796293, -0.795628}; 
+ j =2/150; Delta V=0.00005280473331167369; Delta=0.02303978769098447;  E={-0.796282, -0.796325, -0.796218}; 
+ j =3/150; Delta V=0.00006369559658266832; Delta=0.010875574616684536;  E={-0.796315, -0.796328, -0.79625}; 
+ j =4/150; Delta V=0.00006615282407632966; Delta=0.002190178053708247;  E={-0.796318, -0.796328, -0.796253}; 
+ev=9/20*; j MAX=5/150; Delta=0.002190178053708247; 
+JmatMod={0., -1.4587747436367868, 0., 0., 0.3999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00007346814308610063; Delta=1;  E={-0.795692, -0.798129, -0.795628}; 
+ j =2/150; Delta V=0.00007965822065677142; Delta=0.08411722852700831;  E={-0.798118, -0.798612, -0.798054}; 
+ j =3/150; Delta V=0.00011375258978653216; Delta=0.08712096977100375;  E={-0.798602, -0.798798, -0.798538}; 
+ j =4/150; Delta V=0.00011594838230873482; Delta=0.030764578885380978;  E={-0.798788, -0.798878, -0.798723}; 
+ j =5/150; Delta V=0.00013291837222367575; Delta=0.04126910703316672;  E={-0.798867, -0.798918, -0.798802}; 
+ j =6/150; Delta V=0.0001340947551522773; Delta=0.015274093864677818;  E={-0.798907, -0.79894, -0.798843}; 
+ j =7/150; Delta V=0.0001437495178777017; Delta=0.023048688209534318;  E={-0.798929, -0.798952, -0.798864}; 
+ j =8/150; Delta V=0.00014451448261322512; Delta=0.008761071579832358;  E={-0.798941, -0.79896, -0.798877}; 
+ev=9/20*; j MAX=9/150; Delta=0.008761071579832358; 
+JmatMod={-0.014068228387586812, -1.458774743636787, 0.20981795265676384, 0., 0.19999999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.000056481637737473063; Delta=1;  E={-0.810876, -0.81165, -0.810821}; 
+ j =2/150; Delta V=0.000053500927074644164; Delta=0.046318013020727744;  E={-0.811648, -0.811748, -0.811594}; 
+ j =3/150; Delta V=0.0000619443047379013; Delta=0.03748812787967476;  E={-0.811746, -0.811771, -0.811692}; 
+ j =4/150; Delta V=0.000061401655380781; Delta=0.01217369562322801;  E={-0.811769, -0.811776, -0.811714}; 
+ j =5/150; Delta V=0.00006390525531460491; Delta=0.009971962020786818;  E={-0.811774, -0.811778, -0.81172}; 
+ev=9/20*; j MAX=6/150; Delta=0.009971962020786818; 
+JmatMod={-0.014068228387586812, -1.458774743636787, 0.2098179526567638, 0., 0.3999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00007586074395198724; Delta=1;  E={-0.810876, -0.813257, -0.810821}; 
+ j =2/150; Delta V=0.0000723097133225435; Delta=0.10167831337532962;  E={-0.813256, -0.813819, -0.813201}; 
+ j =3/150; Delta V=0.00009943240127819963; Delta=0.13425477541802602;  E={-0.813817, -0.814084, -0.813763}; 
+ j =4/150; Delta V=0.00009790151704429147; Delta=0.055897971258111356;  E={-0.814082, -0.814228, -0.814027}; 
+ j =5/150; Delta V=0.00011380629203464125; Delta=0.09260854291510046;  E={-0.814226, -0.814328, -0.814172}; 
+ j =6/150; Delta V=0.00011317166526264882; Delta=0.040207518910098494;  E={-0.814326, -0.814404, -0.814271}; 
+ j =7/150; Delta V=0.0000994024075480353; Delta=0.5520382214529073;  E={-0.814401, -0.81461, -0.814347}; 
+ j =8/150; Delta V=0.00009855538899136948; Delta=0.11556394091026928;  E={-0.814608, -0.815283, -0.814554}; 
+ j =9/150; Delta V=0.00012939072760111443; Delta=0.7509781384773715;  E={-0.815282, -0.816532, -0.815227}; 
+ j =10/150; Delta V=0.0001258461314526492; Delta=0.11479814659144733;  E={-0.816531, -0.81744, -0.816477}; 
+ j =11/150; Delta V=0.00013002510035648173; Delta=0.13626021243944603;  E={-0.817439, -0.817698, -0.817385}; 
+ j =12/150; Delta V=0.00012931560512008852; Delta=0.040738930396968284;  E={-0.817696, -0.817788, -0.817642}; 
+ j =13/150; Delta V=0.00013132482323510768; Delta=0.059503457208509;  E={-0.817786, -0.817826, -0.817732}; 
+ j =14/150; Delta V=0.0001312550834540514; Delta=0.017937206607634634;  E={-0.817824, -0.817843, -0.81777}; 
+ j =15/150; Delta V=0.000132090294492874; Delta=0.02717342312695395;  E={-0.817841, -0.81785, -0.817787}; 
+ j =16/150; Delta V=0.00013211141706913476; Delta=0.008122998631459155;  E={-0.817849, -0.817854, -0.817795}; 
+ev=9/20*; j MAX=17/150; Delta=0.008122998631459155; 
+JmatMod={0., -1.6209170803576813, 0., 0., 0.22499999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00006256653222868031; Delta=1;  E={-0.799066, -0.799977, -0.799002}; 
+ j =2/150; Delta V=0.00006715929894865905; Delta=0.02983475381026557;  E={-0.799967, -0.800041, -0.799903}; 
+ j =3/150; Delta V=0.00008153302012989475; Delta=0.019185575484164635;  E={-0.800031, -0.80005, -0.799967}; 
+ j =4/150; Delta V=0.00008387181364190756; Delta=0.004080839094860345;  E={-0.80004, -0.800052, -0.799975}; 
+ev=10/20*; j MAX=5/150; Delta=0.004080839094860345; 
+JmatMod={0., -1.6209170803576813, 0., 0., 0.44999999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00009559466032559269; Delta=1;  E={-0.799066, -0.802731, -0.799002}; 
+ j =2/150; Delta V=0.00009999150405993627; Delta=0.10318511771212613;  E={-0.802721, -0.80366, -0.802657}; 
+ j =3/150; Delta V=0.00015118756073491298; Delta=0.1458650987722532;  E={-0.803649, -0.804152, -0.803585}; 
+ j =4/150; Delta V=0.00015370502539810318; Delta=0.05328612703511487;  E={-0.804141, -0.804447, -0.804077}; 
+ j =5/150; Delta V=0.00018921042981377532; Delta=0.11173478815412641;  E={-0.804436, -0.804671, -0.804372}; 
+ j =6/150; Delta V=0.000192162621035239; Delta=0.04073943405820604;  E={-0.80466, -0.80485, -0.804595}; 
+ j =7/150; Delta V=0.00022246282921410923; Delta=0.09900795682635893;  E={-0.804838, -0.805012, -0.804773}; 
+ j =8/150; Delta V=0.0002258925649571972; Delta=0.03636545730609411;  E={-0.805, -0.805162, -0.804935}; 
+ j =9/150; Delta V=0.00025471612059414225; Delta=0.09520909954645984;  E={-0.805151, -0.805314, -0.805085}; 
+ j =10/150; Delta V=0.00025873849342694205; Delta=0.03520214213343667;  E={-0.805302, -0.805468, -0.805237}; 
+ j =11/150; Delta V=0.0002873971166127182; Delta=0.09883102694302953;  E={-0.805455, -0.80563, -0.80539}; 
+ j =12/150; Delta V=0.0002920102039215127; Delta=0.036065915779048885;  E={-0.805618, -0.805799, -0.805552}; 
+ j =13/150; Delta V=0.00031997640082532484; Delta=0.1017183733901349;  E={-0.805786, -0.805976, -0.80572}; 
+ j =14/150; Delta V=0.0003250391480064749; Delta=0.03719630820722222;  E={-0.805963, -0.806155, -0.805897}; 
+ j =15/150; Delta V=0.00035024623994850515; Delta=0.10639934006726481;  E={-0.806142, -0.806331, -0.806075}; 
+ j =16/150; Delta V=0.0003554047977882721; Delta=0.03563544374701197;  E={-0.806317, -0.806494, -0.80625}; 
+ j =17/150; Delta V=0.00037556251203621846; Delta=0.09819124381830319;  E={-0.80648, -0.806636, -0.806412}; 
+ j =18/150; Delta V=0.0003803410624232118; Delta=0.030492264173804337;  E={-0.806622, -0.806753, -0.806554}; 
+ j =19/150; Delta V=0.00039480356618148326; Delta=0.07876275923773296;  E={-0.806738, -0.806843, -0.806671}; 
+ j =20/150; Delta V=0.0003988855956770147; Delta=0.023150275559577757;  E={-0.806828, -0.806909, -0.80676}; 
+ j =21/150; Delta V=0.0004096392085654016; Delta=0.05619637907667577;  E={-0.806892, -0.806953, -0.806825}; 
+ j =22/150; Delta V=0.0004131789526791619; Delta=0.015969716836340443;  E={-0.806937, -0.806984, -0.806869}; 
+ j =23/150; Delta V=0.00042271600478408297; Delta=0.05126955296416295;  E={-0.806967, -0.807003, -0.806899}; 
+ j =24/150; Delta V=0.00042584478554928825; Delta=0.010367307973021583;  E={-0.806986, -0.807015, -0.806918}; 
+ j =25/150; Delta V=0.00043228012525291655; Delta=0.06278839880138265;  E={-0.806998, -0.807023, -0.80693}; 
+ j =26/150; Delta V=0.0004346360918848735; Delta=0.006520936939347313;  E={-0.807006, -0.807028, -0.806937}; 
+ev=10/20*; j MAX=27/150; Delta=0.006520936939347313; 
+JmatMod={-0.015683940179739952, -1.6209170803576816, 0.23313914962576776, 0., 0.22499999999999992}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00006940658792193192; Delta=1;  E={-0.814315, -0.815574, -0.81426}; 
+ j =2/150; Delta V=0.00006562188768758267; Delta=0.06470445070550201;  E={-0.815573, -0.815775, -0.815518}; 
+ j =3/150; Delta V=0.00008007576942672486; Delta=0.0662556724116084;  E={-0.815773, -0.815838, -0.815718}; 
+ j =4/150; Delta V=0.0000791242697414709; Delta=0.023114151889646162;  E={-0.815835, -0.81586, -0.815781}; 
+ j =5/150; Delta V=0.00008480263650467714; Delta=0.025601507382780497;  E={-0.815858, -0.815869, -0.815803}; 
+ j =6/150; Delta V=0.00008443236048930503; Delta=0.00970519146270249;  E={-0.815867, -0.815873, -0.815812}; 
+ev=10/20*; j MAX=7/150; Delta=0.00970519146270249; 
+JmatMod={-0.015683940179739952, -1.6209170803576816, 0.2331391496257678, 0., 0.44999999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00009406875141398612; Delta=1;  E={-0.814315, -0.817964, -0.81426}; 
+ j =2/150; Delta V=0.00008842421368380374; Delta=0.13491289353563246;  E={-0.817963, -0.81903, -0.817909}; 
+ j =3/150; Delta V=0.00010202913649403173; Delta=0.6287796248762079;  E={-0.819028, -0.819776, -0.818974}; 
+ j =4/150; Delta V=0.00009918250580950195; Delta=0.1558666379087053;  E={-0.819775, -0.821188, -0.819721}; 
+ j =5/150; Delta V=0.00013086436757368176; Delta=0.8347054455535466;  E={-0.821187, -0.823146, -0.821133}; 
+ j =6/150; Delta V=0.00012703252222141448; Delta=0.11771083625284735;  E={-0.823146, -0.824145, -0.823092}; 
+ j =7/150; Delta V=0.00013154964499504125; Delta=0.1358311661110509;  E={-0.824144, -0.824409, -0.82409}; 
+ j =8/150; Delta V=0.00013100698347804634; Delta=0.037451679240895375;  E={-0.824408, -0.824492, -0.824354}; 
+ j =9/150; Delta V=0.00013321777680268704; Delta=0.049437817319276045;  E={-0.824491, -0.824522, -0.824437}; 
+ j =10/150; Delta V=0.00013324325244907278; Delta=0.013929551993055928;  E={-0.82452, -0.824533, -0.824467}; 
+ j =11/150; Delta V=0.00013413579101387665; Delta=0.01877133959089159;  E={-0.824531, -0.824537, -0.824478}; 
+ j =12/150; Delta V=0.00013420188117952022; Delta=0.005252756547137451;  E={-0.824536, -0.824539, -0.824482}; 
+ev=10/20*; j MAX=13/150; Delta=0.005252756547137451; 
+JmatMod={0., -1.8295931399379672, 0., 0., 0.24999999999999994}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00008163467855722865; Delta=1;  E={-0.803663, -0.805035, -0.803599}; 
+ j =2/150; Delta V=0.00008578936436057153; Delta=0.03723080680014823;  E={-0.805025, -0.805161, -0.80496}; 
+ j =3/150; Delta V=0.00010573647959052225; Delta=0.0339139444631589;  E={-0.80515, -0.805186, -0.805086}; 
+ j =4/150; Delta V=0.00010806863048592365; Delta=0.00731818765889658;  E={-0.805175, -0.805192, -0.805111}; 
+ev=11/20*; j MAX=5/150; Delta=0.00731818765889658; 
+JmatMod={0., -1.8295931399379672, 0., 0., 0.4999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00012287025511702095; Delta=1;  E={-0.803663, -0.809119, -0.803599}; 
+ j =2/150; Delta V=0.00012503318278604363; Delta=0.12225264452125828;  E={-0.809109, -0.810811, -0.809045}; 
+ j =3/150; Delta V=0.00019665807669171504; Delta=0.2501497129181055;  E={-0.8108, -0.811963, -0.810736}; 
+ j =4/150; Delta V=0.00020087674959381796; Delta=0.08272530698571437;  E={-0.811951, -0.812814, -0.811887}; 
+ j =5/150; Delta V=0.00025695450328312453; Delta=0.2042454073606933;  E={-0.812802, -0.813585, -0.812738}; 
+ j =6/150; Delta V=0.00026388960089334973; Delta=0.06885168002633599;  E={-0.813573, -0.814259, -0.813508}; 
+ j =7/150; Delta V=0.0003082388308893752; Delta=0.18250545960346087;  E={-0.814247, -0.814862, -0.814182}; 
+ j =8/150; Delta V=0.0003164020982896371; Delta=0.05886115789148137;  E={-0.814849, -0.815351, -0.814784}; 
+ j =9/150; Delta V=0.00034635827758655797; Delta=0.14896423658791944;  E={-0.815337, -0.815716, -0.815271}; 
+ j =10/150; Delta V=0.0003539822236080418; Delta=0.042365788246559594;  E={-0.815702, -0.815962, -0.815636}; 
+ j =11/150; Delta V=0.0003723677243778943; Delta=0.0967749027111529;  E={-0.815947, -0.816113, -0.815881}; 
+ j =12/150; Delta V=0.00037858313622177105; Delta=0.02565515516370944;  E={-0.816097, -0.816199, -0.81603}; 
+ j =13/150; Delta V=0.00039232908740809516; Delta=0.07009889715682743;  E={-0.816183, -0.816245, -0.816115}; 
+ j =14/150; Delta V=0.0003974468658323012; Delta=0.013965643753120479;  E={-0.816229, -0.81627, -0.816161}; 
+ j =15/150; Delta V=0.0004061385083040004; Delta=0.07428702098554732;  E={-0.816253, -0.816282, -0.816185}; 
+ j =16/150; Delta V=0.00040975806086577485; Delta=0.0072554428101291426;  E={-0.816265, -0.816289, -0.816197}; 
+ev=11/20*; j MAX=17/150; Delta=0.0072554428101291426; 
+JmatMod={-0.017764823642476113, -1.8295931399379675, 0.2631533679145086, 0., 0.24999999999999997}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00008692426645260215; Delta=1;  E={-0.819003, -0.821042, -0.818948}; 
+ j =2/150; Delta V=0.00008236335464844171; Delta=0.08873340351107872;  E={-0.821041, -0.82145, -0.820987}; 
+ j =3/150; Delta V=0.00010624468844943043; Delta=0.11612623894283919;  E={-0.821448, -0.821629, -0.821394}; 
+ j =4/150; Delta V=0.00010512860461880877; Delta=0.04327705713042698;  E={-0.821627, -0.821721, -0.821573}; 
+ j =5/150; Delta V=0.00011577965035392755; Delta=0.09492497640574554;  E={-0.821718, -0.821782, -0.821664}; 
+ j =6/150; Delta V=0.00011542043541550107; Delta=0.030857064695628267;  E={-0.82178, -0.821831, -0.821726}; 
+ j =7/150; Delta V=0.00008899661757705911; Delta=0.6365037095505609;  E={-0.821828, -0.822074, -0.821774}; 
+ j =8/150; Delta V=0.00008796520261402544; Delta=0.1150236413643026;  E={-0.822072, -0.822849, -0.822018}; 
+ j =9/150; Delta V=0.00012328682606385394; Delta=0.6005533681721128;  E={-0.822848, -0.823972, -0.822794}; 
+ j =10/150; Delta V=0.00012164725371894473; Delta=0.09270019011031369;  E={-0.823972, -0.82459, -0.823918}; 
+ j =11/150; Delta V=0.00012484498476501613; Delta=0.12549622635603425;  E={-0.824588, -0.824771, -0.824535}; 
+ j =12/150; Delta V=0.00012464812794081006; Delta=0.03458747071487776;  E={-0.824769, -0.824839, -0.824716}; 
+ j =13/150; Delta V=0.00012590849822156626; Delta=0.057601932263515246;  E={-0.824837, -0.824869, -0.824783}; 
+ j =14/150; Delta V=0.00012598290148205216; Delta=0.01607124731985126;  E={-0.824867, -0.824884, -0.824814}; 
+ j =15/150; Delta V=0.0001265286190108842; Delta=0.027812003599345714;  E={-0.824882, -0.824891, -0.824828}; 
+ j =16/150; Delta V=0.00012661422527965207; Delta=0.007722648038344659;  E={-0.824889, -0.824894, -0.824835}; 
+ev=11/20*; j MAX=17/150; Delta=0.007722648038344659; 
+JmatMod={-0.017764823642476113, -1.8295931399379675, 0.26315336791450855, 0., 0.49999999999999983}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00011602487561282931; Delta=1;  E={-0.819003, -0.82453, -0.818948}; 
+ j =2/150; Delta V=0.00010806280795589741; Delta=0.16958956373212253;  E={-0.82453, -0.82643, -0.824475}; 
+ j =3/150; Delta V=0.00013308639128221201; Delta=1.297351802662813;  E={-0.826429, -0.82917, -0.826374}; 
+ j =4/150; Delta V=0.00012751198242011238; Delta=0.18800404932604897;  E={-0.82917, -0.832065, -0.829116}; 
+ j =5/150; Delta V=0.0001330007858245267; Delta=0.18519486650901887;  E={-0.832064, -0.832661, -0.83201}; 
+ j =6/150; Delta V=0.00013208831252857538; Delta=0.046649484361482474;  E={-0.83266, -0.832808, -0.832606}; 
+ j =7/150; Delta V=0.00013593341138683597; Delta=0.05502242756937378;  E={-0.832806, -0.832852, -0.832753}; 
+ j =8/150; Delta V=0.00013605452482053632; Delta=0.014424768875686705;  E={-0.83285, -0.832866, -0.832797}; 
+ j =9/150; Delta V=0.00013769862144304514; Delta=0.017395380585313404;  E={-0.832864, -0.83287, -0.83281}; 
+ j =10/150; Delta V=0.0001378648936962163; Delta=0.0045283170486458135;  E={-0.832868, -0.832871, -0.832814}; 
+ev=11/20*; j MAX=11/150; Delta=0.0045283170486458135; 
+JmatMod={0., -2.101548235067704, 0., 0., 0.275}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00010635053082771541; Delta=1;  E={-0.810007, -0.812064, -0.809943}; 
+ j =2/150; Delta V=0.00011021109818170179; Delta=0.04674543493018107;  E={-0.812053, -0.81231, -0.811989}; 
+ j =3/150; Delta V=0.00013889371621407967; Delta=0.06027010838249475;  E={-0.812299, -0.812381, -0.812235}; 
+ j =4/150; Delta V=0.0001415605428079324; Delta=0.014287183158877337;  E={-0.81237, -0.812404, -0.812306}; 
+ j =5/150; Delta V=0.0001519586438863543; Delta=0.02096835911904643;  E={-0.812393, -0.812413, -0.812328}; 
+ j =6/150; Delta V=0.00015313603348015298; Delta=0.005369665671875523;  E={-0.812401, -0.812416, -0.812337}; 
+ev=12/20*; j MAX=7/150; Delta=0.005369665671875523; 
+JmatMod={0., -2.101548235067704, 0., 0., 0.55}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00015487244907794252; Delta=1;  E={-0.810007, -0.818039, -0.809943}; 
+ j =2/150; Delta V=0.00015484717169351846; Delta=0.1490313564896967;  E={-0.818028, -0.820918, -0.817964}; 
+ j =3/150; Delta V=0.0002408174103284676; Delta=0.3362589370828103;  E={-0.820907, -0.823099, -0.820843}; 
+ j =4/150; Delta V=0.00024776625509470454; Delta=0.10036181299311867;  E={-0.823087, -0.824689, -0.823022}; 
+ j =5/150; Delta V=0.00030090251050572333; Delta=0.24864807778640674;  E={-0.824677, -0.825881, -0.824612}; 
+ j =6/150; Delta V=0.00031079449838089247; Delta=0.07017896446811119;  E={-0.825868, -0.826643, -0.825802}; 
+ j =7/150; Delta V=0.00033894012704419014; Delta=0.15450534122118206;  E={-0.826629, -0.82707, -0.826563}; 
+ j =8/150; Delta V=0.00034771895191014804; Delta=0.038145063119818835;  E={-0.827056, -0.827283, -0.826989}; 
+ j =9/150; Delta V=0.00036545064331738793; Delta=0.0784923567746465;  E={-0.827268, -0.82738, -0.827201}; 
+ j =10/150; Delta V=0.00037249704315050385; Delta=0.01751240717942143;  E={-0.827364, -0.827423, -0.827297}; 
+ j =11/150; Delta V=0.0003832700151369713; Delta=0.08201698151107355;  E={-0.827406, -0.827441, -0.827339}; 
+ j =12/150; Delta V=0.0003881215538868169; Delta=0.007535422173958282;  E={-0.827424, -0.827448, -0.827356}; 
+ev=12/20*; j MAX=13/150; Delta=0.007535422173958282; 
+JmatMod={-0.020478771557429276, -2.101548235067704, 0.3022691131819659, 0., 0.275}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00011035741431159613; Delta=1;  E={-0.825472, -0.828784, -0.825417}; 
+ j =2/150; Delta V=0.00010535742083877414; Delta=0.11774730754439441;  E={-0.828783, -0.829608, -0.828729}; 
+ j =3/150; Delta V=0.00012011309735748566; Delta=1.1098139946077645;  E={-0.829606, -0.830664, -0.829552}; 
+ j =4/150; Delta V=0.00011848051983127563; Delta=0.18141466965917236;  E={-0.830663, -0.833345, -0.83061}; 
+ j =5/150; Delta V=0.00012542008223593267; Delta=0.2092477615011811;  E={-0.833344, -0.834037, -0.833291}; 
+ j =6/150; Delta V=0.00012487660793325279; Delta=0.051886989155780425;  E={-0.834035, -0.83421, -0.833981}; 
+ j =7/150; Delta V=0.00012651635510081588; Delta=0.07519613417617449;  E={-0.834208, -0.834271, -0.834155}; 
+ j =8/150; Delta V=0.00012653782571155834; Delta=0.01936130971030437;  E={-0.834269, -0.834294, -0.834216}; 
+ j =9/150; Delta V=0.00012716958064624086; Delta=0.029700230358384698;  E={-0.834292, -0.834303, -0.834239}; 
+ j =10/150; Delta V=0.00012725409524500954; Delta=0.007593654695868399;  E={-0.834301, -0.834306, -0.834247}; 
+ev=12/20*; j MAX=11/150; Delta=0.007593654695868399; 
+JmatMod={-0.020478771557429276, -2.101548235067704, 0.3022691131819659, 0., 0.55}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00011071637233454535; Delta=1;  E={-0.825472, -0.833777, -0.825417}; 
+ j =2/150; Delta V=0.00009965849404276805; Delta=0.24024797788216673;  E={-0.833779, -0.838432, -0.833725}; 
+ j =3/150; Delta V=0.00013391050355982947; Delta=0.9384261149719155;  E={-0.838434, -0.842034, -0.83838}; 
+ j =4/150; Delta V=0.00012932782059041074; Delta=0.11055778250355491;  E={-0.842034, -0.843085, -0.841981}; 
+ j =5/150; Delta V=0.0001375144513906104; Delta=0.11204371220176305;  E={-0.843084, -0.843316, -0.84303}; 
+ j =6/150; Delta V=0.00013752860059682443; Delta=0.026589155443915068;  E={-0.843314, -0.843372, -0.843261}; 
+ j =7/150; Delta V=0.00014182486781399718; Delta=0.02861602092532835;  E={-0.843371, -0.843388, -0.843317}; 
+ j =8/150; Delta V=0.00014225041824304804; Delta=0.006906414768726417;  E={-0.843386, -0.843392, -0.843332}; 
+ev=12/20*; j MAX=9/150; Delta=0.006906414768726417; 
+JmatMod={0., -2.4625847138554215, 0., 0., 0.29999999999999993}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.0001381597193239863; Delta=1;  E={-0.818905, -0.821984, -0.818842}; 
+ j =2/150; Delta V=0.00014205179002126626; Delta=0.06134539979706674;  E={-0.821972, -0.82246, -0.821908}; 
+ j =3/150; Delta V=0.00018256736397084296; Delta=0.1054135630968634;  E={-0.822448, -0.822659, -0.822384}; 
+ j =4/150; Delta V=0.00018648377668684815; Delta=0.02679655441387871;  E={-0.822647, -0.822754, -0.822583}; 
+ j =5/150; Delta V=0.0002069909966853457; Delta=0.0613235976549501;  E={-0.822741, -0.822809, -0.822677}; 
+ j =6/150; Delta V=0.00020962747623678717; Delta=0.015772036896364916;  E={-0.822796, -0.822843, -0.822732}; 
+ j =7/150; Delta V=0.00022273156924400826; Delta=0.04136559151948266;  E={-0.82283, -0.822866, -0.822765}; 
+ j =8/150; Delta V=0.00022468474953050307; Delta=0.01073602597481016;  E={-0.822853, -0.822882, -0.822788}; 
+ j =9/150; Delta V=0.00023406767377847355; Delta=0.030533003743836107;  E={-0.822869, -0.822894, -0.822804}; 
+ j =10/150; Delta V=0.0002355921919661629; Delta=0.007978075793755895;  E={-0.822881, -0.822903, -0.822816}; 
+ev=13/20*; j MAX=11/150; Delta=0.007978075793755895; 
+JmatMod={0., -2.4625847138554215, 0., 0., 0.5999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00018919622355038194; Delta=1;  E={-0.818905, -0.830533, -0.818842}; 
+ j =2/150; Delta V=0.0001880699320802512; Delta=0.16605085874634357;  E={-0.830523, -0.834961, -0.830459}; 
+ j =3/150; Delta V=0.0002715313849192636; Delta=0.369091220128116;  E={-0.834949, -0.838034, -0.834885}; 
+ j =4/150; Delta V=0.00028129012362275267; Delta=0.10053846179049383;  E={-0.838022, -0.839805, -0.837958}; 
+ j =5/150; Delta V=0.00031704784979353176; Delta=0.21189712615840484;  E={-0.839792, -0.840691, -0.839727}; 
+ j =6/150; Delta V=0.00032733815621257325; Delta=0.047759962506492344;  E={-0.840678, -0.841066, -0.840612}; 
+ j =7/150; Delta V=0.00034714921884274383; Delta=0.08624529309234912;  E={-0.841051, -0.841207, -0.840985}; 
+ j =8/150; Delta V=0.0003554365479314401; Delta=0.018147091515553285;  E={-0.841191, -0.841258, -0.841125}; 
+ j =9/150; Delta V=0.00036670860994015794; Delta=0.07880044419089027;  E={-0.841241, -0.841275, -0.841174}; 
+ j =10/150; Delta V=0.0003722250129043072; Delta=0.0064190199224603145;  E={-0.841258, -0.841282, -0.841191}; 
+ev=13/20*; j MAX=11/150; Delta=0.0064190199224603145; 
+JmatMod={-0.02408457576816092, -2.462584713855421, 0.35419757927591067, 0., 0.30000000000000004}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00009545871544834637; Delta=1;  E={-0.834545, -0.839977, -0.834491}; 
+ j =2/150; Delta V=0.00009339236664437399; Delta=0.19164002549286277;  E={-0.839978, -0.842813, -0.839924}; 
+ j =3/150; Delta V=0.0001282173620515684; Delta=0.9002068602106648;  E={-0.842813, -0.845553, -0.84276}; 
+ j =4/150; Delta V=0.00012627144234260751; Delta=0.10755084309169478;  E={-0.845553, -0.846534, -0.845499}; 
+ j =5/150; Delta V=0.00012818749814963202; Delta=0.13034495818415262;  E={-0.846532, -0.846756, -0.846479}; 
+ j =6/150; Delta V=0.0001280856376420663; Delta=0.029430354410552854;  E={-0.846754, -0.846816, -0.846701}; 
+ j =7/150; Delta V=0.00012902685306835616; Delta=0.039684947655191385;  E={-0.846813, -0.846834, -0.84676}; 
+ j =8/150; Delta V=0.00012912940280759434; Delta=0.009186819596831798;  E={-0.846832, -0.84684, -0.846779}; 
+ev=13/20*; j MAX=9/150; Delta=0.009186819596831798; 
+JmatMod={-0.02408457576816092, -2.462584713855421, 0.35419757927591067, 0., 0.6}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00013523037862043813; Delta=1;  E={-0.834545, -0.847633, -0.834491}; 
+ j =2/150; Delta V=0.00012419592353469095; Delta=0.2676808919449817;  E={-0.847638, -0.855418, -0.847584}; 
+ j =3/150; Delta V=0.00013514731169495363; Delta=0.22169727816497237;  E={-0.855417, -0.856625, -0.855363}; 
+ j =4/150; Delta V=0.00013446730397551442; Delta=0.04638646457009521;  E={-0.856624, -0.85684, -0.85657}; 
+ j =5/150; Delta V=0.00014353030111276285; Delta=0.04646738795367665;  E={-0.856838, -0.856892, -0.856785}; 
+ j =6/150; Delta V=0.0001443410781688868; Delta=0.009847994561450248;  E={-0.85689, -0.856905, -0.856836}; 
+ev=13/20*; j MAX=7/150; Delta=0.009847994561450248; 
+JmatMod={0., -2.9542417760580806, 0., 0., 0.32499999999999984}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00017690365278773688; Delta=1;  E={-0.83165, -0.836244, -0.831586}; 
+ j =2/150; Delta V=0.0001818645176352466; Delta=0.07644153756367969;  E={-0.836232, -0.837145, -0.836168}; 
+ j =3/150; Delta V=0.00023137953870484458; Delta=0.1977235786971394;  E={-0.837132, -0.837656, -0.837068}; 
+ j =4/150; Delta V=0.0002395195906173095; Delta=0.042775279363366975;  E={-0.837642, -0.83798, -0.837578}; 
+ j =5/150; Delta V=0.00027092097311009556; Delta=0.14287562722275438;  E={-0.837966, -0.838236, -0.837901}; 
+ j =6/150; Delta V=0.0002790662357396187; Delta=0.034554106219506275;  E={-0.838222, -0.838445, -0.838157}; 
+ j =7/150; Delta V=0.0003056537366157356; Delta=0.12349385052339268;  E={-0.83843, -0.83863, -0.838365}; 
+ j =8/150; Delta V=0.00031322616847040527; Delta=0.03080596169616108;  E={-0.838616, -0.838795, -0.83855}; 
+ j =9/150; Delta V=0.00033639437898483896; Delta=0.11142281850526992;  E={-0.83878, -0.838943, -0.838714}; 
+ j =10/150; Delta V=0.00034310132691967884; Delta=0.02763121531481169;  E={-0.838928, -0.839073, -0.838861}; 
+ j =11/150; Delta V=0.00036151421897801824; Delta=0.10082814922107014;  E={-0.839057, -0.839184, -0.838991}; 
+ j =12/150; Delta V=0.0003671244517770864; Delta=0.023568038456907275;  E={-0.839168, -0.839277, -0.839102}; 
+ j =13/150; Delta V=0.00037995602658911137; Delta=0.08322012720288008;  E={-0.83926, -0.83935, -0.839193}; 
+ j =14/150; Delta V=0.00038437131824459143; Delta=0.018630948973362225;  E={-0.839333, -0.839405, -0.839266}; 
+ j =15/150; Delta V=0.0003923007793247537; Delta=0.07653732378951827;  E={-0.839388, -0.839446, -0.839321}; 
+ j =16/150; Delta V=0.0003957472431568837; Delta=0.013682641875109536;  E={-0.839429, -0.839475, -0.839361}; 
+ j =17/150; Delta V=0.00040400577438633704; Delta=0.046300494847068246;  E={-0.839457, -0.839495, -0.83939}; 
+ j =18/150; Delta V=0.00040701875812687094; Delta=0.009509113341715503;  E={-0.839477, -0.839509, -0.83941}; 
+ev=14/20*; j MAX=19/150; Delta=0.009509113341715503; 
+JmatMod={0., -2.9542417760580806, 0., 0., 0.6499999999999997}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00022140336900962741; Delta=1;  E={-0.83165, -0.848038, -0.831586}; 
+ j =2/150; Delta V=0.00022222730651555756; Delta=0.17002305371906332;  E={-0.848027, -0.853961, -0.847963}; 
+ j =3/150; Delta V=0.0002884391250583392; Delta=0.37336263248729223;  E={-0.853949, -0.857132, -0.853885}; 
+ j =4/150; Delta V=0.0003004325611453619; Delta=0.0815825028891067;  E={-0.857119, -0.858419, -0.857054}; 
+ j =5/150; Delta V=0.0003250192269208014; Delta=0.14310923484892332;  E={-0.858405, -0.858851, -0.85834}; 
+ j =6/150; Delta V=0.0003352776765776652; Delta=0.027225862425840193;  E={-0.858836, -0.858982, -0.85877}; 
+ j =7/150; Delta V=0.0003493149735566437; Delta=0.09514756200779347;  E={-0.858966, -0.859019, -0.8589}; 
+ j =8/150; Delta V=0.0003564346687881802; Delta=0.007974969069868013;  E={-0.859003, -0.85903, -0.858936}; 
+ev=14/20*; j MAX=9/150; Delta=0.007974969069868013; 
+JmatMod={-0.028999006654782278, -2.9542417760580806, 0.42491341710528174, 0., 0.32499999999999996}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.0001345151093265799; Delta=1;  E={-0.84754, -0.857466, -0.847485}; 
+ j =2/150; Delta V=0.00013239010618633563; Delta=0.22689762080617473;  E={-0.857469, -0.863047, -0.857416}; 
+ j =3/150; Delta V=0.00013321613429814703; Delta=0.2183392562019641;  E={-0.863045, -0.863855, -0.862992}; 
+ j =4/150; Delta V=0.00013295246036709092; Delta=0.042208282919777504;  E={-0.863853, -0.864, -0.8638}; 
+ j =5/150; Delta V=0.00013461812121166197; Delta=0.04976049879662076;  E={-0.863997, -0.864033, -0.863944}; 
+ j =6/150; Delta V=0.00013471566154464918; Delta=0.010194820701025703;  E={-0.86403, -0.864041, -0.863978}; 
+ j =7/150; Delta V=0.0001354971923360713; Delta=0.01226535056650427;  E={-0.864038, -0.864043, -0.863986}; 
+ j =8/150; Delta V=0.00013558928873917206; Delta=0.002501668489096073;  E={-0.86404, -0.864044, -0.863988}; 
+ev=14/20*; j MAX=9/150; Delta=0.002501668489096073; 
+JmatMod={-0.028999006654782278, -2.9542417760580806, 0.42491341710528174, 0., 0.6499999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00013489935410359045; Delta=1;  E={-0.84754, -0.866444, -0.847485}; 
+ j =2/150; Delta V=0.00012304719122977959; Delta=0.24294794205170314;  E={-0.866449, -0.873557, -0.866395}; 
+ j =3/150; Delta V=0.0001355934366064888; Delta=0.19110193251840402;  E={-0.873556, -0.874512, -0.873503}; 
+ j =4/150; Delta V=0.00013574333038800256; Delta=0.03550770872958057;  E={-0.87451, -0.874663, -0.874457}; 
+ j =5/150; Delta V=0.00016318650512646911; Delta=0.9436779825349431;  E={-0.874661, -0.874912, -0.874607}; 
+ j =6/150; Delta V=0.000156240527924817; Delta=0.11791990180320264;  E={-0.874911, -0.87667, -0.874858}; 
+ j =7/150; Delta V=0.00016276826239909473; Delta=0.2050701379349284;  E={-0.876669, -0.876969, -0.876616}; 
+ j =8/150; Delta V=0.00016134809691071574; Delta=0.0315270177101923;  E={-0.876968, -0.877056, -0.876915}; 
+ j =9/150; Delta V=0.00016303553332603672; Delta=0.08929307181145589;  E={-0.877055, -0.877098, -0.877003}; 
+ j =10/150; Delta V=0.00016273682080243456; Delta=0.01597482371755647;  E={-0.877097, -0.87712, -0.877044}; 
+ j =11/150; Delta V=0.00016328559545671133; Delta=0.048678422006066285;  E={-0.877119, -0.877132, -0.877066}; 
+ j =12/150; Delta V=0.00016323526077751784; Delta=0.00871995318191306;  E={-0.877131, -0.877138, -0.877078}; 
+ev=14/20*; j MAX=13/150; Delta=0.00871995318191306; 
+JmatMod={0., -3.647284567560988, 0., 0., 0.3499999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00021851704958050696; Delta=1;  E={-0.850418, -0.857214, -0.850354}; 
+ j =2/150; Delta V=0.00023029979246284236; Delta=0.0875241024971994;  E={-0.857201, -0.858802, -0.857137}; 
+ j =3/150; Delta V=0.00028105437768734346; Delta=0.27895078935098416;  E={-0.858788, -0.859824, -0.858724}; 
+ j =4/150; Delta V=0.00030306140145600844; Delta=0.05748773200352003;  E={-0.859809, -0.860501, -0.859745}; 
+ j =5/150; Delta V=0.00033493072847327556; Delta=0.1975115280969682;  E={-0.860485, -0.86099, -0.86042}; 
+ j =6/150; Delta V=0.0003531644431471824; Delta=0.04103931300568458;  E={-0.860974, -0.861322, -0.860909}; 
+ j =7/150; Delta V=0.0003706298204881778; Delta=0.13691769755555663;  E={-0.861305, -0.861536, -0.861239}; 
+ j =8/150; Delta V=0.0003836421536480706; Delta=0.026354351525391742;  E={-0.861519, -0.861666, -0.861453}; 
+ j =9/150; Delta V=0.0003938340812197616; Delta=0.09795428744261164;  E={-0.861648, -0.86174, -0.861582}; 
+ j =10/150; Delta V=0.0004029864344990536; Delta=0.015171114074231905;  E={-0.861722, -0.861781, -0.861655}; 
+ j =11/150; Delta V=0.0004156276198107138; Delta=0.11213565787126306;  E={-0.861762, -0.861802, -0.861695}; 
+ j =12/150; Delta V=0.0004222178842177026; Delta=0.008235335487518262;  E={-0.861784, -0.861814, -0.861717}; 
+ev=15/20*; j MAX=13/150; Delta=0.008235335487518262; 
+JmatMod={0., -3.647284567560988, 0., 0., 0.6999999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00024748491909065565; Delta=1;  E={-0.850418, -0.87265, -0.850354}; 
+ j =2/150; Delta V=0.0002551862711586566; Delta=0.16831168525504703;  E={-0.872639, -0.879394, -0.872574}; 
+ j =3/150; Delta V=0.0002999427459106446; Delta=0.3261464677752481;  E={-0.879381, -0.8819, -0.879317}; 
+ j =4/150; Delta V=0.00031485612181435176; Delta=0.057238388056099;  E={-0.881886, -0.882605, -0.881821}; 
+ j =5/150; Delta V=0.0003330933862612583; Delta=0.09089650845716497;  E={-0.88259, -0.882774, -0.882524}; 
+ j =6/150; Delta V=0.0003442810727286739; Delta=0.014154054460089662;  E={-0.882758, -0.882814, -0.882692}; 
+ j =7/150; Delta V=0.0003542944607804182; Delta=0.041301814414726294;  E={-0.882797, -0.882823, -0.882731}; 
+ j =8/150; Delta V=0.00036129396020389946; Delta=0.0043442682535520805;  E={-0.882806, -0.882825, -0.882739}; 
+ev=15/20*; j MAX=9/150; Delta=0.0043442682535520805; 
+JmatMod={-0.03593229067766002, -3.647284567560987, 0.5245948931186023, 0., 0.35}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00014623768241674688; Delta=1;  E={-0.866677, -0.882789, -0.866623}; 
+ j =2/150; Delta V=0.00014499567693499547; Delta=0.20187275399982363;  E={-0.882791, -0.887936, -0.882738}; 
+ j =3/150; Delta V=0.00015365465732257536; Delta=0.18426806892079373;  E={-0.887934, -0.888605, -0.887881}; 
+ j =4/150; Delta V=0.00015429483107022923; Delta=0.031174398346188063;  E={-0.888602, -0.888708, -0.888549}; 
+ j =5/150; Delta V=0.00015896827065513716; Delta=0.03221325054035691;  E={-0.888704, -0.888727, -0.888651}; 
+ j =6/150; Delta V=0.00015973414271584874; Delta=0.005700392006664285;  E={-0.888723, -0.88873, -0.88867}; 
+ev=15/20*; j MAX=7/150; Delta=0.005700392006664285; 
+JmatMod={-0.03593229067766002, -3.647284567560987, 0.5245948931186024, 0., 0.7}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00013137810277895538; Delta=1;  E={-0.866677, -0.892227, -0.866623}; 
+ j =2/150; Delta V=0.00012169823833396386; Delta=0.21210304560239868;  E={-0.892232, -0.89832, -0.892178}; 
+ j =3/150; Delta V=0.0001299242661109668; Delta=0.15253964716769453;  E={-0.898318, -0.898973, -0.898265}; 
+ j =4/150; Delta V=0.00013129067565203546; Delta=0.025012057471082174;  E={-0.898971, -0.899053, -0.898917}; 
+ j =5/150; Delta V=0.00016298573841285266; Delta=0.8487296437523644;  E={-0.89905, -0.899213, -0.898997}; 
+ j =6/150; Delta V=0.00015839303786105912; Delta=0.10212291584292976;  E={-0.899212, -0.900756, -0.899159}; 
+ j =7/150; Delta V=0.00016531086311783214; Delta=0.20410117385618326;  E={-0.900755, -0.901009, -0.900702}; 
+ j =8/150; Delta V=0.0001645804008202204; Delta=0.026962772641281087;  E={-0.901008, -0.901082, -0.900955}; 
+ j =9/150; Delta V=0.00016615472448522353; Delta=0.08977971989478727;  E={-0.901081, -0.901118, -0.901028}; 
+ j =10/150; Delta V=0.00016610666941970417; Delta=0.014016628455260076;  E={-0.901116, -0.901137, -0.901064}; 
+ j =11/150; Delta V=0.0001665313489675013; Delta=0.05048260114784266;  E={-0.901136, -0.901148, -0.901083}; 
+ j =12/150; Delta V=0.00016657807167711147; Delta=0.007893013542615672;  E={-0.901147, -0.901154, -0.901094}; 
+ev=15/20*; j MAX=13/150; Delta=0.007893013542615672; 
+JmatMod={0., -4.671621061864965, 0., 0., 0.3749999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.0002589931038527562; Delta=1;  E={-0.879167, -0.88899, -0.879103}; 
+ j =2/150; Delta V=0.00029909796299853336; Delta=0.09681947662804943;  E={-0.888976, -0.891401, -0.888912}; 
+ j =3/150; Delta V=0.00033534993516076494; Delta=0.31151726122878426;  E={-0.891383, -0.892753, -0.891319}; 
+ j =4/150; Delta V=0.00038315550433586516; Delta=0.054102328965993034;  E={-0.892737, -0.893455, -0.892671}; 
+ j =5/150; Delta V=0.0003890195166917248; Delta=0.16716276258382465;  E={-0.893436, -0.893794, -0.89337}; 
+ j =6/150; Delta V=0.0004276369970281082; Delta=0.026369059263705915;  E={-0.893776, -0.893948, -0.89371}; 
+ j =7/150; Delta V=0.0004333792978072296; Delta=0.08448793811211279;  E={-0.893928, -0.894013, -0.893861}; 
+ j =8/150; Delta V=0.00046324351646423364; Delta=0.011379037307986709;  E={-0.893992, -0.89404, -0.893925}; 
+ j =9/150; Delta V=0.0004637262314852117; Delta=0.12200606578128448;  E={-0.894018, -0.894051, -0.893951}; 
+ j =10/150; Delta V=0.0004862372711513305; Delta=0.004689701866684395;  E={-0.894029, -0.894056, -0.893961}; 
+ev=16/20*; j MAX=11/150; Delta=0.004689701866684395; 
+JmatMod={0., -4.671621061864965, 0., 0., 0.7499999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00026755383496013675; Delta=1;  E={-0.879167, -0.907991, -0.879103}; 
+ j =2/150; Delta V=0.000288619452752131; Delta=0.15218607761173084;  E={-0.907979, -0.914551, -0.907915}; 
+ j =3/150; Delta V=0.00031556944000246884; Delta=0.2544177151772085;  E={-0.914536, -0.916165, -0.914472}; 
+ j =4/150; Delta V=0.00033911723660980304; Delta=0.03606240803410106;  E={-0.91615, -0.916486, -0.916085}; 
+ j =5/150; Delta V=0.00035083883996501564; Delta=0.11090029850232747;  E={-0.916468, -0.916543, -0.916403}; 
+ j =6/150; Delta V=0.0003680807359896963; Delta=0.006833088027862477;  E={-0.916525, -0.916554, -0.916459}; 
+ev=16/20*; j MAX=7/150; Delta=0.006833088027862477; 
+JmatMod={-0.04618861502422966, -4.671621061864965, 0.6719268832040983, 0., 0.37499999999999994}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00022137230337109217; Delta=1;  E={-0.895992, -0.921586, -0.895937}; 
+ j =2/150; Delta V=0.00022775443148018854; Delta=0.17371210138819115;  E={-0.92159, -0.929256, -0.921538}; 
+ j =3/150; Delta V=0.00022357712194453176; Delta=0.23390222762499774;  E={-0.929253, -0.930236, -0.929201}; 
+ j =4/150; Delta V=0.0002268397901166057; Delta=0.03210321491980533;  E={-0.930232, -0.930399, -0.93018}; 
+ j =5/150; Delta V=0.00022830120346440245; Delta=0.07745381706947313;  E={-0.930394, -0.930442, -0.930342}; 
+ j =6/150; Delta V=0.00023157392700964046; Delta=0.010605981147886271;  E={-0.930438, -0.930456, -0.930385}; 
+ j =7/150; Delta V=0.00023298990875951264; Delta=0.02638683991512946;  E={-0.930451, -0.93046, -0.930398}; 
+ j =8/150; Delta V=0.00023563340694539328; Delta=0.0036082412212850557;  E={-0.930455, -0.930461, -0.930403}; 
+ev=16/20*; j MAX=9/150; Delta=0.0036082412212850557; 
+JmatMod={-0.04618861502422966, -4.671621061864965, 0.6719268832040984, 0., 0.7499999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.0001259657882243987; Delta=1;  E={-0.895992, -0.92935, -0.895937}; 
+ j =2/150; Delta V=0.00012204225996217967; Delta=0.1768024178451138;  E={-0.929353, -0.934216, -0.9293}; 
+ j =3/150; Delta V=0.00012469194678064882; Delta=0.1126254596520215;  E={-0.934213, -0.934592, -0.93416}; 
+ j =4/150; Delta V=0.00012729769539962592; Delta=0.015797641913318623;  E={-0.934589, -0.934624, -0.934536}; 
+ j =5/150; Delta V=0.00013032193571769896; Delta=0.010526315236580827;  E={-0.93462, -0.934627, -0.934568}; 
+ j =6/150; Delta V=0.00013289312801178846; Delta=0.0018732626870317905;  E={-0.934624, -0.934627, -0.934571}; 
+ev=16/20*; j MAX=7/150; Delta=0.0018732626870317905; 
+JmatMod={0., -6.291581082303091, 0., 0., 0.39999999999999997}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00030420518401223806; Delta=1;  E={-0.925883, -0.939498, -0.92582}; 
+ j =2/150; Delta V=0.00040348470633097837; Delta=0.09487621787181437;  E={-0.939482, -0.942433, -0.939417}; 
+ j =3/150; Delta V=0.0003956167280125122; Delta=0.2918970557674908;  E={-0.94241, -0.943579, -0.942345}; 
+ j =4/150; Delta V=0.0005092293110736543; Delta=0.03727209784614584;  E={-0.943558, -0.943982, -0.943493}; 
+ j =5/150; Delta V=0.000489415825599469; Delta=0.09968745354450362;  E={-0.943951, -0.944105, -0.943886}; 
+ j =6/150; Delta V=0.0006047851824469097; Delta=0.020946792724139802;  E={-0.944077, -0.94415, -0.944011}; 
+ j =7/150; Delta V=0.0005762843149958769; Delta=0.124377227691692;  E={-0.94411, -0.944159, -0.944044}; 
+ j =8/150; Delta V=0.0006928366710800294; Delta=0.022026285099449754;  E={-0.944123, -0.944172, -0.944056}; 
+ j =9/150; Delta V=0.0006586281112371019; Delta=0.01379465088077133;  E={-0.94412, -0.944169, -0.944053}; 
+ j =10/150; Delta V=0.0007773753533665183; Delta=0.023123136878169963;  E={-0.944123, -0.944181, -0.944055}; 
+ j =11/150; Delta V=0.0007406512850487833; Delta=0.014478816221357181;  E={-0.944114, -0.944176, -0.944047}; 
+ j =12/150; Delta V=0.0008623650792643338; Delta=0.024252890199635842;  E={-0.944117, -0.94419, -0.944049}; 
+ j =13/150; Delta V=0.0008245177068116486; Delta=0.015167547108646935;  E={-0.944106, -0.944184, -0.944039}; 
+ j =14/150; Delta V=0.0009497111716988887; Delta=0.025413889060433507;  E={-0.944109, -0.944201, -0.944041}; 
+ j =15/150; Delta V=0.0009115344738973546; Delta=0.01586171664335713;  E={-0.944096, -0.944194, -0.944029}; 
+ j =16/150; Delta V=0.001040659926345454; Delta=0.02660138427398638;  E={-0.944099, -0.944214, -0.944032}; 
+ j =17/150; Delta V=0.0010024930825481067; Delta=0.016557456806254464;  E={-0.944084, -0.944205, -0.944017}; 
+ j =18/150; Delta V=0.0011359857309164595; Delta=0.02780893996959899;  E={-0.944088, -0.944229, -0.944021}; 
+ j =19/150; Delta V=0.0010979082101661595; Delta=0.017248191312908404;  E={-0.94407, -0.944218, -0.944003}; 
+ j =20/150; Delta V=0.0012361390387377643; Delta=0.029028387399133437;  E={-0.944074, -0.944247, -0.944008}; 
+ j =21/150; Delta V=0.0011981586428647729; Delta=0.017925196613215955;  E={-0.944053, -0.944234, -0.943987}; 
+ j =22/150; Delta V=0.0013413905736497389; Delta=0.030249631188869905;  E={-0.944058, -0.944267, -0.943992}; 
+ j =23/150; Delta V=0.0013035587582587084; Delta=0.018577653920119522;  E={-0.944033, -0.944252, -0.943969}; 
+ j =24/150; Delta V=0.0014519337054878974; Delta=0.031460438954321476;  E={-0.944039, -0.94429, -0.943974}; 
+ j =25/150; Delta V=0.0014143925469975996; Delta=0.019192588064013597;  E={-0.94401, -0.944273, -0.943947}; 
+ j =26/150; Delta V=0.001567935025657001; Delta=0.03264624554125238;  E={-0.944017, -0.944318, -0.943953}; 
+ j =27/150; Delta V=0.0015309297833582204; Delta=0.019754772436807178;  E={-0.943984, -0.944298, -0.943922}; 
+ j =28/150; Delta V=0.001689552981022868; Delta=0.0337899960005443;  E={-0.943991, -0.944349, -0.943929}; 
+ j =29/150; Delta V=0.0016534336796407878; Delta=0.020246660846981707;  E={-0.943953, -0.944326, -0.943894}; 
+ j =30/150; Delta V=0.0018169429113580023; Delta=0.03487205358196177;  E={-0.943961, -0.944384, -0.943901}; 
+ j =31/150; Delta V=0.0017821641047624421; Delta=0.020648391538592326;  E={-0.943919, -0.944359, -0.943861}; 
+ j =32/150; Delta V=0.0019502574761706784; Delta=0.03587020486225931;  E={-0.943926, -0.944425, -0.943869}; 
+ j =33/150; Delta V=0.0019173781482885904; Delta=0.020937906279222568;  E={-0.943879, -0.944397, -0.943824}; 
+ j =34/150; Delta V=0.0020896458482253764; Delta=0.03675980038689006;  E={-0.943886, -0.944471, -0.943833}; 
+ j =35/150; Delta V=0.002059328823844428; Delta=0.02109122989315504;  E={-0.943833, -0.944441, -0.943782}; 
+ j =36/150; Delta V=0.002235252791658788; Delta=0.03751407473418697;  E={-0.943841, -0.944523, -0.943791}; 
+ j =37/150; Delta V=0.002208262260249969; Delta=0.02115949886555557;  E={-0.943782, -0.944491, -0.943735}; 
+ j =38/150; Delta V=0.0023872179637332218; Delta=0.038104693413335944;  E={-0.943789, -0.944582, -0.943743}; 
+ j =39/150; Delta V=0.0023644135177067495; Delta=0.021667237847903087;  E={-0.943724, -0.944548, -0.943682}; 
+ j =40/150; Delta V=0.002545675509147213; Delta=0.03850257371806906;  E={-0.94373, -0.944649, -0.943689}; 
+ j =41/150; Delta V=0.002528001075293047; Delta=0.022095753189742606;  E={-0.943659, -0.944613, -0.943622}; 
+ j =42/150; Delta V=0.002710753889100074; Delta=0.03867902029873907;  E={-0.943663, -0.944723, -0.943628}; 
+ j =43/150; Delta V=0.0026992200240596033; Delta=0.022429928428766704;  E={-0.943585, -0.944687, -0.943555}; 
+ j =44/150; Delta V=0.002882575785625367; Delta=0.03860720221424141;  E={-0.943587, -0.944808, -0.943559}; 
+ j =45/150; Delta V=0.0028782340534707603; Delta=0.02265487806453184;  E={-0.943503, -0.944772, -0.943479}; 
+ j =46/150; Delta V=0.0030612578130949004; Delta=0.038263966277479244;  E={-0.943501, -0.944902, -0.943481}; 
+ j =47/150; Delta V=0.00306516643262644; Delta=0.022756793405356607;  E={-0.94341, -0.944868, -0.943396}; 
+ j =48/150; Delta V=0.00324690965129934; Delta=0.037631945543805057;  E={-0.943404, -0.945008, -0.943394}; 
+ j =49/150; Delta V=0.0032600903560061558; Delta=0.022724005640357342;  E={-0.943308, -0.944977, -0.943303}; 
+ j =50/150; Delta V=0.003439632100240541; Delta=0.03670187056155472;  E={-0.943296, -0.945127, -0.943296}; 
+ j =51/150; Delta V=0.003463019234655307; Delta=0.02254825153098841;  E={-0.943193, -0.945101, -0.943199}; 
+ j =52/150; Delta V=0.003639513470255899; Delta=0.03547489758396444;  E={-0.943174, -0.94526, -0.943186}; 
+ j =53/150; Delta V=0.0036738977501087535; Delta=0.022226092718429263;  E={-0.943065, -0.945241, -0.943084}; 
+ j =54/150; Delta V=0.003846623703708045; Delta=0.03396470699485449;  E={-0.943038, -0.945409, -0.943063}; 
+ j =55/150; Delta V=0.0038925947651284303; Delta=0.021760392945002982;  E={-0.942923, -0.9454, -0.942957}; 
+ j =56/150; Delta V=0.004061005753258015; Delta=0.03219903512497013;  E={-0.942886, -0.945575, -0.942927}; 
+ j =57/150; Delta V=0.0041188998912008576; Delta=0.021161699888308516;  E={-0.942766, -0.945578, -0.942816}; 
+ j =58/150; Delta V=0.004282664277850422; Delta=0.030220245363734854;  E={-0.942717, -0.945761, -0.942776}; 
+ j =59/150; Delta V=0.0043525304298841026; Delta=0.02044931517982357;  E={-0.942591, -0.94578, -0.94266}; 
+ j =60/150; Delta V=0.004511554694132046; Delta=0.028084533856082394;  E={-0.94253, -0.945969, -0.942609}; 
+ j =61/150; Delta V=0.0045931660926600846; Delta=0.01965177873225643;  E={-0.942398, -0.946006, -0.942489}; 
+ j =62/150; Delta V=0.004747596292754265; Delta=0.0258594348987225;  E={-0.942322, -0.946202, -0.942424}; 
+ j =63/150; Delta V=0.004840363066392966; Delta=0.01880646016623727;  E={-0.942184, -0.94626, -0.9423}; 
+ j =64/150; Delta V=0.004990633291973429; Delta=0.02361947034021772;  E={-0.942093, -0.946461, -0.942222}; 
+ j =65/150; Delta V=0.005093519311814589; Delta=0.017957966325564123;  E={-0.941948, -0.946543, -0.942092}; 
+ j =66/150; Delta V=0.005235739124292884; Delta=0.49043700674742646;  E={-0.941841, -0.946752, -0.942}; 
+ j =67/150; Delta V=0.005347640621579835; Delta=0.017155106810716914;  E={-0.941688, -0.94686, -0.941864}; 
+ j =68/150; Delta V=0.005497184367465503; Delta=0.978711881990159;  E={-0.941564, -0.947076, -0.941757}; 
+ j =69/150; Delta V=0.005619514814118068; Delta=0.016471496772842875;  E={-0.941403, -0.947211, -0.941615}; 
+ j =70/150; Delta V=0.005771604598785863; Delta=0.48769532082118855;  E={-0.941261, -0.947437, -0.941492}; 
+ j =71/150; Delta V=0.005899925696949265; Delta=0.015945909668492075;  E={-0.94109, -0.947602, -0.941343}; 
+ j =72/150; Delta V=0.006044102003235703; Delta=0.015914179071277235;  E={-0.94093, -0.94784, -0.941205}; 
+ j =73/150; Delta V=0.006175727917658034; Delta=0.015568531299325505;  E={-0.940747, -0.948034, -0.941046}; 
+ j =74/150; Delta V=0.0063172693071695644; Delta=0.014543365779670747;  E={-0.940569, -0.948286, -0.940893}; 
+ j =75/150; Delta V=0.006451443692088874; Delta=0.015499241138162756;  E={-0.940373, -0.94851, -0.940724}; 
+ j =76/150; Delta V=0.006591353659883177; Delta=0.014407984712785982;  E={-0.940177, -0.948779, -0.940556}; 
+ j =77/150; Delta V=0.006727047566349557; Delta=0.01575825000739517;  E={-0.939967, -0.949033, -0.940376}; 
+ j =78/150; Delta V=0.006865662080867678; Delta=0.015255889382553178;  E={-0.939753, -0.949321, -0.940193}; 
+ j =79/150; Delta V=0.007001776576534486; Delta=0.016079839489195558;  E={-0.939527, -0.949604, -0.940001}; 
+ j =80/150; Delta V=0.0071389647325265345; Delta=0.01591760784279206;  E={-0.939296, -0.949913, -0.939804}; 
+ j =81/150; Delta V=0.007274408868827671; Delta=0.01640157509618967;  E={-0.939054, -0.950224, -0.939599}; 
+ j =82/150; Delta V=0.007409704298625966; Delta=0.016396571662102066;  E={-0.938806, -0.950555, -0.939389}; 
+ j =83/150; Delta V=0.007543410205980702; Delta=0.016659992228663212;  E={-0.938548, -0.950893, -0.939171}; 
+ j =84/150; Delta V=0.007676108050097785; Delta=0.016689241430994373;  E={-0.938283, -0.951246, -0.938948}; 
+ j =85/150; Delta V=0.0078070245183301445; Delta=0.01679702873769373;  E={-0.938009, -0.951609, -0.938718}; 
+ j =86/150; Delta V=0.00793626520999021; Delta=0.016784687231057305;  E={-0.937728, -0.951984, -0.938482}; 
+ j =87/150; Delta V=0.008063357261577713; Delta=0.016959840092784284;  E={-0.93744, -0.952368, -0.93824}; 
+ j =88/150; Delta V=0.008188206785916554; Delta=0.017620835774098342;  E={-0.937145, -0.952762, -0.937993}; 
+ j =89/150; Delta V=0.008310476394185485; Delta=0.01826829775162364;  E={-0.936843, -0.953164, -0.937742}; 
+ j =90/150; Delta V=0.008430007055798454; Delta=0.01887654059758259;  E={-0.936536, -0.953574, -0.937485}; 
+ j =91/150; Delta V=0.008546535932170666; Delta=0.019449418659754913;  E={-0.936224, -0.95399, -0.937225}; 
+ j =92/150; Delta V=0.008659901637231278; Delta=0.019978224568919067;  E={-0.935908, -0.95441, -0.936961}; 
+ j =93/150; Delta V=0.008769893818640944; Delta=0.020464235387101515;  E={-0.935589, -0.954834, -0.936694}; 
+ j =94/150; Delta V=0.00887636329254368; Delta=0.02091042716702729;  E={-0.935267, -0.955261, -0.936425}; 
+ j =95/150; Delta V=0.00897911134898829; Delta=0.021328867865304968;  E={-0.934943, -0.955688, -0.936155}; 
+ j =96/150; Delta V=0.009077934662864613; Delta=0.021741671134684615;  E={-0.934617, -0.956115, -0.935883}; 
+ j =97/150; Delta V=0.009172489273290651; Delta=0.025740504596267144;  E={-0.93429, -0.956542, -0.935609}; 
+ j =98/150; Delta V=0.009262242059684324; Delta=0.032027341149851896;  E={-0.933962, -0.95697, -0.935333}; 
+ j =99/150; Delta V=0.009346230319773299; Delta=0.03981815319365736;  E={-0.933631, -0.957399, -0.935055}; 
+ j =100/150; Delta V=0.0094228858257265; Delta=0.04908647355010645;  E={-0.933296, -0.957834, -0.934771}; 
+ j =101/150; Delta V=0.009489755449976848; Delta=0.05939035284248945;  E={-0.932951, -0.95828, -0.934478}; 
+ j =102/150; Delta V=0.009543624760186305; Delta=0.06939697941932294;  E={-0.932592, -0.958746, -0.934171}; 
+ j =103/150; Delta V=0.009581152958634754; Delta=0.07682040733387635;  E={-0.932209, -0.959242, -0.933841}; 
+ j =104/150; Delta V=0.009600363081041022; Delta=0.07893214393183096;  E={-0.931794, -0.959778, -0.933481}; 
+ j =105/150; Delta V=0.00960161917229737; Delta=0.0743416203825088;  E={-0.931341, -0.960358, -0.933085}; 
+ j =106/150; Delta V=0.009587011885443666; Delta=0.06586094464013031;  E={-0.930854, -0.960976, -0.932656}; 
+ j =107/150; Delta V=0.009558580339701474; Delta=0.07062969778077727;  E={-0.930341, -0.961614, -0.932203}; 
+ j =108/150; Delta V=0.00951807386393187; Delta=0.07225261163644275;  E={-0.92982, -0.962251, -0.93174}; 
+ j =109/150; Delta V=0.009468007823551896; Delta=0.06967461080629123;  E={-0.929307, -0.962869, -0.931281}; 
+ j =110/150; Delta V=0.009412308957776502; Delta=0.0632045206285784;  E={-0.928813, -0.963455, -0.930838}; 
+ j =111/150; Delta V=0.009355474144000156; Delta=0.054170743031427215;  E={-0.928349, -0.963997, -0.93042}; 
+ j =112/150; Delta V=0.009301277571203874; Delta=0.04940857227345408;  E={-0.927925, -0.964487, -0.930035}; 
+ j =113/150; Delta V=0.00925200112617453; Delta=0.04297379210303742;  E={-0.927545, -0.964918, -0.929691}; 
+ j =114/150; Delta V=0.009208574460680666; Delta=0.03590497881866067;  E={-0.927214, -0.96529, -0.929389}; 
+ j =115/150; Delta V=0.009171052197725273; Delta=0.03124685435030089;  E={-0.926931, -0.965604, -0.92913}; 
+ j =116/150; Delta V=0.009139054678476526; Delta=0.028390662154239715;  E={-0.926693, -0.965866, -0.928911}; 
+ j =117/150; Delta V=0.009112018755962898; Delta=0.025519457726688066;  E={-0.926495, -0.966083, -0.928729}; 
+ j =118/150; Delta V=0.00908933203916111; Delta=0.02275873958524921;  E={-0.926331, -0.966262, -0.928578}; 
+ j =119/150; Delta V=0.00907039437086032; Delta=0.020493201057395855;  E={-0.926196, -0.966408, -0.928453}; 
+ j =120/150; Delta V=0.009054650778279334; Delta=0.019975587729819194;  E={-0.926086, -0.966527, -0.92835}; 
+ j =121/150; Delta V=0.009041605291711758; Delta=0.018853848824774172;  E={-0.925995, -0.966625, -0.928266}; 
+ j =122/150; Delta V=0.009030824806518165; Delta=0.019691301882940493;  E={-0.925921, -0.966704, -0.928197}; 
+ j =123/150; Delta V=0.009021936480156891; Delta=0.020432410819775565;  E={-0.925861, -0.966769, -0.92814}; 
+ j =124/150; Delta V=0.009014621744655428; Delta=0.020496051643648705;  E={-0.925811, -0.966822, -0.928093}; 
+ j =125/150; Delta V=0.009008611342255314; Delta=0.01980676709555146;  E={-0.925771, -0.966865, -0.928055}; 
+ j =126/150; Delta V=0.009003679795422166; Delta=0.018405986179533346;  E={-0.925738, -0.9669, -0.928023}; 
+ j =127/150; Delta V=0.00899964189005351; Delta=0.016445366998449673;  E={-0.925711, -0.966928, -0.927998}; 
+ j =128/150; Delta V=0.008996346762554707; Delta=0.014154123533122065;  E={-0.925689, -0.966952, -0.927976}; 
+ j =129/150; Delta V=0.008993673327842955; Delta=0.011773018363452903;  E={-0.925671, -0.966971, -0.927959}; 
+ j =130/150; Delta V=0.008991523389183487; Delta=0.009505623256933049;  E={-0.925656, -0.966987, -0.927944}; 
+ev=17/20*; j MAX=131/150; Delta=0.009505623256933049; 
+JmatMod={0., -6.291581082303091, 0., 0., 0.7999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00028700016400123353; Delta=1;  E={-0.925883, -0.961596, -0.92582}; 
+ j =2/150; Delta V=0.0003340039749125719; Delta=0.12579741624067098;  E={-0.961583, -0.96713, -0.961519}; 
+ j =3/150; Delta V=0.0003468450117213557; Delta=0.1828132704351693;  E={-0.967111, -0.968012, -0.967047}; 
+ j =4/150; Delta V=0.0003976767994910255; Delta=0.020485764666141448;  E={-0.967993, -0.968139, -0.967928}; 
+ j =5/150; Delta V=0.00040263450926299036; Delta=0.07250862454461252;  E={-0.968115, -0.968155, -0.968049}; 
+ j =6/150; Delta V=0.0004491385431564993; Delta=0.009740011709154693;  E={-0.968131, -0.968161, -0.968065}; 
+ev=17/20*; j MAX=7/150; Delta=0.009740011709154693; 
+JmatMod={-0.06242234960108206, -6.29158108230309, 0.9049283773393482, 0., 0.3999999999999999}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.0002124365732808655; Delta=1;  E={-0.943626, -0.986362, -0.943571}; 
+ j =2/150; Delta V=0.00021963201181353782; Delta=0.13821914323546644;  E={-0.986365, -0.992881, -0.986313}; 
+ j =3/150; Delta V=0.00022351874452849316; Delta=0.18243816638784946;  E={-0.992876, -0.99345, -0.992823}; 
+ j =4/150; Delta V=0.00023033723808886235; Delta=0.018504736512758836;  E={-0.993446, -0.993518, -0.993393}; 
+ j =5/150; Delta V=0.00023948739502127703; Delta=0.03020746899321457;  E={-0.99351, -0.993527, -0.993458}; 
+ j =6/150; Delta V=0.0002476670692413686; Delta=0.0059754193671830175;  E={-0.993521, -0.99353, -0.993468}; 
+ev=17/20*; j MAX=7/150; Delta=0.0059754193671830175; 
+JmatMod={-0.06242234960108206, -6.29158108230309, 0.9049283773393482, 0., 0.7999999999999998}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.00013956425806925743; Delta=1;  E={-0.943626, -0.987841, -0.943571}; 
+ j =2/150; Delta V=0.00013666936784405493; Delta=0.1391784477548238;  E={-0.987842, -0.991617, -0.987789}; 
+ j =3/150; Delta V=0.0002153670694847489; Delta=0.8894385948314814;  E={-0.991612, -0.992124, -0.991559}; 
+ j =4/150; Delta V=0.00021987608074534827; Delta=0.0712615427107392;  E={-0.99212, -0.99325, -0.992067}; 
+ j =5/150; Delta V=0.00023858292325947163; Delta=0.21032116067605386;  E={-0.993242, -0.993431, -0.99319}; 
+ j =6/150; Delta V=0.00024586884367633826; Delta=0.018446216158947946;  E={-0.993425, -0.993484, -0.993372}; 
+ j =7/150; Delta V=0.00025825025415055636; Delta=0.08402969477501107;  E={-0.993475, -0.993506, -0.993422}; 
+ j =8/150; Delta V=0.00026611765064158983; Delta=0.00888125873715016;  E={-0.993498, -0.99352, -0.993445}; 
+ev=17/20*; j MAX=9/150; Delta=0.00888125873715016; 
+JmatMod={0., -9.13284868031548, 0., 0., 0.42500000000000004}; L=20; h=(0.01,0,0); 
+ j =1/150; Delta V=0.0003682510285957647; Delta=1;  E={-1.009385, -1.027253, -1.009321}; 
+ j =2/150; Delta V=0.0005921702862212705; Delta=0.07983431850932077;  E={-1.027233, -1.03006, -1.027169}; 
+ j =3/150; Delta V=0.0005209794348992258; Delta=0.21852413709639057;  E={-1.030014, -1.03072, -1.029949}; 
+ j =4/150; Delta V=0.0008622832393728311; Delta=0.0632989399488745;  E={-1.030682, -1.030904, -1.030616}; 
+ j =5/150; Delta V=0.0007793609643997187; Delta=0.2294003497932049;  E={-1.030797, -1.030921, -1.030732}; 
+ j =6/150; Delta V=0.0012731476258277656; Delta=0.09569776137857822;  E={-1.030834, -1.031024, -1.030768}; 
+ j =7/150; Delta V=0.0011623871066316128; Delta=0.05814653767720654;  E={-1.030763, -1.030989, -1.0307}; 
+ j =8/150; Delta V=0.0018726400202504052; Delta=0.14156140683590135;  E={-1.030782, -1.031226, -1.03072}; 
+ j =9/150; Delta V=0.0017315934321581387; Delta=0.08465801016875518;  E={-1.030599, -1.031135, -1.030543}; 
+ j =10/150; Delta V=0.002721157535595606; Delta=0.20051597486882722;  E={-1.030638, -1.031687, -1.030586}; 
+ j =11/150; Delta V=0.002570632083634017; Delta=0.12199829212275701;  E={-1.030232, -1.031479, -1.030196}; 
+ j =12/150; Delta V=0.0038276432174412156; Delta=0.25981198613737233;  E={-1.030297, -1.032686, -1.030277}; 
+ j =13/150; Delta V=0.003765467506626397; Delta=0.1709724410365053;  E={-1.0295, -1.032279, -1.029518}; 
+ j =14/150; Delta V=0.005113352915726591; Delta=0.28626679034414454;  E={-1.029535, -1.034657, -1.029596}; 
+ j =15/150; Delta V=0.005328730416304929; Delta=0.21616518918228675;  E={-1.028235, -1.034088, -1.028385}; 
+ j =16/150; Delta V=0.006473076692011912; Delta=0.24357013182499587;  E={-1.027985, -1.038069, -1.028232}; 
+ j =17/150; Delta V=0.007053141814341949; Delta=0.22424465569240165;  E={-1.02629, -1.037979, -1.02674}; 
+ j =18/150; Delta V=0.007862946810566785; Delta=1.4806912409005517;  E={-1.025295, -1.043306, -1.025935}; 
+ j =19/150; Delta V=0.008529074446746382; Delta=1.4645238410179973;  E={-1.023337, -1.045255, -1.024371}; 
+ j =20/150; Delta V=0.009082651269462979; Delta=1.9460366871705488;  E={-1.021561, -1.0507, -1.022911}; 
