@@ -888,11 +888,12 @@ JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 (**)
 
 
-\[CapitalGamma]s=round@Table[x,{x,-.03,-.4,-.02}];
-hV=round@Table[{x,90,0},{x,0.0001,1.21,.01}];
+\[CapitalGamma]s=round@Table[x,{x,-.2,.6,.02}];
+Js={-0.1};
+hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 parametersMat={
-Flatten[Table[{Jmat[0{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]
+Flatten[Table[{Jmat[ Js[[1]]{1,1,1},-1{1,1,1},\[CapitalGamma]s[[t]]{1,1,1},0{1,1,1},0{1,1,1}], hs[[h]], {}, hV[[h]], 0, 0},{t,1,Length@\[CapitalGamma]s},{h,1,Length@hV}],1]
 };
 
 
