@@ -19,10 +19,10 @@ Ls =Range[20,20,2];
 tV={0};	  
 hV={{.01,0,0}};
 steps=150;
-acuracy=3;    
+acuracy=2.9;    
 dmax=1; s0=1;
 \[CapitalDelta]eV=2 0.05; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
-eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ]
+eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ][[1;;-3]]
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
 
@@ -71,7 +71,7 @@ traceUNUN[u_]:=2{{u[[1,2]] u[[2,1]]-u[[1,1]] u[[2,2]],u[[1,3]] u[[2,1]]-u[[1,1]]
 {u[[1,2]] u[[3,1]]-u[[1,1]] u[[3,2]],u[[1,3]] u[[3,1]]-u[[1,1]] u[[3,3]],u[[1,4]] u[[3,1]]-u[[1,1]] u[[3,4]]},{u[[1,2]] u[[4,1]]-u[[1,1]] u[[4,2]],u[[1,3]] u[[4,1]]-u[[1,1]] u[[4,3]],u[[1,4]] u[[4,1]]-u[[1,1]] u[[4,4]]}};
 
 
-(* ::Subsection::Bold:: *)
+(* ::Subsection::Bold::Closed:: *)
 (*Pure Kitaev model definitions*)
 
 
@@ -582,7 +582,7 @@ Graphics[{plaquettes,bonds,lattice},ImageSize->500,ContentSelectable->True,Epilo
 
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Couplings  *)
 
 
@@ -593,8 +593,9 @@ Jr[eV0_,JH_,U_,t_]:=Jc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 Kr[eV0_,JH_,U_,t_]:=Kc[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 \[CapitalGamma]r[eV0_,JH_,U_,t_]:= \[CapitalGamma]c[eV0,JH,U,t]/Abs[Kc[0,JH,U,t]];
 (*DMr[eV0_,JH_,U_,t_,Dmax_,s_:1]:=Dmax eV0/ Abs[s(3 JH-U)]  Abs[ Kc[eV0,JH,U,t]/Kc[s eV0,JH,U,t]];*)
-DMr[eV0_,JH_,U_,t_,Dmax_:1,s_:1]:=Dmax eV0/ Abs[s(3 JH-U)]  Abs[ Kc[eV0,JH,U,t]/Kc[0,JH,U,t]];
-JmatMicro[eV0_,JH_,U_,t_,Dmax_:.5,s_:1]:=Jmat[Jr[eV0,JH,U,t]{1,1,1},Kr[eV0,JH,U,t]{1,1,1},\[CapitalGamma]r[eV0,JH,U,t]{1,1,1},{0,0,0},DMr[eV0,JH,U,t,Dmax,s]{1,1,1}];
+DMr[eV0_,JH_,U_,t_,Dmax_:1,s_:1]:=Dmax(* eV0/ Abs[s(3 JH-U)]*) 1  Abs[ Kc[eV0,JH,U,t]/Kc[0,JH,U,t]];
+JmatMicro[eV0_,JH_,U_,t_,Dmax_:1,s_:1]:=
+Jmat[Jr[eV0,JH,U,t]{1,1,1},Kr[eV0,JH,U,t]{1,1,1},\[CapitalGamma]r[eV0,JH,U,t]{1,1,1},{0,0,0},DMr[eV0,JH,U,t,Dmax,s]{1,1,1}];
 addVortexJarray[ Ko_,K0_, R_,L1_,L2_]:= Module[ {m=R[[1]],n=R[[2]],K=Ko,r=Table[0,6]},
 K[[ m+n L1 +1,3    ]]=K0[[3]];  
 K[[ Mod[m+1,L1]+Mod[n-1,L2] L1 +1  ,2    ]]=K0[[2]];
@@ -626,7 +627,7 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-tV={2,2};
+tV={1,1};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
@@ -637,6 +638,12 @@ N@Table[Flatten[ Table[{
 JmatMicro[              0,JH,U,ts[[t]],d0[[t]],s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],d0[[t]],s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
+
+
+Do[ Module[{Jmat,h,JmatMod,hv},
+{Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
+Print["Jmat=",fromJmat[Jmat],"; JmatMod=",fromJmat[JmatMod],";"]
+],{p,1,Length[parametersMat[[1]]]},{ev,1,Length[parametersMat]} ];
 
 
 Print[" "];
@@ -737,7 +744,7 @@ Print[" "] Print[" "];];
 Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*pure loop w/out  vortices*)
 
 
@@ -763,7 +770,7 @@ dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{
         ]  , {ev,1,Length[parametersMat]}, {l,1,Length@Ls}, {p,1,Length[parametersMat[[1]] ]}  ]   
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*pure loop w/ vortices*)
 
 
