@@ -14,16 +14,19 @@ Print["Starting Kernels"];
 (*Definitions *)
 
 
+SetDirectory[NotebookDirectory[]]
+
+
 NbName="705"; \[Lambda]0=0.5; 
 
-		Ls = {40}; 				tV={ 2 (*, 2.74356 *) };	
+		Ls = {40}; 				tV={ 0 (*, 2.74356 *) };	
 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)
 		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
 		
-		hV={  {0.25,180/\[Pi] ArcTan[Sqrt[2]],180}, {0.35,180/\[Pi] ArcTan[Sqrt[2]],180} };	
+		hV={  {0.2,180/\[Pi] ArcTan[Sqrt[2]],180} };	
 
-		steps=600;   acuracy=5;   
+		steps=600;   acuracy=1.5;   
 		
 		eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
@@ -1170,7 +1173,7 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
  
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*vortex free + gradually increase  electric field*)
 
 
@@ -1289,7 +1292,7 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 *)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*four vortex + gradually increase  electric field*)
 
 
@@ -1668,3 +1671,6 @@ Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quant
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
 Print[ "4 vortices loop timing \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ] ];
 
+
+
+ 

@@ -14,15 +14,18 @@ Print["Starting Kernels"];
 (*Definitions *)
 
 
+If[FileNameSplit[NotebookDirectory[]][[-1]]=="Mathematica2",SetDirectory[NotebookDirectory[]] ];Print[Directory[] ]
+
+
 NbName="805";  (*\[Lambda]0=0.5; *)
 Ls =Range[20,20,2]; 	    
 tV={0};	  
 hV={{.01,0,0}};
-steps=150;
+steps=25;
 acuracy=2.9;    
 dmax=1; s0=1;
 \[CapitalDelta]eV=2 0.05; \[Xi]s=Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] ,{.95}]; 
-eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ][[1;;-3]]
+eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ][[1;;-5]]
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
 
@@ -582,7 +585,7 @@ Graphics[{plaquettes,bonds,lattice},ImageSize->500,ContentSelectable->True,Epilo
 
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Couplings  *)
 
 
@@ -631,7 +634,7 @@ tV={1,1};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
-d0={.5,1};
+d0={.1,.5};
 
 parametersMat=
 N@Table[Flatten[ Table[{
@@ -652,7 +655,7 @@ Print["    Lambda s=", \[Eta]s,"; "];
 Print["    Ls=",Ls,"; "];
 Print["    tV=",tV,"; "];
 Print["    ts=",ts,"; "];
-Print["    hV=",hV,";"]
+Print["    hV=",hV,";"];
 Print["    Couplings="];
      (*Do[Print["    ", round[ fromJmat@parametersMat[[1,i,1]] ] ] , {i,1,Length@parametersMat[[1]] }];*)
 Print["    Gammas=", \[CapitalGamma]s,"; "];
