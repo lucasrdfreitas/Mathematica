@@ -18,7 +18,7 @@ If[FileNameSplit[NotebookDirectory[]][[-1]]=="Mathematica2",SetDirectory[Noteboo
 
 
 NbName="805";  (*\[Lambda]0=0.5; *)
-Ls =Range[20,20,2]; 	    
+Ls =Range[22,22,2]; 	    
 tV={0};	  
 hV={{.001,0,0}};
 steps=100;
@@ -668,10 +668,10 @@ JmatMicro[eVs[[ev]],JH,U,ts[[t]],d0[[t]],s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
 
-Do[ Module[{Jmat,h,JmatMod,hv},
+(*Do[ Module[{Jmat,h,JmatMod,hv},
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
 Print["Jmat=",fromJmat[Jmat],"; JmatMod=",fromJmat[JmatMod],";"]
-],{p,1,Length[parametersMat[[1]]]},{ev,1,Length[parametersMat]} ];
+],{p,1,Length[parametersMat[[1]]]},{ev,1,Length[parametersMat]} ];*)
 
 
 Print[" "];
@@ -911,7 +911,7 @@ Print[MatrixForm/@round[#,100000]&@V[[r0]] ];
 \[CapitalDelta]V=1/(8 Sqrt[3] Nc) Sum[Sqrt@Total[ Power[#,2]&/@traceG[V[[r,\[Sigma]]]] ] , {r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}};
 (*Do[ V[[r,\[Sigma]]]=Sum[ 1/4 Mmat[[\[Gamma]]] traceM[ V[[r,\[Sigma]]] ][[\[Gamma]]] ,{\[Gamma],1,3}],{\[Sigma],1,2},{r,1,Nc}];*)
   
-u2=u1;      Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@({EMF,Esum,Econst}),"; "  ];     
+u2=u1;        If[ Mod[j,5]==1,Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@({EMF,Esum,Econst}),"; " ] ];     
 ];  
 (*Module[{H,u}, H=Hmf[Jarray,h,U,V,L,1]; u=Quiet@UmatK[T\[ConjugateTranspose] . H . T]; {U,V,\[Xi],u1}=(*BiParallel*)bilinears[u,L,T];       ];  	*)    (*<-- rewrite bilinears   *)
 \[CapitalDelta]seq=Partition[Flatten[\[CapitalDelta]seq],2];
@@ -975,7 +975,7 @@ Do[ Module[{m,n,\[Alpha],\[Beta],rz,rx,ry,Io}, rz=\[LeftFloor]R0/16\[RightFloor]
     ];     u2=u1;
 \[CapitalDelta]V=1/(8 Sqrt[3] Nc) Sum[Sqrt@Total[ Power[#,2]&/@traceG[V[[r,\[Sigma]]]] ] , {r,1,Nc},{\[Sigma],1,2}]; \[CapitalDelta]Vseq={\[CapitalDelta]Vseq,{j,\[CapitalDelta]V}};
       
-Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@(2{EMF,Esum,Econst}),"; "  ];              ];  
+  If[ Mod[j,5]==1,Print[" j =",j, "/",steps, "; Delta V=",\[CapitalDelta]V, "; Delta=",\[CapitalDelta]1, ";  E=", round/@(2{EMF,Esum,Econst}),"; "  ];  ]            ];  
 (*Module[{H,u}, H=Hmf[Jarray,h,U,V,L,1]; u=Quiet@UmatK[T\[ConjugateTranspose] . H . T]; {U,V,\[Xi],u1}=(*BiParallel*)bilinears[u,L,T];   ];*)    
 (*<-- rewrite bilinears   *)
 
