@@ -25,9 +25,8 @@ steps=100;
 acuracy=4;    
 dmax=1; s0=1;
 \[CapitalDelta]eV= 0.05; 
-\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] , {.85,.95}];(*
-\[Xi]s={.99}*)
-\[Xi]s=Sort@Table[ \[Xi], {\[Xi],0,1,\[CapitalDelta]eV} ]
+\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] , {.99}];(*
+\[Xi]s={.99}*) 
 eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ]
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
