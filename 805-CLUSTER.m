@@ -18,15 +18,16 @@ If[FileNameSplit[NotebookDirectory[]][[-1]]=="Mathematica2",SetDirectory[Noteboo
 
 
 NbName="805";  (*\[Lambda]0=0.5; *)
-Ls =Range[12,60,4]; 	    
+Ls =Range[44,44,4]; 	    
 tV={0};	  
-hV={{.001,0,0},{.1,0,0},{.2,0,0}};
+hV={{.1,0,0}};
 steps=100;
 acuracy=4;    
 dmax=1; s0=1;
-\[CapitalDelta]eV=2 0.05; 
-\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] , {.85,.95}]
-\[Xi]s={.99}
+\[CapitalDelta]eV= 0.05; 
+\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] , {.85,.95}];(*
+\[Xi]s={.99}*)
+\[Xi]s=Sort@Table[ \[Xi], {\[Xi],0,1,\[CapitalDelta]eV} ]
 eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ]
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
