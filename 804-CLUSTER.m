@@ -888,8 +888,8 @@ JmatMicro[eV0,JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 (**)
 
 
-\[CapitalGamma]s=round@Table[x,{x,-.2+.01,.6,.02}];
-Js={-0.1};
+\[CapitalGamma]s=round@Table[x,{x,-.2,.6,.01}];
+Js={0};
 hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 parametersMat={
