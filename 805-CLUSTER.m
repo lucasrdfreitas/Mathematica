@@ -20,7 +20,7 @@ If[FileNameSplit[NotebookDirectory[]][[-1]]=="Mathematica2",SetDirectory[Noteboo
 NbName="805";  (*\[Lambda]0=0.5; *)
 Ls =Range[44,44,4]; 	    
 tV={0};	  
-hV={{.2,0,0}};
+hV={{.3,0,0}};
 steps=100;
 acuracy=4;    
 dmax=1; s0=1;
