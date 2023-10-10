@@ -1,0 +1,35 @@
+Before Starting Kernels
+Starting Kernels
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+/home/rodrigues/Mathematica2
+ 
+    NbName=805; 
+    Lambda s=ηs; 
+    Ls={22}; 
+    tV={0}; 
+    ts={{0, 160, 0, 0, -60}}; 
+    hV={{0.05, 0, 0}};
+    Couplings=
+    Gammas=Γs; 
+    Steps=100; 
+    acuracy=4; 
+ 
+Definition timing= 31.437161
+
+    Pure and with vortices 
+
+ eV0=0. x 1700; Epure=-1.5796721779869456; ev=1/9; l=1/1; p=1/1
+ eV0=0.1 x 1700; Epure=-1.5802800689677632; ev=2/9; l=1/1; p=1/1
+ eV0=0.2 x 1700; Epure=-1.582269946044652; ev=3/9; l=1/1; p=1/1
+ eV0=0.3 x 1700; Epure=-1.5862201513061684; ev=4/9; l=1/1; p=1/1
+ eV0=0.4 x 1700; Epure=-1.5934162256316142; ev=5/9; l=1/1; p=1/1
+ eV0=0.5 x 1700; Epure=-1.606587180856284; ev=6/9; l=1/1; p=1/1
+ eV0=0.6 x 1700; Epure=-1.631773508380699; ev=7/9; l=1/1; p=1/1
+ eV0=0.7 x 1700; Epure=-1.6838449198782715; ev=8/9; l=1/1; p=1/1
+ eV0=0.75 x 1700; Epure=-1.7313544277628174; ev=9/9; l=1/1; p=1/1
+
+    Pure and with vortices 
+
+ eV0=0. x 1700; Epure=-1.5784274934433604; ev=1/9; l=1/1; p=1/1
+ eV0=0.1 x 1700; Epure=-1.5790819234103473; ev=2/9; l=1/1; p=1/1
