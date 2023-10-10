@@ -22,7 +22,8 @@ NbName="705"; \[Lambda]0=0.5;
 		Ls = {40}; 				tV={ 0 (*, 2.74356 *) };	
 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)
-		(*hV=Table[{h,0,0},{h,0.,1,.01}];*)
+		
+		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)
 		
 		hV={  {0.2,180/\[Pi] ArcTan[Sqrt[2]],180} };	
 

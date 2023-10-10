@@ -21,13 +21,15 @@ Print["Starting Kernels"];
 NbName="709"; 
 		\[Lambda]0=0.5; 
 		Ls = Range[42,42,2]; 				tV={0};		
-		\[CurlyPhi]V = {0}(*Union[ Table[\[CurlyPhi],{\[CurlyPhi],124,120+60,1}], Table[\[CurlyPhi],{\[CurlyPhi],124+180,120+180+60,1}]  ]*);
+(*		\[CurlyPhi]V = {0}(*Union[ Table[\[CurlyPhi],{\[CurlyPhi],124,120+60,1}], Table[\[CurlyPhi],{\[CurlyPhi],124+180,120+180+60,1}]  ]*);
 		\[Theta]V = Table[\[Theta],{\[Theta],120,140,1}];	
 \[Theta]V={0,60,115,120,125,180}	;
 h0V={.001,.1,.2,.3,.4};
-		hV = Flatten[Table[{h,\[Theta],120},{h,h0V},{\[Theta],\[Theta]V}],1]; 
+		hV = Flatten[Table[{h,\[Theta],120},{h,h0V},{\[Theta],\[Theta]V}],1]; *)
+		
+		hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];
 
-		steps=500;				acuracy=9;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
+		steps=500;				acuracy=10;     eVs=Table[1700 x, {x,0,0,0.0499999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -1204,10 +1206,10 @@ Module[{R,l,\[Chi],\[Omega],\[Xi],Jv,Kv,\[CapitalGamma]v,J,K,\[CapitalGamma],Nc,
 
 
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
-hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
+hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}]; hs=N@Simplify@hs;   hV=N@hV;
 eV0=0;U=2600;JH=300;
 (*  \[Kappa]=0.1 : h=0.3292;   \[Kappa]=0.2 : 0.41475; \[Kappa]=0.05 : 0.2612 *)
-parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,
+parameters=Chop[#,10^-5]&@N@Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,
 N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
 
 
@@ -1306,7 +1308,7 @@ Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Tpure,
 	Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,\[Omega]0,Hpure,Epure,Upure,Esystem,chargehex,data,dataload},   
 	\[Kappa]0=toKappa[h]; 
 	\[Kappa]=N@(Round[10000 \[Kappa]0]/10000);   
-	Hpure=ConjugateTranspose[Tpure].Hreal[Kv,\[Kappa],\[Lambda],u0,L,0,{0,0}].Tpure;  
+	Hpure=ConjugateTranspose[Tpure] . Hreal[Kv,\[Kappa],\[Lambda],u0,L,0,{0,0}] . Tpure;  
     Esystem = Reverse@Sort@Transpose@Chop@Quiet@Eigensystem[N[Hpure],Method->"Direct"];
 	Upure= Transpose[  Transpose[Esystem][[2]] ]; 
 	(*Epure=Total[Select[Quiet@Eigenvalues[Hpure],#<0&]]/(Nc);*)
