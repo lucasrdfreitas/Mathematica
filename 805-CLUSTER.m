@@ -371,11 +371,11 @@ HmfMomentumVec[Jmatrice_,h_,U_,V_, kTable_,\[Eta]_:0] :=Table[HmfMomentum[Jmatri
 UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[ConjugateTranspose] . HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]] . Tk,{l,1,Length@kTable}];
 
 
-(* ::Subsection::Bold::Closed:: *)
+(* ::Subsection::Bold:: *)
 (*MF model definitions *)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*Saving and Loading data*)
 
 
@@ -383,7 +383,7 @@ cyclicPermutation[A_,s_:1]:= If[ Length[A]==3 \[And] Length[A[[1]]]==3, Table[ A
 fromJmat[Jm_]:= Module[{J,K,\[CapitalGamma],\[CapitalGamma]p,DM,jm}, jm=(  cyclicPermutation[Jm[[1]] ,2] + cyclicPermutation[Jm[[2]] ,1] + Jm[[3]] )/3; 
 \[CapitalGamma]p=(jm[[1,3]]+jm[[2,3]]+jm[[3,1]]+jm[[3,2]])/4; 
 K=( jm[[3,3]]-(jm[[2,2]] +jm[[1,1]] )/2); J=(jm[[3,3]]-K);DM=(jm[[1,2]]-jm[[2,1]])/2;\[CapitalGamma]=(jm[[1,2]]+jm[[2,1]])/2;
-Chop[N@{J,K,\[CapitalGamma],\[CapitalGamma]p,DM},.00000999]       ];
+N@Chop[N@{J,K,\[CapitalGamma],\[CapitalGamma]p,DM},.00000999]       ];
 createDir[path_] :=
 Module[ {l=Length@FileNames[path]},		
 	If[ l==0,  CreateDirectory@File@FileNameJoin[{path,"data" }]; CreateDirectory@File@FileNameJoin[{path ,"graph" }];  , Null]  ];
