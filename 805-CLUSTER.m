@@ -18,9 +18,9 @@ If[FileNameSplit[NotebookDirectory[]][[-1]]=="Mathematica2",SetDirectory[Noteboo
 
 
 NbName="805";  (*\[Lambda]0=0.5; *)
-Ls =Range[40,40,4];
-tV={2};	  
-hV={{.05,0,0}};
+Ls {16,28,40};
+tV={0};	  
+hV={{.001,0,0}};
 steps=100;
 acuracy=4;    
 dmax=1; s0=1;
@@ -371,11 +371,11 @@ HmfMomentumVec[Jmatrice_,h_,U_,V_, kTable_,\[Eta]_:0] :=Table[HmfMomentum[Jmatri
 UmatVec[Jmatrice_,h_,U_,V_, kTable_,Tk_,\[Eta]_:0] :=UmatK/@Table[ Tk\[ConjugateTranspose] . HmfMomentum[Jmatrice,h,U,V, kTable[[l]],\[Eta]] . Tk,{l,1,Length@kTable}];
 
 
-(* ::Subsection::Bold:: *)
+(* ::Subsection::Bold::Closed:: *)
 (*MF model definitions *)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Saving and Loading data*)
 
 
@@ -640,11 +640,11 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-tV={2};
+tV={2.};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
-d0={0.2};
+d0={0.1};
 
 parametersMat=
 N@Table[Flatten[ Table[{
