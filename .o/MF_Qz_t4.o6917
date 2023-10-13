@@ -1,0 +1,24 @@
+Before Starting Kernels
+Starting Kernels
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+
+SetDirectory::fstr: File specification $Failed is not a string of one or more characters.
+ 
+    NbName=705; 
+    Ls={40}; 
+    tV={4}; 
+    ts={{20, 160, -48, 0, -60}}; 
+    hV={{0., 54.735610317245346, 180.}, {0.05, 54.735610317245346, 180.}, {0.1, 54.735610317245346, 180.}, {0.15, 54.735610317245346, 180.}, {0.2, 54.735610317245346, 180.}, {0.25, 54.735610317245346, 180.}, {0.3, 54.735610317245346, 180.}};
+    Gammas=Γs; 
+    Steps=600; 
+    acuracy=5; 
+ 
+Definition timing= 31.2431
+ 
+ 
+    Starting free loop
+ 
+J=-0.039842422227148455; K=-1.; G=0.30148525825759254; L=40; h=(0.,54.735610317245346,180.); 
+Max Step = 5; Delta=7.4862*^-9; E={-1.3890352639142838, -1.5528732673578802, -1.3890352639142838};  p=1/7
+J=-0.039842422227148455; K=-1.; G=0.30148525825759254; L=40; h=(0.05,54.735610317245346,180.); 
