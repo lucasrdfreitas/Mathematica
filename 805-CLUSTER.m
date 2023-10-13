@@ -18,18 +18,18 @@ If[FileNameSplit[NotebookDirectory[]][[-1]]=="Mathematica2",SetDirectory[Noteboo
 
 
 NbName="805";  (*\[Lambda]0=0.5; *)
-Ls {16,28,40};
-tV={0};	  
+Ls={16,28};
+(*tV={0};	*)  
 hV={{.001,0,0}};
 steps=100;
 acuracy=4;    
 dmax=1; s0=1;
 \[CapitalDelta]eV= 0.05; 
-\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] , {.99}];
-(*\[Xi]s={.99}*) 
-\[CapitalDelta]eV= 0.1; 
-\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.7,\[CapitalDelta]eV} ] , {.75}];
-eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ]
+\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.9,\[CapitalDelta]eV} ] , {.99}]
+(*\[Xi]s={.99}*) (*
+\[CapitalDelta]eV= 0.05; 
+\[Xi]s=Sort@Join[Table[ \[Xi], {\[Xi],0,.7,\[CapitalDelta]eV} ] , {.75}];*)
+eVs=Table[ 1700Abs[\[Xi]], {\[Xi],\[Xi]s} ];
 (*\[Eta]s=Join[ Table[3 \[Eta]-.113,{\[Eta],-1,1,.1}]    ]; *)   (*, Table[\[Eta],{\[Eta],-.5+.02,.5,0.05}], Table[\[Eta],{\[Eta],-.5+.04,.5,0.05}] *) 
 		
 
@@ -640,11 +640,11 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-tV={2.};
+tV={0.,2.,0.,2.};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
-d0={0.1};
+d0={0.,0.,.1,.1};
 
 parametersMat=
 N@Table[Flatten[ Table[{
@@ -910,7 +910,7 @@ u2=u1;        If[ Mod[j,5]==1,Print[" j =",j, "/",steps, "; Delta V=",\[CapitalD
 
 Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ]; 
 
- ]; , {ev,1      ,Length[parametersMat]} , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];
+ ]; , {ev,1, Min[12,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];
 Print[" "];
 
 
@@ -976,7 +976,7 @@ EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnL
 	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];     
 
 Print["ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "]; 
- ]; , {ev,1 ,Length[parametersMat]} , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
+ ]; , {ev,1, Min[12,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
 
 
 CloseKernels[];

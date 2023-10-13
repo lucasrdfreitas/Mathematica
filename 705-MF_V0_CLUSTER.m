@@ -18,17 +18,15 @@ SetDirectory[NotebookDirectory[]]
 
 
 NbName="705"; \[Lambda]0=0.5; 
-
-		Ls = {40}; 				tV={ 0 (*, 2.74356 *) };	
-					
-		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)
-		
-		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)
-		
-		hV={  {0.2,180/\[Pi] ArcTan[Sqrt[2]],180} };	
-
-		steps=600;   acuracy=1.5;   
-		
+		Ls = {40}; 	 					
+		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)	
+		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)		
+		tV={4};  hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{0,.05,.1,.15,.2,.25,.3}}]; 			
+		acuracy=5;   		
+		steps=600;  
+		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
+		hs =FullSimplify@Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];   
+		hV=N@hV;		
 		eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
@@ -422,7 +420,7 @@ asites[m_,n_]:=m nx+n ny;
 bsites[m_,n_]:=m nx+n ny-\[Delta]z;
 
 
-(* ::Subsection::Bold:: *)
+(* ::Subsection::Bold::Closed:: *)
 (*MF definitions*)
 
 
@@ -1056,7 +1054,7 @@ ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs = FullSimplify/@Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  hV=N@hV;
 eV0=0; U=2600; JH=300;
 (*  \[Kappa]=0.1 : h=0.3292;   \[Kappa]=0.2 : 0.41475; \[Kappa]=0.05 : 0.2612 *)
-parameters=Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
+parameters=Chop@Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
 
 
 \[Omega]GA = {{I,.0001,.0001,.0001},{-.0001,I,.0001,-.0001},{-.0001,-.0001,I,.0001},{-.0001,.0001,-.0001,I}}; 
@@ -1174,15 +1172,15 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
  
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*vortex free + gradually increase  electric field*)
 
 
-Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+(*Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
 Print[" "] Print[" "];];
-Print["    Starting vortex free + electric field loop: "];Print[" "]
+Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 
 
 (*
@@ -1293,18 +1291,18 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 *)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*four vortex + gradually increase  electric field*)
 
 
-Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Hours" ];
+(*Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Hours" ];
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
 Print[ "Free loop + electric field timing= ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ];
 t0=t4v;Print[" "] Print[" "];
 ];
-Print["    Starting four vortex + electric field loop: "];Print[" "]
+Print["    Starting four vortex + electric field loop: "];Print[" "]*)
 
 
 (*
@@ -1405,15 +1403,15 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 
   ];
 ]  , {l,1,Length@Ls}, {p,1,Length[parameters[[1]] ]}  ]          
-*)                                     
+                                     *)
 
 
-Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-t4v], "Seconds" ], "Hours" ];
+(*Module[{\[CapitalDelta]t},t1=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t1-t4v], "Seconds" ], "Hours" ];
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
 Print[ "4 vortices loop timing \[CapitalDelta]t = ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ] 
-];
+];*)
 
 
 (* ::Subsubsection::Bold::Closed:: *)
@@ -1540,10 +1538,10 @@ Print[ "p=",p,"/",Length@parameters[[1]], "; l=",l, "/",Length@Ls, "; \[CapitalD
 (*four vortex + gradually increase  parameters *)
 
 
-(*Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];
+Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Minutes" ];   
 Print["Free loop + electric field timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t4v;Print[" "] Print[" "];];
-Print["    Starting four vortex -fixed eV- gradually changing parameters  "];Print[" "]*)
+Print["    Starting four vortex -fixed eV- gradually changing parameters  "];Print[" "]
 
 
 
