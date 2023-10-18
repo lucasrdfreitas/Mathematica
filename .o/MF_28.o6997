@@ -1,0 +1,29 @@
+Before Starting Kernels
+Starting Kernels
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+/home/rodrigues/Mathematica2
+
+Table::iterb: Iterator {x, tV} does not have appropriate bounds.
+ 
+    NbName=805; 
+    Lambda s=ηs; 
+    Ls={28}; 
+    tV={0., 2., 0., 2.}; 
+    ts={{0., 160, 0., 0, -60}, {10., 160, -24., 0, -60}, {0., 160, 0., 0, -60}, {10., 160, -24., 0, -60}}; 
+    hV={{0.001, 0, 0}};
+    Couplings=
+    Gammas=Γs; 
+    Steps=100; 
+    acuracy=4; 
+ 
+Definition timing= 32.298394
+
+    Pure and with vortices 
+
+ eV0=0. x 1700; Epure=-1.5746285137497689; ev=1/20; l=1/1; p=1/4
+ eV0=0. x 1700; Epure=-1.5746285137497682; ev=1/20; l=1/1; p=2/4
+ eV0=0. x 1700; Epure=-1.5746285137497689; ev=1/20; l=1/1; p=3/4
+ eV0=0. x 1700; Epure=-1.5746285137497682; ev=1/20; l=1/1; p=4/4
+ eV0=0.05 x 1700; Epure=-1.57472081632531; ev=2/20; l=1/1; p=1/4
+ eV0=0.05 x 1700; Epure=-1.5747208163253092; ev=2/20; l=1/1; p=2/4
