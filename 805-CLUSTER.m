@@ -919,14 +919,17 @@ Print[" "];
 (*four vortex + gradually increase  electric field*)
 
 
-Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Hours" ];
+(*Module[{\[CapitalDelta]t},t4v=AbsoluteTime[];\[CapitalDelta]t= UnitConvert[ Quantity[N[t4v-t0v], "Seconds" ], "Hours" ];
 \[CapitalDelta]tHours=IntegerPart[\[CapitalDelta]t];
 \[CapitalDelta]tMin=IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ];
 \[CapitalDelta]tSec=IntegerPart@UnitConvert[FractionalPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Minutes" ], "Seconds" ];
 Print[ "Free loop + electric field timing= ",ToString@\[CapitalDelta]tHours," : ",ToString@\[CapitalDelta]tMin," : ",ToString@\[CapitalDelta]tSec    ];
 t0=t4v;Print[" "] Print[" "];
 ];
-Print["    Starting four vortex + electric field loop: "];Print[" "]
+Print["    Starting four vortex + electric field loop: "];Print[" "]*)
+
+
+t4v=AbsoluteTime[];
 
 
 minSteps=5;
@@ -976,7 +979,7 @@ EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnL
 	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];     
 
 Print["ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "]; 
- ]; , {ev,2, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
+ ]; , {ev,11, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
 
 
 CloseKernels[];
