@@ -23,10 +23,10 @@ NbName="705"; \[Lambda]0=0.5;
 		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)		
 		tV={4};  hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{0,.05,.1,.15,.2,.25,.3}}]; 			
 		acuracy=5;   		
-		steps=600;  
+		steps=50;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs =FullSimplify@Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];   
-		hV=N@hV;		
+		hV=N@hV[[5;;-1]];		
 		eVs=Table[1700 x, {x,0,0,0.099999}];  (* eV=\[Xi](U-3JH)=1500\[Xi] *)
 
 
