@@ -1083,7 +1083,7 @@ parameters=Chop@Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]
 		
 		acuracy=6.1; 
 		\[CapitalGamma]s=round@Table[x,{x,-.3,.6,.01}][[2;;-1;;2]];
-		K={-1.};
+		Ks={-1.};
 		Js={0.};
 		hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];
 		
@@ -1118,8 +1118,8 @@ Print["    NbName=",NbName,"; "];
 Print["    Ls=",Ls,"; "];
 Print["    tV=",tV,"; "];
 Print["    ts=",ts,"; "];
-Print["    hV=",hV,";"]
-Print["    Gammas=", \[CapitalGamma]s,"; "];
+Print["    hV={",hV[[1]],", ",hV[[Mod[2,Length@hV,1]]],", ..., ",hV[[-1]],"};"]
+Print["    Gammas={",\[CapitalGamma]s[[1]],", ",\[CapitalGamma]s[[Mod[2,Length@hV,1]]],", ..., ",\[CapitalGamma]s[[-1]],"};"]
 Print["    Steps=",steps,"; "];
 Print["    acuracy=",acuracy,"; "];
 (*
