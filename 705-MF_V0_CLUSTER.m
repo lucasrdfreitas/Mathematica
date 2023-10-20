@@ -1082,7 +1082,8 @@ parameters=Chop@Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]
 		hV=Table[{h,0,0},{h,0.01,1.4,.02}][[-10;;-1]];*)
 		
 		acuracy=6.1; 
-		\[CapitalGamma]s=round@Table[x,{x,-.3,.6,.01}][[1;;-1;;2]];
+		\[CapitalGamma]s=round@Table[x,{x,-.3,.6,.01}][[2;;-1;;2]];
+		K={-1.};
 		Js={0.};
 		hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];
 		
