@@ -979,7 +979,7 @@ EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnL
 	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];     
 
 Print["ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "]; 
- ]; , {ev,11, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
+ ]; , {ev,14, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
 
 
 CloseKernels[];
