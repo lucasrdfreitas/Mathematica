@@ -24,18 +24,18 @@ NbName="705"; \[Lambda]0=0.5;
 		Ls = {40}; 	 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)	
 		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)		
-		tV={0}; 
-		(* hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{0,.05,.1,.15,.2,.25,.3}}]; 	*)
-				(*
-		acuracy=4; 
+		tV={4}; 
+		 hV= Table[{ h+.025,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{0,.05,.1,.15,.2,.25}}]; 	
+				
+		acuracy=5; (*
 		\[CapitalGamma]s=round@Table[x,{x,-.3,.6,.01}][[1;;-1;;2]];
 		Js={0.};
-		hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];
+		hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];*)
 		
-		steps=500;  
+		steps=50;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs = Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
-		eVs= Table[1700 x, {x,0,0,0.099999}];  *)
+		eVs= Table[1700 x, {x,0,0,0.099999}];  
 		(* eV=\[Xi](U-3JH)=1500\[Xi] *)
 		
 
@@ -1060,18 +1060,28 @@ sym\[Omega][\[Omega]_]:= Module[ {\[Omega]A,\[Omega]B},
 (*MF Loop -- microscopic parameters*)
 
 
-(*ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
+ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs = FullSimplify/@Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  hV=N@hV;
 eV0=0; U=2600; JH=300;
 (*  \[Kappa]=0.1 : h=0.3292;   \[Kappa]=0.2 : 0.41475; \[Kappa]=0.05 : 0.2612 *)
-parameters=Chop@Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];*)
+parameters=Chop@Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]],N@\[CapitalGamma]r[0,JH,U,ts[[t]]],hs[[h]] ,N@Jr[eVs[[ev]],JH,U,ts[[t]] ],N@Kr[eVs[[ev]],JH,U,ts[[t]]],N@\[CapitalGamma]r[eVs[[ev]],JH,U,ts[[t]]],hV[[h]],tV[[t]],eVs[[ev]]} , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs}];
+(*
+    NbName=705; 
+    Ls={40}; 
+    tV={4}; 
+    ts={{20, 160, -48, 0, -60}}; 
+    hV={{0.2, 54.735610317245346, 180.}, {0.25, 54.735610317245346, 180.}, {0.3, 54.735610317245346, 180.}};
+    Gammas=\[CapitalGamma]s; 
+    Steps=50; 
+    acuracy=5; 
+*)
 
 
 \[Omega]GA = {{I,.0001,.0001,.0001},{-.0001,I,.0001,-.0001},{-.0001,-.0001,I,.0001},{-.0001,.0001,-.0001,I}}; 
 \[Omega]GB = \[Omega]GA;
 
 
-		(* for equally spaced Gamma values *)
+(*		(* for equally spaced Gamma values *)
 						
 		(*
 		steps=400;
@@ -1110,7 +1120,7 @@ parameters=Chop@Table[Flatten[ Table[ {N@Jr[0,JH,U,ts[[t]] ],N@Kr[0,JH,U,ts[[t]]
 				parameters0=Tuples[{Js,Ks,\[CapitalGamma]s,hs}];
 				parameters1=Tuples[{Js,Ks,\[CapitalGamma]s,hV}];
 				parameters={Table[  Flatten[{ parameters0[[i]],parameters1[[i]],{0},{0}},1],  {i,1,  Length@parameters0  }]}  ];  *)
-	 
+	 *)
 
 
 Print[" "];
@@ -1118,8 +1128,8 @@ Print["    NbName=",NbName,"; "];
 Print["    Ls=",Ls,"; "];
 Print["    tV=",tV,"; "];
 Print["    ts=",ts,"; "];
-Print["    hV={",hV[[1]],", ",hV[[Mod[2,Length@hV,1]]],", ..., ",hV[[-1]],"};"]
-Print["    Gammas={",\[CapitalGamma]s[[1]],", ",\[CapitalGamma]s[[Mod[2,Length@hV,1]]],", ..., ",\[CapitalGamma]s[[-1]],"};"]
+Print["    hV={",hV[[1]],", ",hV[[Mod[2,Length@hV,1]]],", ..., ",hV[[-1]],"};"](*
+Print["    Gammas={",\[CapitalGamma]s[[1]],", ",\[CapitalGamma]s[[Mod[2,Length@hV,1]]],", ..., ",\[CapitalGamma]s[[-1]],"};"]*)
 Print["    Steps=",steps,"; "];
 Print["    acuracy=",acuracy,"; "];
 (*
