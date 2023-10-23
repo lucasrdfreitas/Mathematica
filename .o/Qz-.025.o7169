@@ -1,0 +1,9 @@
+Before Starting Kernels
+Starting Kernels
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+
+SetDirectory::fstr: File specification $Failed is not a string of one or more characters.
+
+Syntax::sntx: Invalid syntax in or before "hV= Table[{ h+.025,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,(*{0,.05,.1 ,*).15,.2,.25  }}]; 	" (line 28 of "705-MF_V0_CLUSTER.m").
+                                                                                                                               ^
