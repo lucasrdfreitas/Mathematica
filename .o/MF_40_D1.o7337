@@ -1,0 +1,23 @@
+Before Starting Kernels
+Starting Kernels
+
+FrontEndObject::notavail: A front end is not available; certain operations require a front end.
+/home/rodrigues/Mathematica2
+ 
+    NbName=805; 
+    Lambda s=ηs; 
+    Ls={40}; 
+    tV={2.}; 
+    ts={{10., 160, -24., 0, -60}}; 
+    hV={{0.001, 0, 0}};
+    Couplings=
+    Gammas=Γs; 
+    Steps=100; 
+    acuracy=4; 
+ 
+Definition timing= 31.199957
+JmatMod {-0.009503948319320332, -0.9999999999999997, 0.14383163238326907, 0., 0.9999999999999998}; L=40; h=(0.001,0,0); 
+
+OpenRead::noopen: Cannot open /home/rodrigues/Mathematica2/Files/805/free/free_0_JKG={-0.0095, -1.0000, 0.1438, 0.0000, 1.0000}/data/h=(0.001,0.,0.)_L=40_A=4.txt.
+Failed to OpenRead file at: 
+/home/rodrigues/Mathematica2/Files/805/free/free_0_JKG={-0.0095, -1.0000, 0.1438, 0.0000, 1.0000}/data/h=(0.001,0.,0.)_L=40_A=4.txt

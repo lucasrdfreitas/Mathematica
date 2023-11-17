@@ -640,11 +640,11 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-tV={0.,2.,0.,2.};
+tV={2.};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
-d0={0.,0.,.1,.1};
+d0={1};
 
 parametersMat=
 N@Table[Flatten[ Table[{
@@ -979,7 +979,7 @@ EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnL
 	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];     
 
 Print["ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "]; 
- ]; , {ev,14, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
+ ]; , {ev,1, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
 
 
 CloseKernels[];
