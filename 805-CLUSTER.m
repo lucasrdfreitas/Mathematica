@@ -757,11 +757,11 @@ Print[" "] Print[" "];];
 Print["    Starting vortex free + electric field loop: "];Print[" "]*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*pure loop w/out  vortices*)
 
 
-(*Print[];
+Print[];
 
 Print["    Pure and with vortices "];Print[];
 Do[   Module[{gauge="g0",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jmat,JmatMod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hv,hp=Mod[p,Length@hV,1] }, 
@@ -781,14 +781,14 @@ Print[ " eV0=",round[  parametersMat[[ev,p]][[-1]]/1700  ] ," x 1700","; Epure="
 dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} },NbName ]; 
 (*If[ ev==1, Print["Kappa=",\[Kappa],"; Lambda=",to\[Lambda][h], "; L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "]; ];*)
                        ]; 
-        ]  , {ev,1,Length[parametersMat]}, {l,1,Length@Ls}, {p,1,Length[parametersMat[[1]] ]}  ]   *)
+        ]  , {ev,1,Length[parametersMat]}, {l,1,Length@Ls}, {p,1,Length[parametersMat[[1]] ]}  ]   
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*pure loop w/ vortices*)
 
 
-(*Print[];Print["    Pure and with vortices "];Print[];
+Print[];Print["    Pure and with vortices "];Print[];
 Do[   Module[{gauge="g4",J,K,\[CapitalGamma],Jmod,Kmod,\[CapitalGamma]mod,Jmat,JmatMod,Jv,Kv,\[CapitalGamma]v,L=Ls[[l]],Nc,h,hv,T,En,EMF,E\[Lambda],EnList={{},{},{}},u0,ES,\[CapitalDelta]t,hp=Mod[p,Length@hV,1] }, 
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];Nc=L^2;
 T=Tmat[L,L];K=fromJmat[Jmat][[2]]; Kmod=fromJmat[JmatMod][[2]];
@@ -804,14 +804,14 @@ Print[ " eV0=",round[  parametersMat[[ev,p]][[-1]]/1700  ] ," x 1700","; Epure="
 dataToFilePure800[parametersMat[[ev,p]],L,acuracy, gauge,{0,L,\[Chi]0,{{},{}},{{{},{},{}},{{},{},{}}},{Epure} },NbName ]; 
        ]; 
         ]  , {ev,1,Length[parametersMat]}, {l,1,Length@Ls}, {p,1,Length[parametersMat[[1]] ]}  ]   
-*)
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+
+(* ::Subsubsection::Bold:: *)
 (*vortex free*)
 
 
-(*Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
+Print[" "];Print[" "];Print["    Starting free loop"];Print[" "];
 t0=AbsoluteTime[]; 
 
 Do[ \[CapitalGamma]0=fromJmat[parametersMat[[1,p]][[1]]][[3]];  \[Alpha]0=-0.2+1.13 \[CapitalGamma]0;
@@ -841,22 +841,22 @@ dataToFile800[parametersMat[[1,p]],L,acuracy,{j,L,U,V,{0,0},{{EMF},{Esum},{cMF},
 {jG,LG,\[Chi]G,\[Omega]G,\[Xi]G,EnG}= loadData[toPath800[parametersMat[[1,p]],L,acuracy,"free",NbName ]  ];  
 (*AppendTo[\[CapitalDelta]V\[Lambda],{\[Eta],\[CapitalDelta]V}];AppendTo[\[CapitalDelta]en\[Lambda],{\[Eta],EMF}];AppendTo[\[CapitalDelta]enSum\[Lambda],{\[Eta],Esum}]; *)  ];   
 ,{p,1,Length@parametersMat[[1]]} ]; Print[" "]; 
-*)
 
 
-(*Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+
+Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
 Print[" "];
 Print[" "];   ];
-Print["    Starting vortex free + electric field loop: "];Print[" "]*)
+Print["    Starting vortex free + electric field loop: "];Print[" "]
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*vortex free  + electric field*)
 
 
-(*Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
+Module[{\[CapitalDelta]t}, t0v=AbsoluteTime[];
 \[CapitalDelta]t= UnitConvert[ Quantity[N[t0v-tvf], "Seconds" ], "Minutes" ];   
 Print["Free loop timing= ", IntegerPart[\[CapitalDelta]t],IntegerPart@UnitConvert[FractionalPart[\[CapitalDelta]t], "Seconds" ]    ];t0=t0v;
 Print[" "]; Print[" "];
@@ -912,7 +912,7 @@ Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDel
 
  ]; , {ev,1, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];
 Print[" "];
-*)
+
 
 
 (* ::Subsubsection::Bold:: *)
