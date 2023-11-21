@@ -20,7 +20,7 @@ If[FileNameSplit[NotebookDirectory[]][[-1]]=="Mathematica2",SetDirectory[Noteboo
 NbName="805";  (*\[Lambda]0=0.5; *)
 Ls={40};
 tV={0}; 
-hV={{.001,0,0}};
+hV={{.2,0,0}};
 steps=100;
 acuracy=4;    
 dmax=1; s0=1;
@@ -653,6 +653,11 @@ JmatMicro[eVs[[ev]],JH,U,ts[[t]],d0[[t]],s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
 
+evList = {0,4,8}+1; 
+Print["\[Xi]s list = ", \[Xi]s[[evList]] ];
+(*evList=Range[1,Min[14,Length[parametersMat]] ];*)
+
+
 (*Do[ Module[{Jmat,h,JmatMod,hv},
 {Jmat,h}=parametersMat[[ev,p]][[1;;2]]; {JmatMod,hv}=parametersMat[[ev,p]][[3;;4]];
 Print["Jmat=",fromJmat[Jmat],"; JmatMod=",fromJmat[JmatMod],";"]
@@ -910,7 +915,7 @@ u2=u1;        If[ Mod[j,5]==1,Print[" j =",j, "/",steps, "; Delta V=",\[CapitalD
 
 Print[ "ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "   ]; 
 
- ]; , {ev,1, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];
+ ]; , {ev, evList } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];
 Print[" "];
 
 
@@ -979,7 +984,7 @@ EnList[[1]]={EnList[[1]],{j,EMF}};    EnList[[2]]={EnList[[2]],{j,Esum}};    EnL
 	dataToFile800[parametersMat[[ev,p]],L,acuracy,{j,L,U,V,\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]Vseq}},gauge,NbName];     
 
 Print["ev=",ev ,"/", Length@eVs"; j MAX=",j, "/",steps, "; Delta=",\[CapitalDelta]1, "; "]; 
- ]; , {ev,1, Min[14,Length[parametersMat]]  } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
+ ]; , {ev,evList    } , {pt,1,Length@tV},  {ph,1,Length@hV}  ,{l,1,Length@Ls}];  
 
 
 CloseKernels[];
