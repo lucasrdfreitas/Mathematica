@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #$ -l hostname=micro4.local 
-#$ -N MF_40_D1
+#$ -N D1_h.2_G.0
 #$ -l h_rt=140:00:00                   #estimate max run time
 #$ -q all.q
 #$ -m ea
