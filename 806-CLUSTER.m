@@ -647,11 +647,11 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-tV={2.};
+tV={4.};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
-d0={1};
+d0={.5};
 
 parametersMat=
 N@Table[Flatten[ Table[{
@@ -661,7 +661,7 @@ JmatMicro[eVs[[ev]],JH,U,ts[[t]],d0[[t]],s0],hV[[h]],tV[[t]],eVs[[ev]]
 
 
 (*evList = {0,4,8}+1; *)
-evList=Range[1,Min[12,Length[parametersMat]] ];
+evList=Range[1,Min[11,Length[parametersMat]] ];
 Print["\[Xi]s list = ", \[Xi]s[[evList]] ];
 
 
