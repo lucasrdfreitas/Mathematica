@@ -647,7 +647,7 @@ JmatMicro[              0,JH,U,ts[[t]],dmax,s0],hs[[h]],
 JmatMicro[eVs[[ev]],JH,U,ts[[t]],dmax,s0],hV[[h]],tV[[t]],eVs[[ev]]
 } , {t,1,Length@tV},  {h,1,Length@hV}],1] ,  {ev,1,Length@eVs} ];
 
-tV={2.};
+tV={0.};
 ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 hs =Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 eV0=0;U=2600;JH=300; 
