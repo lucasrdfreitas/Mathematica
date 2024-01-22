@@ -25,7 +25,7 @@ NbName="705"; \[Lambda]0=0.5;
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)	
 		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)		
 		tV={-4}; 
-		hV= Table[{ h+2*.0125,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{ .05,.1 , .15,.2,.25  }}]; 	
+		hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{.005, .05,.1 , .15,.2,.25  }}]; 	
 				
 		acuracy=5; (*
 		\[CapitalGamma]s=round@Table[x,{x,-.3,.6,.01}][[1;;-1;;2]];
