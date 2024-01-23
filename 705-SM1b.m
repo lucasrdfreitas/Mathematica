@@ -279,7 +279,7 @@ SS        ];
 (**)
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*gauge pure*)
 
 
@@ -346,7 +346,8 @@ positionVortex[v_,L_]:=Module[{d1,d2,r2,mS,nS,mW,nW,mE,nE,mN,nN},
 (**)
 
 
-gauge2v[u0_,L_,\[Alpha]_]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor];   Do[  Module[{r,m,n},
+gauge2v[u0_,L_,\[Alpha]_:1]:= Module[{d1,d2,u=u0,m0,n0,r2 ,v},   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2; d1=L-d2; 
+Do[  Module[{r,m,n},
 							m={r2-1,             r2-1+i,              r2-1+i   }[[\[Alpha]]]; 
 							n={r2-1+i,       L-r2-1,             L-r2-i   }[[\[Alpha]]];
  r = m+n L+1;    u[[r,\[Alpha]]] =-u0[[r,\[Alpha]]];      ]   , {i,1,d1}];                u           ];
@@ -746,12 +747,8 @@ R={m+Mod[n+1,L]L,Mod[m-1,L]+n L,Mod[m+1,L]+Mod[n-1,L] L,m+Mod[n-1,L]L,Mod[m+1,L]
 ];
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*Mean field 3*)
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 \[Chi]gauge4v[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
@@ -791,48 +788,6 @@ Do[ Module[{m,n,mT,nT},
 {\[Chi],\[Omega]}];
 
 
-(* ::Code::Bold:: *)
-(**)
-
-
-(*\[Chi]gauge4vChangeXtoY[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ;          r=m+n L+1;   \[Chi][[1,r]][[2,2]] =-Abs@\[Chi]0[[1,r]][[2,2]];   \[Chi][[1,r]][[1,1]] =Abs@\[Chi]0[[1,r]][[1,1]];      ]   , {i,1,d1}];   
-Do[  Module[{r,m,n}, m =mN ; n=nN-i+1;        r=m+n L+1;    \[Chi][[1,r]][[2,2]] =-Abs@\[Chi]0[[1,r]][[2,2]];  \[Chi][[1,r]][[1,1]] =Abs@\[Chi]0[[1,r]][[1,1]];         ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =mS+i ; n=nS ;         r=m+n L+1;    \[Chi][[2,r]][[3,3]] =Abs@\[Chi]0[[2,r]][[3,3]];   \[Chi][[2,r]][[1,1]] =-Abs@\[Chi]0[[2,r]][[1,1]];       ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =mN -i+1 ; n=nN;        r=m+n L+1;    \[Chi][[2,r]][[3,3]] =Abs@\[Chi]0[[2,r]][[3,3]];   \[Chi][[2,r]][[1,1]] =-Abs@\[Chi]0[[2,r]][[1,1]];      ]   , {i,1,d1}];       \[Chi] ];
-
-\[Chi]gauge4vChangeXtoZ[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;mW=r2-1;nW=L-r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ;          r=m+n L+1;   \[Chi][[1,r]][[2,2]] =-Abs@\[Chi]0[[1,r]][[2,2]];   \[Chi][[1,r]][[1,1]] =Abs@\[Chi]0[[1,r]][[1,1]];      ]   , {i,1,d1}];   
-Do[  Module[{r,m,n}, m =mN ; n=nN-i+1;        r=m+n L+1;    \[Chi][[1,r]][[2,2]] =-Abs@\[Chi]0[[1,r]][[2,2]];  \[Chi][[1,r]][[1,1]] =Abs@\[Chi]0[[1,r]][[1,1]];         ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =Mod[mS+i,L]; n=Mod[nS-i+1,L]; r=m+n L+1;    \[Chi][[3,r]][[4,4]] =Abs@\[Chi]0[[3,r]][[4,4]];   \[Chi][[3,r]][[1,1]] =-Abs@\[Chi]0[[3,r]][[1,1]];       ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =Mod[mW+i,L]; n=Mod[nW-i+1,L]; r=m+n L+1;    \[Chi][[3,r]][[4,4]] =Abs@\[Chi]0[[3,r]][[4,4]];   \[Chi][[3,r]][[1,1]] =-Abs@\[Chi]0[[3,r]][[1,1]];       ]   , {i,1,d1}];       \[Chi] ]; *)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
-(*changeSign[m_,s_]:={{s m\[LeftDoubleBracket]1,1\[RightDoubleBracket],m\[LeftDoubleBracket]1,2\[RightDoubleBracket],m\[LeftDoubleBracket]1,3\[RightDoubleBracket],m\[LeftDoubleBracket]1,4\[RightDoubleBracket]},{m\[LeftDoubleBracket]2,1\[RightDoubleBracket],s m\[LeftDoubleBracket]2,2\[RightDoubleBracket],s m\[LeftDoubleBracket]2,3\[RightDoubleBracket],s m\[LeftDoubleBracket]2,4\[RightDoubleBracket]},{m\[LeftDoubleBracket]3,1\[RightDoubleBracket],s m\[LeftDoubleBracket]3,2\[RightDoubleBracket],s m\[LeftDoubleBracket]3,3\[RightDoubleBracket],s m\[LeftDoubleBracket]3,4\[RightDoubleBracket]},{m\[LeftDoubleBracket]4,1\[RightDoubleBracket],s m\[LeftDoubleBracket]4,2\[RightDoubleBracket],s m\[LeftDoubleBracket]4,3\[RightDoubleBracket],s m\[LeftDoubleBracket]4,4\[RightDoubleBracket]}};
-\[Chi]gauge4vChangeX[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ;         r=m+n L+1;   \[Chi][[1,r]]=changeSign[\[Chi]0[[1,r]],-1];  \[Chi][[2,r]]=-changeSign[\[Chi]0[[2,r]],-1]; \[Chi][[3,r]]=-changeSign[\[Chi]0[[3,r]],-1];         ]   , {i,1,d1}];   
-Do[  Module[{r,m,n}, m =mN ; n=nN-i+1;        r=m+n L+1;   \[Chi][[1,r]]=changeSign[\[Chi]0[[1,r]],-1];  \[Chi][[2,r]]=-changeSign[\[Chi]0[[2,r]],-1]; \[Chi][[3,r]]=-changeSign[\[Chi]0[[3,r]],-1];           ]   , {i,1,d1}]; \[Chi] ];
-\[Chi]gauge4vChangeXtoY[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ;         r=m+n L+1;   \[Chi][[1,r]] =changeSign[\[Chi]0[[1,r]],-1];          ]   , {i,1,d1}];   
-Do[  Module[{r,m,n}, m =mN ; n=nN-i+1;        r=m+n L+1;   \[Chi][[1,r]] =changeSign[\[Chi]0[[1,r]],-1];          ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =mS+i ; n=nS ;         r=m+n L+1;   \[Chi][[2,r]] =changeSign[\[Chi]0[[2,r]],-1];          ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =mN -i+1 ; n=nN;       r=m+n L+1;   \[Chi][[2,r]] =changeSign[\[Chi]0[[2,r]],-1];          ]   , {i,1,d1}];       \[Chi] ];
-
-\[Chi]gauge4vChangeXtoZ[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,mW,nW,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;mW=r2-1;nW=L-r2-1;
-Do[  Module[{r,m,n}, m =mS ; n=nS+i ;                     r=m+n L+1;     \[Chi][[1,r]]=changeSign[\[Chi]0[[1,r]],-1];      ]   , {i,1,d1}];   
-Do[  Module[{r,m,n}, m =mN ; n=nN-i+1;                    r=m+n L+1;     \[Chi][[1,r]]=changeSign[\[Chi]0[[1,r]],-1];          ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =Mod[mS+i,L]; n=Mod[nS-i+1,L];   r=m+n L+1;     \[Chi][[3,r]]=changeSign[\[Chi]0[[3,r]],-1];        ]   , {i,1,d1}];
-Do[  Module[{r,m,n}, m =Mod[mW+i,L]; n=Mod[nW-i+1,L];   r=m+n L+1;     \[Chi][[3,r]]=changeSign[\[Chi]0[[3,r]],-1];        ]   , {i,1,d1}];       \[Chi] ];*)
-
-
-(* ::Code::Bold:: *)
-(**)
-
-
 changeSign[m_,s_]:={{s m[[1,1]],m[[1,2]],m[[1,3]],m[[1,4]]},{m[[2,1]],s m[[2,2]],s m[[2,3]],s m[[2,4]]},{m[[3,1]],s m[[3,2]],s m[[3,3]],s m[[3,4]]},{m[[4,1]],s m[[4,2]],s m[[4,3]],s m[[4,4]]}};
 \[Chi]gauge4vChangeX[\[Chi]0_,L_]:= Module[{d1,d2,\[Chi]=\[Chi]0,mS,nS,mN,nN,r2 },   r2= \[LeftFloor]1/2 \[LeftCeiling]L/2\[RightCeiling]\[RightFloor]; d2=2r2;d1=L-d2;  mS=r2-1;nS=r2-1;mN=L-r2-1;nN=L-r2-1;
 Do[  Module[{r,m,n}, m =mS ; n=nS+i ;         r=m+n L+1;   \[Chi][[1,r]]=-\[Chi]0[[1,r]];          ]   , {i,1,d1}];   
@@ -848,10 +803,6 @@ Do[  Module[{r,m,n}, m =mS ; n=nS+i ;                     r=m+n L+1;     \[Chi][
 Do[  Module[{r,m,n}, m =mN ; n=nN-i+1;                    r=m+n L+1;     \[Chi][[1,r]]=-\[Chi]0[[1,r]];           ]   , {i,1,d1}];
 Do[  Module[{r,m,n}, m =Mod[mS+i,L]; n=Mod[nS-i+1,L];   r=m+n L+1;     \[Chi][[3,r]]=-\[Chi]0[[3,r]];         ]   , {i,1,d1}];
 Do[  Module[{r,m,n}, m =Mod[mW+i,L]; n=Mod[nW-i+1,L];   r=m+n L+1;     \[Chi][[3,r]]=-\[Chi]0[[3,r]];        ]   , {i,1,d1}];       \[Chi] ];
-
-
-(* ::Code::Bold:: *)
-(**)
 
 
 reflectXinternal[m_]:={
@@ -1137,7 +1088,7 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
  
 
 
-(* ::Subsubsection::Bold:: *)
+(* ::Subsubsection::Bold::Closed:: *)
 (*two vortex + gradually increase  parameters *)
 
 
