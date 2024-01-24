@@ -21,13 +21,13 @@ round[x_,pow_:10000]:=N[Round[pow(x)]/pow];
 
 
 NbName="705"; \[Lambda]0=0.5; 
-		Ls = {20,24,28,32,36,40}; 	 					
+		Ls = {8,12,16,20,24,28,32,36,40}; 	 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)			
-		tV={4}; 
-		hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{ .3  }}]; 	
+		tV={4}; (* { h,180/\[Pi] ArcTan[Sqrt[2]],180} *)
+		hV= Table[ { h,180/\[Pi] ArcTan[Sqrt[2]],180}   ,{h,{ .2  }}]; 	
 				
 		acuracy=5; 		
-		steps=60;  
+		steps=120;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs = Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eVs= Table[1700 x, {x,0,0,0.099999}];    		(* eV=\[Xi](U-3JH)=1500\[Xi] *)		
