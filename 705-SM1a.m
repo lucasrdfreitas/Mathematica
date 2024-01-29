@@ -21,13 +21,13 @@ round[x_,pow_:10000]:=N[Round[pow(x)]/pow];
 
 
 NbName="705"; \[Lambda]0=0.5; 
-		Ls = {8,12,16,20,24,28,32,36,40}; 	 					
+		Ls = {28}; 	 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)			
 		tV={4}; (* { h,180/\[Pi] ArcTan[Sqrt[2]],180} *)
 		hV= Table[ { h,180/\[Pi] ArcTan[Sqrt[2]],180}   ,{h,{ .2  }}]; 	
 				
 		acuracy=5; 		
-		steps=120;  
+		steps=200;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs = Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eVs= Table[1700 x, {x,0,0,0.099999}];    		(* eV=\[Xi](U-3JH)=1500\[Xi] *)		
@@ -1092,12 +1092,14 @@ Do[ Do[ Module[{ loaddata,\[CapitalGamma],J,K,L=Ls[[l]],Nc,h,\[CapitalLambda],T,
 	If[ h==hs[[1]] (*p==1 Abs[\[CapitalGamma]]==1*), \[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB}; ];
 	(*\[Chi]G={\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; \[Omega]G={\[Omega]GA,\[Omega]GB};*)
 	\[Chi]=\[Chi]G; \[Omega]=\[Omega]G;   
+	
 Print["J=",J,"; K=",K, "; G=",\[CapitalGamma], "; L=",L,"; h=(", hV[[ hp,1 ]],",",hV[[ hp,2 ]],",",hV[[ hp,3]],"); "];
 kTable=toMomentumTable[L];
 For[j=1,( ( j<(steps))\[And](Chop[ \[CapitalDelta]1,10^(-acuracy) ]!= 0) ), j++,  
   (*  If[j<=1, loaddata=loadDataTry[toPath[parameters[[1,p]],L,acuracy,"free",NbName]  ];
-    If[!(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata]];
-    *)If[ (Mod[j,200]==80)\[And]( \[CapitalDelta]1>10^(-6) ), \[Chi]=0.6{\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; Module[{rm=RandomReal[.1,{4,4}]}, \[Omega]={\[Omega]GA+( rm-Transpose[rm]),\[Omega]GB+( rm-Transpose[rm])}] ];
+      If[!(loaddata===$Failed),{j,L,\[Chi],\[Omega],\[Xi],{EnList[[1]],EnList[[2]],EnList[[3]],\[CapitalDelta]seq,\[CapitalDelta]\[Omega]seq}}=loaddata]];     *)
+  (*  If[ (Mod[j,200]==80)\[And]( \[CapitalDelta]1>10^(-6) ),     
+  \[Chi]=0.6{\[Chi]Gx,\[Chi]Gy,\[Chi]Gz}; Module[{rm=RandomReal[.1,{4,4}]}, \[Omega]={\[Omega]GA+( rm-Transpose[rm]),\[Omega]GB+( rm-Transpose[rm])}] ];*)
 u=Chop@Total@Table[ Module[{H0,Hr,U,TU,TUh,k,uu},
 k=kTable[[l]];
 H0=HMFk[J,K,\[CapitalGamma],h,\[Chi],\[Omega],\[Eta],k];
@@ -1528,6 +1530,8 @@ If[h==hs[[1]],
 \[Chi][[2]]=Table[\[Chi]G[[2]],{r,1,Nc} ];
 \[Chi][[3]]=Table[\[Chi]G[[3]],{r,1,Nc} ];
 
+	 h=0.15;  (*   !!!!   *)
+	
 (* Print[" for Pure Kitaev model: " ];*)
 Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,Hpure,Tpure,Upure,Epure},   
 \[Kappa]0=(*(h0/Sqrt[3])^3/(0.262)^2*) toKappa[h]; 
@@ -1563,7 +1567,7 @@ Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 ];*)
 
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
-\[Lambda]1=0.46 Heff;\[Lambda]2= 0.46 Heff;
+\[Lambda]1=0.5 Heff;\[Lambda]2= 0.5 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
 u=Umat[T\[ConjugateTranspose] . H . T];
@@ -1592,7 +1596,7 @@ u2=u1;
 Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1, ";  E=", N[Round[1000000(#)]/1000000]&@{EMF,Esum,EMF+E\[Lambda]},"; "  ];     
          ];  
 Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]]; 
-\[Lambda]1=0.46 Heff;\[Lambda]2=0.46 Heff;
+\[Lambda]1=0.45 Heff;\[Lambda]2=0.45 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
     u=Umat[T\[ConjugateTranspose] . H . T];
