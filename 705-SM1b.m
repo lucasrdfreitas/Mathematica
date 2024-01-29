@@ -21,13 +21,13 @@ round[x_,pow_:10000]:=N[Round[pow(x)]/pow];
 
 
 NbName="705"; \[Lambda]0=0.5; 
-		Ls = {8,12,16,20,24,28,32,36,40}; 	 					
+		Ls = {28,36}; 	 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)			
 		tV={4}; 
 		hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{ .2  }}]; 	
 				
 		acuracy=5; 		
-		steps=120;  
+		steps=200;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs = Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eVs= Table[1700 x, {x,0,0,0.099999}];    		(* eV=\[Xi](U-3JH)=1500\[Xi] *)		
@@ -1088,7 +1088,7 @@ Print["Max Step = ", j,"; Delta=",round\[CapitalDelta]@\[CapitalDelta]1,(*,"; \[
  
 
 
-(* ::Subsubsection::Bold::Closed:: *)
+(* ::Subsubsection::Bold:: *)
 (*two vortex + gradually increase  parameters *)
 
 
@@ -1119,6 +1119,8 @@ If[h==hs[[1]],
 \[Chi][[1]]=Table[\[Chi]G[[1]],{r,1,Nc} ];
 \[Chi][[2]]=Table[\[Chi]G[[2]],{r,1,Nc} ];
 \[Chi][[3]]=Table[\[Chi]G[[3]],{r,1,Nc} ];
+
+h=0.15; (*  !!!  *)
 
 (* Print[" for Pure Kitaev model: " ];*)
 Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,Hpure,Tpure,Upure,Epure},   
@@ -1155,7 +1157,7 @@ Module[{H,u,TUh,Heff,\[Lambda]1,\[Lambda]2,loaddata},
 ];*)
 
 Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]];
-\[Lambda]1=0.46 Heff;\[Lambda]2= 0.46 Heff;
+\[Lambda]1=0.48 Heff;\[Lambda]2= 0.48 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
 u=Umat[T\[ConjugateTranspose] . H . T];
@@ -1184,7 +1186,7 @@ u2=u1;
 Print[" j =",j, "/",steps, "; Delta=",round\[CapitalDelta]@\[CapitalDelta]1, ";  E=", N[Round[1000000(#)]/1000000]&@{EMF,Esum,EMF+E\[Lambda]},"; "  ];     
          ];  
 Module[{H,u,Heff,\[Lambda]1,\[Lambda]2},Heff=HeffList[Jv,Kv,\[CapitalGamma]v,h,\[Omega]]; 
-\[Lambda]1=0.46 Heff;\[Lambda]2=0.46 Heff;
+\[Lambda]1=0.48 Heff;\[Lambda]2=0.48 Heff;
 (*\[Lambda]1=\[Lambda]1List[Heff,\[Omega]];\[Lambda]2=\[Lambda]2List[Heff,\[Omega]]; *)
 H=HMF[Jv,Kv,\[CapitalGamma]v,h,\[Chi],\[Omega],L,L,\[Lambda]1,\[Lambda]2,Heff]; 
     u=Umat[T\[ConjugateTranspose] . H . T];
