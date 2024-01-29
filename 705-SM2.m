@@ -25,14 +25,14 @@ NbName="705"; \[Lambda]0=0.5;
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)	
 		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)		
 		tV={-4}; 
-		hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{.0, .05,.1 , .15,.2,.25,.3  }}]; 	
+		hV= Table[{ h,180/\[Pi] ArcTan[Sqrt[2]],180}  ,{h,{.27 }}]; 	
 				
 		acuracy=5; (*
 		\[CapitalGamma]s=round@Table[x,{x,-.3,.6,.01}][[1;;-1;;2]];
 		Js={0.};
 		hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];*)
 		
-		steps=50;  
+		steps=100;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs = Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eVs= Table[1700 x, {x,0,0,0.099999}];  
