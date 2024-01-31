@@ -32,7 +32,7 @@ NbName="705"; \[Lambda]0=0.5;
 		Js={0.};
 		hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];*)
 		
-		steps=100;  
+		steps=120;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs = Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
 		eVs= Table[1700 x, {x,0,0,0.099999}];  

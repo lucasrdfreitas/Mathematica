@@ -1530,7 +1530,7 @@ If[h==hs[[1]],
 \[Chi][[2]]=Table[\[Chi]G[[2]],{r,1,Nc} ];
 \[Chi][[3]]=Table[\[Chi]G[[3]],{r,1,Nc} ];
 
-	 h=0.15;  (*   !!!!   *)
+	 h=0.19 h/Norm[h];  (*   !!!!   *)
 	
 (* Print[" for Pure Kitaev model: " ];*)
 Module[ {h0=Norm[h],\[Kappa]0,\[Kappa],\[Lambda]=to\[Lambda][h],\[Chi]0,Hpure,Tpure,Upure,Epure},   
