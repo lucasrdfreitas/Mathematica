@@ -24,7 +24,7 @@ NbName="705"; \[Lambda]0=0.5;
 		Ls = {40}; 	 					
 		(*hV=With[{h=0.2,\[CurlyPhi]=0}, { {h,0,\[CurlyPhi]} } ];*)	
 		(*hV=Table[{h,180/\[Pi] ArcTan[Sqrt[2]],180} ,{h,0.,.35,.01}];*)		
-		tV={5.1}; 
+		tV={4.56}; 
 		hV= Table[{ h,0.0,0.0}  ,{h,{.3  }}]; 	
 				
 		acuracy=5; (*
@@ -32,9 +32,12 @@ NbName="705"; \[Lambda]0=0.5;
 		Js={0.};
 		hV=round@Table[{x,0,0},{x,0.0001,1.21,.01}];*)
 		
-		steps=50;  
+		steps=100;  
 		ts = Table[ {5x,160,-12x,0,-60},{x,tV}];
 		hs = Table[  h[[1]]  hAngle[h[[2]],h[[3]]] , {h,hV}];  
+		tV={"J"}; 
+		ts={ {32.5,160,32.5,0,-60} };
+		
 		eVs= Table[1700 x, {x,0,0,0.099999}];  
 		(* eV=\[Xi](U-3JH)=1500\[Xi] *)
 		
